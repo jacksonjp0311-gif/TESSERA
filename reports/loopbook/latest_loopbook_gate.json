@@ -1,0 +1,10 @@
+{
+  "schema": "TESSERA-loopbook-gate-validation-v0.2.6",
+  "passed": true,
+  "manifest_schema": "TESSERA-loopbook-manifest-v0.2.6",
+  "missing_files": [],
+  "stale_hashes": [],
+  "missing_readme_tokens": [],
+  "missing_loopbook_tokens": [],
+  "claim_boundary": "Loopbook gate validates operator run surfaces only; it does not prove real telemetry transfer."
+}

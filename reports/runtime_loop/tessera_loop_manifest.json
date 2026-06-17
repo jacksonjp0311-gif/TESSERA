@@ -1,69 +1,67 @@
 {
-  "schema": "TESSERA-runtime-loop-compiler-v0.2.2",
+  "schema": "TESSERA-runtime-loop-compiler-v0.2.6",
   "loop": [
     {
       "order": "01",
       "stage": "REHYDRATE",
-      "purpose": "load README, AGENTS, route map, origin manifest, metrics, claim locks"
+      "purpose": "load repository truth, README, AGENTS, RCC, origin, claim locks"
     },
     {
       "order": "02",
-      "stage": "SHELL",
-      "purpose": "enter compressed PowerShell operator surface"
+      "stage": "LOOPBOOK",
+      "purpose": "sync canonical runbook and manifest before every full loop"
     },
     {
       "order": "03",
-      "stage": "COMPILE",
-      "purpose": "render ASCII, Bash, PowerShell, manifest, and README dropdowns"
+      "stage": "LAUNCH",
+      "purpose": "open dual PowerShell console surfaces"
     },
     {
       "order": "04",
-      "stage": "CHECK",
-      "purpose": "run RCC, architecture, README, operator shell, loop, and unit checkers"
+      "stage": "OBSERVE",
+      "purpose": "human observer watches status, events, wounds, certificate, git state"
     },
     {
       "order": "05",
-      "stage": "RUN",
-      "purpose": "execute local Tessera runtime without pip reinstall"
+      "stage": "WORKER",
+      "purpose": "worker runs checkers, runtime, validation, ledger, push"
     },
     {
       "order": "06",
-      "stage": "VALIDATE",
-      "purpose": "validate latest evidence, certificate, wounds, metrics, and claim ceiling"
+      "stage": "CHECK",
+      "purpose": "run RCC, architecture, README, loopbook, and unit gates"
     },
     {
       "order": "07",
-      "stage": "LEDGER",
-      "purpose": "write reports/runtime_loop and lessons learned"
+      "stage": "RUN",
+      "purpose": "execute local Tessera diagnostic runtime without pip reinstall"
     },
     {
       "order": "08",
-      "stage": "PUSH",
-      "purpose": "commit and push after local evidence passes"
+      "stage": "VALIDATE",
+      "purpose": "validate latest evidence package and transfer certificate"
     },
     {
       "order": "09",
+      "stage": "LEDGER",
+      "purpose": "write reports, live state, hashes, lessons, and Loopbook state"
+    },
+    {
+      "order": "10",
+      "stage": "PUSH",
+      "purpose": "commit and push after local gates pass"
+    },
+    {
+      "order": "11",
       "stage": "ROOT",
       "purpose": "return to repository root"
     }
   ],
-  "operator_shell": "scripts/tessera-shell.ps1",
-  "commands": [
-    "status",
-    "compile",
-    "check",
-    "run",
-    "validate",
-    "full",
-    "push",
-    "help",
-    "exit"
-  ],
-  "outputs": {
-    "ascii": "reports/runtime_loop/tessera_loop_ascii.txt",
-    "manifest": "reports/runtime_loop/tessera_loop_manifest.json",
-    "readme_section": "reports/runtime_loop/tessera_readme_operator_shell_section.md",
-    "lessons": "reports/lessons/tessera_v0_2_2_operator_shell_lessons.md"
-  },
-  "claim_boundary": "Operator shell improves local visibility and repeatability. It does not prove correctness, safety, production readiness, or real telemetry transfer."
+  "canonical_loopbook": "docs/loop/TESSERA_LOOPBOOK.md",
+  "canonical_launcher": "scripts/run-tessera-full-loop.ps1",
+  "dual_console_launcher": "scripts/tessera-dual-console.ps1",
+  "worker": "scripts/tessera-worker.ps1",
+  "observer": "scripts/tessera-watch.ps1",
+  "gate": "scripts/validation/validate_loopbook_gate.py",
+  "claim_boundary": "Loopbook gate improves repeatability and operator visibility. It does not prove correctness, safety, production readiness, or real telemetry transfer."
 }

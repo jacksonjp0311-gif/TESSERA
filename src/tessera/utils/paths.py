@@ -2,7 +2,6 @@ from pathlib import Path
 import shutil
 import time
 
-
 def _remove_latest_pointer(path: Path) -> None:
     if not path.exists() and not path.is_symlink():
         return
@@ -13,7 +12,6 @@ def _remove_latest_pointer(path: Path) -> None:
         shutil.rmtree(path)
         return
     path.unlink()
-
 
 def make_run_dir(out: str | Path) -> Path:
     root = Path(out)
@@ -30,7 +28,6 @@ def make_run_dir(out: str | Path) -> Path:
     latest = runs_root / "latest"
     _remove_latest_pointer(latest)
     return run_dir
-
 
 def publish_latest_run(run_dir: str | Path) -> Path:
     run_dir = Path(run_dir)

@@ -7,17 +7,14 @@ from pathlib import Path
 from tessera.experiments.run_synthetic import run as run_synthetic
 from tessera import loop_compiler
 
-
 def cmd_init(args):
     out = Path(args.out)
     for sub in ["runs", "datasets", "reports", "ledgers"]:
         (out / sub).mkdir(parents=True, exist_ok=True)
     print(f"TESSERA workspace initialized at {out}")
 
-
 def cmd_run(args):
     run_synthetic(out=args.out, steps=args.steps, channels=args.channels, seed=args.seed, topology=args.topology, field_dim=args.field_dim, code_dim=args.code_dim, alpha=args.alpha, epochs=args.epochs)
-
 
 def cmd_validate(args):
     run_dir = Path(args.run)
@@ -37,17 +34,13 @@ def cmd_validate(args):
     print(f"claim_ceiling: {cert.get('claim_ceiling')}")
     print(f"certificate_hash: {cert.get('certificate_hash')}")
 
-
 def cmd_loop(args):
     loop_compiler.main(args.loop_args)
-
 
 def main(argv=None):
     p = argparse.ArgumentParser(prog="tessera", description="TESSERA Engine")
     sub = p.add_subparsers(dest="cmd", required=True)
-    q = sub.add_parser("init")
-    q.add_argument("--out", default="outputs")
-    q.set_defaults(func=cmd_init)
+    q = sub.add_parser("init"); q.add_argument("--out", default="outputs"); q.set_defaults(func=cmd_init)
     r = sub.add_parser("run")
     r.add_argument("--out", default="outputs")
     r.add_argument("--steps", type=int, default=900)
@@ -59,15 +52,12 @@ def main(argv=None):
     r.add_argument("--alpha", type=float, default=0.618)
     r.add_argument("--epochs", type=int, default=6)
     r.set_defaults(func=cmd_run)
-    v = sub.add_parser("validate")
-    v.add_argument("--run", required=True)
-    v.set_defaults(func=cmd_validate)
-    loop = sub.add_parser("loop", help="Compile runtime loop as ASCII/Bash/PowerShell/evidence.")
+    v = sub.add_parser("validate"); v.add_argument("--run", required=True); v.set_defaults(func=cmd_validate)
+    loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)
     loop.set_defaults(func=cmd_loop)
     args = p.parse_args(argv)
     args.func(args)
-
 
 if __name__ == "__main__":
     main()

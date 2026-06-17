@@ -1,0 +1,12 @@
+{
+    "schema":  "TESSERA-v0.2.6-paste-safe-loopbook-gate-setup-report",
+    "started_at":  "2026-06-17T06:48:15",
+    "completed_at":  "2026-06-17T06:48:46",
+    "root":  "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera",
+    "repo_url":  "https://github.com/jacksonjp0311-gif/TESSERA.git",
+    "install_mode":  "local_pythonpath_no_pip",
+    "push_mode":  "push_by_default",
+    "canonical_command":  ".\\\\scripts\\\\run-tessera-full-loop.ps1",
+    "loopbook":  "docs/loop/TESSERA_LOOPBOOK.md",
+    "claim_boundary":  "loopbook gate and diagnostic runtime only; not real telemetry transfer"
+}

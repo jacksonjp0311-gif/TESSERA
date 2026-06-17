@@ -1,23 +1,23 @@
 +------------------------------------------------------------------+
-| TESSERA v0.2.2 POWERSHELL OPERATOR SHELL                         |
+| TESSERA v0.2.6 PASTE-SAFE LOOPBOOK GATE                          |
 +------------------------------------------------------------------+
-| 01 REHYDRATE  README / AGENTS / RCC / origin / claim locks        |
-| 02 SHELL      compressed local command surface                    |
-| 03 COMPILE    ASCII / Bash / PowerShell / manifest / README       |
-| 04 CHECK      RCC / architecture / README / shell / loop / tests  |
-| 05 RUN        local runtime, no pip reinstall by default          |
-| 06 VALIDATE   latest evidence / certificate / wounds / metrics    |
-| 07 LEDGER     report / lesson / hash / git state                  |
-| 08 PUSH       commit + push after evidence passes                 |
-| 09 ROOT       return to root                                      |
+| REHYDRATE -> LOOPBOOK -> LAUNCH -> OBSERVE -> WORKER             |
+| CHECK -> RUN -> VALIDATE -> LEDGER -> PUSH -> ROOT               |
++------------------------------------------------------------------+
+| Loopbook is the canonical record.                                |
+| Full loop opens the human observer every time.                   |
+| Worker runs code; observer is read-only.                         |
+| Loopbook sync is a required gate before promotion.               |
 +------------------------------------------------------------------+
 
-01 REHYDRATE  :: load README, AGENTS, route map, origin manifest, metrics, claim locks
-02 SHELL      :: enter compressed PowerShell operator surface
-03 COMPILE    :: render ASCII, Bash, PowerShell, manifest, and README dropdowns
-04 CHECK      :: run RCC, architecture, README, operator shell, loop, and unit checkers
-05 RUN        :: execute local Tessera runtime without pip reinstall
-06 VALIDATE   :: validate latest evidence, certificate, wounds, metrics, and claim ceiling
-07 LEDGER     :: write reports/runtime_loop and lessons learned
-08 PUSH       :: commit and push after local evidence passes
-09 ROOT       :: return to repository root
+01 REHYDRATE  :: load repository truth, README, AGENTS, RCC, origin, claim locks
+02 LOOPBOOK   :: sync canonical runbook and manifest before every full loop
+03 LAUNCH     :: open dual PowerShell console surfaces
+04 OBSERVE    :: human observer watches status, events, wounds, certificate, git state
+05 WORKER     :: worker runs checkers, runtime, validation, ledger, push
+06 CHECK      :: run RCC, architecture, README, loopbook, and unit gates
+07 RUN        :: execute local Tessera diagnostic runtime without pip reinstall
+08 VALIDATE   :: validate latest evidence package and transfer certificate
+09 LEDGER     :: write reports, live state, hashes, lessons, and Loopbook state
+10 PUSH       :: commit and push after local gates pass
+11 ROOT       :: return to repository root

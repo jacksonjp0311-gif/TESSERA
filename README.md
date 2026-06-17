@@ -483,3 +483,77 @@ The shell may not import Hermes runtime authority or ASF safety claims.
 </details>
 
 <!-- TESSERA_OPERATOR_SHELL_END -->
+
+<!-- TESSERA_LOOPBOOK_GATE_START -->
+## TESSERA Loopbook Gate
+
+The Loopbook is the canonical record of the Tessera runtime loop. It updates before the full loop runs and acts as a gate: if loop surfaces change and the Loopbook manifest is stale, validation fails.
+
+```text
+rehydrate -> loopbook -> launch -> observe -> worker -> check -> run -> validate -> ledger -> push -> root
+```
+
+<details>
+<summary><strong>Run the whole Tessera loop</strong></summary>
+
+```powershell
+cd "C:\Users\jacks\OneDrive\Desktop\Tessera"
+.\scripts\run-tessera-full-loop.ps1
+```
+
+Dry run without push:
+
+```powershell
+.\scripts\run-tessera-full-loop.ps1 -NoPush
+```
+
+</details>
+
+<details>
+<summary><strong>What opens every time</strong></summary>
+
+```text
+Observer PowerShell = read-only human interface
+Worker PowerShell   = local code runner
+```
+
+The observer may watch, illuminate, and display loop state. The worker runs local commands, checkers, runtime, validation, ledger, commit, and push.
+
+</details>
+
+<details>
+<summary><strong>Loopbook gate checkers</strong></summary>
+
+```powershell
+python scripts/loopbook/sync_loopbook.py
+python scripts/validation/validate_loopbook_gate.py
+python scripts/rcc/check_rcc_nexus.py
+python scripts/validation/validate_architecture_contracts.py
+python scripts/readme/audit_readme_nexus_discipline.py
+python -m unittest discover -s tests
+python -m tessera validate --run outputs/runs/latest
+```
+
+</details>
+
+<details>
+<summary><strong>Gate law</strong></summary>
+
+```text
+If feature surfaces change, sync the Loopbook.
+If the Loopbook manifest is stale, validation fails.
+If validation fails, no commit/push promotion.
+```
+
+</details>
+
+Boundary: the Loopbook improves repeatability and operator visibility. It does not prove correctness, safety, production readiness, AGI, consciousness, or real telemetry transfer.
+<!-- TESSERA_LOOPBOOK_GATE_END -->
+
+<!-- TESSERA_README_DISCIPLINE_ANCHOR_START -->
+
+# PART I — Human README
+# PART II — RCC Nexus README
+# PART III — AI Agent README
+
+<!-- TESSERA_README_DISCIPLINE_ANCHOR_END -->

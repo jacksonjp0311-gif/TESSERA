@@ -22,7 +22,7 @@ from tessera.memory.wound_ledger import classify_wounds, write_wounds
 from tessera.memory.certificates import make_transfer_certificate, write_json
 from tessera.evidence.package import make_evidence_package, write_evidence
 from tessera.visuals.plots import write_plots
-from tessera.utils.paths import make_run_dir, publish_latest_run, publish_latest_run, publish_latest_run
+from tessera.utils.paths import make_run_dir, publish_latest_run, publish_latest_run, publish_latest_run, publish_latest_run
 
 
 def run(out='outputs', steps=900, channels=6, seed=42, topology='q4', field_dim=16, code_dim=8, alpha=0.618, epochs=6):
