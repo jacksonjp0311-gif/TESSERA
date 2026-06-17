@@ -1,0 +1,8 @@
+{
+  "schema": "TESSERA-v0.2.2-operator-shell-validation",
+  "passed": true,
+  "missing_files": [],
+  "missing_readme_tokens": [],
+  "manifest_schema": "TESSERA-runtime-loop-compiler-v0.2.2",
+  "claim_boundary": "Operator shell validation checks shell surfaces and README links only; it does not prove real telemetry transfer."
+}

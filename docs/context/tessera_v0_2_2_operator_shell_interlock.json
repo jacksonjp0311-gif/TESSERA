@@ -1,0 +1,30 @@
+{
+    "schema":  "TESSERA-v0.2.2-operator-shell-interlock",
+    "operator_surface":  "scripts/tessera-shell.ps1",
+    "tessera_loop":  [
+                         "rehydrate",
+                         "shell",
+                         "compile",
+                         "check",
+                         "run",
+                         "validate",
+                         "ledger",
+                         "push",
+                         "root"
+                     ],
+    "imported_lessons":  [
+                             "Hermes separates actor runtime from governance geometry",
+                             "ASF-R makes the whole loop visible and evidence-gated",
+                             "Tessera should hide raw code scroll behind grouped operator sections",
+                             "PowerShell can be a local high-authority interface without becoming autonomous authority"
+                         ],
+    "blocked_authority":  {
+                              "hermes_runtime_authority":  false,
+                              "cms_write_authority":  false,
+                              "asf_safety_authority":  false,
+                              "external_api_authority":  false,
+                              "self_authorization":  false,
+                              "automatic_rollback":  false
+                          },
+    "claim_boundary":  "Interlock imports lessons and formatting discipline only."
+}

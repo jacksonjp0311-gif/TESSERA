@@ -4,7 +4,6 @@ import time
 
 
 def _remove_latest_pointer(path: Path) -> None:
-    """Remove an old latest pointer on Windows/macOS/Linux."""
     if not path.exists() and not path.is_symlink():
         return
     if path.is_symlink() or path.is_file():
@@ -20,28 +19,20 @@ def make_run_dir(out: str | Path) -> Path:
     root = Path(out)
     runs_root = root / "runs"
     runs_root.mkdir(parents=True, exist_ok=True)
-
     run_id = time.strftime("tessera_run_%Y%m%d_%H%M%S")
     run_dir = runs_root / run_id
     suffix = 0
     while run_dir.exists():
         suffix += 1
         run_dir = runs_root / f"{run_id}_{suffix:02d}"
-
     for sub in ["certificates", "evidence", "ledgers", "metrics", "reports", "visuals", "state"]:
         (run_dir / sub).mkdir(parents=True, exist_ok=True)
-
     latest = runs_root / "latest"
     _remove_latest_pointer(latest)
     return run_dir
 
 
 def publish_latest_run(run_dir: str | Path) -> Path:
-    """Publish completed artifacts as outputs/runs/latest.
-
-    Symlink when allowed. If Windows blocks symlink creation, copy the completed
-    run directory only after artifacts exist so validation sees the full run.
-    """
     run_dir = Path(run_dir)
     latest = run_dir.parent / "latest"
     _remove_latest_pointer(latest)

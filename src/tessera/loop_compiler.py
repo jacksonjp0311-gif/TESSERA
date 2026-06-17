@@ -5,136 +5,210 @@ import json
 from pathlib import Path
 from textwrap import dedent
 
-LOOP_STEPS = [
-    ("01", "REHYDRATE", "Load origin manifest, route map, context indexes, and claim locks."),
-    ("02", "ORIENT", "Resolve RCC Nexus route, local surface, claim ceiling, and validation path."),
-    ("03", "COMPILE", "Compress the runtime loop into ASCII, Bash, PowerShell, and evidence runbooks."),
-    ("04", "RUN", "Execute the Tessera smoke/runtime cycle under declared graph and thresholds."),
-    ("05", "MEASURE", "Emit rate-distortion, gates, wounds, baseline summary, and certificate artifacts."),
-    ("06", "VALIDATE", "Run RCC, README, architecture, unit, and latest-run evidence checks."),
-    ("07", "LEDGER", "Record run identity, Git state, lessons, and non-claim boundaries."),
-    ("08", "DISCONNECT", "Extract lessons learned without importing Hermes runtime authority."),
+VERSION = "TESSERA-runtime-loop-compiler-v0.2.2"
+LOOP = [
+    ("01", "REHYDRATE", "load README, AGENTS, route map, origin manifest, metrics, claim locks"),
+    ("02", "SHELL", "enter compressed PowerShell operator surface"),
+    ("03", "COMPILE", "render ASCII, Bash, PowerShell, manifest, and README dropdowns"),
+    ("04", "CHECK", "run RCC, architecture, README, operator shell, loop, and unit checkers"),
+    ("05", "RUN", "execute local Tessera runtime without pip reinstall"),
+    ("06", "VALIDATE", "validate latest evidence, certificate, wounds, metrics, and claim ceiling"),
+    ("07", "LEDGER", "write reports/runtime_loop and lessons learned"),
+    ("08", "PUSH", "commit and push after local evidence passes"),
+    ("09", "ROOT", "return to repository root"),
 ]
 
-ASCII_BOX = r"""
-╔════════════════════════════════════════════════════════════════════╗
-║                    TESSERA RUNTIME LOOP COMPILER                  ║
-╠════════════════════════════════════════════════════════════════════╣
-║ 01 REHYDRATE  -> origin/context/route/non-claim locks             ║
-║ 02 ORIENT     -> RCC Nexus geometry + route map                   ║
-║ 03 COMPILE    -> ASCII + Bash + PowerShell runtime runbooks       ║
-║ 04 RUN        -> sparse field / codec / gates / replay            ║
-║ 05 MEASURE    -> RD metrics / wounds / baselines / certificate    ║
-║ 06 VALIDATE   -> RCC + README + architecture + tests + evidence   ║
-║ 07 LEDGER     -> reports / lessons / Git state                    ║
-║ 08 DISCONNECT -> carry lessons, not foreign runtime authority     ║
-╚════════════════════════════════════════════════════════════════════╝
-"""
+ASCII = """+------------------------------------------------------------------+
+| TESSERA v0.2.2 POWERSHELL OPERATOR SHELL                         |
++------------------------------------------------------------------+
+| 01 REHYDRATE  README / AGENTS / RCC / origin / claim locks        |
+| 02 SHELL      compressed local command surface                    |
+| 03 COMPILE    ASCII / Bash / PowerShell / manifest / README       |
+| 04 CHECK      RCC / architecture / README / shell / loop / tests  |
+| 05 RUN        local runtime, no pip reinstall by default          |
+| 06 VALIDATE   latest evidence / certificate / wounds / metrics    |
+| 07 LEDGER     report / lesson / hash / git state                  |
+| 08 PUSH       commit + push after evidence passes                 |
+| 09 ROOT       return to root                                      |
++------------------------------------------------------------------+"""
 
-BASH_RUNBOOK = """#!/usr/bin/env bash
+POWERSHELL = r'''$ErrorActionPreference = "Stop"
+$Root = if ($args.Count -gt 0) { $args[0] } else { (Get-Location).Path }
+Set-Location $Root
+[System.IO.Directory]::SetCurrentDirectory($Root)
+$env:PYTHONPATH = (Join-Path $Root "src")
+$env:PYTHONUTF8 = "1"
+$env:PYTHONIOENCODING = "utf-8"
+Write-Host "::group::compile"
+python -m tessera loop compile --out reports/runtime_loop
+Write-Host "::endgroup::"
+Write-Host "::group::check"
+python scripts/rcc/check_rcc_nexus.py
+python scripts/validation/validate_architecture_contracts.py
+python scripts/readme/audit_readme_nexus_discipline.py
+python scripts/validation/validate_operator_shell.py
+python scripts/validation/validate_runtime_loop_compiler.py
+python -m unittest discover -s tests
+Write-Host "::endgroup::"
+Write-Host "::group::runtime"
+python -m tessera run --out outputs --steps 80 --epochs 1 --topology q4 --field-dim 16 --code-dim 8
+python -m tessera validate --run outputs/runs/latest
+Write-Host "::endgroup::"
+'''
+
+BASH = r'''#!/usr/bin/env bash
 set -euo pipefail
-export PYTHONPATH="${PYTHONPATH:-$(pwd)/src}"
-
+ROOT="${1:-$(pwd)}"
+cd "$ROOT"
+export PYTHONPATH="$ROOT/src"
+export PYTHONUTF8=1
+export PYTHONIOENCODING=utf-8
+echo "::group::compile"
+python -m tessera loop compile --out reports/runtime_loop
+echo "::endgroup::"
+echo "::group::check"
 python scripts/rcc/check_rcc_nexus.py
 python scripts/validation/validate_architecture_contracts.py
 python scripts/readme/audit_readme_nexus_discipline.py
+python scripts/validation/validate_operator_shell.py
 python scripts/validation/validate_runtime_loop_compiler.py
 python -m unittest discover -s tests
-python -m tessera loop ascii
-python -m tessera loop compile --out reports/runtime_loop
+echo "::endgroup::"
+echo "::group::runtime"
 python -m tessera run --out outputs --steps 80 --epochs 1 --topology q4 --field-dim 16 --code-dim 8
 python -m tessera validate --run outputs/runs/latest
-"""
-
-POWERSHELL_RUNBOOK = r"""$ErrorActionPreference = "Stop"
-$env:PYTHONPATH = (Join-Path (Get-Location).Path "src")
-
-python scripts/rcc/check_rcc_nexus.py
-python scripts/validation/validate_architecture_contracts.py
-python scripts/readme/audit_readme_nexus_discipline.py
-python scripts/validation/validate_runtime_loop_compiler.py
-python -m unittest discover -s tests
-python -m tessera loop ascii
-python -m tessera loop compile --out reports/runtime_loop
-python -m tessera run --out outputs --steps 80 --epochs 1 --topology q4 --field-dim 16 --code-dim 8
-python -m tessera validate --run outputs/runs/latest
-"""
+echo "::endgroup::"
+'''
 
 LESSONS = [
-    "Hermes pattern extracted: actor/runtime is separate from governance geometry.",
-    "Tessera pattern added: compile the loop before every run so the operator can see the runtime contract.",
-    "Latest-run bug lesson: publish latest after artifacts exist, not before.",
-    "Push lesson: validation can pass while push remains blocked if commit/push flags are absent.",
-    "Interlock rule: borrow geometry, not authority.",
-    "Disconnect rule: preserve lessons locally, do not create dependency on Hermes runtime folders.",
+    "PowerShell can act as the local operator shell without becoming autonomous authority.",
+    "Compressed groups and status rows are better than raw code visibility for repeated loops.",
+    "Use local PYTHONPATH by default; pip install is an explicit operator action.",
+    "Normalize JSON and markdown without BOM before validation.",
+    "Use ASCII output to avoid Windows console encoding failures.",
+    "Borrow Hermes governance separation; do not borrow Hermes runtime authority.",
+    "Borrow ASF whole-loop visibility; do not claim ASF safety or truth.",
 ]
 
 
 def ascii_text() -> str:
-    rows = "\n".join(f"{n}. {name:<10} :: {desc}" for n, name, desc in LOOP_STEPS)
-    return ASCII_BOX.strip() + "\n\n" + rows + "\n"
-
-
-def bash_text() -> str:
-    return BASH_RUNBOOK
-
-
-def powershell_text() -> str:
-    return POWERSHELL_RUNBOOK
+    rows = "\n".join(f"{n} {name:<10} :: {desc}" for n, name, desc in LOOP)
+    return ASCII + "\n\n" + rows + "\n"
 
 
 def manifest() -> dict:
     return {
-        "schema": "TESSERA-runtime-loop-compiler-v0.2.0",
-        "loop_steps": [
-            {"order": order, "name": name, "description": desc}
-            for order, name, desc in LOOP_STEPS
-        ],
+        "schema": VERSION,
+        "loop": [{"order": n, "stage": name, "purpose": desc} for n, name, desc in LOOP],
+        "operator_shell": "scripts/tessera-shell.ps1",
+        "commands": ["status", "compile", "check", "run", "validate", "full", "push", "help", "exit"],
         "outputs": {
-            "ascii": "reports/runtime_loop/tessera_runtime_loop_ascii.txt",
-            "bash": "reports/runtime_loop/tessera_runtime_loop.sh",
-            "powershell": "reports/runtime_loop/tessera_runtime_loop.ps1",
-            "manifest": "reports/runtime_loop/tessera_runtime_loop_manifest.json",
+            "ascii": "reports/runtime_loop/tessera_loop_ascii.txt",
+            "manifest": "reports/runtime_loop/tessera_loop_manifest.json",
+            "readme_section": "reports/runtime_loop/tessera_readme_operator_shell_section.md",
+            "lessons": "reports/lessons/tessera_v0_2_2_operator_shell_lessons.md",
         },
-        "hermes_interlock": {
-            "source": "hermes-agent-evo",
-            "borrowed_pattern": [
-                "observe",
-                "propose",
-                "classify",
-                "dry_run",
-                "evidence",
-                "authorize",
-                "limited_apply",
-                "validate",
-                "ledger",
-            ],
-            "blocked_transfer": [
-                "Hermes runtime authority",
-                "CMS write authority",
-                "API authority",
-                "self-authorization",
-                "automatic rollback",
-                "provider/model/tool authority",
-            ],
-        },
-        "claim_boundary": "Loop compilation improves operator visibility and repeatability; it does not prove code correctness, safety, production readiness, or real telemetry transfer.",
+        "claim_boundary": "Operator shell improves local visibility and repeatability. It does not prove correctness, safety, production readiness, or real telemetry transfer.",
     }
 
 
-def compile_outputs(out: str | Path) -> Path:
+def readme_section() -> str:
+    return dedent("""
+    <!-- TESSERA_OPERATOR_SHELL_START -->
+    ## Tessera v0.2.2 PowerShell Operator Shell
+
+    Tessera now has a local Hermes-style PowerShell operator shell. It compresses the runtime loop into grouped sections, status rows, checkers, and run commands so the operator does not have to watch raw implementation code scroll by.
+
+    ```text
+    rehydrate -> shell -> compile -> check -> run -> validate -> ledger -> push -> root
+    ```
+
+    <details>
+    <summary><strong>Open the operator shell</strong></summary>
+
+    ```powershell
+    cd "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera"
+    .\\scripts\\tessera-shell.ps1
+    ```
+
+    Commands inside the shell:
+
+    ```text
+    status
+    compile
+    check
+    run
+    validate
+    full
+    push
+    help
+    exit
+    ```
+
+    </details>
+
+    <details>
+    <summary><strong>Run the full compressed loop without entering the shell</strong></summary>
+
+    ```powershell
+    cd "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera"
+    .\\scripts\\run-tessera-full-loop.ps1
+    ```
+
+    Bash:
+
+    ```bash
+    ./scripts/run-tessera-full-loop.sh
+    ```
+
+    </details>
+
+    <details>
+    <summary><strong>Checkers</strong></summary>
+
+    ```powershell
+    python scripts/rcc/check_rcc_nexus.py
+    python scripts/validation/validate_architecture_contracts.py
+    python scripts/readme/audit_readme_nexus_discipline.py
+    python scripts/validation/validate_operator_shell.py
+    python scripts/validation/validate_runtime_loop_compiler.py
+    python -m unittest discover -s tests
+    python -m tessera validate --run outputs/runs/latest
+    ```
+
+    </details>
+
+    <details>
+    <summary><strong>Boundary</strong></summary>
+
+    ```text
+    The shell may observe.
+    The shell may compile.
+    The shell may run local validation.
+    The shell may push after validation.
+    The shell may not claim real telemetry transfer.
+    The shell may not become autonomous authority.
+    The shell may not import Hermes runtime authority or ASF safety claims.
+    ```
+
+    </details>
+
+    <!-- TESSERA_OPERATOR_SHELL_END -->
+    """).strip()
+
+
+def compile_outputs(out: str | Path = "reports/runtime_loop") -> Path:
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
-    (out / "tessera_runtime_loop_ascii.txt").write_text(ascii_text(), encoding="utf-8")
-    (out / "tessera_runtime_loop.sh").write_text(bash_text(), encoding="utf-8")
-    (out / "tessera_runtime_loop.ps1").write_text(powershell_text(), encoding="utf-8")
-    (out / "tessera_runtime_loop_manifest.json").write_text(
-        json.dumps(manifest(), indent=2), encoding="utf-8"
-    )
-    (out / "tessera_runtime_loop_lessons.md").write_text(
-        "# Tessera v0.2.0 Runtime Loop Lessons\n\n"
-        + "\n".join(f"- {x}" for x in LESSONS)
-        + "\n\n## Disconnect Boundary\n\nHermes-Agent-Evo informs the governance geometry. Tessera does not import Hermes runtime authority, CMS write authority, API authority, or self-authorization.\n",
+    (out / "tessera_loop_ascii.txt").write_text(ascii_text(), encoding="utf-8")
+    (out / "tessera_loop_manifest.json").write_text(json.dumps(manifest(), indent=2), encoding="utf-8")
+    (out / "tessera_readme_operator_shell_section.md").write_text(readme_section(), encoding="utf-8")
+    Path("scripts").mkdir(exist_ok=True)
+    Path("scripts/run-tessera-full-loop.ps1").write_text(POWERSHELL, encoding="utf-8")
+    Path("scripts/run-tessera-full-loop.sh").write_text(BASH, encoding="utf-8")
+    Path("reports/lessons").mkdir(parents=True, exist_ok=True)
+    Path("reports/lessons/tessera_v0_2_2_operator_shell_lessons.md").write_text(
+        "# Tessera v0.2.2 Operator Shell Lessons\n\n" + "\n".join(f"- {x}" for x in LESSONS) + "\n",
         encoding="utf-8",
     )
     return out
@@ -145,11 +219,11 @@ def cmd_ascii(_: argparse.Namespace) -> None:
 
 
 def cmd_bash(_: argparse.Namespace) -> None:
-    print(bash_text())
+    print(BASH)
 
 
 def cmd_powershell(_: argparse.Namespace) -> None:
-    print(powershell_text())
+    print(POWERSHELL)
 
 
 def cmd_manifest(_: argparse.Namespace) -> None:
@@ -158,29 +232,16 @@ def cmd_manifest(_: argparse.Namespace) -> None:
 
 def cmd_compile(args: argparse.Namespace) -> None:
     out = compile_outputs(args.out)
-    print(f"TESSERA runtime loop compiled: {out}")
+    print(f"TESSERA operator loop surfaces compiled: {out}")
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        prog="tessera loop",
-        description="Compile TESSERA runtime loop sections into ASCII/Bash/PowerShell/evidence surfaces.",
-    )
-    sub = parser.add_subparsers(dest="loop_cmd", required=True)
-
-    a = sub.add_parser("ascii", help="Print the ASCII runtime loop.")
-    a.set_defaults(func=cmd_ascii)
-
-    b = sub.add_parser("bash", help="Print a Bash runtime runbook.")
-    b.set_defaults(func=cmd_bash)
-
-    p = sub.add_parser("powershell", help="Print a PowerShell runtime runbook.")
-    p.set_defaults(func=cmd_powershell)
-
-    m = sub.add_parser("manifest", help="Print the runtime loop manifest JSON.")
-    m.set_defaults(func=cmd_manifest)
-
-    c = sub.add_parser("compile", help="Write all loop compiler artifacts.")
+    parser = argparse.ArgumentParser(prog="tessera loop", description="Compile Tessera operator shell loop surfaces.")
+    sub = parser.add_subparsers(dest="cmd", required=True)
+    for name, fn in [("ascii", cmd_ascii), ("bash", cmd_bash), ("powershell", cmd_powershell), ("manifest", cmd_manifest)]:
+        p = sub.add_parser(name)
+        p.set_defaults(func=fn)
+    c = sub.add_parser("compile")
     c.add_argument("--out", default="reports/runtime_loop")
     c.set_defaults(func=cmd_compile)
     return parser
