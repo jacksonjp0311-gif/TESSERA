@@ -25,3 +25,17 @@ rehydrate -> loopbook -> launch -> observe -> worker -> check -> run -> validate
 Gate rule: if feature surfaces change, sync and validate `docs/loop/TESSERA_LOOPBOOK.md` before promotion.
 
 Claim boundary: Tessera v0.2.6 improves operator-visible loop control and validation routing. It does not prove real telemetry transfer, production readiness, safety, AGI, consciousness, or universal anomaly-detection superiority.
+
+## Failure Lessons + Chart
+
+```powershell
+python scripts/validation/validate_failure_lessons_chart_gate.py
+```
+
+Read:
+
+```text
+docs/loop/TESSERA_FAILURE_LESSONS.md
+docs/loop/TESSERA_OPERATOR_LOOP_CHART.md
+docs/loop/TESSERA_README_FEATURE_IMPORTS.md
+```

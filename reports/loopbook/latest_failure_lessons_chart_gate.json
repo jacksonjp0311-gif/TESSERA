@@ -1,0 +1,10 @@
+{
+  "schema": "TESSERA-v0.2.7-failure-lessons-chart-gate-validation",
+  "passed": true,
+  "missing_files": [],
+  "missing_readme_tokens": [],
+  "missing_lessons_tokens": [],
+  "missing_chart_tokens": [],
+  "missing_import_tokens": [],
+  "claim_boundary": "Failure lessons chart gate validates operator documentation surfaces only; it does not prove real telemetry transfer."
+}

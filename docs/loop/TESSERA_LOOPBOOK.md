@@ -109,3 +109,28 @@ The Loopbook does not prove truth, safety, production readiness, code correctnes
   "claim_boundary": "Loopbook sync records operator surfaces only; it does not prove real telemetry transfer."
 }
 ```
+
+## Failure Lessons and Loop Chart Gate
+
+Tessera maintains these companion Loopbook surfaces:
+
+```text
+docs/loop/TESSERA_FAILURE_LESSONS.md
+docs/loop/TESSERA_OPERATOR_LOOP_CHART.md
+docs/loop/TESSERA_README_FEATURE_IMPORTS.md
+```
+
+Promotion gate:
+
+```powershell
+python scripts/validation/validate_failure_lessons_chart_gate.py
+```
+
+Core law:
+
+```text
+Failure must become a lesson.
+Lesson must become a chart.
+Chart must become a gate.
+Gate must run before promotion.
+```

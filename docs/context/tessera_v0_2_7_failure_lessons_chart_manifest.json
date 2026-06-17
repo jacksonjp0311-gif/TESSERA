@@ -1,0 +1,20 @@
+{
+    "schema":  "TESSERA-v0.2.7-failure-lessons-chart-manifest",
+    "updated_at":  "2026-06-17T07:43:50",
+    "registry":  "docs/loop/TESSERA_FAILURE_LESSONS.md",
+    "chart":  "docs/loop/TESSERA_OPERATOR_LOOP_CHART.md",
+    "readme_feature_imports":  "docs/loop/TESSERA_README_FEATURE_IMPORTS.md",
+    "validation_gate":  "scripts/validation/validate_failure_lessons_chart_gate.py",
+    "loop":  [
+                 "failure",
+                 "lesson",
+                 "chart",
+                 "loopbook",
+                 "gate",
+                 "run",
+                 "validate",
+                 "push",
+                 "root"
+             ],
+    "claim_boundary":  "Failure lessons and charts improve local operator governance only; not proof of real telemetry transfer."
+}

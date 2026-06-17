@@ -37,3 +37,19 @@ James has authorized push-by-default after local validation passes. Use `-NoPush
 ## Non-Claim Lock
 
 The Loopbook and observer console are operator surfaces. They do not prove transfer, safety, production readiness, correctness, AGI, consciousness, or autonomous authority.
+
+## Failure Lessons Gate
+
+Before promoting any feature that changes loop behavior, update and validate:
+
+```powershell
+python scripts/validation/validate_failure_lessons_chart_gate.py
+```
+
+Required surfaces:
+
+```text
+docs/loop/TESSERA_FAILURE_LESSONS.md
+docs/loop/TESSERA_OPERATOR_LOOP_CHART.md
+docs/loop/TESSERA_README_FEATURE_IMPORTS.md
+```

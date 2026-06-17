@@ -1,9 +1,30 @@
 {
   "schema": "TESSERA-loopbook-gate-validation-v0.2.6",
-  "passed": true,
+  "passed": false,
   "manifest_schema": "TESSERA-loopbook-manifest-v0.2.6",
   "missing_files": [],
-  "stale_hashes": [],
+  "stale_hashes": [
+    {
+      "path": "README.md",
+      "expected": "50089cb59a6a9029f8e5ab6fcc260544dc4559deea4f2b85129665808bf0b860",
+      "actual": "324e8556cd064aae126acd36005f87045b4c8237b3587d92485db44cb5c36a8b"
+    },
+    {
+      "path": "README_90_SECONDS.md",
+      "expected": "bbc105d0f9f70554b32467db0f14ae736d41cbd5034ff4d24a0610f56a4a6c2d",
+      "actual": "ae20c88824fc21c649a46f8c9a11589cdc047740cf7618f5b31deb713617a8e8"
+    },
+    {
+      "path": "AGENTS.md",
+      "expected": "5451a5ee4cc6559071ce987500cffd95a24c3ed15541af3bf1f27fabc2f4054b",
+      "actual": "cff09709179d0b1d27af0cf5473a99ffc5573f3e76e11e21373dc3f83f716136"
+    },
+    {
+      "path": "docs/loop/TESSERA_LOOPBOOK.md",
+      "expected": "9ba9a77babdbd97e606d07bf32124579d776bc3377fe4ae2ee0330c7b38626f3",
+      "actual": "9833ee50b8937cd98ed21e63387fecb798ed29a283ab8d3db96ca4e450d66d36"
+    }
+  ],
   "missing_readme_tokens": [],
   "missing_loopbook_tokens": [],
   "claim_boundary": "Loopbook gate validates operator run surfaces only; it does not prove real telemetry transfer."

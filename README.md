@@ -557,3 +557,63 @@ Boundary: the Loopbook improves repeatability and operator visibility. It does n
 # PART III — AI Agent README
 
 <!-- TESSERA_README_DISCIPLINE_ANCHOR_END -->
+
+<!-- TESSERA_FAILURE_LESSONS_CHART_START -->
+## TESSERA Failure Lessons + Loop Chart Gate
+
+Tessera now records failure as a first-class learning surface. Build failures are not discarded; they become named lessons, loop-chart updates, and validation gates.
+
+```text
+Failure -> Lesson -> Gate -> Artifact -> Promotion
+```
+
+<details>
+<summary><strong>Failure lessons registry</strong></summary>
+
+```text
+docs/loop/TESSERA_FAILURE_LESSONS.md
+```
+
+This table records the failures from the v0.1.4 to v0.2.6 loop evolution: latest-pointer bugs, Windows symlink removal, empty-root paste failures, Git scanning the home directory, BOM JSON failures, README drift, Unicode console errors, noisy output, and missing Loopbook discipline.
+
+</details>
+
+<details>
+<summary><strong>Operator loop chart</strong></summary>
+
+```text
+docs/loop/TESSERA_OPERATOR_LOOP_CHART.md
+```
+
+The chart defines the canonical operator path:
+
+```text
+rehydrate -> loopbook -> lessons -> launch -> observe -> worker -> check -> run -> validate -> ledger -> push -> root
+```
+
+</details>
+
+<details>
+<summary><strong>README feature imports</strong></summary>
+
+```text
+docs/loop/TESSERA_README_FEATURE_IMPORTS.md
+```
+
+Imported features include one-command full loop, UI opened before runtime, expected result, final state visibility, wound/trace visibility, read-only UI law, quick start commands, and non-claim locks.
+
+</details>
+
+<details>
+<summary><strong>Gate command</strong></summary>
+
+```powershell
+python scripts/validation/validate_failure_lessons_chart_gate.py
+```
+
+This gate must pass before loop surface promotion.
+
+</details>
+
+Boundary: failure lessons and charts improve operator governance and repeatability. They do not prove correctness, safety, production readiness, AGI, consciousness, or real telemetry transfer.
+<!-- TESSERA_FAILURE_LESSONS_CHART_END -->

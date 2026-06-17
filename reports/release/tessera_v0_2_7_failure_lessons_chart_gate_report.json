@@ -1,0 +1,13 @@
+{
+    "schema":  "TESSERA-v0.2.7-failure-lessons-chart-gate-report",
+    "started_at":  "2026-06-17T07:43:43",
+    "completed_at":  "2026-06-17T07:44:13",
+    "root":  "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera",
+    "repo_url":  "https://github.com/jacksonjp0311-gif/TESSERA.git",
+    "install_mode":  "local_pythonpath_no_pip",
+    "push_mode":  "push_by_default",
+    "lessons":  "docs/loop/TESSERA_FAILURE_LESSONS.md",
+    "chart":  "docs/loop/TESSERA_OPERATOR_LOOP_CHART.md",
+    "feature_imports":  "docs/loop/TESSERA_README_FEATURE_IMPORTS.md",
+    "claim_boundary":  "failure lessons chart gate and diagnostic runtime only; not real telemetry transfer"
+}
