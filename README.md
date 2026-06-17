@@ -617,3 +617,60 @@ This gate must pass before loop surface promotion.
 
 Boundary: failure lessons and charts improve operator governance and repeatability. They do not prove correctness, safety, production readiness, AGI, consciousness, or real telemetry transfer.
 <!-- TESSERA_FAILURE_LESSONS_CHART_END -->
+
+<!-- TESSERA_PYTHON_LOOP_KERNEL_START -->
+## TESSERA Python Loop Kernel
+
+Tessera loops are Python-owned. PowerShell is only a terminal launcher.
+
+```text
+rehydrate -> python-loop-kernel -> loopbook -> launch -> observe -> worker -> check -> run -> validate -> ledger -> push -> root
+```
+
+<details>
+<summary><strong>Run the whole Tessera loop</strong></summary>
+
+```powershell
+cd "C:\Users\jacks\OneDrive\Desktop\Tessera"
+.\scripts\run-tessera-full-loop.ps1
+```
+
+Direct Python:
+
+```powershell
+$env:PYTHONPATH = ".\src"
+python -m tessera.loop_runtime launch
+```
+
+Dry run without push:
+
+```powershell
+python -m tessera.loop_runtime launch --no-push
+```
+
+</details>
+
+<details>
+<summary><strong>What opens every time</strong></summary>
+
+```text
+Observer PowerShell = read-only human interface
+Worker PowerShell   = Python loop worker
+```
+
+</details>
+
+<details>
+<summary><strong>Required gates</strong></summary>
+
+```powershell
+python -m tessera.loop_runtime sync
+python -m tessera.loop_runtime validate-loopbook
+python -m tessera.loop_runtime check
+python scripts/validation/validate_python_loop_kernel_gate.py
+```
+
+</details>
+
+Boundary: Python loop ownership improves portability, testability, repeatability, and operator visibility. It does not prove correctness, safety, production readiness, AGI, consciousness, or real telemetry transfer.
+<!-- TESSERA_PYTHON_LOOP_KERNEL_END -->

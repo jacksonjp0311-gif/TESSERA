@@ -1,0 +1,7 @@
+{
+  "schema": "TESSERA-python-loop-kernel-gate-v0.2.8",
+  "passed": true,
+  "missing_files": [],
+  "token_failures": [],
+  "claim_boundary": "Python loop kernel gate validates operator surfaces only; it does not prove real telemetry transfer."
+}

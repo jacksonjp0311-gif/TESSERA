@@ -1,0 +1,11 @@
+{
+    "schema":  "TESSERA-v0.2.8-python-loop-kernel-setup-report",
+    "started_at":  "2026-06-17T07:44:26",
+    "completed_at":  "2026-06-17T07:44:49",
+    "root":  "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera",
+    "repo_url":  "https://github.com/jacksonjp0311-gif/TESSERA.git",
+    "python_loop_kernel":  "src/tessera/loop_runtime.py",
+    "canonical_python_command":  "python -m tessera.loop_runtime launch",
+    "powershell_launcher":  "scripts/run-tessera-full-loop.ps1",
+    "claim_boundary":  "python loop kernel and diagnostic runtime only; not real telemetry transfer"
+}
