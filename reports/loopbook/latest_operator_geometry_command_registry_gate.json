@@ -1,0 +1,8 @@
+{
+  "schema": "TESSERA-operator-geometry-validation-v0.3.2",
+  "passed": true,
+  "missing_files": [],
+  "missing_readme_tokens": [],
+  "root_engine_markdown_files": [],
+  "claim_boundary": "operator geometry validation is not real telemetry transfer proof"
+}

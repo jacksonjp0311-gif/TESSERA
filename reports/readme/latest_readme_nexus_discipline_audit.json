@@ -1,8 +1,8 @@
 {
-  "schema": "TESSERA-readme-nexus-discipline-audit-v0.1.2",
+  "schema": "TESSERA-readme-nexus-discipline-audit-v0.3.2",
   "passed": true,
   "missing_files": [],
   "missing_readme_tokens": [],
-  "route_map_readme_discipline_present": true,
+  "root_engine_markdown_files": [],
   "claim_boundary": "README discipline is navigation and public-surface alignment, not code correctness or empirical validation"
 }

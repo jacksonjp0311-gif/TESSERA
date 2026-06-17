@@ -1,23 +1,25 @@
-# TESSERA Failure Lessons
+# TESSERA Failure Lessons Chart
 
 ## Purpose
 
-Failures are now first-class learning artifacts. Every repeat failure must become a lesson, and every lesson must become a gate or chart element.
+Failure is a learning artifact only when it becomes a named lesson, a chart entry, and a validation gate.
 
-| ID | Failure | Lesson | Gate |
-|---|---|---|---|
-| F001 | latest pointer published before runtime artifacts existed | Publish latest only after certificates, evidence, metrics, ledgers, and reports exist. | latest evidence validation |
-| F002 | Windows symlink/copy latest directory removal failed | Use robust latest pointer removal for symlink, file, and directory cases. | paths utility test |
-| F003 | Git command scanned C:\Users\jacks instead of Tessera root | Every Git call must be root-bound with git -C <repo-root>. | root-lock check |
-| F004 | bundle folder was missing | Critical installers must be runnable from anywhere or paste-safe. | single-file bootstrap |
-| F005 | top-level PowerShell param block failed when pasted | Installer scripts meant for pasting must avoid top-level param blocks. | paste-safe script convention |
-| F006 | UTF-8 BOM broke JSON parsing | Write JSON and markdown UTF-8 without BOM before validators run. | encoding normalization |
-| F007 | Unicode box drawing crashed Windows cp1252 console | Operator output must be ASCII-safe unless terminal encoding is proven UTF-8. | ASCII-safe display |
-| F008 | README discipline drifted after new loop surfaces | README, Loopbook, AGENTS, and route docs must update together. | README discipline + loopbook gate |
-| F009 | raw PowerShell scroll hid the agent-like operator state | Separate worker execution from human observer display. | observer/worker split |
-| F010 | PowerShell accumulated too much loop logic | PowerShell should launch terminals only; Python should own loop logic. | Python loop kernel |
+| ID | Failure / Wound | Learned Lesson | Gate / Artifact |
+|---:|---|---|---|
+| F001 | latest pointer published before artifacts existed | publish latest only after evidence/certificate/metrics/reports exist | latest validation |
+| F002 | Windows latest pointer removal failed | handle symlink/file/directory removal explicitly | paths utility |
+| F003 | Git scanned user home | all Git calls use git -C <repo-root> | root-bound git |
+| F004 | missing bundle folder | critical installers must be paste-safe or run-from-anywhere | single-file bootstrap |
+| F005 | top-level PowerShell param failed when pasted | paste-safe scripts avoid top-level param blocks | paste-safe convention |
+| F006 | UTF-8 BOM JSON failed | write JSON/MD as UTF-8 without BOM | encoding normalization |
+| F007 | Unicode console crash | operator output is ASCII-safe by default | ASCII display |
+| F008 | README drift | README/AGENTS/Loopbook/registry update together | README discipline |
+| F009 | no Observer CLI at loop start | launch Observer before Worker | observer-first launch |
+| F010 | PowerShell absorbed loop logic | Python owns loop logic; shell launches only | Python loop kernel |
+| F011 | engine patch notes accumulated in repo root | release docs live under docs/releases/engine | root hygiene |
+| F012 | alignment and geometry gap | command registry, loopbook, lessons, chart, and README must align | geometry gate |
 
-## Law
+## Lessons Law
 
 ```text
 Failure must become a lesson.

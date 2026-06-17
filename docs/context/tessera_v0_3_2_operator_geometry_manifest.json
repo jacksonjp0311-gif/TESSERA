@@ -1,0 +1,9 @@
+{
+  "schema": "TESSERA-v0.3.2-operator-geometry-manifest",
+  "updated_at": "2026-06-17T14:27:16.951666+00:00",
+  "command_registry": "docs/loop/TESSERA_COMMAND_REGISTRY.md",
+  "chart": "docs/loop/TESSERA_OPERATOR_LOOP_CHART.md",
+  "lessons": "docs/loop/TESSERA_FAILURE_LESSONS.md",
+  "geometry_gap": "docs/alignment/TESSERA_ALIGNMENT_GEOMETRY_GAP.md",
+  "claim_boundary": "operator geometry repair is not real telemetry transfer proof"
+}

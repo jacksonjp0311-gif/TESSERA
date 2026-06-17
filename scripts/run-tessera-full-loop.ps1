@@ -1,4 +1,4 @@
-<# TESSERA CANONICAL FULL LOOP v0.2.8 :: PowerShell launcher only #>
+<# TESSERA CANONICAL FULL LOOP v0.3.2 :: PowerShell launcher only #>
 param(
     [string]$Root = "$env:USERPROFILE\OneDrive\Desktop\Tessera",
     [switch]$NoPush,
@@ -12,7 +12,7 @@ Set-Location $Root
 $env:PYTHONPATH = Join-Path $Root "src"
 $env:PYTHONUTF8 = "1"
 $env:PYTHONIOENCODING = "utf-8"
-$ArgsList = @("-m", "tessera.loop_runtime", "launch", "--root", $Root)
+$ArgsList = @("-m", "tessera.operator_geometry", "launch", "--root", $Root)
 if ($NoPush) { $ArgsList += "--no-push" }
 if ($SkipRun) { $ArgsList += "--skip-run" }
 if ($SkipTests) { $ArgsList += "--skip-tests" }
