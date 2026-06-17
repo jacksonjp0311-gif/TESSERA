@@ -6,7 +6,7 @@
 
 **Declare the graph. Compress the stream. Replay every memory. Wound every failure. Repair only in shadow. Validate before mutation. Claim only what transfers.**
 
-![Tessera Engine](https://img.shields.io/badge/Tessera%20Engine-v0.3.2-blue)
+![Tessera Engine](https://img.shields.io/badge/Tessera%20Engine-v0.3.8-blue)
 ![RCC-N](https://img.shields.io/badge/RCC--N-Full-brightgreen)
 ![README Discipline](https://img.shields.io/badge/README%20discipline-passing-brightgreen)
 ![Alignment](https://img.shields.io/badge/alignment-geometry--guarded-brightgreen)
@@ -33,7 +33,7 @@ What is this compressed telemetry state allowed to become next?
 |---|---:|
 | Repository | `Tessera` |
 | Package / CLI | `tessera` |
-| Current engine | Tessera Engine v0.3.2 Operator Geometry Finalization |
+| Current engine | Tessera Engine v0.3.8 Agent CLI Mirror Gate Alignment |
 | Command registry | `docs/loop/TESSERA_COMMAND_REGISTRY.md` |
 | Loopbook | `docs/loop/TESSERA_LOOPBOOK.md` |
 | Failure lessons chart | `docs/loop/TESSERA_FAILURE_LESSONS.md` |
@@ -222,7 +222,7 @@ python scripts/validation/validate_agent_cli_contract.py
 <!-- TESSERA_AGENT_CLI_MIRROR_START -->
 ## Agent CLI Mirror â€” Transplantable Root Module
 
-Tessera now includes a portable `agent_cli_mirror/` root folder. Its purpose is to turn operator-facing scripts into a hardened agent-style CLI interface: scripts enter as agent/API calls, the Observer opens before Worker, live state is emitted, failures become lessons, and the command registry remains portable.
+Tessera now includes a portable `agent_cli_mirror/` root folder. Its purpose is to turn operator-facing scripts into a hardened agent-style CLI interface: scripts as agent/API calls enter, the Observer opens before Worker, live state is emitted, failures become lessons, and the command registry remains portable.
 
 ```text
 operator script

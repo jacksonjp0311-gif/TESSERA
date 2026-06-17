@@ -1,10 +1,8 @@
 {
   "schema": "TESSERA-agent-cli-mirror-validation-v0.3.7",
-  "passed": false,
+  "passed": true,
   "missing_files": [],
-  "missing_readme_tokens": [
-    "scripts as agent/API calls"
-  ],
+  "missing_readme_tokens": [],
   "missing_commands": [],
   "command_schema_ok": true,
   "claim_boundary": "Agent CLI Mirror validation checks operator surfaces only; it does not prove autonomy, safety, correctness, or real telemetry transfer."

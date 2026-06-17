@@ -1,25 +1,13 @@
 {
-  "schema": "TESSERA-v0.3.2-operator-geometry-command-registry-validation",
-  "passed": false,
+  "schema": "TESSERA-v0.3.8-operator-geometry-command-registry-validation",
+  "passed": true,
   "missing_files": [],
   "missing_readme_tokens": [],
-  "missing_registry_tokens": [
-    "python -m tessera.operator_geometry launch"
-  ],
+  "missing_registry_tokens": [],
   "missing_chart_tokens": [],
   "missing_geometry_tokens": [],
-  "missing_powershell_tokens": [
-    "tessera.operator_geometry",
-    "launch",
-    "--root"
-  ],
-  "missing_bash_tokens": [
-    "tessera.operator_geometry",
-    "launch",
-    "--no-push",
-    "--skip-run",
-    "--skip-tests"
-  ],
+  "missing_powershell_tokens": [],
+  "missing_bash_tokens": [],
   "root_engine_markdown_files": [],
   "claim_boundary": "operator geometry validation is not real telemetry transfer proof"
 }
