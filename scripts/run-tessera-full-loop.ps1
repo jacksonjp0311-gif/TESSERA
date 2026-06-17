@@ -1,4 +1,4 @@
-<# TESSERA CANONICAL FULL LOOP v0.3.2 :: PowerShell launcher only #>
+<# TESSERA FULL LOOP :: delegates to Agent CLI Mirror #>
 param(
     [string]$Root = "$env:USERPROFILE\OneDrive\Desktop\Tessera",
     [switch]$NoPush,
@@ -7,13 +7,8 @@ param(
 )
 $ErrorActionPreference = "Stop"
 $Root = (Resolve-Path $Root).Path
-Set-Location $Root
-[System.IO.Directory]::SetCurrentDirectory($Root)
-$env:PYTHONPATH = Join-Path $Root "src"
-$env:PYTHONUTF8 = "1"
-$env:PYTHONIOENCODING = "utf-8"
-$ArgsList = @("-m", "tessera.operator_geometry", "launch", "--root", $Root)
-if ($NoPush) { $ArgsList += "--no-push" }
-if ($SkipRun) { $ArgsList += "--skip-run" }
-if ($SkipTests) { $ArgsList += "--skip-tests" }
-python @ArgsList
+$ArgsList = @("-ExecutionPolicy", "Bypass", "-File", (Join-Path $Root "scripts\agent-mirror.ps1"), "-Root", $Root, "-Command", "full")
+if ($NoPush) { $ArgsList += "-NoPush" }
+if ($SkipRun) { $ArgsList += "-SkipRun" }
+if ($SkipTests) { $ArgsList += "-SkipTests" }
+powershell @ArgsList

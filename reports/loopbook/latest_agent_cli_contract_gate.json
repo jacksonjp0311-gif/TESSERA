@@ -1,0 +1,23 @@
+{
+  "schema": "TESSERA-v0.3.6-agent-cli-contract-validation",
+  "passed": false,
+  "missing_files": [],
+  "missing_script_tokens": {
+    "scripts/run-tessera-full-loop.ps1": [
+      "tessera.agent_cli",
+      "launch",
+      "--root"
+    ],
+    "scripts/run-tessera-full-loop.sh": [
+      "tessera.agent_cli",
+      "launch",
+      "--no-push",
+      "--skip-run",
+      "--skip-tests"
+    ]
+  },
+  "missing_readme_tokens": [],
+  "missing_registry_tokens": [],
+  "missing_contract_tokens": [],
+  "claim_boundary": "Agent CLI contract validates operator surfaces only; it does not prove real telemetry transfer."
+}

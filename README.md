@@ -177,3 +177,111 @@ Documentation is not correctness.
 Synthetic success is not transfer.
 Validation remains reality.
 ```
+
+## Agent CLI Contract
+
+Every operator-facing Tessera script or loop enters through the Agent CLI. The Agent CLI opens the Observer first, then opens the Worker.
+
+```text
+Observer CLI opens first.
+Worker CLI opens second.
+```
+
+PowerShell All-One Loop Box:
+
+```powershell
+cd "C:\Users\jacks\OneDrive\Desktop\Tessera"
+.\scripts\tessera-agent.ps1
+```
+
+Bash All-One Loop Box:
+
+```bash
+cd "$HOME/OneDrive/Desktop/Tessera"
+./scripts/tessera-agent.sh
+```
+
+Direct Python:
+
+```powershell
+python -m tessera.agent_cli launch
+```
+
+Agent contract:
+
+```text
+docs/operator/TESSERA_AGENT_CLI_CONTRACT.md
+```
+
+Validation:
+
+```powershell
+python scripts/validation/validate_agent_cli_contract.py
+```
+
+<!-- TESSERA_AGENT_CLI_MIRROR_START -->
+## Agent CLI Mirror â€” Transplantable Root Module
+
+Tessera now includes a portable `agent_cli_mirror/` root folder. Its purpose is to turn operator-facing scripts into a hardened agent-style CLI interface: scripts enter as agent/API calls, the Observer opens before Worker, live state is emitted, failures become lessons, and the command registry remains portable.
+
+```text
+operator script
+-> Agent CLI Mirror
+-> Observer opens before Worker
+-> Worker executes registered command capsule
+-> live state / events / lessons / ledger
+-> validation / push / root
+```
+
+### Intent
+
+`agent_cli_mirror/` is designed to be copied into another repository. To transplant it:
+
+```text
+1. Copy agent_cli_mirror/
+2. Copy scripts/agent-mirror.ps1 and scripts/agent-mirror.sh
+3. Edit agent_cli_mirror/config/commands.json
+4. Run python agent_cli_mirror/agent_mirror.py validate
+5. Launch through the mirror, not raw scripts
+```
+
+### Canonical Agent Entrypoints
+
+PowerShell:
+
+```powershell
+.\scripts\agent-mirror.ps1
+```
+
+Bash:
+
+```bash
+./scripts/agent-mirror.sh
+```
+
+Direct Python:
+
+```powershell
+python agent_cli_mirror/agent_mirror.py launch --command full
+```
+
+Dry run:
+
+```powershell
+.\scripts\agent-mirror.ps1 -NoPush -SkipRun
+```
+
+### Registry Law
+
+```text
+No operator-facing script bypasses the Agent CLI Mirror.
+No script becomes public until it is represented in agent_cli_mirror/config/commands.json.
+No Worker starts before Observer.
+No failure disappears without a lesson entry.
+No shell owns the loop; shells only launch the mirror.
+```
+
+### Portable Boundary
+
+The Agent CLI Mirror improves operator visibility, portability, command compression, and failure learning. It does not prove safety, correctness, autonomy, production readiness, or real telemetry transfer.
+<!-- TESSERA_AGENT_CLI_MIRROR_END -->

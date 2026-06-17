@@ -1,0 +1,235 @@
+{
+  "schema": "AGENT-CLI-MIRROR-COMMANDS-v0.3.7",
+  "intent": "Portable script-to-agent mirror command registry. Copy agent_cli_mirror/ and the two wrapper scripts into another repository, edit commands.json, and run.",
+  "default_command": "full",
+  "commands": {
+    "status": {
+      "purpose": "Validate the mirror itself and print the registered command surface.",
+      "steps": [
+        {
+          "phase": "MIRROR",
+          "label": "agent mirror validate",
+          "cmd": [
+            "{python}",
+            "agent_cli_mirror/agent_mirror.py",
+            "validate",
+            "--root",
+            "{root}"
+          ]
+        },
+        {
+          "phase": "REGISTRY",
+          "label": "show commands",
+          "cmd": [
+            "{python}",
+            "agent_cli_mirror/agent_mirror.py",
+            "commands",
+            "--root",
+            "{root}"
+          ]
+        }
+      ]
+    },
+    "validate": {
+      "purpose": "Run repository validation without runtime diagnostics.",
+      "steps": [
+        {
+          "phase": "MIRROR",
+          "label": "agent mirror validator",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_agent_cli_mirror.py"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "operator geometry validate",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera.operator_geometry",
+            "validate",
+            "--root",
+            "{root}"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "readme discipline",
+          "cmd": [
+            "{python}",
+            "scripts/readme/audit_readme_nexus_discipline.py"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "rcc nexus",
+          "cmd": [
+            "{python}",
+            "scripts/rcc/check_rcc_nexus.py"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "architecture contracts",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_architecture_contracts.py"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "unit tests",
+          "skip_tag": "tests",
+          "cmd": [
+            "{python}",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ]
+        }
+      ]
+    },
+    "diagnostic": {
+      "purpose": "Run Tessera diagnostic runtime and validate latest evidence.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "tessera runtime",
+          "skip_tag": "runtime",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "run",
+            "--out",
+            "outputs",
+            "--steps",
+            "80",
+            "--epochs",
+            "1",
+            "--topology",
+            "q4",
+            "--field-dim",
+            "16",
+            "--code-dim",
+            "8"
+          ]
+        },
+        {
+          "phase": "VALIDATE",
+          "label": "validate latest evidence",
+          "skip_tag": "runtime",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "validate",
+            "--run",
+            "outputs/runs/latest"
+          ]
+        }
+      ]
+    },
+    "full": {
+      "purpose": "Run mirror validation, repository gates, diagnostic runtime, ledger, and push routing.",
+      "steps": [
+        {
+          "phase": "MIRROR",
+          "label": "agent mirror validator",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_agent_cli_mirror.py"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "operator geometry validate",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera.operator_geometry",
+            "validate",
+            "--root",
+            "{root}"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "readme discipline",
+          "cmd": [
+            "{python}",
+            "scripts/readme/audit_readme_nexus_discipline.py"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "rcc nexus",
+          "cmd": [
+            "{python}",
+            "scripts/rcc/check_rcc_nexus.py"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "architecture contracts",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_architecture_contracts.py"
+          ]
+        },
+        {
+          "phase": "CHECK",
+          "label": "unit tests",
+          "skip_tag": "tests",
+          "cmd": [
+            "{python}",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests"
+          ]
+        },
+        {
+          "phase": "RUN",
+          "label": "tessera runtime",
+          "skip_tag": "runtime",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "run",
+            "--out",
+            "outputs",
+            "--steps",
+            "80",
+            "--epochs",
+            "1",
+            "--topology",
+            "q4",
+            "--field-dim",
+            "16",
+            "--code-dim",
+            "8"
+          ]
+        },
+        {
+          "phase": "VALIDATE",
+          "label": "validate latest evidence",
+          "skip_tag": "runtime",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "validate",
+            "--run",
+            "outputs/runs/latest"
+          ]
+        }
+      ]
+    }
+  }
+}
