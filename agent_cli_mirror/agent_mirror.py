@@ -9,7 +9,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA = "AGENT-CLI-MIRROR-v0.3.7"
+SCHEMA = "AGENT-CLI-MIRROR-v0.3.9"
 DEFAULT_ROOT = Path(os.environ.get("TESSERA_ROOT", r"C:\Users\jacks\OneDrive\Desktop\Tessera"))
 MIRROR_DIRNAME = "agent_cli_mirror"
 PHASES = [
@@ -99,20 +99,44 @@ def expand_arg(arg: str, root: Path) -> str:
 
 def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
     cmd = [expand_arg(x, root) for x in step]
-    emit(root, phase, "RUN", label, " ".join(cmd))
-    print("[CMD] " + " ".join(cmd))
-    proc = subprocess.run(cmd, cwd=root, env=env_for(root), text=True)
-    if proc.returncode != 0:
-        emit(root, phase, "FAIL", f"{label} exit={proc.returncode}", " ".join(cmd))
+    command_text = " ".join(cmd)
+    emit(root, phase, "RUN", label, command_text)
+    print("[CMD] " + command_text)
+    creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
+    proc = subprocess.Popen(cmd, cwd=root, env=env_for(root), text=True, creationflags=creationflags)
+    try:
+        returncode = proc.wait()
+    except KeyboardInterrupt:
+        emit(root, phase, "STOP", f"{label} interrupted by operator", command_text)
+        try:
+            proc.terminate()
+            proc.wait(timeout=5)
+        except Exception:
+            try:
+                proc.kill()
+            except Exception:
+                pass
+        record_lesson(
+            root,
+            failure=f"operator interrupted command: {label}",
+            diagnosis=f"KeyboardInterrupt while command was running; command={command_text}",
+            repair="Use -SkipRun or command=validate for interface checks; let heavy imports finish during full runtime.",
+            gate="agent_cli_mirror graceful stop",
+        )
+        print("
+[AGENT] Worker command interrupted by operator. Event recorded; exiting cleanly.")
+        raise SystemExit(130)
+    if returncode != 0:
+        emit(root, phase, "FAIL", f"{label} exit={returncode}", command_text)
         record_lesson(
             root,
             failure=f"command failed: {label}",
-            diagnosis=f"exit={proc.returncode}; command={' '.join(cmd)}",
+            diagnosis=f"exit={returncode}; command={command_text}",
             repair="Inspect output, patch command registry or touched surface, rerun validation.",
             gate="agent_cli_mirror worker",
         )
-        raise SystemExit(proc.returncode)
-    emit(root, phase, "OK", label, " ".join(cmd))
+        raise SystemExit(returncode)
+    emit(root, phase, "OK", label, command_text)
 
 
 def git(root: Path, args: list[str], label: str) -> str:
@@ -219,62 +243,72 @@ def observer(root: Path, refresh: float = 1.0) -> None:
     state_dir = mirror_dir(root) / "state"
     status_path = state_dir / "live_status.json"
     events_path = state_dir / "events.jsonl"
-    while True:
-        os.system("cls" if os.name == "nt" else "clear")
-        print("+------------------------------------------------------------------------------+")
-        print("| AGENT CLI MIRROR v0.3.7                                                       |")
-        print("+------------------------------------------------------------------------------+")
-        print("| transplantable operator surface :: scripts enter as agent/API calls           |")
-        print("| observer: read-only :: worker: executes :: ledger: learns                     |")
-        print("+------------------------------------------------------------------------------+")
-        print(f"root:   {root}")
-        print(f"mirror: {mirror_dir(root)}")
-        print(f"time:   {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        status = None
-        if status_path.exists():
-            try:
-                status = json.loads(status_path.read_text(encoding="utf-8"))
-            except Exception:
-                status = None
-        print("")
-        if status:
-            print(f"current: {status.get('phase',''):<10} {status.get('state',''):<7} {status.get('detail','')}")
-            if status.get("command"):
-                print(f"command: {status.get('command')}")
-        else:
-            print("current: waiting for worker...")
-        events = []
-        if events_path.exists():
-            for line in events_path.read_text(encoding="utf-8", errors="replace").splitlines()[-18:]:
+    try:
+        while True:
+            os.system("cls" if os.name == "nt" else "clear")
+            print("+------------------------------------------------------------------------------+")
+            print("| AGENT CLI MIRROR v0.3.9                                                       |")
+            print("+------------------------------------------------------------------------------+")
+            print("| transplantable operator surface :: scripts enter as agent/API calls           |")
+            print("| observer: read-only :: worker: executes :: ledger: learns                     |")
+            print("+------------------------------------------------------------------------------+")
+            print(f"root:   {root}")
+            print(f"mirror: {mirror_dir(root)}")
+            print(f"time:   {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            status = None
+            if status_path.exists():
                 try:
-                    events.append(json.loads(line))
+                    status = json.loads(status_path.read_text(encoding="utf-8"))
+                except Exception:
+                    status = None
+            print("")
+            if status:
+                print(f"current: {status.get('phase',''):<10} {status.get('state',''):<7} {status.get('detail','')}")
+                if status.get("command"):
+                    print(f"command: {status.get('command')}")
+            else:
+                print("current: waiting for worker...")
+            events = []
+            if events_path.exists():
+                for line in events_path.read_text(encoding="utf-8", errors="replace").splitlines()[-18:]:
+                    try:
+                        events.append(json.loads(line))
+                    except Exception:
+                        pass
+            latest = {event.get("phase"): event for event in events}
+            print("
+PHASE BOARD")
+            print("-----------")
+            for phase in PHASES:
+                event = latest.get(phase)
+                if event:
+                    print(f"{phase:<10} {event.get('state',''):<7} {event.get('detail','')}")
+                else:
+                    print(f"{phase:<10} [...]")
+            print("
+RECENT EVENTS")
+            print("-------------")
+            for event in events:
+                print(f"{event.get('timestamp','')} | {event.get('phase',''):<10} {event.get('state',''):<7} {event.get('detail','')}")
+            cert = root / "outputs" / "runs" / "latest" / "certificates" / "transfer_certificate.json"
+            if cert.exists():
+                try:
+                    c = json.loads(cert.read_text(encoding="utf-8"))
+                    print("
+LATEST CERTIFICATE")
+                    print("------------------")
+                    print(f"claim_ceiling:    {c.get('claim_ceiling')}")
+                    print(f"certificate_hash: {c.get('certificate_hash')}")
                 except Exception:
                     pass
-        latest = {event.get("phase"): event for event in events}
-        print("\nPHASE BOARD")
-        print("-----------")
-        for phase in PHASES:
-            event = latest.get(phase)
-            if event:
-                print(f"{phase:<10} {event.get('state',''):<7} {event.get('detail','')}")
-            else:
-                print(f"{phase:<10} [...]")
-        print("\nRECENT EVENTS")
-        print("-------------")
-        for event in events:
-            print(f"{event.get('timestamp','')} | {event.get('phase',''):<10} {event.get('state',''):<7} {event.get('detail','')}")
-        cert = root / "outputs" / "runs" / "latest" / "certificates" / "transfer_certificate.json"
-        if cert.exists():
-            try:
-                c = json.loads(cert.read_text(encoding="utf-8"))
-                print("\nLATEST CERTIFICATE")
-                print("------------------")
-                print(f"claim_ceiling:    {c.get('claim_ceiling')}")
-                print(f"certificate_hash: {c.get('certificate_hash')}")
-            except Exception:
-                pass
-        print("\ncontrols: Ctrl+C closes Observer. Worker continues in its own window.")
-        time.sleep(refresh)
+            print("
+controls: Ctrl+C closes Observer cleanly. Worker continues in its own window unless interrupted there.")
+            time.sleep(refresh)
+    except KeyboardInterrupt:
+        emit(root, "ROOT", "STOP", "observer closed by operator")
+        print("
+[AGENT] Observer closed by operator. Worker continues in its own window.")
+        return
 
 
 def worker(root: Path, command: str, no_push: bool = False, skip_run: bool = False, skip_tests: bool = False) -> None:
@@ -408,4 +442,14 @@ def main(argv: list[str] | None = None) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        try:
+            root = root_path(os.environ.get("TESSERA_ROOT"))
+            emit(root, "ROOT", "STOP", "operator interrupt")
+        except Exception:
+            pass
+        print("
+[AGENT] Operator interrupt received. Exiting cleanly.")
+        raise SystemExit(130)

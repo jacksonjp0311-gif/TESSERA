@@ -21,7 +21,7 @@ REQUIRED = [
 SCRIPT_TOKENS = {
     "scripts/tessera-agent.ps1": ["tessera.agent_cli", "launch", "--root", "NoPush", "SkipRun", "SkipTests"],
     "scripts/tessera-agent.sh": ["tessera.agent_cli", "launch", "--root", "--no-push", "--skip-run", "--skip-tests"],
-    "scripts/agent-mirror.ps1": ["agent_mirror.py", "launch", "-Command", "NoPush", "SkipRun", "SkipTests"],
+    "scripts/agent-mirror.ps1": ["agent_mirror.py", "launch", "--command", "NoPush", "SkipRun", "SkipTests"],
     "scripts/agent-mirror.sh": ["agent_mirror.py", "launch", "--command", "--no-push", "--skip-run", "--skip-tests"],
     "scripts/run-tessera-full-loop.ps1": ["agent-mirror.ps1", "-Command", "full", "NoPush", "SkipRun", "SkipTests"],
     "scripts/run-tessera-full-loop.sh": ["agent-mirror.sh", "--command=full", "--root"],

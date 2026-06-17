@@ -285,3 +285,7 @@ No shell owns the loop; shells only launch the mirror.
 
 The Agent CLI Mirror improves operator visibility, portability, command compression, and failure learning. It does not prove safety, correctness, autonomy, production readiness, or real telemetry transfer.
 <!-- TESSERA_AGENT_CLI_MIRROR_END -->
+
+## Agent CLI Mirror Graceful Stop
+
+The Agent CLI Mirror now treats operator interruption as a governed event instead of a raw traceback. `Ctrl+C` in the Observer closes the Observer cleanly. `Ctrl+C` in the Worker records an interrupted-command lesson and exits with a controlled stop state. Use `-SkipRun` or `-Command validate` for lightweight interface checks when heavy imports such as Torch or SciPy are not needed.
