@@ -1,0 +1,32 @@
+{
+    "schema":  "TESSERA-Hermes-interlock-geometry-v0.2.0",
+    "source_repo":  "jacksonjp0311-gif/hermes-agent-evo",
+    "target_repo":  "jacksonjp0311-gif/TESSERA",
+    "borrowed_geometry":  [
+                              "governed operational loop",
+                              "replay rollback hardening",
+                              "operator command surface",
+                              "non-claim locks",
+                              "human authorization boundary"
+                          ],
+    "tessera_loop":  [
+                         "rehydrate",
+                         "orient",
+                         "compile",
+                         "run",
+                         "measure",
+                         "validate",
+                         "ledger",
+                         "disconnect"
+                     ],
+    "blocked_authority":  [
+                              "Hermes runtime mutation",
+                              "CMS write authority",
+                              "API write authority",
+                              "memory promotion authority",
+                              "automatic rollback authority",
+                              "self authorization",
+                              "provider/model/tool authority"
+                          ],
+    "claim_boundary":  "Interlock geometry is navigation and governance transfer only; it does not prove code correctness or real telemetry transfer."
+}

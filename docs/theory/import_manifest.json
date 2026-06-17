@@ -1,0 +1,89 @@
+{
+  "schema": "Tessera-theory-import-manifest-v0.1",
+  "repository": "Tessera",
+  "date": "2026-06-17",
+  "purpose": "Preserve uploaded theory/reference material under docs before repository promotion.",
+  "import_count": 10,
+  "imports": [
+    {
+      "title": "RP-SA v0.1 \u2014 Rehydration Protocol Software Architecture",
+      "source_uploaded_name": "Pasted text(765).txt",
+      "repo_path": "docs/theory/imports/rp_sa_v0_1_rehydration_protocol_software_architecture.md",
+      "sha256": "bba8ae4a55f49397b0c2b1d2ba057b641d764c96be6ab220200ad518117866f4",
+      "status": "imported_reference",
+      "claim_boundary": "source/reference context only; not automatic validation or proof"
+    },
+    {
+      "title": "LFTE-SA v0.1 \u2014 Lattice Field Theory Software Architecture",
+      "source_uploaded_name": "Pasted text (2)(26).txt",
+      "repo_path": "docs/theory/imports/lfte_sa_v0_1_lattice_field_theory_software_architecture.md",
+      "sha256": "1a9fb2c9d2e13c58a29f6b0a5c0241f12126ffd402be75075e7130398cfa1f13",
+      "status": "imported_reference",
+      "claim_boundary": "source/reference context only; not automatic validation or proof"
+    },
+    {
+      "title": "RCC-N v1.7 \u2014 RCC Nexus",
+      "source_uploaded_name": "Pasted text (3)(3).txt",
+      "repo_path": "docs/theory/imports/rcc_n_v1_7_rcc_nexus.md",
+      "sha256": "2e8c685d8ba540d57211ecf42acf5521d15a28aca5d98a4206737d3e06b8daf4",
+      "status": "imported_reference",
+      "claim_boundary": "source/reference context only; not automatic validation or proof"
+    },
+    {
+      "title": "Observable Manifold Network README reference",
+      "source_uploaded_name": "Pasted markdown (4)(1).md",
+      "repo_path": "docs/theory/imports/omn_runtime_readme_reference.md",
+      "sha256": "f4b78f0b4c2c2869c759f7b60e55a395b0457ea466f58609d8591d185414498f",
+      "status": "imported_reference",
+      "claim_boundary": "source/reference context only; not automatic validation or proof"
+    },
+    {
+      "title": "AI Survival Field Runtime README reference",
+      "source_uploaded_name": "Pasted markdown (5).md",
+      "repo_path": "docs/theory/imports/asf_r_runtime_readme_reference.md",
+      "sha256": "95f8f7e472542e320cdc41c53ddc48c19ed0a65e06e0a904b429219b36225603",
+      "status": "imported_reference",
+      "claim_boundary": "source/reference context only; not automatic validation or proof"
+    },
+    {
+      "title": "tessera v1 7 real telemetry transfer architecture",
+      "source_uploaded_name": "tessera_v1_7_real_telemetry_transfer_architecture.tex",
+      "repo_path": "docs/theory/tessera_lineage/tessera_v1_7_real_telemetry_transfer_architecture.tex",
+      "sha256": "97bd9b8db846c13777dc3b6647b605c599a92c8617bb77abf1c0c6c969583f71",
+      "status": "imported_tessera_lineage",
+      "claim_boundary": "theory lineage only; runtime claims require evidence package and certificate"
+    },
+    {
+      "title": "tessera v1 6 replay guided codec repair",
+      "source_uploaded_name": "tessera_v1_6_replay_guided_codec_repair.tex",
+      "repo_path": "docs/theory/tessera_lineage/tessera_v1_6_replay_guided_codec_repair.tex",
+      "sha256": "032ade9e324fb82478ba58df844cd409f275dd9054cb95c6caedfca173cbe444",
+      "status": "imported_tessera_lineage",
+      "claim_boundary": "theory lineage only; runtime claims require evidence package and certificate"
+    },
+    {
+      "title": "tessera v1 5 rate distortion triadic memory",
+      "source_uploaded_name": "tessera_v1_5_rate_distortion_triadic_memory.tex",
+      "repo_path": "docs/theory/tessera_lineage/tessera_v1_5_rate_distortion_triadic_memory.tex",
+      "sha256": "f9da3dc66e49be94c7bb117d0bf924e0ed68792a725c6655fdc4f1f40dbf625e",
+      "status": "imported_tessera_lineage",
+      "claim_boundary": "theory lineage only; runtime claims require evidence package and certificate"
+    },
+    {
+      "title": "tessera v1 4 compressive field memory architecture",
+      "source_uploaded_name": "tessera_v1_4_compressive_field_memory_architecture.tex",
+      "repo_path": "docs/theory/tessera_lineage/tessera_v1_4_compressive_field_memory_architecture.tex",
+      "sha256": "1da46fa9a7948f2d2b0a5067b21a6f1c8103ba49f9b18d813b3afbab141e3c25",
+      "status": "imported_tessera_lineage",
+      "claim_boundary": "theory lineage only; runtime claims require evidence package and certificate"
+    },
+    {
+      "title": "tessera v1 3 spectral triadic field architecture",
+      "source_uploaded_name": "tessera_v1_3_spectral_triadic_field_architecture.tex",
+      "repo_path": "docs/theory/tessera_lineage/tessera_v1_3_spectral_triadic_field_architecture.tex",
+      "sha256": "e8bb2c63e17396570e5bc607a74edb9185ab315bad124ddb7bf65540cb1b723a",
+      "status": "imported_tessera_lineage",
+      "claim_boundary": "theory lineage only; runtime claims require evidence package and certificate"
+    }
+  ]
+}

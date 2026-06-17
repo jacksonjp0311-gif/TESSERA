@@ -1,0 +1,211 @@
+{
+  "schema": "Tessera-rcc-nexus-index-v0.2",
+  "profile": "Standard",
+  "sphere_position": {
+    "shell": "center",
+    "meridians": [
+      "neural",
+      "memory",
+      "alignment",
+      "rcc",
+      "evidence",
+      "telemetry"
+    ],
+    "sector": "tessera-engine"
+  },
+  "route_map": "rcc/nexus/route_map.json",
+  "echo_records": [
+    "README.md",
+    "docs/theory/README.md",
+    "docs/theory/imports/README.md",
+    "docs/theory/tessera_lineage/README.md",
+    "docs/alignment/README.md",
+    "rcc/README.md",
+    "rcc/nexus/README.md",
+    "src/tessera/README.md",
+    "src/tessera/data/README.md",
+    "src/tessera/graph/README.md",
+    "src/tessera/model/README.md",
+    "src/tessera/metrics/README.md",
+    "src/tessera/memory/README.md",
+    "src/tessera/baselines/README.md",
+    "src/tessera/evidence/README.md",
+    "src/tessera/experiments/README.md",
+    "src/tessera/visuals/README.md",
+    "tests/README.md",
+    "outputs/README.md",
+    "reports/README.md",
+    "reports/rcc_nexus/README.md",
+    "reports/validation/README.md",
+    "scripts/README.md",
+    "scripts/rcc/README.md",
+    "scripts/validation/README.md",
+    "configs/README.md"
+  ],
+  "evidence_surfaces": [
+    {
+      "id": "root",
+      "path": "README.md",
+      "role": "human/rcc/agent trisection root"
+    },
+    {
+      "id": "agents",
+      "path": "AGENTS.md",
+      "role": "agent operating contract"
+    },
+    {
+      "id": "quick",
+      "path": "README_90_SECONDS.md",
+      "role": "fast orientation"
+    },
+    {
+      "id": "architecture",
+      "path": "docs/architecture/TESSERA_ENGINE_V0_1_SOFTWARE_ARCHITECTURE.md",
+      "role": "software architecture"
+    },
+    {
+      "id": "theory",
+      "path": "docs/theory/README.md",
+      "role": "theory import index"
+    },
+    {
+      "id": "theory_imports",
+      "path": "docs/theory/imports/README.md",
+      "role": "imported theory/reference documents"
+    },
+    {
+      "id": "tessera_lineage",
+      "path": "docs/theory/tessera_lineage/README.md",
+      "role": "TESSERA v1.3-v1.7 lineage"
+    },
+    {
+      "id": "alignment",
+      "path": "docs/alignment/README.md",
+      "role": "origin and non-claim locks"
+    },
+    {
+      "id": "context_index",
+      "path": "docs/context/repository_context_index.json",
+      "role": "repository context map"
+    },
+    {
+      "id": "rcc_index",
+      "path": "docs/context/rcc_nexus_index.json",
+      "role": "rcc nexus surface map"
+    },
+    {
+      "id": "rcc",
+      "path": "rcc/README.md",
+      "role": "RCC root shell"
+    },
+    {
+      "id": "rcc_nexus",
+      "path": "rcc/nexus/README.md",
+      "role": "RCC-N route shell"
+    },
+    {
+      "id": "runtime",
+      "path": "src/tessera/README.md",
+      "role": "runtime package orientation"
+    },
+    {
+      "id": "data",
+      "path": "src/tessera/data/README.md",
+      "role": "data manifests, splits, leakage guard"
+    },
+    {
+      "id": "graph",
+      "path": "src/tessera/graph/README.md",
+      "role": "graph topology and spectral operator layer"
+    },
+    {
+      "id": "model",
+      "path": "src/tessera/model/README.md",
+      "role": "neural model and codec layer"
+    },
+    {
+      "id": "metrics",
+      "path": "src/tessera/metrics/README.md",
+      "role": "rate-distortion and governance metrics"
+    },
+    {
+      "id": "memory",
+      "path": "src/tessera/memory/README.md",
+      "role": "triadic gates, wounds, certificates"
+    },
+    {
+      "id": "baselines",
+      "path": "src/tessera/baselines/README.md",
+      "role": "baseline comparison layer"
+    },
+    {
+      "id": "evidence",
+      "path": "src/tessera/evidence/README.md",
+      "role": "evidence package writer"
+    },
+    {
+      "id": "experiments",
+      "path": "src/tessera/experiments/README.md",
+      "role": "experiment harnesses"
+    },
+    {
+      "id": "visuals",
+      "path": "src/tessera/visuals/README.md",
+      "role": "visual outputs"
+    },
+    {
+      "id": "tests",
+      "path": "tests/README.md",
+      "role": "validation tests"
+    },
+    {
+      "id": "outputs",
+      "path": "outputs/README.md",
+      "role": "generated evidence artifacts"
+    },
+    {
+      "id": "reports",
+      "path": "reports/README.md",
+      "role": "generated validation reports"
+    },
+    {
+      "id": "rcc_reports",
+      "path": "reports/rcc_nexus/README.md",
+      "role": "RCC validation report output"
+    },
+    {
+      "id": "validation_reports",
+      "path": "reports/validation/README.md",
+      "role": "architecture validation report output"
+    },
+    {
+      "id": "scripts",
+      "path": "scripts/README.md",
+      "role": "script surface"
+    },
+    {
+      "id": "rcc_scripts",
+      "path": "scripts/rcc/README.md",
+      "role": "RCC checker scripts"
+    },
+    {
+      "id": "validation_scripts",
+      "path": "scripts/validation/README.md",
+      "role": "architecture validation scripts"
+    },
+    {
+      "id": "configs",
+      "path": "configs/README.md",
+      "role": "runtime configuration profiles"
+    }
+  ],
+  "validators": [
+    "python scripts/rcc/check_rcc_nexus.py",
+    "python scripts/validation/validate_architecture_contracts.py",
+    "python -m unittest discover -s tests",
+    "python -m tessera validate --run outputs/runs/latest"
+  ],
+  "claim_boundary": "Navigation is not validation; validation remains required.",
+  "readme_discipline": "docs/readme/README_DISCIPLINE.md",
+  "readme_audit": "scripts/readme/audit_readme_nexus_discipline.py"
+}

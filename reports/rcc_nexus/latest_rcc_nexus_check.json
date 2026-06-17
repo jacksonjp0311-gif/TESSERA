@@ -1,0 +1,10 @@
+{
+  "schema": "Tessera-rcc-nexus-check-v0.1",
+  "status": "failed",
+  "errors": [
+    "route_map invalid json: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)"
+  ],
+  "checked_required_count": 10,
+  "checked_echo_count": 5,
+  "claim_boundary": "RCC validation checks navigation surfaces only; it does not prove code correctness."
+}

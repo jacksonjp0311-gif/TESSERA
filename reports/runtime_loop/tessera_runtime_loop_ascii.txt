@@ -1,0 +1,21 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                    TESSERA RUNTIME LOOP COMPILER                  ║
+╠════════════════════════════════════════════════════════════════════╣
+║ 01 REHYDRATE  -> origin/context/route/non-claim locks             ║
+║ 02 ORIENT     -> RCC Nexus geometry + route map                   ║
+║ 03 COMPILE    -> ASCII + Bash + PowerShell runtime runbooks       ║
+║ 04 RUN        -> sparse field / codec / gates / replay            ║
+║ 05 MEASURE    -> RD metrics / wounds / baselines / certificate    ║
+║ 06 VALIDATE   -> RCC + README + architecture + tests + evidence   ║
+║ 07 LEDGER     -> reports / lessons / Git state                    ║
+║ 08 DISCONNECT -> carry lessons, not foreign runtime authority     ║
+╚════════════════════════════════════════════════════════════════════╝
+
+01. REHYDRATE  :: Load origin manifest, route map, context indexes, and claim locks.
+02. ORIENT     :: Resolve RCC Nexus route, local surface, claim ceiling, and validation path.
+03. COMPILE    :: Compress the runtime loop into ASCII, Bash, PowerShell, and evidence runbooks.
+04. RUN        :: Execute the Tessera smoke/runtime cycle under declared graph and thresholds.
+05. MEASURE    :: Emit rate-distortion, gates, wounds, baseline summary, and certificate artifacts.
+06. VALIDATE   :: Run RCC, README, architecture, unit, and latest-run evidence checks.
+07. LEDGER     :: Record run identity, Git state, lessons, and non-claim boundaries.
+08. DISCONNECT :: Extract lessons learned without importing Hermes runtime authority.

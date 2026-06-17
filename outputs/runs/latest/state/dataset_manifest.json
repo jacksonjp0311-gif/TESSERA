@@ -1,0 +1,22 @@
+{
+  "schema": "TESSERA-v0.1-dataset-manifest",
+  "dataset_name": "tessera_synthetic_telemetry",
+  "dataset_version": "synthetic-v0.1",
+  "raw_data_hash": "b415bcaf6232b69e159603f8d882c5996fa83bcb23103d8d59d810c15f713175",
+  "split_policy": {
+    "calibration": "first 16 percent chronological window",
+    "train": "first 38 percent chronological window",
+    "validation": "38-58 percent chronological window",
+    "replay": "58-76 percent chronological window",
+    "final_test": "76-100 percent chronological window"
+  },
+  "label_policy": "labels are used for evaluation and replay validation, not for training codec thresholds",
+  "leakage_controls": {
+    "future_statistics_blocked": true,
+    "test_labels_blocked_from_tuning": true,
+    "preprocessing_fit_on_train_only": true,
+    "time_order_preserved": true
+  },
+  "claim_boundary": "synthetic_or_dataset_scoped_evidence_only",
+  "manifest_hash": "603452c50d4f9fbad2eca70e67f27a6b2780b4332c9e0f17009133b5e258f677"
+}

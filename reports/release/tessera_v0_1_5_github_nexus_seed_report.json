@@ -1,0 +1,26 @@
+{
+    "schema":  "TESSERA-v0.1.5-github-nexus-seed-report",
+    "started_at":  "2026-06-16T22:37:20",
+    "completed_at":  "2026-06-16T22:37:41",
+    "repo_url":  "https://github.com/jacksonjp0311-gif/TESSERA.git",
+    "root":  "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera",
+    "patch_zip":  "C:\\Users\\jacks\\Downloads\\Tessera_engine_v0_1_2_readme_nexus_discipline_patch_package.zip",
+    "push_default":  "blocked",
+    "commit_requested":  false,
+    "push_requested":  false,
+    "validation":  {
+                       "rcc_nexus":  "passed",
+                       "architecture_contracts":  "passed",
+                       "readme_nexus_discipline":  "passed",
+                       "unittest":  "passed",
+                       "smoke_run":  "passed"
+                   },
+    "claim_boundary":  "local Nexus seed and diagnostic runtime only; not empirical transfer or production readiness",
+    "non_claim_locks":  [
+                            "navigation_is_not_validation",
+                            "documentation_is_not_correctness",
+                            "synthetic_success_is_not_transfer",
+                            "validation_remains_required",
+                            "push_requires_explicit_authorization"
+                        ]
+}

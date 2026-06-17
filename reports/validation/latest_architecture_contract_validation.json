@@ -1,0 +1,12 @@
+{
+  "schema": "TESSERA-architecture-contract-validation-v0.1.2",
+  "passed": true,
+  "status": "passed",
+  "errors": [],
+  "missing_dirs": [],
+  "missing_files": [],
+  "missing_locks": [],
+  "theory_manifest_present": true,
+  "readme_discipline_present": true,
+  "claim_boundary": "architecture validation is not empirical validation"
+}

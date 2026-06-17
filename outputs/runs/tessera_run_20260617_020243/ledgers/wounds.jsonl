@@ -1,0 +1,17 @@
+{"step": 0, "wound_type": "W_block_false_positive", "J_RD": 587.9830219447613, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 6, "wound_type": "W_falsememory", "J_RD": 208.0909845879674, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 7, "wound_type": "W_falsememory", "J_RD": 209.34774564437566, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 8, "wound_type": "W_falsememory", "J_RD": 216.80943325258792, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 9, "wound_type": "W_falsememory", "J_RD": 226.24306927256285, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 10, "wound_type": "W_falsememory", "J_RD": 228.1901717817038, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 11, "wound_type": "W_falsememory", "J_RD": 229.82557875245809, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 12, "wound_type": "W_falsememory", "J_RD": 234.8650849027559, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 13, "wound_type": "W_falsememory", "J_RD": 356.88732762344176, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 22, "wound_type": "W_codedrift", "J_RD": 1199.556253171265, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 23, "wound_type": "W_codedrift", "J_RD": 1237.1139737689496, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 24, "wound_type": "W_predict", "J_RD": 1331.6356314432621, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 25, "wound_type": "W_reconstruct", "J_RD": 1455.3609463870525, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 25, "wound_type": "W_predict", "J_RD": 1455.3609463870525, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 26, "wound_type": "W_reconstruct", "J_RD": 1250.9231722414493, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 27, "wound_type": "W_codedrift", "J_RD": 638.4806482456625, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 28, "wound_type": "W_codedrift", "J_RD": 294.9551282820106, "claim_boundary": "repair_evidence_not_training_permission"}

@@ -1,0 +1,19 @@
+{
+  "schema": "TESSERA-runtime-loop-compiler-validation-v0.2.0",
+  "passed": false,
+  "missing": [],
+  "failures": [
+    {
+      "command": [
+        "C:\\Program Files\\Python312\\python.exe",
+        "-m",
+        "tessera",
+        "loop",
+        "ascii"
+      ],
+      "stderr": "en runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera\\src\\tessera\\__main__.py\", line 4, in <module>\n    main()\n  File \"C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera\\src\\tessera\\cli.py\", line 60, in main\n    args.func(args)\n  File \"C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera\\src\\tessera\\cli.py\", line 38, in cmd_loop\n    loop_compiler.main(args.loop_args)\n  File \"C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera\\src\\tessera\\loop_compiler.py\", line 192, in main\n    args.func(args)\n  File \"C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera\\src\\tessera\\loop_compiler.py\", line 144, in cmd_ascii\n    print(ascii_text())\n  File \"C:\\Program Files\\Python312\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode characters in position 0-69: character maps to <undefined>\n"
+    }
+  ],
+  "manifest_ok": true,
+  "claim_boundary": "Runtime loop compilation proves operator visibility only; it does not prove transfer, safety, or correctness."
+}

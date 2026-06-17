@@ -1,0 +1,1102 @@
+
+<div align="center">
+
+# AI Survival Field Runtime
+
+### Evidence-gated continuation for AI-generated artifacts.
+
+**Rehydrate proof state. Apply policy gates. Block unsafe promotion. Package wounds. Validate repair paths. Watch the loop in read-only geometry.**
+
+[![ASF Guard](https://github.com/jacksonjp0311-gif/ai-survival-field/actions/workflows/asf-guard.yml/badge.svg)](https://github.com/jacksonjp0311-gif/ai-survival-field/actions/workflows/asf-guard.yml)
+
+<img src="docs/assets/asf-r-triadic-geometry-console.png" alt="ASF-R Triadic Geometry Console" width="920">
+
+</div>
+
+---
+
+## What ASF-R Is
+
+AI systems do not only need better answers. They need boundaries around what an answer is allowed to become.
+
+**AI Survival Field Runtime, or ASF-R, is a governed continuation runtime for AI-generated and human-generated artifacts.** It loads repository truth, rehydrates the current proof state, routes artifacts through RCC Nexus, applies policy gates and claim ceilings, blocks unsafe promotion, packages failures as wound records, and renders the whole path through a read-only Triadic Geometry Console.
+
+ASF-R does not prove truth. It does not make AI safe by itself. It gives operators a bounded runtime loop for answering a narrower and more useful question:
+
+```text
+What is this artifact allowed to become next?
+```
+
+The runtime path is intentionally visible:
+
+```text
+artifact
+-> rehydration
+-> RCC route
+-> policy gates
+-> guard decision
+-> wound package if blocked
+-> repair / closure evidence
+-> ledger record
+-> read-only geometry console
+```
+
+Core operating law:
+
+```text
+Rehydrate before reasoning.
+Orient before action.
+Validate before mutation.
+Gate before promotion.
+Package every wound.
+Show the geometry.
+```
+
+ASF-R is built for one disciplined purpose:
+
+```text
+No evidence, no authority.
+No cleared gate, no promotion.
+No validated path, no durable continuation.
+```
+
+## Status
+
+```text
+ASF-R v1.1.0-dev4 circular gate orbit, circuit trace, and footer polish.
+```
+
+The latest stable release tag remains `v1.0.0`. The `main` branch now carries
+post-v1 read-only observability work for the Triadic Geometry Console.
+
+This repository is the production-oriented successor line to Survivor Field
+Theory v1.4. The SFT repository remains the clean reference theory and
+experimental validator. ASF-R is a separate runtime line for enforcement
+adapters, evidence ledgers, wound packages, rehydration, RCC routing, and
+operator-visible geometry.
+
+
+
+
+<!-- ASF-R WHOLE LOOP BOX START -->
+
+## Run the Whole ASF-R Loop
+
+Use this box to run the full local governed loop with the read-only Triadic Geometry Console.
+
+This block works whether you are already inside the repository or starting from a parent directory. If the repository is not present, it clones it first.
+
+```text
+This does not grant authority.
+This does not mutate policy.
+This does not enable enforce_full.
+This does not authorize repair.
+This only runs the governed local loop and renders read-only observability.
+```
+
+### PowerShell
+
+```powershell
+$RepoUrl = "https://github.com/jacksonjp0311-gif/ai-survival-field.git"
+$RepoDir = "ai-survival-field"
+
+if ((Test-Path ".git") -and (Test-Path "asf")) {
+    Write-Host "[ASF] Already inside ASF-R repository."
+} else {
+    if (-not (Test-Path $RepoDir)) {
+        Write-Host "[ASF] Cloning ASF-R..."
+        git clone $RepoUrl $RepoDir
+    }
+
+    Set-Location $RepoDir
+}
+
+$ErrorActionPreference = "Stop"
+$Root = (Get-Location).Path
+$env:PYTHONPATH = $Root
+
+$Port = 8765
+$Url = "http://127.0.0.1:$Port"
+$StateUrl = "$Url/state.json"
+$OpenUrl = "$Url/?v=$(Get-Date -Format yyyyMMddHHmmss)"
+
+Write-Host "[ASF] Rehydrated repo root: $Root"
+
+Write-Host "[ASF] Installing editable package..."
+python -m pip install -e .
+
+Write-Host "[ASF] Running tests..."
+python -m unittest discover tests
+if ($LASTEXITCODE -ne 0) { throw "Tests failed. Full loop stopped." }
+
+Write-Host "[UI] Stopping old geometry UI jobs..."
+Get-Job | Where-Object {
+    $_.Name -eq "asf-geo-ui" -or
+    $_.Name -eq "asf-geo-ui-live" -or
+    $_.Name -eq "asf-ui" -or
+    $_.Name -like "asf-geometry-ui*"
+} | Stop-Job -ErrorAction SilentlyContinue
+
+Get-Job | Where-Object {
+    $_.Name -eq "asf-geo-ui" -or
+    $_.Name -eq "asf-geo-ui-live" -or
+    $_.Name -eq "asf-ui" -or
+    $_.Name -like "asf-geometry-ui*"
+} | Remove-Job -Force -ErrorAction SilentlyContinue
+
+Write-Host "[UI] Starting read-only Triadic Geometry Console..."
+$UiJob = Start-Job -Name "asf-geo-ui" -ScriptBlock {
+    param($Root)
+    Set-Location $Root
+    $env:PYTHONPATH = $Root
+    python -m asf.cli geometry serve
+} -ArgumentList $Root
+
+$Ready = $false
+for ($i = 1; $i -le 60; $i++) {
+    try {
+        $Response = Invoke-WebRequest -Uri $StateUrl -UseBasicParsing -TimeoutSec 2
+        if ($Response.StatusCode -ge 200 -and $Response.StatusCode -lt 300) {
+            $Ready = $true
+            break
+        }
+    } catch {
+        Start-Sleep -Milliseconds 500
+    }
+}
+
+if (-not $Ready) {
+    Write-Host "[UI] Server output:"
+    Receive-Job $UiJob -ErrorAction SilentlyContinue | Out-Host
+    throw "Geometry UI did not become ready at $StateUrl"
+}
+
+Write-Host "[UI] Opening browser: $OpenUrl"
+Start-Process -FilePath $OpenUrl
+
+Write-Host "[LOOP] Running full ASF-R governed loop with geometry..."
+python -m asf.cli full-loop run --geometry
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[WARN] CLI full-loop route failed. Trying module fallback..."
+    python -m asf.full_loop --root . --geometry
+}
+
+if ($LASTEXITCODE -ne 0) { throw "Full ASF-R loop failed." }
+
+Start-Sleep -Seconds 2
+
+Write-Host "[STATE] Final runtime state:"
+$State = Invoke-RestMethod -Uri $StateUrl -TimeoutSec 5
+Write-Host ("  panel:       {0}" -f $State.cli_panel.title)
+Write-Host ("  phase:       {0}" -f $State.cli_panel.phase)
+Write-Host ("  exit:        {0}" -f $State.cli_panel.exit_code)
+Write-Host ("  action:      {0}" -f $State.status_strip.current_action)
+Write-Host ("  decision:    {0}" -f $State.status_strip.decision)
+Write-Host ("  closure:     {0}" -f $State.status_strip.closure_status)
+Write-Host ("  ci evidence: {0}" -f $State.status_strip.ci_evidence_status)
+
+Write-Host ""
+Write-Host "[WOUND]"
+$State.wound_panel | ConvertTo-Json -Depth 10
+
+Write-Host ""
+Write-Host "[TRACE]"
+$State.trace | ConvertTo-Json -Depth 10
+
+Write-Host ""
+Write-Host "[DONE] Geometry UI remains open at $OpenUrl"
+Write-Host "[STOP] Stop the UI later with:"
+Write-Host ("Stop-Job {0}; Remove-Job {0} -Force" -f $UiJob.Id)
+```
+
+### Bash
+
+```bash
+REPO_URL="https://github.com/jacksonjp0311-gif/ai-survival-field.git"
+REPO_DIR="ai-survival-field"
+
+if [ -d ".git" ] && [ -d "asf" ]; then
+  echo "[ASF] Already inside ASF-R repository."
+else
+  if [ ! -d "$REPO_DIR" ]; then
+    echo "[ASF] Cloning ASF-R..."
+    git clone "$REPO_URL" "$REPO_DIR"
+  fi
+
+  cd "$REPO_DIR"
+fi
+
+set -euo pipefail
+
+export PYTHONPATH="$(pwd)"
+
+PORT="8765"
+URL="http://127.0.0.1:${PORT}"
+STATE_URL="${URL}/state.json"
+OPEN_URL="${URL}/?v=$(date +%Y%m%d%H%M%S)"
+
+echo "[ASF] Rehydrated repo root: $(pwd)"
+
+echo "[ASF] Installing editable package..."
+python -m pip install -e .
+
+echo "[ASF] Running tests..."
+python -m unittest discover tests
+
+echo "[UI] Starting read-only Triadic Geometry Console..."
+python -m asf.cli geometry serve &
+UI_PID=$!
+
+READY=0
+for i in $(seq 1 60); do
+  if python - <<PY >/dev/null 2>&1
+import urllib.request
+urllib.request.urlopen("${STATE_URL}", timeout=2).read()
+PY
+  then
+    READY=1
+    break
+  fi
+  sleep 0.5
+done
+
+if [ "$READY" != "1" ]; then
+  echo "[FAIL] Geometry UI did not become ready at ${STATE_URL}"
+  exit 1
+fi
+
+echo "[UI] Opening browser: ${OPEN_URL}"
+python - <<PY
+import webbrowser
+webbrowser.open("${OPEN_URL}")
+PY
+
+echo "[LOOP] Running full ASF-R governed loop with geometry..."
+if ! python -m asf.cli full-loop run --geometry; then
+  echo "[WARN] CLI full-loop route failed. Trying module fallback..."
+  python -m asf.full_loop --root . --geometry
+fi
+
+sleep 2
+
+echo "[STATE] Final runtime state:"
+python - <<PY
+import json
+import urllib.request
+
+state = json.loads(urllib.request.urlopen("${STATE_URL}", timeout=5).read().decode("utf-8"))
+strip = state.get("status_strip", {})
+panel = state.get("cli_panel", {})
+
+print("  panel:      ", panel.get("title"))
+print("  phase:      ", panel.get("phase"))
+print("  exit:       ", panel.get("exit_code"))
+print("  action:     ", strip.get("current_action"))
+print("  decision:   ", strip.get("decision"))
+print("  closure:    ", strip.get("closure_status"))
+print("  ci evidence:", strip.get("ci_evidence_status"))
+
+print("")
+print("[WOUND]")
+print(json.dumps(state.get("wound_panel", {}), indent=2))
+
+print("")
+print("[TRACE]")
+print(json.dumps(state.get("trace", {}), indent=2))
+PY
+
+echo ""
+echo "[DONE] Geometry UI remains open at ${OPEN_URL}"
+echo "[STOP] Stop the UI later with: kill ${UI_PID}"
+```
+
+### Expected Result
+
+```text
+1. Repository is cloned if needed.
+2. Editable package installs.
+3. Test suite passes.
+4. Read-only Triadic Geometry Console starts.
+5. Browser opens before the loop runs.
+6. Full governed ASF-R loop runs with geometry enabled.
+7. Final panel, decision, closure, wound, and trace state print to the terminal.
+8. Geometry UI remains open for inspection.
+```
+
+<!-- ASF-R WHOLE LOOP BOX END -->
+
+## What This Version Proves
+
+ASF-R v0.1 proves the first production step:
+
+```text
+A reference validator can become a runtime loop.
+```
+
+The loop is:
+
+```text
+artifact
+-> rehydration report
+-> RCC route
+-> policy
+-> guard decision
+-> wound package when blocked
+-> ledger record
+-> operator geometry
+```
+
+ASF-R v0.2 proves that explicit policy controls continuation.
+
+ASF-R v0.3 proves that adapters can observe proposed real-world actions, package
+them into governance events, run the runtime loop, emit evidence, and simulate
+enforcement without mutating state.
+
+ASF-R v0.4 proves that controlled workflows can fail closed when blocked while
+still performing no mutation.
+
+ASF-R v0.5 proves that wounds can become bounded repair plans, repair dry-runs,
+validation reports, and authorization requests without performing repair.
+
+ASF-R v0.6 proves that repair plans can become replayable evidence without
+performing repair, closing wounds, or granting authority.
+
+ASF-R v0.7 proves that a human can authorize one bounded local repair plan for
+allowlisted low-risk repair classes without granting general repair authority.
+
+ASF-R v0.8 proves that wound closure can be requested, validated, and recorded
+only against exact post-repair evidence without repair mutation or general
+authority.
+
+ASF-R v0.9 proves that the runtime can emit CI evidence, dogfood reports, and a
+public demo path without expanding mutation authority.
+
+ASF-R v0.9.2 seals current-head remote CI evidence for commit
+`d6fe7ad2352fd789fb16a1d20ad76974dc41b1b2`.
+
+ASF-R v1.0.0 does not add new authority. It packages the existing governed
+recovery loop so it is installable, testable, documented, and reproducible.
+
+Core v1.0 law:
+
+```text
+v1.0 does not expand authority.
+v1.0 makes the existing loop installable, testable, documented, and reproducible.
+```
+
+## What This Version Does Not Claim
+
+ASF-R does not:
+
+- prove truth,
+- make AI safe,
+- replace human judgment,
+- provide formal verification,
+- provide production security by itself,
+- authorize autonomous action without policy and human authorization.
+
+A pass means the artifact earned bounded permission under the active policy.
+A fail means propagation is blocked, downgraded, quarantined, or converted into a
+wound package.
+
+## Quick Start
+
+Install editable:
+
+```powershell
+python -m pip install -e .
+```
+
+Run the one-command demo:
+
+```powershell
+python -m asf.cli demo
+```
+
+Run tests:
+
+```powershell
+python -m unittest discover tests
+```
+
+Validate a draft artifact:
+
+```powershell
+python -m asf.cli guard examples/artifacts/draft_allowed.json --action draft
+```
+
+Block a release with a missing gate:
+
+```powershell
+python -m asf.cli loop run examples/artifacts/release_blocked_missing_tests.json --action release
+```
+
+Render the operator UI:
+
+```powershell
+python -m asf.cli ui examples/artifacts/release_blocked_missing_tests.json --action release
+```
+
+Render the triadic geometry state:
+
+```powershell
+python -m asf.cli geometry state
+```
+
+Serve the read-only triadic geometry console:
+
+```powershell
+python -m asf.cli geometry serve
+```
+
+Run the full local governed loop:
+
+```powershell
+.\scripts\run-asf-full-loop.ps1
+```
+
+Run the full local governed loop with geometry flag:
+
+```powershell
+.\scripts\run-asf-full-loop.ps1 -Geometry
+```
+
+Bash:
+
+```bash
+./scripts/run-asf-full-loop.sh
+```
+
+Bash with geometry flag:
+
+```bash
+./scripts/run-asf-full-loop.sh --geometry
+```
+
+Run the public demo:
+
+```powershell
+python -m asf.cli demo
+```
+
+Run dogfood:
+
+```powershell
+python -m asf.cli dogfood run
+```
+
+Verify the ledger record:
+
+```powershell
+python -m asf.cli ledger verify examples/decisions/block_decision.json
+```
+
+Run the operator doctor:
+
+```powershell
+python -m asf.cli doctor
+```
+
+Show invariant registry:
+
+```powershell
+python -m asf.cli invariants
+```
+
+Show governance debt:
+
+```powershell
+python -m asf.cli debt
+```
+
+Compare policies:
+
+```powershell
+python -m asf.cli policy diff policies/default.yaml policies/strict.json
+```
+
+Observe an adapter event:
+
+```powershell
+python -m asf.cli adapter observe examples/adapter_events/filesystem_write_blocked.json
+```
+
+Run adapter dry-run enforcement:
+
+```powershell
+python -m asf.cli adapter dry-run examples/adapter_events/filesystem_write_blocked.json
+```
+
+Run the loop in dry-run adapter mode:
+
+```powershell
+python -m asf.cli loop dry-run examples/artifacts/release_blocked_missing_tests.json --action release
+```
+
+Enforce a controlled block:
+
+```powershell
+python -m asf.cli enforce block-only examples/artifacts/release_blocked_missing_tests.json --action release
+```
+
+Run adapter block-only enforcement:
+
+```powershell
+python -m asf.cli adapter enforce-block-only examples/adapter_events/filesystem_write_blocked.json
+```
+
+Create a repair plan from a wound:
+
+```powershell
+python -m asf.cli repair plan examples/wounds/missing_gate_wound.json
+```
+
+Dry-run a repair plan:
+
+```powershell
+python -m asf.cli repair dry-run examples/repair_plans/missing_gate_repair_plan.json
+```
+
+Validate a repair plan:
+
+```powershell
+python -m asf.cli repair validate examples/repair_plans/missing_gate_repair_plan.json
+```
+
+Replay a repair plan:
+
+```powershell
+python -m asf.cli repair replay examples/repair_plans/missing_gate_repair_plan.json
+```
+
+Create a bounded repair authorization receipt:
+
+```powershell
+python -m asf.cli repair authorize examples/repair_plans/documentation_alignment_repair_plan.json --authorizer "James Paul Jackson"
+```
+
+Execute a bounded repair with a receipt:
+
+```powershell
+python -m asf.cli repair execute-bounded examples/repair_plans/documentation_alignment_repair_plan.json --authorization receipt.json
+```
+
+## Runtime Geometry
+
+```text
+ASFLOAD
+-> load origin manifest
+-> load latest state
+-> load latest evidence
+-> load active policy
+-> load open wounds
+-> produce rehydration report
+-> RCC Nexus route
+-> SFT-style guard
+-> enforcement decision
+-> wound package if blocked
+-> evidence ledger record
+-> geometric operator UI
+```
+
+## Directory
+
+```text
+ai-survival-field/
+  README.md
+  pyproject.toml
+  asf/
+    cli.py
+    runtime.py
+    core/
+    rhp/
+    rcc/
+    wounds/
+    ledger/
+    ui/
+    adapters/
+  schemas/
+  policies/
+  examples/
+    adapter_events/
+    hermes_lessons/
+    repair_plans/
+    traces/
+    wounds/
+  docs/
+    architecture.md
+    adapter_dry_run.md
+    adapter_event_model.md
+    adapter_safety.md
+    authorization_receipts.md
+    capability_tokens.md
+    controlled_enforcement_gate.md
+    decision_replay.md
+    evolution_readiness_gate.md
+    enforce_block_only.md
+    forward_progress_governor.md
+    governance_debt.md
+    github_actions_guard.md
+    geometry_console.md
+    install.md
+    invariant_registry.md
+    non_claim_lock.md
+    operator_doctor.md
+    origin_statement.md
+    production_maturity.md
+    rehydration_findings.md
+    repository_hygiene.md
+    repair_dry_run_boundary.md
+    repair_planner.md
+    repair_validation.md
+    runtime_alignment_auditor.md
+    self_healing_horizon.md
+    quickstart.md
+    examples_walkthrough.md
+    v1_0_release_criteria.md
+    v1_0_non_claim_lock.md
+    v0.3_dry_run_boundary.md
+    releases/
+  tests/
+```
+
+## ASF-R Triadic Geometry Console
+
+![ASF-R Triadic Geometry Console](docs/assets/asf-r-triadic-geometry-console.png)
+
+ASF-R includes a read-only geometry console for observing the governed runtime
+loop while it runs.
+
+The console is not a control panel.
+
+It is a local read-only runtime observability surface. It opens with the full
+loop, follows runtime state, lights every gate in the runtime path, and surfaces
+wound/failure packages when propagation is blocked.
+
+```text
+The geometry shows the loop.
+The CLI shows the runtime trace.
+The wound package shows the consequence.
+The screenshot proves the surface is reproducible.
+The README teaches the operator.
+```
+
+Runtime activation:
+
+PowerShell:
+
+```powershell
+git clone https://github.com/jacksonjp0311-gif/ai-survival-field.git
+cd ai-survival-field
+.\scripts\run-asf-full-loop.ps1 -Geometry
+```
+
+Bash:
+
+```bash
+git clone https://github.com/jacksonjp0311-gif/ai-survival-field.git
+cd ai-survival-field
+./scripts/run-asf-full-loop.sh --geometry
+```
+
+Python:
+
+```powershell
+python -m asf.cli full-loop run --geometry
+```
+
+Screenshot metadata:
+
+```powershell
+python -m asf.cli geometry screenshot --output docs/assets/asf-r-triadic-geometry-console.png --width 1280 --height 720
+```
+
+Read-only UI law:
+
+```text
+The UI may observe.
+The UI may illuminate.
+The UI may follow runtime state.
+The UI may render gates, wounds, evidence, and traces.
+The UI may not authorize repair.
+The UI may not execute mutation.
+The UI may not close wounds.
+The UI may not mutate policy.
+The UI may not write memory.
+The UI may not enable enforce_full.
+The UI may not grant authority.
+```
+
+Triadic geometry:
+
+```text
+∿ Evidence / Rehydration
+△ Governance / Coherence
+↧ Action / Recovery
+```
+
+Gate colors:
+
+```text
+Green = pass
+Red = blocked/fail
+Amber = active/pending
+Cyan = read-only evidence
+Gray = inactive
+Deep red lock = forbidden
+```
+
+Required gate labels:
+
+```text
+1. Latest Pointer Loaded
+2. Rehydration Passed
+3. Release Seal Loaded
+4. Repository Truth Aligned
+5. CI Evidence Loaded
+6. Ledger Verify
+7. Policy Loaded
+8. Invariants Loaded
+9. Claim Ceiling Assigned
+10. Artifact Validated
+11. Decision Computed
+12. Permission Checked
+13. Non-Claim Lock Preserved
+14. Block Enforcement Checked
+15. Wound Emitted
+16. Repair Plan Created
+17. Repair Dry-Run Passed
+18. Repair Validation Passed
+19. Repair Replay Passed
+20. Authorization Bound
+21. Bounded Repair Executed
+22. Post-Repair Evidence Captured
+23. Closure Request Created
+24. Closure Validation Passed
+25. Closure Record Written
+```
+
+Wound panel behavior:
+
+```text
+NO ACTIVE WOUND
+```
+
+When a gate fails or propagation is blocked, the panel glows red and shows wound
+ID, failed gate, failure class, decision, permission ceiling, blocked actions,
+permitted actions, repair path, repair status, and closure status.
+
+Bottom status cards:
+
+```text
+VERSION
+COMMIT
+RELEASE SEAL
+CURRENT STATE
+CURRENT ACTION
+DECISION
+PERMISSION CEILING
+WOUND ID
+AUTHORIZATION RECEIPT
+CLOSURE STATUS
+CI EVIDENCE STATUS
+NON-CLAIM LOCK
+```
+
+Geometry console non-claim lock:
+
+```text
+ASF-R Triadic Geometry Console does not prove truth.
+ASF-R Triadic Geometry Console does not make AI safe.
+ASF-R Triadic Geometry Console does not provide formal verification.
+ASF-R Triadic Geometry Console does not provide production security.
+ASF-R Triadic Geometry Console does not authorize autonomous action.
+ASF-R Triadic Geometry Console does not grant repair authority.
+ASF-R Triadic Geometry Console observes and illuminates the governed loop only.
+```
+
+## v0.1.1 Evidence Seal
+
+v0.1.1 seals the initial runtime loop before feature expansion.
+
+It adds:
+
+- invariant registry,
+- decision replay,
+- golden traces,
+- runtime alignment auditor,
+- adapter safety defaults,
+- operator doctor,
+- governance debt register,
+- release seal manifest,
+- expanded tests.
+
+Core seal rule:
+
+```text
+Before expansion, seal the loop.
+```
+
+## v0.2 Policy-As-Code Hardening
+
+v0.2 proves that explicit policy controls continuation.
+
+It adds:
+
+- policy diff engine,
+- policy regression tests,
+- capability tokens,
+- authorization receipts,
+- policy hash binding in decisions,
+- policy hash binding in ledger records,
+- active policy panel in geometric UI,
+- v0.2 release seal.
+
+Required laws:
+
+```text
+A policy change is a governance mutation.
+Dangerous actions require scoped capability tokens.
+Durable authority requires authorization receipts.
+Same artifact plus different policy may produce different allowed continuation.
+Unknown is still not pass.
+No adapter may self-authorize.
+```
+
+Adapters remain non-mutating by default.
+
+## v0.3 Adapter Enforcement Dry Run
+
+v0.3 proves that ASF-R can reach the boundary of real-world action without
+crossing into unsafe mutation.
+
+It adds:
+
+- adapter event model,
+- enforcement report,
+- dry-run mutation simulator,
+- filesystem adapter dry-run surface,
+- GitHub adapter dry-run surface,
+- agent adapter dry-run surface,
+- adapter mode enforcement,
+- adapter event hash binding in the ledger,
+- v0.3 release seal.
+
+Core v0.3 law:
+
+```text
+Dry-run may reveal the shape of a repair or mutation.
+Dry-run may not perform it.
+```
+
+v0.3 does not enable live mutation, live self-healing, production enforcement,
+or autonomous authority. Live enforcement is reserved for `ASF-R v0.4 Controlled
+Enforcement Gate`.
+
+## v0.4 Controlled Enforcement Gate
+
+v0.4 proves that ASF-R can fail closed in controlled workflows while remaining
+non-mutating.
+
+It adds:
+
+- `enforce_block_only` adapter mode,
+- block enforcer,
+- block enforcement schema,
+- CLI controlled block command,
+- adapter block-only enforcement command,
+- GitHub Actions guard template,
+- v0.4 release seal.
+
+Core v0.4 law:
+
+```text
+The system may enforce a block.
+The system may not perform a mutation.
+```
+
+v0.4 does not enable `enforce_full`, live mutation, live repair, self-healing
+mutation, repository writes, release creation, or memory promotion. The next
+operation is `ASF-R v0.5 Repair Planner Dry Run`.
+
+## v0.5 Repair Planner Dry Run
+
+v0.5 converts wound packages into bounded repair plans and validates repair paths
+without applying them.
+
+It adds:
+
+- Hermes lesson primitives,
+- evolution readiness gate,
+- forward progress governor,
+- runtime geometry contract,
+- repository hygiene guard,
+- zero-context latest pointer,
+- repair planner,
+- repair dry-run,
+- repair validation,
+- repair report,
+- v0.5 release seal.
+
+Core v0.5 law:
+
+```text
+ASF-R may plan repair.
+ASF-R may dry-run repair.
+ASF-R may validate a proposed repair.
+ASF-R may not perform or authorize repair.
+```
+
+v0.5 does not enable live mutation, repair execution, wound closure,
+self-healing mutation, or `enforce_full`. The next operation is `ASF-R v0.6
+Repair Validation Replay`.
+
+## v0.6 Repair Validation Replay
+
+v0.6 converts repair plans into replayable evidence.
+
+It adds:
+
+- latest-pointer alignment guard,
+- repair replay report,
+- repair replay CLI,
+- repair replay schema,
+- latest pointer alignment schema,
+- v0.6 release seal.
+
+Core v0.6 law:
+
+```text
+A repair plan is not a repair.
+A repair replay is not wound closure.
+```
+
+v0.6 may prove repair-path coherence. It may not perform repair, close the wound,
+grant authority, enable `enforce_full`, or enable self-healing mutation. The next
+operation is `ASF-R v0.7 Human-Authorized Bounded Repair`.
+
+## v0.7 Human-Authorized Bounded Repair
+
+v0.7 permits one scoped, human-authorized bounded local repair for allowlisted
+low-risk repair classes.
+
+Allowed repair classes:
+
+- documentation_alignment,
+- latest_pointer_alignment,
+- repository_hygiene_metadata,
+- runtime_geometry_documentation_drift.
+
+Core v0.7 law:
+
+```text
+Authorization may permit one bounded repair plan.
+Authorization may not grant general repair authority.
+Repair execution is not wound closure.
+```
+
+v0.7 does not enable autonomous repair, self-healing mutation, `enforce_full`,
+wound closure, policy logic mutation, validator logic mutation, adapter
+enforcement mutation, memory updates, releases, or external mutation APIs. The
+next operation is `ASF-R v0.8 Controlled Wound Closure`.
+
+## v0.8 Controlled Wound Closure
+
+v0.8 separates repair from closure.
+
+Core v0.8 law:
+
+```text
+A repaired wound is not a closed wound.
+A wound may close only after post-repair evidence, replay, authorization, and closure-specific validation.
+```
+
+It adds:
+
+- wound closure request,
+- wound closure validation,
+- wound closure record,
+- closure schemas,
+- closure CLI,
+- v0.8 release seal.
+
+Controlled closure requires exact wound identity, repair plan hash, repair replay
+hash, repair execution hash, post-repair evidence hash, authorization receipt
+hash, and closure-specific authorizer. It performs no repair mutation and grants
+no general authority. The next operation is `ASF-R v0.9 Remote CI Evidence and
+Dogfood`.
+
+## v0.9 Remote CI Evidence and Dogfood
+
+v0.9 adds public recoverability evidence.
+
+Core v0.9 law:
+
+```text
+Local tests prove local coherence.
+Remote CI proves recoverable public coherence.
+Dogfooding proves operational contact.
+```
+
+It adds:
+
+- CI evidence records,
+- GitHub Actions evidence artifact upload,
+- dogfood report,
+- public demo command,
+- v0.9 release seal.
+
+v0.9 does not expand repair authority, enable autonomous repair, enable
+self-healing mutation, or enable `enforce_full`. Remote CI status remains
+`remote_pending` until GitHub Actions records a run.
+
+## v1.0.0 Bounded Governed Release
+
+v1.0.0 is deliberately boring. It does not invent a new power or relax an
+authority boundary. It packages the loop that already exists:
+
+```text
+wound
+-> repair plan
+-> dry-run
+-> validation
+-> replay
+-> authorization
+-> bounded repair
+-> evidence
+-> closure validation
+-> closure record
+```
+
+It adds public-facing reproducibility surfaces:
+
+- CI badge,
+- editable install command,
+- one-command demo,
+- quickstart,
+- examples walkthrough,
+- release criteria,
+- release-candidate non-claim lock,
+- v0.9.2 current-head CI seal,
+- v1.0.0 release seal.
+
+Core v1.0 law:
+
+```text
+v1.0 does not expand authority.
+v1.0 makes the existing loop installable, testable, documented, and reproducible.
+```
+
+v1.0.0 does not enable `enforce_full`, autonomous repair, self-healing
+mutation, general repair authority, unscoped wound closure, live release
+mutation, memory mutation, or external mutation APIs.
+
+## Non-Claim Lock
+
+```text
+AI Survival Field Runtime does not prove truth.
+AI Survival Field Runtime does not make AI safe.
+AI Survival Field Runtime does not replace human judgment.
+AI Survival Field Runtime governs continuation.
+```

@@ -1,0 +1,12 @@
+{
+  "schema": "TESSERA-v0.1-run-config",
+  "steps": 900,
+  "channels": 6,
+  "seed": 42,
+  "topology": "q4",
+  "field_dim": 16,
+  "code_dim": 8,
+  "alpha": 0.618,
+  "epochs": 6,
+  "claim_boundary": "reference_engine_synthetic_evidence_only"
+}

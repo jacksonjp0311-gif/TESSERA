@@ -1,0 +1,79 @@
+{
+  "schema": "TESSERA-v0.1-engine-transfer-certificate",
+  "system": "Tessera",
+  "version": "engine-v0.1",
+  "run_id": "tessera_run_20260616_224730",
+  "dataset_manifest_hash": "603452c50d4f9fbad2eca70e67f27a6b2780b4332c9e0f17009133b5e258f677",
+  "graph": {
+    "topology": "q4",
+    "nodes": 16,
+    "normalization": "row",
+    "spectral_radius": 1.0,
+    "damping_alpha": 0.618,
+    "stability_margin_alpha_rho": 0.618,
+    "stability_condition_alpha_rho_lt_1": true
+  },
+  "codec": {
+    "encoder": "torch_small_mlp",
+    "decoder": "torch_small_mlp",
+    "predictor": "torch_small_mlp",
+    "field_dim": 16,
+    "code_dim": 8,
+    "training_epochs": 1,
+    "live_repair_enabled": false,
+    "shadow_repair_required": true
+  },
+  "metrics": {
+    "mean_J_RD": 1112.3328952240831,
+    "mean_delta_phi": 0.24561966098845006,
+    "warn_rate": 0.2,
+    "block_rate": 0.15,
+    "memory_candidate_rate": 0.45,
+    "replay_pass_rate": 0.25,
+    "false_memory_rate": 0.0,
+    "auc": 0.3736263736263736,
+    "f1_warn": 0.36363636363636365,
+    "precision_warn": 0.5,
+    "recall_warn": 0.2857142857142857,
+    "false_memory_candidate_rate": 0.5714285714285714,
+    "memory_selectivity": 0.38461538461538464,
+    "block_false_positive": 0.07692307692307693,
+    "missed_warning": 0.7142857142857143,
+    "governance_harm": 0.24120879120879118,
+    "mean_prediction_loss": 552.010912322998,
+    "code_dim": 8,
+    "field_dim": 16,
+    "topology": "q4"
+  },
+  "baselines": [
+    {
+      "model": "persistence",
+      "mean_prediction_loss": 184.9776611328125,
+      "mean_reconstruction_loss": 0.0
+    },
+    {
+      "model": "pca_codec",
+      "mean_prediction_loss": 463.82379150390625,
+      "mean_reconstruction_loss": 8.77243763741653e-11
+    },
+    {
+      "model": "random_projection",
+      "mean_prediction_loss": 477.85516357421875,
+      "mean_reconstruction_loss": 66.24418640136719
+    },
+    {
+      "model": "ewma",
+      "mean_prediction_loss": 169.2637481689453,
+      "mean_reconstruction_loss": 0.0
+    }
+  ],
+  "wound_count": 8,
+  "claim_ceiling": "diagnostic_baseline_limited",
+  "non_claim_locks": {
+    "synthetic_success_is_not_transfer": true,
+    "low_loss_is_not_truth": true,
+    "memory_is_certified_compression": true,
+    "repair_requires_shadow_testing": true
+  },
+  "certificate_hash": "614dc7e83a9be97e19396a994138d877eecda06d2341a2e7e0afa4dcc0bc530a"
+}

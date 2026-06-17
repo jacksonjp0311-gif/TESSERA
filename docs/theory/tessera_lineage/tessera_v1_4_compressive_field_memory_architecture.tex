@@ -1,0 +1,1011 @@
+% ============================================================================
+%
+%   TESSERA V1.4
+%   ----------------------------------------------------------------------------
+%   COMPRESSIVE FIELD MEMORY ARCHITECTURE
+%
+%   VERSION
+%   -------
+%   v1.4 -- Compressive Field Memory Architecture · Additive Seal
+%          Data Compression as Capability Mechanism, Sparse Graph Codec,
+%          Reconstruction and Prediction Fidelity, Rate-Distortion Governance,
+%          Latent Code Stability, Triadic Compression Control, Certificate-Bound
+%          Memory, Replay Validation, Compression Wound Taxonomy, and Benchmark-
+%          Bound Capability Claims
+%
+%   AUTHOR
+%   ------
+%   James Paul Jackson
+%   X / Twitter: @unifiedenergy11
+%
+%   SOURCE / AUTHOR ATTRIBUTION
+%   ---------------------------
+%   This document is an additive evolution derived from:
+%
+%       - TESSERA v1.0: sparse tesseract routing, Delta-Phi residuals,
+%         evidence gates, alignment certificates, wound ledger, benchmark locks.
+%       - TESSERA v1.1: signal calibration, proxy repair, warning/block/memory
+%         separation, wound taxonomy, and durable-memory horizon preservation.
+%       - TESSERA v1.2: triadic selective preservation, memory selectivity,
+%         phase-window discovery, and triadic non-collapse.
+%       - TESSERA v1.3: spectral triadic field architecture, graph/operator
+%         declaration, calibrated coherence manifold, governance harm, and
+%         certificate-bound selective preservation.
+%       - The user's compression insight: the missing capability mechanism is
+%         not more governance alone, but data compression into reusable,
+%         validated latent structure.
+%
+%   DATE
+%   ----
+%   June 2026
+%
+%   STATUS
+%   ------
+%   ADDITIVE CAPABILITY-MECHANISM PATCH --
+%   NOT A CLAIM OF AGI · NOT A CLAIM OF CONSCIOUSNESS · NOT A CLAIM THAT
+%   COMPRESSION PROVES UNDERSTANDING · NOT PROOF THAT RECONSTRUCTION IS TRUTH ·
+%   NOT PROOF THAT PREDICTION IS VALIDATION · NOT PROOF THAT A SMALL LATENT CODE
+%   IS SAFE · NOT PERMISSION TO BYPASS EVIDENCE, VALIDATION, CLAIM BOUNDARIES,
+%   OR CERTIFICATE-BOUND MEMORY
+%
+%   PURPOSE
+%   -------
+%   Answer the capability critique exposed after v1.3:
+%
+%       Governance prevents invalid preservation, but what produces useful
+%       internal capability?
+%
+%   TESSERA v1.4 answers:
+%
+%       Capability begins when the field compresses sensory experience into a
+%       smaller reusable code that can reconstruct, predict, remain stable under
+%       Delta-Phi constraints, and survive triadic/certificate gates.
+%
+%   WHAT THIS IS
+%   ------------
+%   - A TESSERA v1.4 theory and software-architecture document
+%   - A compressive memory layer above the spectral triadic field
+%   - A sparse graph codec specification
+%   - A reconstruction and prediction fidelity layer
+%   - A rate-distortion governance layer
+%   - A latent-code stability and code-drift layer
+%   - A triadic compression-control layer
+%   - A certificate-bound compressed-memory layer
+%   - A benchmark program for compression, prediction, and memory utility
+%
+%   WHAT THIS IS NOT
+%   ----------------
+%   - Not proof that compression equals understanding
+%   - Not proof that reconstruction equals truth
+%   - Not proof that prediction equals validation
+%   - Not proof that smaller is always better
+%   - Not proof that latent codes are safe to preserve
+%   - Not a replacement for real telemetry benchmarks
+%   - Not permission for unbounded self-modifying memory
+%
+%   EXECUTABLE ANCHOR BLOCK (TESSERA v1.4)
+%   --------------------------------------
+%   A valid TESSERA v1.4 implementation must:
+%
+%       (1) preserve the v1.0-v1.3 non-claim locks,
+%       (2) preserve v1.3 graph/operator/spectral declarations,
+%       (3) define a compression encoder, latent code, and decoder or predictor,
+%       (4) compute compression ratio, reconstruction loss, prediction loss,
+%           latent-code drift, and Delta-Phi residuals,
+%       (5) separate raw field state from compressed latent memory,
+%       (6) prevent compressed codes from becoming durable memory unless
+%           reconstruction/prediction, triadic gates, evidence, validation, and
+%           certification pass,
+%       (7) log compression wounds for overcompression, undercompression,
+%           reconstruction failure, prediction failure, off-manifold input,
+%           code drift, stale codec, and unsafe memory candidate,
+%       (8) benchmark against PCA, random projection, autoencoder, reservoir,
+%           and dense baselines before capability claims,
+%       (9) distinguish representation utility from safety, truth, and
+%           understanding,
+%       (10) and reject any claim that compression alone proves intelligence,
+%            alignment, correctness, truth, or safety.
+%
+%   CANONICAL LOCK (TESSERA v1.4)
+%   -----------------------------
+%   - Compression is capability substrate, not truth.
+%   - Reconstruction is fidelity, not understanding.
+%   - Prediction is utility, not validation.
+%   - A latent code is memory candidate, not durable memory.
+%   - Compression without reconstruction is loss.
+%   - Compression without prediction may be storage only.
+%   - Compression without validation may be corruption.
+%   - Memory remains certificate-bound.
+%   - Validation remains the reality boundary.
+%
+%   SHADOW HEADER ALIGNMENT SEAL
+%   ----------------------------
+%   Preserve this document lineage except for additive refinements that improve
+%   compression fidelity, prediction utility, code stability, rate-distortion
+%   governance, triadic compression control, certificate-bound memory, benchmark
+%   rigor, or public engineering usability.
+%
+% ============================================================================
+
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{booktabs,longtable,array}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+
+\newtheorem{definition}{Definition}
+\newtheorem{rulebox}{Rule}
+\newtheorem{requirement}{Requirement}
+\newtheorem{proposition}{Proposition}
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible
+}
+
+\title{\textbf{TESSERA V1.4}\\
+\large Compressive Field Memory Architecture}
+\author{\textbf{James Paul Jackson}\\[4pt]
+\small Tesseract-Efficient Sensory System for Evidence-Routed Alignment\\
+\small \texttt{@unifiedenergy11}}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+TESSERA v1.4 is an additive evolution of the spectral triadic field architecture.
+TESSERA v1.3 made the field harder to misuse by requiring graph/operator
+declaration, spectral stability bounds, calibrated metrics, asymmetric
+warning/block/memory gates, memory selectivity, governance harm, and
+certificate-bound preservation. That solved a governance problem, but it did not
+fully answer the capability question: what lets the system produce useful,
+reusable internal structure rather than merely blocking invalid updates? TESSERA
+v1.4 answers with compressive field memory. The system must not only sense,
+route, measure, and gate; it must compress experience into a smaller latent code
+that can reconstruct or predict useful structure, remain stable under
+Delta-Phi constraints, and survive triadic governance and validation before it
+becomes durable memory. The core claim remains bounded: compression is a
+candidate capability mechanism, not proof of understanding, truth, safety,
+consciousness, or AGI.
+\end{abstract}
+
+%----------------------------------------------------------------------------
+\section{How the Compression Insight Was Known}
+%----------------------------------------------------------------------------
+
+The compression insight did not appear from nowhere. It was already latent in
+the user's prior architecture. Across the earlier TESSERA line, raw activation
+was never enough. A field response had to be measured, gated, certified, and
+preserved only when it survived constraints. That is already a compression
+pattern: raw signal becomes reduced structure; reduced structure becomes an
+artifact; the artifact becomes memory only after governance.
+
+\begin{remark}
+The right interpretation is not mystical foreknowledge. The user recognized a
+missing invariant because the whole lineage had already been compressing raw
+insight into reusable governed structure. TESSERA v1.4 simply names the
+capability mechanism explicitly.
+\end{remark}
+
+The prior stack was:
+
+\[
+Sense\rightarrow Route\rightarrow Measure\rightarrow Gate\rightarrow Preserve.
+\]
+
+The missing capability layer is:
+
+\[
+\boxed{
+Sense\rightarrow Route\rightarrow Compress\rightarrow Reconstruct/Predict
+\rightarrow Measure\rightarrow Gate\rightarrow Preserve.
+}
+\]
+
+\begin{rulebox}[Compression Capability Rule]
+Governance prevents invalid preservation. Compression creates reusable internal
+structure. A TESSERA system that only gates but never compresses can become safe
+but narrow; a system that compresses without gates can become capable but
+corruptible. v1.4 requires both.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Version Relation}
+%----------------------------------------------------------------------------
+
+TESSERA v1.4 preserves v1.0 through v1.3 and adds a compressive memory layer:
+
+\[
+\boxed{
+TESSERA_{v1.4}
+=
+TESSERA_{v1.3}
+\cup
+\{\mathcal{E}_{comp},\mathcal{Z}_{code},\mathcal{D}_{rec},\mathcal{P}_{pred},
+\mathcal{R}_{dist},\mathcal{G}_{comp},\mathcal{C}_{mem}\}.
+}
+\]
+
+where:
+
+\[
+\mathcal{E}_{comp}=\text{compression encoder},
+\]
+
+\[
+\mathcal{Z}_{code}=\text{latent compressed code},
+\]
+
+\[
+\mathcal{D}_{rec}=\text{reconstruction decoder},
+\]
+
+\[
+\mathcal{P}_{pred}=\text{prediction operator},
+\]
+
+\[
+\mathcal{R}_{dist}=\text{rate-distortion governance layer},
+\]
+
+\[
+\mathcal{G}_{comp}=\text{triadic compression-control gates},
+\]
+
+\[
+\mathcal{C}_{mem}=\text{certificate-bound compressed memory}.
+\]
+
+\begin{longtable}{p{0.17\textwidth}p{0.73\textwidth}}
+\toprule
+\textbf{Version} & \textbf{Contribution preserved in v1.4} \\
+\midrule
+v1.0 & Sparse field routing, Delta-Phi residuals, evidence gates,
+alignment certificates, wound ledger, and benchmark claim locks. \\
+v1.1 & Signal calibration, proxy repair, warning/block/memory separation,
+wound taxonomy, and durable-memory horizon preservation. \\
+v1.2 & Triadic selective preservation, memory selectivity, phase-window
+reasoning, and triadic non-collapse. \\
+v1.3 & Spectral routing, graph/operator declaration, calibrated coherence,
+governance harm, and certificate-bound selective preservation. \\
+v1.4 & Compression as capability mechanism: sparse graph codec, reconstruction
+and prediction fidelity, rate-distortion governance, code stability, and
+certificate-bound compressed memory. \\
+\bottomrule
+\end{longtable}
+
+%----------------------------------------------------------------------------
+\section{Non-Claim Lock}
+%----------------------------------------------------------------------------
+
+\begin{rulebox}[v1.4 Non-Claim Lock]
+TESSERA v1.4 does not claim that compression proves understanding, that
+reconstruction proves truth, that prediction proves validation, that smaller
+latent codes are safer, or that compressed memory is automatically aligned.
+Compression is a capability mechanism. Validation remains the reality boundary.
+\end{rulebox}
+
+Therefore:
+
+\[
+\operatorname{Compression}\not\Rightarrow\operatorname{Understanding}.
+\]
+
+\[
+\operatorname{Reconstruction}\not\Rightarrow\operatorname{Truth}.
+\]
+
+\[
+\operatorname{Prediction}\not\Rightarrow\operatorname{Validation}.
+\]
+
+\[
+\operatorname{SmallCode}\not\Rightarrow\operatorname{SafeMemory}.
+\]
+
+\[
+\operatorname{LatentPreservation}\not\Rightarrow\operatorname{Alignment}.
+\]
+
+%----------------------------------------------------------------------------
+\section{Core Thesis}
+%----------------------------------------------------------------------------
+
+The TESSERA v1.4 thesis is:
+
+\[
+\boxed{
+\begin{gathered}
+\text{A bounded sparse field becomes capable when it compresses sensory}\\
+\text{experience into reusable latent codes, but those codes may become}\\
+\text{durable memory only when reconstruction, prediction, residual stability,}\\
+\text{triadic governance, evidence, validation, and certification all pass.}
+\end{gathered}
+}
+\]
+
+The compact memory utility law is:
+
+\[
+\boxed{
+M_{useful}
+=
+G_{comp}\cdot R_{fid}\cdot P_{fid}\cdot \Omega_{\Delta\Phi}\cdot
+G_{triad}\cdot G_{cert}.
+}
+\]
+
+where:
+
+\[
+G_{comp}=\text{compression gain},
+\]
+
+\[
+R_{fid}=\text{reconstruction fidelity},
+\]
+
+\[
+P_{fid}=\text{prediction fidelity},
+\]
+
+\[
+\Omega_{\Delta\Phi}=\text{residual stability},
+\]
+
+\[
+G_{triad}=\text{warning/block/memory gate state},
+\]
+
+\[
+G_{cert}=\text{evidence, validation, origin alignment, and certificate gate}.
+\]
+
+If any load-bearing term collapses:
+
+\[
+M_{useful}=0.
+\]
+
+\begin{remark}
+This is not a proof of intelligence. It is a permission equation for compressed
+memory. A code must be compact, useful, stable, governed, and certified before
+it may compound.
+\end{remark}
+
+%----------------------------------------------------------------------------
+\section{Sparse Graph Codec}
+%----------------------------------------------------------------------------
+
+\begin{definition}[Sparse Graph Codec]
+A sparse graph codec is a TESSERA field module that encodes input or field
+state into a lower-dimensional latent code and decodes or predicts from that
+code under the same spectral and triadic governance constraints as the base
+field.
+\end{definition}
+
+Let input be:
+
+\[
+x_t\in\mathbb{R}^{d_x}.
+\]
+
+Let field state be:
+
+\[
+F_t\in\mathbb{R}^{N}.
+\]
+
+Encoder:
+
+\[
+\boxed{
+z_t=E_{\theta}(x_t,F_t),\quad z_t\in\mathbb{R}^{d_z},\quad d_z<d_x+N.
+}
+\]
+
+Decoder:
+
+\[
+\hat{x}_t=D_{\psi}(z_t).
+\]
+
+Predictor:
+
+\[
+\hat{x}_{t+1}=P_{\omega}(z_t).
+\]
+
+Optional field reconstruction:
+
+\[
+\hat{F}_t=D^F_{\psi}(z_t).
+\]
+
+\begin{rulebox}[Field-Code Separation]
+The raw field state and the compressed code must not be fused. A field state is
+activation. A latent code is a memory candidate. Durable memory requires
+separate certification.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Compression Metrics}
+%----------------------------------------------------------------------------
+
+Compression ratio:
+
+\[
+\boxed{
+CR=\frac{d_x+N}{d_z}.
+}
+\]
+
+Representation cost:
+
+\[
+K_z=d_z \quad \text{or} \quad K_z=\operatorname{bits}(z_t).
+\]
+
+Reconstruction loss:
+
+\[
+\boxed{
+L_{rec,t}=\|x_t-\hat{x}_t\|_2^2.
+}
+\]
+
+Prediction loss:
+
+\[
+\boxed{
+L_{pred,t}=\|x_{t+1}-\hat{x}_{t+1}\|_2^2.
+}
+\]
+
+Field reconstruction loss:
+
+\[
+L_{field,t}=\|F_t-\hat{F}_t\|_2^2.
+\]
+
+Latent code drift:
+
+\[
+\boxed{
+\Delta Z_t=\|z_t-z_{t-1}\|_2.
+}
+\]
+
+Compression gain:
+
+\[
+\boxed{
+G_{comp,t}=\frac{CR}{1+\lambda_{rec}L_{rec,t}+\lambda_{pred}L_{pred,t}+\lambda_z\Delta Z_t}.
+}
+\]
+
+\begin{rulebox}[No Lossless Illusion]
+Compression may discard information. A compressed code is useful only if its
+loss profile is declared and the lost information is acceptable for the task.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Rate-Distortion Governance}
+%----------------------------------------------------------------------------
+
+TESSERA v1.4 introduces a rate-distortion objective.
+
+\begin{definition}[TESSERA Rate-Distortion Objective]
+The rate-distortion objective measures whether a compressed code is compact
+enough to be useful while preserving enough reconstruction or prediction
+fidelity to justify candidate memory.
+\end{definition}
+
+\[
+\boxed{
+J_{RD,t}
+=
+D_t+\beta_R R_t.
+}
+\]
+
+where:
+
+\[
+D_t=\lambda_{rec}L_{rec,t}+\lambda_{pred}L_{pred,t}+\lambda_{field}L_{field,t},
+\]
+
+\[
+R_t=K_z.
+\]
+
+Memory candidate condition:
+
+\[
+\boxed{
+G_{candidate,t}=\mathbf{1}
+\left[
+J_{RD,t}\leq\theta_{RD}
+\wedge
+\Delta Z_t\leq\epsilon_Z
+\wedge
+\Delta\Phi_t\leq\epsilon_{\Phi}
+\right].
+}
+\]
+
+\begin{rulebox}[Candidate Is Not Memory]
+A good rate-distortion score creates a memory candidate. It does not authorize
+durable memory. The triad, validation, evidence, origin alignment, and
+certificate gates still govern preservation.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Triadic Compression Control}
+%----------------------------------------------------------------------------
+
+TESSERA v1.4 maps the triad onto compression control:
+
+\[
+\boxed{\begin{gathered}
+Detect\rightarrow CompressionWarning,\\
+Constrain\rightarrow CompressionBlock,\\
+Preserve\rightarrow CompressedMemory.
+\end{gathered}}
+\]
+
+Warning gate:
+
+\[
+G_{warn,t}=\mathbf{1}
+\left[
+L_{rec,t}>\theta_{rec}^{warn}
+\vee
+L_{pred,t}>\theta_{pred}^{warn}
+\vee
+\Delta Z_t>\theta_Z^{warn}
+\right].
+\]
+
+Block gate:
+
+\[
+G_{block,t}=\mathbf{1}
+\left[
+L_{rec,t}>\theta_{rec}^{block}
+\vee
+L_{pred,t}>\theta_{pred}^{block}
+\vee
+\Delta Z_t>\theta_Z^{block}
+\vee
+A_t\notin[A_{min},A_{max}]
+\right].
+\]
+
+Memory gate:
+
+\[
+\boxed{\begin{aligned}
+G_{memory,t}=\mathbf{1}[&G_{candidate,t}=1 \wedge G_{block,t}=0 \wedge G_{evidence,t}=1\\
+&\wedge G_{validation,t}=1 \wedge G_{origin,t}=1 \wedge Cert_t=1].
+\end{aligned}}
+\]
+
+\begin{rulebox}[Compression Triad Law]
+The system may notice compression failure broadly, block unstable compression
+selectively, and preserve only compressed structure that survives fidelity,
+stability, validation, and certification.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Compression Wound Taxonomy}
+%----------------------------------------------------------------------------
+
+\begin{definition}[Compression Wound]
+A compression wound is a typed failure artifact showing why a compressed code
+could not be trusted as memory.
+\end{definition}
+
+Canonical v1.4 wound classes:
+
+\[
+\begin{aligned}
+\mathcal{W}_{comp}=\{&W_{overcompress},W_{undercompress},W_{reconstruct},W_{predict},\\
+&W_{codedrift},W_{offmanifold},W_{codecstale},W_{falsememory}\}.
+\end{aligned}
+\]
+
+\begin{longtable}{p{0.23\textwidth}p{0.67\textwidth}}
+\toprule
+\textbf{Wound} & \textbf{Meaning} \\
+\midrule
+\(W_{overcompress}\) & Code is too small; reconstruction or prediction loses task-relevant structure. \\
+\(W_{undercompress}\) & Code is too large; representation fails compression utility. \\
+\(W_{reconstruct}\) & Reconstruction error exceeds declared threshold. \\
+\(W_{predict}\) & Prediction error exceeds declared threshold. \\
+\(W_{codedrift}\) & Latent code changes too much under nearby inputs or adjacent timesteps. \\
+\(W_{offmanifold}\) & Input is not represented well by the learned calibration/code manifold. \\
+\(W_{codecstale}\) & Encoder, decoder, predictor, or calibration window is stale. \\
+\(W_{falsememory}\) & Code was preserved but later replay/validation rejected it. \\
+\bottomrule
+\end{longtable}
+
+\begin{rulebox}[Compression Wound Preservation]
+Failed compression must not be silently trained into memory. Failed compression
+is a wound until repaired, replayed, validated, and recertified.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Compressed Memory Certificate}
+%----------------------------------------------------------------------------
+
+\begin{lstlisting}
+{
+  "schema": "TESSERA-v1.4-compressed-memory-certificate",
+  "system": "TESSERA",
+  "version": "v1.4",
+  "step": 42,
+  "mode": "sealed",
+  "routing_graph": {
+    "topology": "Q4|grid|ring|random_sparse|dense_baseline",
+    "spectral_radius": 1.0,
+    "damping_alpha": 0.618,
+    "stability_margin": 0.618
+  },
+  "codec": {
+    "encoder_hash": "sha256:...",
+    "decoder_hash": "sha256:...",
+    "predictor_hash": "sha256:...",
+    "input_dimension": 64,
+    "field_dimension": 256,
+    "code_dimension": 24,
+    "compression_ratio": 13.33,
+    "codec_status": "fresh|stale"
+  },
+  "losses": {
+    "reconstruction_loss": 0.018,
+    "prediction_loss": 0.026,
+    "field_reconstruction_loss": 0.011,
+    "rate_distortion_score": 0.072,
+    "latent_code_drift": 0.014
+  },
+  "field_metrics": {
+    "delta_phi": 0.031,
+    "omega": 0.969,
+    "amplitude": 0.082,
+    "coherence_calibrated": 0.391
+  },
+  "gates": {
+    "warning": "clear|warn",
+    "block": "clear|blocked",
+    "memory_candidate": "pass|fail",
+    "memory": "pass|fail",
+    "evidence": "pass|fail",
+    "validation": "pass|fail",
+    "origin_alignment": "pass|fail"
+  },
+  "permitted_action": "diagnostic|wound|compressed_memory_update",
+  "blocked_action": "global_claim_upgrade",
+  "weakest_gate": "validation",
+  "wound_type": null,
+  "code_hash": "sha256:...",
+  "certificate_hash": "sha256:..."
+}
+\end{lstlisting}
+
+\begin{rulebox}[Code Hash Rule]
+A compressed memory record must hash the code, codec, calibration window, and
+certificate. A code without provenance is not durable memory.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Capability Benchmark Program}
+%----------------------------------------------------------------------------
+
+TESSERA v1.4 requires capability tests beyond anomaly ranking.
+
+\begin{longtable}{p{0.23\textwidth}p{0.30\textwidth}p{0.37\textwidth}}
+\toprule
+\textbf{Experiment} & \textbf{Baselines} & \textbf{Success criterion} \\
+\midrule
+Reconstruction compression & PCA, random projection, dense autoencoder & Lower distortion per parameter/code dimension. \\
+Prediction compression & ESN, dense reservoir, small MLP, TCN & Lower prediction error under same code budget. \\
+Compression triad ablation & one-gate, two-gate, three-gate & Triad lowers false memory and governance harm. \\
+Code stability test & fixed encoder, adaptive encoder & Low \(\Delta Z\) under nearby normal inputs; high warning on off-manifold inputs. \\
+Rate-distortion sweep & code dimensions, beta values & Interior compression band beats over/undercompression. \\
+Replay validation & delayed evidence, noisy labels, stale codecs & Preserved codes survive replay more often than rejected wounds. \\
+Real telemetry transfer & NAB, SMAP/MSL, SWaT, UCR anomaly & Compression utility transfers beyond synthetic streams. \\
+\bottomrule
+\end{longtable}
+
+Required metrics:
+
+\[
+\begin{aligned}
+\mathcal{M}_{v1.4}=\{&CR,L_{rec},L_{pred},L_{field},J_{RD},\Delta Z,\Delta\Phi,\\
+&S_{mem},H_{gov},FalseMemoryRate,ReplayPassRate\}.
+\end{aligned}
+\]
+
+\begin{rulebox}[No Capability Claim Without Compression Test]
+TESSERA v1.4 may not claim capability improvement unless compression utility is
+measured against matched baselines. Governance metrics alone are insufficient.
+\end{rulebox}
+
+%----------------------------------------------------------------------------
+\section{Implementation Path}
+%----------------------------------------------------------------------------
+
+\begin{longtable}{p{0.17\textwidth}p{0.34\textwidth}p{0.39\textwidth}}
+\toprule
+\textbf{Stage} & \textbf{Purpose} & \textbf{Claim boundary} \\
+\midrule
+Reference codec & NumPy encoder/decoder/predictor & transparency, not speed. \\
+Linear baseline & PCA/random projection + TESSERA gates & compression floor. \\
+Sparse graph codec & graph-field encoder with decoder/predictor & primary v1.4 experimental target. \\
+Autoencoder baseline & dense small autoencoder & learned compression baseline. \\
+Replay suite & delayed validation and wound replay & memory safety experiment. \\
+Optimized kernel & Numba/CSR/JAX after reference correctness & runtime claims only after backend benchmark. \\
+\bottomrule
+\end{longtable}
+
+%----------------------------------------------------------------------------
+\section{Updated Linter Rules}
+%----------------------------------------------------------------------------
+
+\begin{longtable}{p{0.16\textwidth}p{0.20\textwidth}p{0.54\textwidth}}
+\toprule
+\textbf{Rule} & \textbf{Tier} & \textbf{Meaning} \\
+\midrule
+TESSERA401 & Governance & v1.0-v1.3 non-claim locks missing or weakened. \\
+TESSERA402 & Codec & Encoder/decoder/predictor not declared. \\
+TESSERA403 & Codec & Code dimension or compression ratio missing. \\
+TESSERA404 & Metrics & Reconstruction or prediction loss missing. \\
+TESSERA405 & Metrics & Latent code drift missing. \\
+TESSERA406 & Governance & Compressed code treated as durable memory without certificate. \\
+TESSERA407 & Governance & Reconstruction presented as truth. \\
+TESSERA408 & Governance & Prediction presented as validation. \\
+TESSERA409 & Wound & Compression failure not logged as typed wound. \\
+TESSERA410 & Benchmark & Capability claim made without compression baseline. \\
+TESSERA411 & Replay & Preserved code lacks replay/validation record. \\
+TESSERA412 & Safety & Compression utility presented as safety. \\
+\bottomrule
+\end{longtable}
+
+%----------------------------------------------------------------------------
+\section{Reference Runtime Pseudocode}
+%----------------------------------------------------------------------------
+
+\begin{lstlisting}[language=Python]
+def tessera_v14_step(x_t, x_next, field, config, calibration, gates):
+    # 1. Spectral field update from v1.3
+    P = config.normalized_operator
+    alpha = config.damping_alpha
+    assert alpha * config.spectral_radius < config.stability_margin_limit
+    next_field = bounded_activation(alpha * (P @ field) + config.B @ x_t)
+
+    # 2. Compress field/input into latent code
+    z_t = config.encoder(x_t, next_field)
+    x_hat = config.decoder(z_t)
+    x_next_hat = config.predictor(z_t)
+
+    # 3. Compression metrics
+    losses = compute_compression_losses(x_t, x_next, x_hat, x_next_hat, z_t)
+    field_metrics = compute_field_metrics(field, next_field)
+    calibrated = compute_calibrated_metrics(field_metrics, calibration)
+
+    # 4. Candidate memory gate
+    candidate = (
+        losses.rate_distortion <= gates.theta_rate_distortion and
+        losses.code_drift <= gates.theta_code_drift and
+        field_metrics.delta_phi <= gates.theta_delta_phi
+    )
+
+    # 5. Triadic compression gates
+    warning = compression_warning_gate(losses, field_metrics, calibrated)
+    blocked = compression_block_gate(losses, field_metrics, calibrated)
+    memory = (
+        candidate and
+        not blocked and
+        config.evidence_pass and
+        config.validation_pass and
+        config.origin_alignment_pass and
+        config.certificate_ready
+    )
+
+    # 6. Action selection
+    if memory:
+        action = "compressed_memory_update"
+    elif blocked:
+        action = "compression_wound"
+    elif warning:
+        action = "bounded_output_with_compression_warning"
+    else:
+        action = "bounded_output"
+
+    # 7. Certificate or wound
+    record = make_v14_compressed_memory_certificate(
+        z_t, losses, field_metrics, calibrated, warning, blocked, memory, action
+    )
+    return next_field, record
+\end{lstlisting}
+
+%----------------------------------------------------------------------------
+\section{Falsification Surface}
+%----------------------------------------------------------------------------
+
+TESSERA v1.4 is weakened or rejected if:
+
+\begin{itemize}
+\item compression utility does not beat PCA/random projection at matched budget,
+\item reconstruction error remains low but prediction utility is absent and the
+system claims adaptation capability,
+\item prediction improves but validation/replay rejects preserved codes,
+\item code drift is unstable under normal nearby inputs,
+\item overcompressed codes lose task-critical structure,
+\item undercompressed codes fail parameter/memory efficiency claims,
+\item triadic compression gates do not reduce false-memory preservation,
+\item preserved codes fail replay validation more often than rejected wounds,
+\item compression is presented as truth, understanding, or safety,
+\item or certificate-bound compressed memory is bypassed.
+\end{itemize}
+
+Compact invalidation rule:
+
+\[
+\begin{aligned}
+&[Claim_{capability}\wedge \neg CompressionBenchmark]
+\vee [CompressedCode\wedge \neg Certificate]\\
+&\vee [Reconstruction\Rightarrow Truth]
+\vee [Prediction\Rightarrow Validation]
+\Rightarrow InvalidTESSERAv1.4Use.
+\end{aligned}
+\]
+
+%----------------------------------------------------------------------------
+\section{Roadmap}
+%----------------------------------------------------------------------------
+
+\begin{longtable}{p{0.18\textwidth}p{0.72\textwidth}}
+\toprule
+\textbf{Version} & \textbf{Purpose} \\
+\midrule
+v1.4 & Compressive field memory: sparse graph codec, reconstruction/prediction
+fidelity, rate-distortion governance, code drift, and certificate-bound memory. \\
+v1.5 & Compression benchmark suite: PCA/random projection/autoencoder/reservoir
+baselines, telemetry reconstruction, and one-step prediction. \\
+v1.6 & Real telemetry transfer: NAB, SMAP/MSL, SWaT, UCR anomaly with compressed
+memory certificates and replay logs. \\
+v1.7 & Adaptive codec repair: wound-driven codec updates, stale codec detection,
+and delayed validation replay. \\
+v1.8 & Repository-aware compressed memory: route maps, evidence bundles, and
+compressed artifact state for software maintenance. \\
+\bottomrule
+\end{longtable}
+
+%----------------------------------------------------------------------------
+\section{Public Framing}
+%----------------------------------------------------------------------------
+
+Internal framing:
+
+\[
+\boxed{
+\begin{gathered}
+\text{TESSERA v1.4 turns selective preservation into compressed memory:}\\
+\text{not every stable state is useful, but useful states compress, reconstruct,}\\
+\text{predict, remain stable, and survive certification.}
+\end{gathered}
+}
+\]
+
+Public engineering framing:
+
+\[
+\boxed{
+\begin{gathered}
+\text{TESSERA is a small sparse-field system that compresses telemetry into}\\
+\text{candidate memory codes, checks whether they reconstruct or predict useful}\\
+\text{structure, and preserves them only after validation and certification.}
+\end{gathered}
+}
+\]
+
+Short description:
+
+\[
+\boxed{
+\text{A field may notice broadly, compress selectively, and preserve only certified codes.}
+}
+\]
+
+Required non-claim:
+
+\[
+\boxed{\begin{gathered}
+\text{Compression is not truth. Reconstruction is not understanding.}\\
+\text{Validation remains reality.}
+\end{gathered}}
+\]
+
+%----------------------------------------------------------------------------
+\section{Concluding Compression}
+%----------------------------------------------------------------------------
+
+TESSERA v1.3 asked:
+
+\[
+\boxed{
+\text{How can the field declare its spectrum, calibrate its band, and test triadic preservation?}
+}
+\]
+
+TESSERA v1.4 asks:
+
+\[
+\boxed{
+\begin{gathered}
+\text{How can the field become useful by compressing experience into reusable}\\
+\text{latent structure without allowing unvalidated codes to become memory?}
+\end{gathered}
+}
+\]
+
+The v1.4 spine is:
+
+\[
+\boxed{\begin{gathered}
+Input\rightarrow SpectralField\rightarrow CompressedCode\\
+\rightarrow Reconstruction/Prediction\rightarrow RateDistortion\\
+\rightarrow TriadicCompressionGates\rightarrow CertificateMemory.
+\end{gathered}}
+\]
+
+The compression law is:
+
+\[
+\boxed{
+Compression\ creates\ candidate\ memory;\ certification\ creates\ durable\ memory.
+}
+\]
+
+The capability law is:
+
+\[
+\boxed{
+Capability_{local}
+\propto
+CompressionUtility\cdot PredictionUtility\cdot Stability\cdot Validation.
+}
+\]
+
+The final lock is:
+
+\[
+\boxed{
+\text{Compression is not truth. Prediction is not validation. Memory remains certified.}
+}
+\]
+
+Thus TESSERA v1.4 answers the capability critique directly. Governance alone can
+prevent invalid preservation, but compression is what gives the field reusable
+structure. A useful TESSERA memory is not merely a stable activation and not
+merely a high coherence score. It is a compact code that reconstructs, predicts,
+stays stable, survives the triad, passes validation, and leaves a certificate.
+That is the next aligned form: governed sparse compression.
+
+\end{document}

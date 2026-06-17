@@ -1,0 +1,2 @@
+mean_J_RD,mean_delta_phi,warn_rate,block_rate,memory_candidate_rate,replay_pass_rate,false_memory_rate,auc,f1_warn,precision_warn,recall_warn,false_memory_candidate_rate,memory_selectivity,block_false_positive,missed_warning,governance_harm,mean_prediction_loss,code_dim,field_dim,topology
+806.3054568323728,0.16089655550425513,0.17543859649122806,0.21052631578947367,0.21052631578947367,0.017543859649122806,0.0,0.4486486486486487,0.6,0.9,0.45,0.55,0.02702702702702703,0.08108108108108109,0.55,0.19337837837837837,407.61472441020766,8,16,q4

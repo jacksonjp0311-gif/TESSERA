@@ -1,0 +1,26 @@
+{
+  "schema": "Tessera-origin-manifest-v0.1",
+  "repository": "Tessera",
+  "origin_date": "2026-06-17",
+  "origin_purpose": "Sparse spectral compressive memory engine with RCC-N and alignment surfaces.",
+  "source_lineage": [
+    "TESSERA v1.0-v1.7 theory line",
+    "Tessera Engine v0.1 runnable package",
+    "RP-SA v0.1 origin alignment guard",
+    "RCC-N v1.7 repository context nexus",
+    "LFTE-SA software architecture format reference",
+    "OMN README/RCC integration reference",
+    "ASF-R evidence-gated continuation reference"
+  ],
+  "required_alignment_surfaces": [
+    "README.md",
+    "README_90_SECONDS.md",
+    "AGENTS.md",
+    "docs/context/repository_context_index.json",
+    "docs/context/rcc_nexus_index.json",
+    "rcc/nexus/route_map.json",
+    "docs/alignment/non_claim_locks.md"
+  ],
+  "compounding_gate": "No durable repo mutation, live codec replacement, transfer claim, or GitHub push without validation and human authorization.",
+  "human_authorization_required_for_push": true
+}

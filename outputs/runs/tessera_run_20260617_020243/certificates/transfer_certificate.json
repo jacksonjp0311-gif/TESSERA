@@ -1,0 +1,79 @@
+{
+  "schema": "TESSERA-v0.1-engine-transfer-certificate",
+  "system": "Tessera",
+  "version": "engine-v0.1",
+  "run_id": "tessera_run_20260617_020243",
+  "dataset_manifest_hash": "46c893c9a8ed6f9647f2c92d9a8f10712dc8b46f6594d05699287f0cc7d136f3",
+  "graph": {
+    "topology": "q4",
+    "nodes": 16,
+    "normalization": "row",
+    "spectral_radius": 1.0,
+    "damping_alpha": 0.618,
+    "stability_margin_alpha_rho": 0.618,
+    "stability_condition_alpha_rho_lt_1": true
+  },
+  "codec": {
+    "encoder": "torch_small_mlp",
+    "decoder": "torch_small_mlp",
+    "predictor": "torch_small_mlp",
+    "field_dim": 16,
+    "code_dim": 8,
+    "training_epochs": 2,
+    "live_repair_enabled": false,
+    "shadow_repair_required": true
+  },
+  "metrics": {
+    "mean_J_RD": 537.6694138251295,
+    "mean_delta_phi": 0.24303276634706958,
+    "warn_rate": 0.14634146341463414,
+    "block_rate": 0.1951219512195122,
+    "memory_candidate_rate": 0.21951219512195122,
+    "replay_pass_rate": 0.024390243902439025,
+    "false_memory_rate": 0.0,
+    "auc": 0.39743589743589747,
+    "f1_warn": 0.47619047619047616,
+    "precision_warn": 0.8333333333333334,
+    "recall_warn": 0.3333333333333333,
+    "false_memory_candidate_rate": 0.5333333333333333,
+    "memory_selectivity": 0.038461538461538464,
+    "block_false_positive": 0.038461538461538464,
+    "missed_warning": 0.6666666666666666,
+    "governance_harm": 0.21346153846153845,
+    "mean_prediction_loss": 271.1925674066311,
+    "code_dim": 8,
+    "field_dim": 16,
+    "topology": "q4"
+  },
+  "baselines": [
+    {
+      "model": "persistence",
+      "mean_prediction_loss": 210.8516387939453,
+      "mean_reconstruction_loss": 0.0
+    },
+    {
+      "model": "pca_codec",
+      "mean_prediction_loss": 386.51806640625,
+      "mean_reconstruction_loss": 3.0864949485120974e-11
+    },
+    {
+      "model": "random_projection",
+      "mean_prediction_loss": 337.9871520996094,
+      "mean_reconstruction_loss": 47.40000534057617
+    },
+    {
+      "model": "ewma",
+      "mean_prediction_loss": 107.38321685791016,
+      "mean_reconstruction_loss": 0.0
+    }
+  ],
+  "wound_count": 17,
+  "claim_ceiling": "diagnostic_baseline_limited",
+  "non_claim_locks": {
+    "synthetic_success_is_not_transfer": true,
+    "low_loss_is_not_truth": true,
+    "memory_is_certified_compression": true,
+    "repair_requires_shadow_testing": true
+  },
+  "certificate_hash": "27b8a6b73506994560e2d7cd35cb76d5fcb4c579572eab8894e4f075a600b963"
+}

@@ -1,0 +1,9 @@
+{
+  "topology": "q4",
+  "nodes": 16,
+  "normalization": "row",
+  "spectral_radius": 1.0,
+  "damping_alpha": 0.618,
+  "stability_margin_alpha_rho": 0.618,
+  "stability_condition_alpha_rho_lt_1": true
+}

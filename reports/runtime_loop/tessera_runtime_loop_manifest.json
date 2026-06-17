@@ -1,0 +1,74 @@
+{
+  "schema": "TESSERA-runtime-loop-compiler-v0.2.0",
+  "loop_steps": [
+    {
+      "order": "01",
+      "name": "REHYDRATE",
+      "description": "Load origin manifest, route map, context indexes, and claim locks."
+    },
+    {
+      "order": "02",
+      "name": "ORIENT",
+      "description": "Resolve RCC Nexus route, local surface, claim ceiling, and validation path."
+    },
+    {
+      "order": "03",
+      "name": "COMPILE",
+      "description": "Compress the runtime loop into ASCII, Bash, PowerShell, and evidence runbooks."
+    },
+    {
+      "order": "04",
+      "name": "RUN",
+      "description": "Execute the Tessera smoke/runtime cycle under declared graph and thresholds."
+    },
+    {
+      "order": "05",
+      "name": "MEASURE",
+      "description": "Emit rate-distortion, gates, wounds, baseline summary, and certificate artifacts."
+    },
+    {
+      "order": "06",
+      "name": "VALIDATE",
+      "description": "Run RCC, README, architecture, unit, and latest-run evidence checks."
+    },
+    {
+      "order": "07",
+      "name": "LEDGER",
+      "description": "Record run identity, Git state, lessons, and non-claim boundaries."
+    },
+    {
+      "order": "08",
+      "name": "DISCONNECT",
+      "description": "Extract lessons learned without importing Hermes runtime authority."
+    }
+  ],
+  "outputs": {
+    "ascii": "reports/runtime_loop/tessera_runtime_loop_ascii.txt",
+    "bash": "reports/runtime_loop/tessera_runtime_loop.sh",
+    "powershell": "reports/runtime_loop/tessera_runtime_loop.ps1",
+    "manifest": "reports/runtime_loop/tessera_runtime_loop_manifest.json"
+  },
+  "hermes_interlock": {
+    "source": "hermes-agent-evo",
+    "borrowed_pattern": [
+      "observe",
+      "propose",
+      "classify",
+      "dry_run",
+      "evidence",
+      "authorize",
+      "limited_apply",
+      "validate",
+      "ledger"
+    ],
+    "blocked_transfer": [
+      "Hermes runtime authority",
+      "CMS write authority",
+      "API authority",
+      "self-authorization",
+      "automatic rollback",
+      "provider/model/tool authority"
+    ]
+  },
+  "claim_boundary": "Loop compilation improves operator visibility and repeatability; it does not prove code correctness, safety, production readiness, or real telemetry transfer."
+}

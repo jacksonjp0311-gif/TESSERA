@@ -1,0 +1,5 @@
+model,mean_prediction_loss,mean_reconstruction_loss
+persistence,121.3536148071289,0.0
+pca_codec,212.7289276123047,1.7501303141084779e-12
+random_projection,186.734130859375,6.216370582580566
+ewma,75.84559631347656,0.0

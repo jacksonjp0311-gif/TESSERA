@@ -1,0 +1,12 @@
+{
+  "schema": "TESSERA-readme-nexus-discipline-audit-v0.1.2",
+  "passed": false,
+  "missing_files": [],
+  "missing_readme_tokens": [
+    "PART I \u2014 Human README",
+    "PART II \u2014 RCC Nexus README",
+    "PART III \u2014 AI Agent README"
+  ],
+  "route_map_readme_discipline_present": false,
+  "claim_boundary": "README discipline is navigation and public-surface alignment, not code correctness or empirical validation"
+}

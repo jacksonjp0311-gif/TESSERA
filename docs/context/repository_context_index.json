@@ -1,0 +1,47 @@
+{
+  "schema": "Tessera-repository-context-index-v0.1",
+  "repository": "Tessera",
+  "purpose": "Sparse spectral compressive memory reference engine with alignment and RCC-N navigation.",
+  "current_layer": "Tessera Engine v0.1 with RCC-N alignment/nexus patch v0.2",
+  "read_order": [
+    "README.md",
+    "AGENTS.md",
+    "README_90_SECONDS.md",
+    "docs/context/repository_context_index.json",
+    "docs/context/rcc_nexus_index.json",
+    "rcc/nexus/route_map.json"
+  ],
+  "core_runtime_paths": [
+    "src/tessera",
+    "configs",
+    "tests",
+    "outputs",
+    "reports"
+  ],
+  "theory_paths": [
+    "docs/theory/import_manifest.json",
+    "docs/theory/imports",
+    "docs/theory/tessera_lineage"
+  ],
+  "alignment_paths": [
+    "docs/alignment",
+    "rcc/nexus"
+  ],
+  "evidence_paths": [
+    "outputs/runs",
+    "reports/rcc_nexus"
+  ],
+  "validation_commands": [
+    "python scripts/rcc/check_rcc_nexus.py",
+    "python scripts/validation/validate_architecture_contracts.py",
+    "python -m unittest discover -s tests",
+    "python -m tessera validate --run outputs/runs/latest",
+    "python scripts/readme/audit_readme_nexus_discipline.py"
+  ],
+  "claim_ceiling": "diagnostic_baseline_limited_until_real_telemetry_transfer",
+  "status": "readme_nexus_discipline_integrated_local",
+  "main_surfaces": {
+    "readme_discipline": "docs/readme/README_DISCIPLINE.md",
+    "public_metrics": "docs/benchmarks/current_public_metrics.md"
+  }
+}
