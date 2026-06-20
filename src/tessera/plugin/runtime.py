@@ -58,6 +58,7 @@ class TesseraPlugin:
         memory_capacity: int = 64,
         field_dim: int = 8,
         code_dim: int = 4,
+        inline_neural_training: bool = True,
     ):
         self._events: deque[AgentEvent] = deque(maxlen=max_events)
         self.warning_quantile = warning_quantile
@@ -65,6 +66,7 @@ class TesseraPlugin:
         self.memory_capacity = memory_capacity
         self.field_dim = field_dim
         self.code_dim = code_dim
+        self.inline_neural_training = inline_neural_training
         self._last_packet: InferencePacket | None = None
         self._last_prediction_expert = "not_selected"
         self._wound_history: list[str] = []
@@ -107,11 +109,29 @@ class TesseraPlugin:
             )
             self._last_packet = packet
             return packet
-        if len(matrix) >= self.neural_min_events:
+        if (
+            len(matrix) >= self.neural_min_events
+            and self.inline_neural_training
+        ):
             packet = self._neural_infer(matrix)
             self._last_packet = packet
             return packet
         packet = self._fallback_infer(matrix)
+        if (
+            len(matrix) >= self.neural_min_events
+            and not self.inline_neural_training
+        ):
+            packet = InferencePacket(
+                status="fast_path_shadow_training_required",
+                anomaly_score=packet.anomaly_score,
+                prediction_loss=packet.prediction_loss,
+                warning=packet.warning,
+                memory_candidate=packet.memory_candidate,
+                claim_boundary=(
+                    "Bounded fast-path inference only; neural fitting is "
+                    "excluded from the host request and remains shadow-only."
+                ),
+            )
         self._last_packet = packet
         return packet
 
@@ -257,6 +277,11 @@ class TesseraPlugin:
             "wound_count": len(self._wound_history),
             "anomaly_mean": float(np.mean(self._anomaly_history)) if self._anomaly_history else 0.0,
             "selected_prediction_expert": self._last_prediction_expert,
+            "inline_neural_training": self.inline_neural_training,
+            "shadow_training_required": (
+                len(self._events) >= self.neural_min_events
+                and not self.inline_neural_training
+            ),
             "live_codec_replacement": False,
             "memory_write": False,
             "tool_invocation": False,

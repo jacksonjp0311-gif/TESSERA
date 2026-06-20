@@ -85,10 +85,14 @@ class PluginSupervisor:
         process_target: Callable | None = None,
     ):
         self.budget = budget or RuntimeBudget()
-        self.plugin_options = dict(plugin_options or {})
+        self.plugin_options = {
+            "inline_neural_training": False,
+            **dict(plugin_options or {}),
+        }
         self._process_target = process_target
         self._events: list[AgentEvent] = []
-        self._lifecycle = "ready"
+        self._lifecycle = "created"
+        self._warmed = False
         self._consecutive_failures = 0
         self._total_requests = 0
         self._successful_requests = 0
@@ -171,6 +175,8 @@ class PluginSupervisor:
         self._last_latency_ms = (time.perf_counter() - started) * 1000.0
         self._successful_requests += 1
         self._consecutive_failures = 0
+        self._warmed = True
+        self._lifecycle = "ready"
         return RuntimeResult(
             status="ok",
             packet=packet,
@@ -182,6 +188,10 @@ class PluginSupervisor:
                 "or authority to mutate the host."
             ),
         )
+
+    def warmup(self) -> RuntimeResult:
+        """Start the isolated worker before host traffic reaches the plugin."""
+        return self.infer()
 
     def reset_circuit(self) -> bool:
         if self._lifecycle == "unloaded":
@@ -199,6 +209,8 @@ class PluginSupervisor:
             status = "unloaded"
         elif self._circuit_open:
             status = "degraded"
+        elif not self._warmed:
+            status = "starting"
         else:
             status = "ready"
         return RuntimeHealth(

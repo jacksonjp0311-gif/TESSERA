@@ -38,14 +38,27 @@ def run_plugin_readiness_probe() -> dict:
         budget=RuntimeBudget(timeout_ms=30_000),
         plugin_options={"neural_min_events": 8},
     )
-    for _ in range(3):
-        receipt = supervisor.observe(_events())
+    cold_start = supervisor.warmup()
+    observed = 0
+    fast_path_statuses = []
+    for _ in range(20):
+        batch = _events()
+        receipt = supervisor.observe(batch)
+        observed += receipt.accepted
         result = supervisor.infer()
         success_latencies.append(result.latency_ms)
         success_statuses.append(
             receipt.accepted == 4
             and result.status == "ok"
             and result.packet is not None
+        )
+        fast_path_statuses.append(
+            result.packet is not None
+            and (
+                observed < 8
+                or result.packet.status
+                == "fast_path_shadow_training_required"
+            )
         )
     supervisor.unload()
 
@@ -82,6 +95,7 @@ def run_plugin_readiness_probe() -> dict:
 
     checks = {
         "normal_inference_subprocess_success": all(success_statuses),
+        "fitting_excluded_from_host_path": all(fast_path_statuses),
         "worker_crash_contained": (
             crash_result.status == "contained_failure"
             and crash_result.host_contained
@@ -103,16 +117,18 @@ def run_plugin_readiness_probe() -> dict:
             and unloaded_result.error_code == "runtime_unloaded"
         ),
     }
-    warm_p95 = float(np.percentile(success_latencies[1:], 95))
+    warm_p95 = float(np.percentile(success_latencies, 95))
     production_latency_budget_ms = 250.0
     containment_passed = all(checks.values())
+    latency_passed = warm_p95 <= production_latency_budget_ms
     return {
-        "schema": "TESSERA-EVO-026-PLUGIN-READINESS-v0.1",
+        "schema": "TESSERA-PLUGIN-READINESS-v0.2",
         "checks": checks,
         "passed": containment_passed,
         "containment_gate_passed": containment_passed,
-        "production_latency_gate_passed": (
-            warm_p95 <= production_latency_budget_ms
+        "production_latency_gate_passed": latency_passed,
+        "interactive_runtime_candidate": (
+            containment_passed and latency_passed
         ),
         "production_candidate": False,
         "metrics": {
@@ -122,8 +138,9 @@ def run_plugin_readiness_probe() -> dict:
             ),
             "latency_ms_p50": float(np.percentile(success_latencies, 50)),
             "latency_ms_p95": float(np.percentile(success_latencies, 95)),
-            "cold_start_latency_ms": float(success_latencies[0]),
+            "cold_start_latency_ms": float(cold_start.latency_ms),
             "warm_latency_ms_p95": warm_p95,
+            "warm_latency_ms_max": float(max(success_latencies)),
             "production_latency_budget_ms": production_latency_budget_ms,
             "crash_containment_rate": float(
                 crash_result.status == "contained_failure"
@@ -134,7 +151,7 @@ def run_plugin_readiness_probe() -> dict:
             "unauthorized_host_mutations": 0,
         },
         "remaining_blockers": [
-            "warm inference p95 within the declared 250 ms host budget",
+            "validated asynchronous shadow fitting and checkpoint admission",
             "two independent host adapters",
             "sustained load and soak testing",
             "package signing and supply-chain verification",

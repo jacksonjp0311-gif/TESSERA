@@ -66,6 +66,7 @@
     "docs/research/PLUGIN_RUNTIME_CONTAINMENT_2026-06-20.md",
     "src/tessera/plugin/supervisor.py",
     "src/tessera/experiments/plugin_readiness.py",
+    "docs/research/PLUGIN_LATENCY_SEPARATION_2026-06-20.md",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

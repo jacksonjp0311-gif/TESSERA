@@ -1,13 +1,13 @@
 {
   "schema": "TESSERA-RHP-LATEST-POINTER-v0.1",
-  "latest_operation": "TESSERA-EVO-026",
-  "latest_evidence": "docs/context/rhp/evidence/TESSERA-EVO-026-final-evidence.json",
+  "latest_operation": "TESSERA-EVO-027",
+  "latest_evidence": "docs/context/rhp/evidence/TESSERA-EVO-027-final-evidence.json",
   "source_repository": "jacksonjp0311-gif/hermes-agent-evo",
   "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
-  "operation_base_commit": "cc551f3bc8c0bbb870437d85d20e4bbac456163b",
-  "state": "PLUGIN_CONTAINMENT_PASSED_PRODUCTION_LATENCY_BLOCKED",
+  "operation_base_commit": "cd1e00b402b606f0c56c20a7db10a60a9b247556",
+  "state": "INTERACTIVE_LATENCY_PASSED_SHADOW_TRAINER_OPEN",
   "integration_closed": false,
-  "next_operation": "cache_inference_state_and_move_fitting_to_async_shadow_worker",
+  "next_operation": "build_async_shadow_trainer_with_replay_gated_atomic_checkpoint_admission",
   "zero_context_rebuild": "docs/context/rhp/RHP_ZERO_CONTEXT_REBUILD.md",
   "authority_ok": true
 }

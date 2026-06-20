@@ -30,12 +30,16 @@ proposals.
 - Crashes and hard timeouts fail closed and emit no proposals.
 - Repeated failures open a circuit breaker.
 - Unload clears buffered events and permanently closes that runtime instance.
+- Supervised host inference disables inline neural fitting by default.
+- Crossing the neural-support threshold emits a shadow-training-required
+  status while the bounded fast path continues serving the host.
+- Direct research-mode plugin instances may still run inline neural fitting.
 - Operational prediction may use a normal-history-selected causal expert while
   neural field loss remains separately visible for anomaly awareness.
 
 ## Claim Boundary
 
-The containment boundary is locally validated, but latency, host compatibility,
-load, signing, security review, and natural agent utility still block
-production readiness. This is not autonomous authority or a replacement
-language model.
+Containment and warm interactive latency are locally validated. Asynchronous
+checkpoint training/admission, host compatibility, load, signing, security
+review, and natural agent utility still block production readiness. This is
+not autonomous authority or a replacement language model.

@@ -1,0 +1,62 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.27",
+  "operation": "TESSERA-EVO-027",
+  "previous_operation": "TESSERA-EVO-026",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "cd1e00b402b606f0c56c20a7db10a60a9b247556",
+  "state_after_validation": "INTERACTIVE_LATENCY_PASSED_SHADOW_TRAINER_OPEN",
+  "implemented": [
+    "inline neural fitting disabled on supervised host path",
+    "explicit fast-path shadow-training-required status",
+    "explicit isolated-worker warmup",
+    "20-request warm latency benchmark",
+    "research-mode neural path preserved",
+    "latency and containment regression coverage"
+  ],
+  "finding": "Removing model fitting from the synchronous host path reduced warm p95 from approximately 1115 ms to 3.11 ms while preserving crash, timeout, circuit-breaker, input, and unload containment.",
+  "decision": "Promote the interactive runtime latency gate. Keep full production-candidate status blocked until asynchronous shadow fitting, checkpoint admission, rollback, host adapters, load, signing, security, and natural utility gates pass.",
+  "metrics": {
+    "unit_tests_passed": 95,
+    "warm_trials": 20,
+    "warm_success_rate": 1.0,
+    "warm_latency_ms_p50": 1.568399995448999,
+    "warm_latency_ms_p95": 3.111104988784065,
+    "warm_latency_ms_max": 5.098599998746067,
+    "previous_warm_latency_ms_p95": 1114.7599249889026,
+    "latency_reduction_fraction": 0.9972091704060719,
+    "production_latency_budget_ms": 250.0,
+    "production_latency_gate_passed": true,
+    "interactive_runtime_candidate": true,
+    "production_candidate": false,
+    "cold_start_latency_ms": 13541.262799990363,
+    "containment_checks_passed": 7,
+    "containment_checks_total": 7,
+    "unauthorized_host_mutations": 0
+  },
+  "artifacts": {
+    "plugin_latency_separation": {
+      "path": "outputs/evidence/evo027/plugin_latency_separation.json",
+      "sha256": "60489b9ace4837f266f235f5fd8f5b8e7ea52b59f2acb64b9502b7b72c5791d9"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 95,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 1
+  },
+  "next_recommended_operation": "build_async_shadow_trainer_with_replay_gated_atomic_checkpoint_admission",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Interactive latency success does not establish complete production readiness, neural utility, security, consciousness, or autonomous authority."
+}

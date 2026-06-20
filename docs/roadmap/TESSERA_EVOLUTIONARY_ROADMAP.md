@@ -499,6 +499,23 @@ Persistent-worker reuse reduced warm p95 from approximately `3.65 s` to
 status remains rejected. The next target separates fast cached inference from
 asynchronous shadow fitting and repair.
 
+### Phase 6 hardening — TESSERA-EVO-027
+
+The latency profiler showed that the supervised path fitted a model after the
+event buffer reached eight records. EVO-027 disables inline fitting for
+production-facing supervisors, adds explicit worker warmup, and emits
+`fast_path_shadow_training_required` when learning support exists.
+
+Across 20 warm requests, p95 latency fell from approximately `1,115 ms` to
+`3.11 ms`; maximum latency was `5.10 ms`. The `250 ms` interactive gate passed
+while crash, timeout, circuit-breaker, input, and unload containment remained
+active.
+
+The interactive runtime is now a candidate. The complete plugin is not:
+asynchronous fitting, immutable checkpoint admission, replay, atomic rollback,
+host adapters, sustained load, signing, security review, and natural utility
+remain open.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -776,11 +793,11 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Cache immutable inference state and move fitting or topology changes to an
-   asynchronous shadow worker.
-2. Measure sustained mixed fallback/neural load against a `250 ms` p95 budget.
-3. Build two host adapters and test identical permissions, timeout, health,
-   unload, and rollback behavior.
+1. Build an asynchronous shadow trainer that emits immutable candidate
+   checkpoints without blocking host inference.
+2. Replay-gate candidate checkpoints, atomically admit eligible versions, and
+   prove rollback under injected failure.
+3. Build two host adapters and run sustained mixed-load validation.
 
 The immediate priority is resolving natural-session sensitivity while keeping
 the plugin read-mostly and evidence-gated.

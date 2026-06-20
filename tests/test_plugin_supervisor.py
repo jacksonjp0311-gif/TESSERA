@@ -93,6 +93,41 @@ class TestPluginSupervisor(unittest.TestCase):
         self.assertTrue(manifest.supports_hard_timeout)
         self.assertTrue(manifest.supports_unload)
 
+    def test_supervisor_disables_inline_training_by_default(self):
+        supervisor = PluginSupervisor()
+        self.assertEqual(supervisor.health().status, "starting")
+        events = [
+            self.event(
+                event_id=f"event-{index}",
+                timestamp=1000.0 + index,
+            )
+            for index in range(8)
+        ]
+        supervisor.observe(events)
+        result = supervisor.infer()
+        supervisor.unload()
+        self.assertEqual(result.status, "ok")
+        self.assertEqual(supervisor.health().status, "unloaded")
+        self.assertEqual(
+            result.packet.status,
+            "fast_path_shadow_training_required",
+        )
+
+    def test_warmup_transitions_health_to_ready(self):
+        supervisor = PluginSupervisor()
+        self.assertEqual(supervisor.health().status, "starting")
+        result = supervisor.warmup()
+        self.assertEqual(result.status, "ok")
+        self.assertEqual(supervisor.health().status, "ready")
+        supervisor.unload()
+
+    def test_direct_plugin_keeps_research_neural_path(self):
+        from tessera.plugin import TesseraPlugin
+
+        plugin = TesseraPlugin(neural_min_events=100)
+        self.assertTrue(plugin.inline_neural_training)
+        self.assertFalse(plugin.checkpoint()["shadow_training_required"])
+
 
 if __name__ == "__main__":
     unittest.main()

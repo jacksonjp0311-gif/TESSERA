@@ -80,6 +80,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Low false-warning rates can hide weak sensitivity. | Preregister effect-size response tests and report the minimum detectable perturbation separately. |
 | A mechanism-adjacent sensor can still be too coarse. | Require replicated tail-specific association; preserve calibration while testing higher-resolution privacy-safe execution aggregates. |
 | Permission declarations are not runtime isolation. | Production-facing inference must be supervised, time-bounded, fail-closed, unloadable, and adversarially tested. |
+| Learning does not belong on the interactive request path. | Fast inference remains synchronous; fitting and repair stay shadow-only until replay-gated checkpoint admission. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -373,6 +374,14 @@ zero unauthorized host mutations. Persistent-worker reuse reduced warm p95
 from approximately `3.65 s` to `1.13 s`, but that remains above the declared
 `250 ms` production budget. Containment is promoted; production-candidate
 status is not.
+
+EVO-027 removed neural fitting from the synchronous supervised request path.
+After explicit worker warmup, 20 consecutive calls achieved `3.11 ms` p95 and
+`5.10 ms` maximum latency against the `250 ms` budget, while all containment
+checks remained active. The interactive runtime latency gate now passes.
+Production status remains blocked because asynchronous shadow training,
+checkpoint admission and rollback, host adapters, sustained load, signing,
+security review, and natural agent utility are still open.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

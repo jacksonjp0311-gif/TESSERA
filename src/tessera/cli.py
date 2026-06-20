@@ -792,7 +792,7 @@ def main(argv=None):
     )
     readiness.add_argument(
         "--out",
-        default="outputs/evidence/evo026/plugin_readiness.json",
+        default="outputs/evidence/evo027/plugin_latency_separation.json",
     )
     readiness.set_defaults(func=cmd_plugin_readiness)
 

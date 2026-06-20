@@ -469,6 +469,18 @@
       "validation_gate": "src/tessera/experiments/plugin_readiness.py",
       "authority_boundary": "Containment does not establish production readiness or authorize host mutation.",
       "status": "promoted"
+    },
+    {
+      "id": "F040",
+      "observed_event": "The supervised plugin exceeded its latency budget because reaching eight events triggered model fitting inside the host request.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-027-final-evidence.json",
+      "wound_class": "training_on_interactive_request_path",
+      "diagnosis": "Containment amortized process startup but could not compensate for synchronous fitting and evaluation.",
+      "lesson": "Interactive inference and learning require separate execution paths; fitting, repair, and topology changes remain shadow-only until replay-gated admission.",
+      "future_behavior_change": "The supervised runtime disables inline fitting, requires explicit warmup, and reports when shadow training is needed.",
+      "validation_gate": "src/tessera/experiments/plugin_readiness.py",
+      "authority_boundary": "Passing latency does not authorize checkpoint admission, host mutation, or a production claim.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

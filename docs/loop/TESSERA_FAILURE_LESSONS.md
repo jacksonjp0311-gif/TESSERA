@@ -27,6 +27,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F037 | broad host load correlated with routine latency but not the problematic tail | require tail-specific replicated association; instrument subprocess startup and I/O wait next | aggregate context attribution gate |
 | F038 | spawn timing and aggregate disk I/O did not explain the remaining tail | use higher-resolution privacy-safe child execution aggregates and preserve calibration | mechanism attribution gate |
 | F039 | permission declarations alone did not contain plugin crashes, hangs, or lifecycle risk | enforce a supervised fail-closed subprocess boundary and retain latency as a production blocker | plugin readiness gate |
+| F040 | synchronous model fitting drove warm plugin latency above one second | separate fast inference from shadow learning and require replay-gated checkpoint admission | latency separation gate |
 
 ## Lessons Law
 

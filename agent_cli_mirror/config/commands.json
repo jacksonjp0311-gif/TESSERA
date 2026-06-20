@@ -417,18 +417,18 @@
       ]
     },
     "plugin-readiness": {
-      "purpose": "Run the EVO-026 supervised-subprocess failure-containment and lifecycle readiness probe.",
+      "purpose": "Run the supervised-subprocess containment and synchronous latency readiness probe.",
       "steps": [
         {
           "phase": "RUN",
-          "label": "EVO-026 plugin readiness",
+          "label": "plugin runtime readiness",
           "cmd": [
             "{python}",
             "-m",
             "tessera",
             "plugin-readiness",
             "--out",
-            "outputs/evidence/evo026/plugin_readiness.json"
+            "outputs/evidence/evo027/plugin_latency_separation.json"
           ]
         }
       ]
