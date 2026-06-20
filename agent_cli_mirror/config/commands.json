@@ -416,6 +416,23 @@
         }
       ]
     },
+    "plugin-readiness": {
+      "purpose": "Run the EVO-026 supervised-subprocess failure-containment and lifecycle readiness probe.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-026 plugin readiness",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "plugin-readiness",
+            "--out",
+            "outputs/evidence/evo026/plugin_readiness.json"
+          ]
+        }
+      ]
+    },
     "repair-ablation": {
       "purpose": "Run the replay-gated five-arm shadow repair ablation.",
       "steps": [

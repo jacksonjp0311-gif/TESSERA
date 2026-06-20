@@ -1,0 +1,58 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.26",
+  "operation": "TESSERA-EVO-026",
+  "previous_operation": "TESSERA-EVO-025",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "cc551f3bc8c0bbb870437d85d20e4bbac456163b",
+  "state_after_validation": "PLUGIN_CONTAINMENT_PASSED_PRODUCTION_LATENCY_BLOCKED",
+  "implemented": [
+    "host-supervised persistent local subprocess runtime",
+    "hard inference timeout and worker termination",
+    "failure circuit breaker",
+    "finite numeric input and feature-budget validation",
+    "health and lifecycle contract",
+    "explicit unload and fail-closed behavior",
+    "plugin manifest v0.2 production-boundary declarations"
+  ],
+  "finding": "All six local containment checks passed and persistent-worker reuse reduced warm latency substantially, but warm p95 remained above the declared 250 ms interactive host budget.",
+  "decision": "Promote the supervised containment boundary but reject production-candidate status. Separate inference from fitting and validate sustained latency next.",
+  "metrics": {
+    "containment_checks_passed": 6,
+    "containment_checks_total": 6,
+    "normal_inference_success_rate": 1.0,
+    "crash_containment_rate": 1.0,
+    "timeout_containment_rate": 1.0,
+    "unauthorized_host_mutations": 0,
+    "cold_start_latency_ms": 3185.9839000098873,
+    "warm_latency_ms_p95": 1114.7599249889026,
+    "production_latency_budget_ms": 250.0,
+    "production_latency_gate_passed": false,
+    "production_candidate": false
+  },
+  "artifacts": {
+    "plugin_readiness": {
+      "path": "outputs/evidence/evo026/plugin_readiness.json",
+      "sha256": "c02e0a3a9fdae287358702cd14ae593c29fcab84d9def942d615fc86e45ec638"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 92,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 1
+  },
+  "next_recommended_operation": "cache_inference_state_and_move_fitting_to_async_shadow_worker",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Failure containment does not establish production readiness, security, agent utility, consciousness, or autonomous authority."
+}

@@ -1,0 +1,98 @@
+from __future__ import annotations
+
+import time
+import unittest
+
+from tessera.plugin import PluginSupervisor
+from tessera.plugin.contracts import AgentEvent, RuntimeBudget
+
+
+def _crash_worker(events, plugin_options, output_queue):
+    raise RuntimeError("simulated worker crash")
+
+
+def _hang_worker(events, plugin_options, output_queue):
+    time.sleep(5)
+
+
+class TestPluginSupervisor(unittest.TestCase):
+    def event(self, **overrides):
+        values = {
+            "event_id": "event-1",
+            "kind": "test_result",
+            "timestamp": 1000.0,
+            "features": {"duration_ms": 10.0},
+        }
+        values.update(overrides)
+        return AgentEvent(**values)
+
+    def test_invalid_events_fail_closed_before_worker(self):
+        supervisor = PluginSupervisor()
+        receipt = supervisor.observe([
+            self.event(features={"duration_ms": float("nan")}),
+            self.event(
+                event_id="sensitive",
+                contains_sensitive_data=True,
+            ),
+        ])
+        self.assertEqual(receipt.accepted, 0)
+        self.assertEqual(receipt.rejected, 2)
+        self.assertEqual(receipt.buffer_size, 0)
+
+    def test_worker_crash_is_contained_and_opens_circuit(self):
+        supervisor = PluginSupervisor(
+            budget=RuntimeBudget(
+                timeout_ms=1000,
+                max_consecutive_failures=2,
+            ),
+            process_target=_crash_worker,
+        )
+        first = supervisor.infer()
+        second = supervisor.infer()
+        third = supervisor.infer()
+        self.assertEqual(first.status, "contained_failure")
+        self.assertEqual(second.status, "contained_failure")
+        self.assertEqual(third.status, "unavailable")
+        self.assertEqual(third.error_code, "circuit_open")
+        self.assertTrue(supervisor.health().circuit_open)
+        self.assertTrue(supervisor.reset_circuit())
+        self.assertFalse(supervisor.health().circuit_open)
+
+    def test_hard_timeout_terminates_worker(self):
+        supervisor = PluginSupervisor(
+            budget=RuntimeBudget(timeout_ms=50),
+            process_target=_hang_worker,
+        )
+        result = supervisor.infer()
+        self.assertEqual(result.status, "contained_failure")
+        self.assertEqual(result.error_code, "hard_timeout")
+        self.assertTrue(result.host_contained)
+        self.assertEqual(supervisor.health().timed_out_requests, 1)
+
+    def test_unload_clears_state_and_fails_closed(self):
+        supervisor = PluginSupervisor()
+        receipt = supervisor.observe([self.event()])
+        self.assertEqual(receipt.accepted, 1)
+        supervisor.unload()
+        result = supervisor.infer()
+        self.assertEqual(result.status, "unavailable")
+        self.assertEqual(result.error_code, "runtime_unloaded")
+        self.assertEqual(supervisor.health().status, "unloaded")
+        rejected = supervisor.observe([self.event(event_id="later")])
+        self.assertEqual(rejected.accepted, 0)
+
+    def test_manifest_declares_enforced_runtime_boundary(self):
+        from tessera.plugin import TesseraPlugin
+
+        manifest = TesseraPlugin().describe()
+        self.assertEqual(manifest.schema, "TESSERA-PLUGIN-MANIFEST-v0.2")
+        self.assertEqual(
+            manifest.execution_model,
+            "host-supervised-local-subprocess",
+        )
+        self.assertTrue(manifest.supports_hard_timeout)
+        self.assertTrue(manifest.supports_unload)
+
+
+if __name__ == "__main__":
+    unittest.main()

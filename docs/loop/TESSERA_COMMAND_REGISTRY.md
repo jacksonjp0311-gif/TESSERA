@@ -37,6 +37,7 @@ Every operational command must be documented here and mirrored in the README whe
 | `python -m tessera trajectory-evo023 --cohort outputs/evidence/evo021/natural_split_calibration.json --preregistration docs/research/EVO023_MODE_AUDIT_PREREGISTRATION.json` | Audit whether privacy-safe slow-tail signatures recur strongly enough to justify separate operational modes. |
 | `python -m tessera trajectory-evo024 --cohort outputs/evidence/evo024/fresh_context_cohort.json --preregistration docs/research/EVO024_CONTEXT_ATTRIBUTION_PREREGISTRATION.json` | Test whether allowlisted aggregate CPU, memory, or process-count context reproducibly associates with natural workflow latency tails. |
 | `python -m tessera trajectory-evo025 --cohort outputs/evidence/evo025/fresh_mechanism_cohort.json --preregistration docs/research/EVO025_MECHANISM_ATTRIBUTION_PREREGISTRATION.json` | Test whether payload-free subprocess spawn timing or aggregate disk I/O reproducibly associates with natural workflow latency tails. |
+| `python -m tessera plugin-readiness --out outputs/evidence/evo026/plugin_readiness.json` | Test supervised subprocess success, crash containment, timeout closure, circuit breaking, input rejection, unload, and latency. |
 | `python -m tessera.rhp summary --root .` | Print the canonical current-version summary: changes, findings, bounds, and next move. |
 | `python -m tessera.operator_geometry validate` | Low-level operator geometry validator. |
 | `.\scripts\tessera-agent.ps1` | Universal PowerShell Agent CLI entrypoint. |

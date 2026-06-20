@@ -484,6 +484,21 @@ Aggregate disk-time counters were usually zero at this workflow scale.
 Mechanism-conditioned calibration was rejected. The next bounded target is
 privacy-safe child-process CPU-time and context-switch aggregation.
 
+### Phase 6 hardening — TESSERA-EVO-026
+
+The production audit found that manifest permissions were descriptive rather
+than enforceable. A plugin crash or hang could still affect the host call.
+
+EVO-026 added a persistent host-supervised subprocess, hard timeout, crash
+containment, circuit breaker, finite numeric input budgets, health reporting,
+and explicit unload. Six of six containment probes passed with zero
+unauthorized host mutations.
+
+Persistent-worker reuse reduced warm p95 from approximately `3.65 s` to
+`1.13 s`. The declared production budget is `250 ms`, so production-candidate
+status remains rejected. The next target separates fast cached inference from
+asynchronous shadow fitting and repair.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -761,12 +776,11 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Instrument privacy-safe child-process CPU-time and context-switch
-   aggregates, then preregister and collect a fresh natural cohort.
-2. Collect untouched natural failure sessions before promoting any workflow
-   warning or intervention utility claim.
-3. Harden the plugin SDK boundary with compatibility, rollback, resource, and
-   host-isolation tests.
+1. Cache immutable inference state and move fitting or topology changes to an
+   asynchronous shadow worker.
+2. Measure sustained mixed fallback/neural load against a `250 ms` p95 budget.
+3. Build two host adapters and test identical permissions, timeout, health,
+   unload, and rollback behavior.
 
 The immediate priority is resolving natural-session sensitivity while keeping
 the plugin read-mostly and evidence-gated.

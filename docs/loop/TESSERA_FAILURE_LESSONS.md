@@ -26,6 +26,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F036 | two isolated slow sessions could be miscast as a second operating mode | require recurrent signatures in chronological discovery and validation; otherwise keep calibration frozen | tail-mode recurrence audit |
 | F037 | broad host load correlated with routine latency but not the problematic tail | require tail-specific replicated association; instrument subprocess startup and I/O wait next | aggregate context attribution gate |
 | F038 | spawn timing and aggregate disk I/O did not explain the remaining tail | use higher-resolution privacy-safe child execution aggregates and preserve calibration | mechanism attribution gate |
+| F039 | permission declarations alone did not contain plugin crashes, hangs, or lifecycle risk | enforce a supervised fail-closed subprocess boundary and retain latency as a production blocker | plugin readiness gate |
 
 ## Lessons Law
 

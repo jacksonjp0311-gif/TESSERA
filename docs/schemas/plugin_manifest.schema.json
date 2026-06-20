@@ -2,13 +2,17 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Tessera Plugin Manifest",
   "type": "object",
-  "required": ["schema", "name", "version", "deterministic_mode", "permissions", "claim_boundary"],
+  "required": ["schema", "name", "version", "deterministic_mode", "execution_model", "health_schema", "supports_hard_timeout", "supports_unload", "permissions", "claim_boundary"],
   "properties": {
-    "schema": {"const": "TESSERA-PLUGIN-MANIFEST-v0.1"},
+    "schema": {"const": "TESSERA-PLUGIN-MANIFEST-v0.2"},
     "name": {"type": "string"},
     "version": {"type": "string"},
     "deterministic_mode": {"type": "boolean"},
     "event_schema": {"type": "string"},
+    "execution_model": {"const": "host-supervised-local-subprocess"},
+    "health_schema": {"const": "TESSERA-PLUGIN-HEALTH-v0.1"},
+    "supports_hard_timeout": {"const": true},
+    "supports_unload": {"const": true},
     "permissions": {
       "type": "object",
       "required": [

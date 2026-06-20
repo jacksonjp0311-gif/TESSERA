@@ -63,6 +63,9 @@ FEATURE_FILES = [
     "docs/research/EVO024_CONTEXT_ATTRIBUTION_PREREGISTRATION.json",
     "docs/research/SUBPROCESS_IO_MECHANISM_ATTRIBUTION_2026-06-20.md",
     "docs/research/EVO025_MECHANISM_ATTRIBUTION_PREREGISTRATION.json",
+    "docs/research/PLUGIN_RUNTIME_CONTAINMENT_2026-06-20.md",
+    "src/tessera/plugin/supervisor.py",
+    "src/tessera/experiments/plugin_readiness.py",
     "scripts/telemetry/probe.py",
     "outputs/evidence/evo020/clean_calibration.json",
     "outputs/evidence/evo020/controlled_confirmation.json",
@@ -81,6 +84,7 @@ FEATURE_FILES = [
     "outputs/evidence/evo024/context_attribution.json",
     "outputs/evidence/evo025/fresh_mechanism_cohort.json",
     "outputs/evidence/evo025/mechanism_attribution.json",
+    "outputs/evidence/evo026/plugin_readiness.json",
     "src/tessera/rhp/core.py", "scripts/validation/validate_rhp_nexus.py",
 ]
 

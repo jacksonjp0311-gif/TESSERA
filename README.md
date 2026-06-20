@@ -79,6 +79,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Several locally calibrated sensors can still over-warn together. | Calibrate the combined session decision when one host action follows multiple phase tests. |
 | Low false-warning rates can hide weak sensitivity. | Preregister effect-size response tests and report the minimum detectable perturbation separately. |
 | A mechanism-adjacent sensor can still be too coarse. | Require replicated tail-specific association; preserve calibration while testing higher-resolution privacy-safe execution aggregates. |
+| Permission declarations are not runtime isolation. | Production-facing inference must be supervised, time-bounded, fail-closed, unloadable, and adversarially tested. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -364,6 +365,14 @@ chronological correlation and tail-support gates. MIRROR spawn association
 weakened from `0.537` in discovery to `0.257` in validation, and aggregate disk
 time was usually zero. Mechanism-conditioned calibration was rejected; the
 next bounded sensor target is child CPU time and context-switch aggregates.
+
+EVO-026 hardened the plugin boundary with a persistent supervised subprocess,
+hard timeout, crash containment, circuit breaker, numeric input budgets, health
+reporting, and unload behavior. All six local containment probes passed with
+zero unauthorized host mutations. Persistent-worker reuse reduced warm p95
+from approximately `3.65 s` to `1.13 s`, but that remains above the declared
+`250 ms` production budget. Containment is promoted; production-candidate
+status is not.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

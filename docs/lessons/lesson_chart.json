@@ -457,6 +457,18 @@
       "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
       "authority_boundary": "Mechanism rejection does not identify causes or authorize host action.",
       "status": "promoted"
+    },
+    {
+      "id": "F039",
+      "observed_event": "Permission declarations did not prevent plugin crashes or hangs from reaching the host boundary, and disposable isolation imposed multi-second latency.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-026-final-evidence.json",
+      "wound_class": "declared_permissions_without_runtime_containment",
+      "diagnosis": "A production plugin needs enforceable process isolation, lifecycle controls, failure closure, and measured budgets in addition to a manifest.",
+      "lesson": "Permission schemas describe intent; supervised execution and adversarial probes enforce the host boundary.",
+      "future_behavior_change": "All production-facing plugin paths use a supervised fail-closed runtime, and production status remains blocked until latency and integration gates pass.",
+      "validation_gate": "src/tessera/experiments/plugin_readiness.py",
+      "authority_boundary": "Containment does not establish production readiness or authorize host mutation.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

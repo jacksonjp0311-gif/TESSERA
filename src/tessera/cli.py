@@ -471,6 +471,23 @@ def cmd_trajectory_evo025(args):
     print(f"Results: {out_path}")
 
 
+def cmd_plugin_readiness(args):
+    from tessera.experiments.plugin_readiness import (
+        run_plugin_readiness_probe,
+    )
+
+    result = run_plugin_readiness_probe()
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "metrics": result["metrics"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -769,6 +786,15 @@ def main(argv=None):
         default="outputs/evidence/evo025/mechanism_attribution.json",
     )
     evo025.set_defaults(func=cmd_trajectory_evo025)
+    readiness = sub.add_parser(
+        "plugin-readiness",
+        help="Run the local plugin failure-containment readiness probe.",
+    )
+    readiness.add_argument(
+        "--out",
+        default="outputs/evidence/evo026/plugin_readiness.json",
+    )
+    readiness.set_defaults(func=cmd_plugin_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

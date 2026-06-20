@@ -16,6 +16,7 @@ proposals.
 - `contracts.py`
 - `trajectory.py`
 - `runtime.py`
+- `supervisor.py`
 - `docs/schemas/plugin_manifest.schema.json`
 
 ## Invariants
@@ -25,10 +26,16 @@ proposals.
   topology mutation, and external API calls are denied by default.
 - Repair proposals remain shadow-only.
 - Replay never authorizes promotion by itself.
+- Production-facing inference runs behind a supervised local subprocess.
+- Crashes and hard timeouts fail closed and emit no proposals.
+- Repeated failures open a circuit breaker.
+- Unload clears buffered events and permanently closes that runtime instance.
 - Operational prediction may use a normal-history-selected causal expert while
   neural field loss remains separately visible for anomaly awareness.
 
 ## Claim Boundary
 
-This is a local prototype. It is not validated agent capability, production
-readiness, autonomous authority, or a replacement language model.
+The containment boundary is locally validated, but latency, host compatibility,
+load, signing, security review, and natural agent utility still block
+production readiness. This is not autonomous authority or a replacement
+language model.

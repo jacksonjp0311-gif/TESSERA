@@ -63,6 +63,9 @@
     "docs/research/EVO024_CONTEXT_ATTRIBUTION_PREREGISTRATION.json",
     "docs/research/SUBPROCESS_IO_MECHANISM_ATTRIBUTION_2026-06-20.md",
     "docs/research/EVO025_MECHANISM_ATTRIBUTION_PREREGISTRATION.json",
+    "docs/research/PLUGIN_RUNTIME_CONTAINMENT_2026-06-20.md",
+    "src/tessera/plugin/supervisor.py",
+    "src/tessera/experiments/plugin_readiness.py",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

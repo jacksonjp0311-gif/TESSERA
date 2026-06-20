@@ -1,0 +1,37 @@
+{
+  "schema": "TESSERA-EVO-026-PLUGIN-READINESS-v0.1",
+  "checks": {
+    "normal_inference_subprocess_success": true,
+    "worker_crash_contained": true,
+    "circuit_breaker_fail_closed": true,
+    "hard_timeout_contained": true,
+    "nonfinite_telemetry_rejected": true,
+    "unload_fails_closed": true
+  },
+  "passed": true,
+  "containment_gate_passed": true,
+  "production_latency_gate_passed": false,
+  "production_candidate": false,
+  "metrics": {
+    "normal_inference_trials": 3,
+    "normal_inference_success_rate": 1.0,
+    "latency_ms_p50": 1171.663199987961,
+    "latency_ms_p95": 2984.5518300076947,
+    "cold_start_latency_ms": 3185.9839000098873,
+    "warm_latency_ms_p95": 1114.7599249889026,
+    "production_latency_budget_ms": 250.0,
+    "crash_containment_rate": 1.0,
+    "timeout_containment_rate": 1.0,
+    "unauthorized_host_mutations": 0
+  },
+  "remaining_blockers": [
+    "warm inference p95 within the declared 250 ms host budget",
+    "two independent host adapters",
+    "sustained load and soak testing",
+    "package signing and supply-chain verification",
+    "cross-platform subprocess validation",
+    "natural agent-task utility superiority",
+    "external security review"
+  ],
+  "claim_boundary": "Passing this local failure-containment probe is not production readiness, safety certification, or agent utility proof."
+}

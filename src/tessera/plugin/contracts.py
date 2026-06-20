@@ -35,11 +35,15 @@ class PluginPermissions:
 
 @dataclass(frozen=True)
 class PluginManifest:
-    schema: str = "TESSERA-PLUGIN-MANIFEST-v0.1"
+    schema: str = "TESSERA-PLUGIN-MANIFEST-v0.2"
     name: str = "tessera-neural-sidecar"
-    version: str = "0.1.0"
+    version: str = "0.2.0"
     deterministic_mode: bool = True
     event_schema: str = "TESSERA-AGENT-EVENT-v0.1"
+    execution_model: str = "host-supervised-local-subprocess"
+    health_schema: str = "TESSERA-PLUGIN-HEALTH-v0.1"
+    supports_hard_timeout: bool = True
+    supports_unload: bool = True
     permissions: PluginPermissions = field(default_factory=PluginPermissions)
     claim_boundary: str = (
         "The plugin provides local inference and proposals only; the host retains "
@@ -112,3 +116,37 @@ class ReplayCertificate:
     observed_prediction_loss: float
     memory_promotion_authorized: bool = False
     live_repair_authorized: bool = False
+
+
+@dataclass(frozen=True)
+class RuntimeBudget:
+    timeout_ms: int = 30_000
+    max_events: int = 512
+    max_feature_count: int = 32
+    max_metadata_count: int = 16
+    max_consecutive_failures: int = 3
+
+
+@dataclass(frozen=True)
+class RuntimeHealth:
+    schema: str
+    status: str
+    lifecycle: str
+    consecutive_failures: int
+    total_requests: int
+    successful_requests: int
+    timed_out_requests: int
+    failed_requests: int
+    last_latency_ms: float
+    circuit_open: bool
+    claim_boundary: str
+
+
+@dataclass(frozen=True)
+class RuntimeResult:
+    status: str
+    packet: InferencePacket | None
+    latency_ms: float
+    error_code: str | None
+    host_contained: bool
+    claim_boundary: str
