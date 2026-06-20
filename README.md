@@ -77,6 +77,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | An adequate sensor can still be wasted by the wrong router. | Phase-semantic telemetry is handled by a separately calibrated bounded specialist before integration. |
 | Shared phase names do not make workflows exchangeable. | Specialists require finite-sample normal support and a matching privacy-safe workflow profile; otherwise they abstain. |
 | Several locally calibrated sensors can still over-warn together. | Calibrate the combined session decision when one host action follows multiple phase tests. |
+| Low false-warning rates can hide weak sensitivity. | Preregister effect-size response tests and report the minimum detectable perturbation separately. |
 
 Current evidence says: Tessera has two supported real-telemetry T1 families
 (NAB and UCR), one rejected NASA transfer branch, and no general transfer claim.
@@ -334,6 +335,13 @@ independent score-calibration sessions to calibrate one maximum cross-phase
 score. On eight untouched clean sessions it achieved `1.0` coverage and `0.0`
 warnings. Two slow valid calibration runs made the gate highly conservative,
 so natural failure sensitivity remains unmeasured and unsupported.
+
+EVO-022 preregistered an offline delay ladder against the frozen natural
+workflow specialist. Response was monotonic and zero-delay warnings remained
+`0`, but full detection required `200 ms` of added REHYDRATE latency and
+`250 ms` for MIRROR and GEOMETRY. No phase responded at `150 ms` or below.
+This maps coarse detector sensitivity; injected delays are not natural
+failures.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

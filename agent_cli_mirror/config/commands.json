@@ -578,6 +578,29 @@
         }
       ]
     },
+    "trajectory-evo022": {
+      "purpose": "Run the preregistered offline delay-response ladder for the calibrated natural validation workflow.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-022 perturbation response ladder",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-evo022",
+            "--base-cohort",
+            "outputs/evidence/evo021/natural_session_confirmation.json",
+            "--calibration",
+            "outputs/evidence/evo021/frozen_session_calibration.json",
+            "--preregistration",
+            "docs/research/EVO022_PERTURBATION_PREREGISTRATION.json",
+            "--out",
+            "outputs/evidence/evo022/perturbation_response.json"
+          ]
+        }
+      ]
+    },
     "telemetry-probe-clean": {
       "purpose": "Generate one privacy-safe enriched clean telemetry session.",
       "steps": [

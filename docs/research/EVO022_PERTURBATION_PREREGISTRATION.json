@@ -1,0 +1,38 @@
+{
+  "schema": "TESSERA-EVO-022-PERTURBATION-PREREGISTRATION-v0.1",
+  "operation": "TESSERA-EVO-022",
+  "base_cohort": "outputs/evidence/evo021/natural_session_confirmation.json",
+  "frozen_calibration": "outputs/evidence/evo021/frozen_session_calibration.json",
+  "target_phases": [
+    "MIRROR",
+    "REHYDRATE",
+    "GEOMETRY"
+  ],
+  "delay_ladder_ms": [
+    0,
+    25,
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "primary_metrics": [
+    "detection_rate_by_phase_and_delay",
+    "minimum_delay_with_full_detection",
+    "minimum_delay_with_any_detection",
+    "monotonic_response"
+  ],
+  "promotion_gate": {
+    "zero_delay_warning_rate_max": 0.05,
+    "monotonic_response_required": true,
+    "full_detection_required_by_ms": 250
+  },
+  "prohibited_interpretations": [
+    "natural failure recall",
+    "production incident prediction",
+    "causal failure diagnosis",
+    "host intervention authority"
+  ],
+  "claim_boundary": "Deterministic offline delay injection measures response of a frozen diagnostic rule only; injected delays are not natural failures."
+}

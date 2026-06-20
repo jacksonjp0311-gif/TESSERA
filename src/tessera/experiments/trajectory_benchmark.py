@@ -4,6 +4,7 @@ import hashlib
 import json
 import math
 import time
+from copy import deepcopy
 from dataclasses import asdict, dataclass
 
 import numpy as np
@@ -593,6 +594,144 @@ def run_evo021_natural_clean_benchmark(
             "Natural clean session shadow measures profile coverage and "
             "false-warning behavior only; failure sensitivity remains "
             "unmeasured."
+        ),
+    }
+
+
+def inject_phase_delay(
+    events: list[AgentEvent],
+    *,
+    phase: str,
+    delay_ms: float,
+) -> list[AgentEvent]:
+    """Return a copied trajectory with delay added to one completed phase."""
+    target_phase = phase.upper()
+    injected = False
+    result = []
+    for event in events:
+        features = deepcopy(event.features)
+        metadata = deepcopy(event.metadata)
+        if (
+            not injected
+            and str(metadata.get("phase", "")).upper() == target_phase
+            and str(metadata.get("state", "")).upper() == "OK"
+            and float(features.get("duration_ms", 0.0)) > 0.0
+        ):
+            features["duration_ms"] = (
+                float(features["duration_ms"]) + float(delay_ms)
+            )
+            injected = True
+        result.append(
+            AgentEvent(
+                event_id=event.event_id,
+                kind=event.kind,
+                timestamp=event.timestamp,
+                features=features,
+                metadata=metadata,
+                contains_sensitive_data=event.contains_sensitive_data,
+            )
+        )
+    if not injected:
+        raise ValueError(f"completed phase not found for injection: {phase}")
+    return result
+
+
+def run_evo022_perturbation_ladder(
+    base_cohort_path: str,
+    calibration_path: str,
+    preregistration_path: str,
+) -> dict:
+    from pathlib import Path
+
+    base = load_trajectory_cohort(base_cohort_path)
+    calibration = json.loads(
+        Path(calibration_path).read_text(encoding="utf-8")
+    )
+    plan = json.loads(
+        Path(preregistration_path).read_text(encoding="utf-8")
+    )
+    phase_rows = []
+    for phase in plan["target_phases"]:
+        delay_rows = []
+        previous_rate = -1.0
+        monotonic = True
+        for delay_ms in plan["delay_ladder_ms"]:
+            perturbed = [
+                (
+                    inject_phase_delay(
+                        events,
+                        phase=phase,
+                        delay_ms=float(delay_ms),
+                    ),
+                    degraded,
+                )
+                for events, degraded in base
+            ]
+            evaluation = evaluate_workflow_session_specialist(
+                perturbed, calibration
+            )
+            rate = float(evaluation["warning_rate"])
+            monotonic = monotonic and rate >= previous_rate
+            previous_rate = rate
+            delay_rows.append(
+                {
+                    "delay_ms": delay_ms,
+                    "detection_rate": rate,
+                    "coverage": evaluation["coverage"],
+                    "detected_count": sum(
+                        row["warning"] for row in evaluation["rows"]
+                    ),
+                    "trajectory_count": evaluation["trajectory_count"],
+                }
+            )
+        any_delays = [
+            row["delay_ms"]
+            for row in delay_rows
+            if row["detection_rate"] > 0.0
+        ]
+        full_delays = [
+            row["delay_ms"]
+            for row in delay_rows
+            if row["detection_rate"] == 1.0
+        ]
+        phase_rows.append(
+            {
+                "phase": phase,
+                "monotonic_response": monotonic,
+                "minimum_delay_with_any_detection": (
+                    min(any_delays) if any_delays else None
+                ),
+                "minimum_delay_with_full_detection": (
+                    min(full_delays) if full_delays else None
+                ),
+                "ladder": delay_rows,
+            }
+        )
+    zero_delay_rates = [
+        row["ladder"][0]["detection_rate"] for row in phase_rows
+    ]
+    gate = plan["promotion_gate"]
+    passed = (
+        max(zero_delay_rates, default=1.0)
+        <= float(gate["zero_delay_warning_rate_max"])
+        and all(row["monotonic_response"] for row in phase_rows)
+        and all(
+            row["minimum_delay_with_full_detection"] is not None
+            and row["minimum_delay_with_full_detection"]
+            <= int(gate["full_detection_required_by_ms"])
+            for row in phase_rows
+        )
+    )
+    return {
+        "schema": "TESSERA-EVO-022-PERTURBATION-RESPONSE-v0.1",
+        "preregistration": plan,
+        "base_trajectory_count": len(base),
+        "calibration_schema": calibration.get("schema"),
+        "phase_results": phase_rows,
+        "promotion_gate_passed": passed,
+        "claim_boundary": (
+            "Offline deterministic delay response is not natural failure "
+            "recall, production prediction, or intervention authority."
         ),
     }
 

@@ -1,0 +1,218 @@
+{
+  "schema": "TESSERA-EVO-022-PERTURBATION-RESPONSE-v0.1",
+  "preregistration": {
+    "schema": "TESSERA-EVO-022-PERTURBATION-PREREGISTRATION-v0.1",
+    "operation": "TESSERA-EVO-022",
+    "base_cohort": "outputs/evidence/evo021/natural_session_confirmation.json",
+    "frozen_calibration": "outputs/evidence/evo021/frozen_session_calibration.json",
+    "target_phases": [
+      "MIRROR",
+      "REHYDRATE",
+      "GEOMETRY"
+    ],
+    "delay_ladder_ms": [
+      0,
+      25,
+      50,
+      100,
+      150,
+      200,
+      250
+    ],
+    "primary_metrics": [
+      "detection_rate_by_phase_and_delay",
+      "minimum_delay_with_full_detection",
+      "minimum_delay_with_any_detection",
+      "monotonic_response"
+    ],
+    "promotion_gate": {
+      "zero_delay_warning_rate_max": 0.05,
+      "monotonic_response_required": true,
+      "full_detection_required_by_ms": 250
+    },
+    "prohibited_interpretations": [
+      "natural failure recall",
+      "production incident prediction",
+      "causal failure diagnosis",
+      "host intervention authority"
+    ],
+    "claim_boundary": "Deterministic offline delay injection measures response of a frozen diagnostic rule only; injected delays are not natural failures."
+  },
+  "base_trajectory_count": 8,
+  "calibration_schema": "TESSERA-WORKFLOW-SESSION-CALIBRATION-v0.1",
+  "phase_results": [
+    {
+      "phase": "MIRROR",
+      "monotonic_response": true,
+      "minimum_delay_with_any_detection": 250,
+      "minimum_delay_with_full_detection": 250,
+      "ladder": [
+        {
+          "delay_ms": 0,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 25,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 50,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 100,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 150,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 200,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 250,
+          "detection_rate": 1.0,
+          "coverage": 1.0,
+          "detected_count": 8,
+          "trajectory_count": 8
+        }
+      ]
+    },
+    {
+      "phase": "REHYDRATE",
+      "monotonic_response": true,
+      "minimum_delay_with_any_detection": 200,
+      "minimum_delay_with_full_detection": 200,
+      "ladder": [
+        {
+          "delay_ms": 0,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 25,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 50,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 100,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 150,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 200,
+          "detection_rate": 1.0,
+          "coverage": 1.0,
+          "detected_count": 8,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 250,
+          "detection_rate": 1.0,
+          "coverage": 1.0,
+          "detected_count": 8,
+          "trajectory_count": 8
+        }
+      ]
+    },
+    {
+      "phase": "GEOMETRY",
+      "monotonic_response": true,
+      "minimum_delay_with_any_detection": 250,
+      "minimum_delay_with_full_detection": 250,
+      "ladder": [
+        {
+          "delay_ms": 0,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 25,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 50,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 100,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 150,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 200,
+          "detection_rate": 0.0,
+          "coverage": 1.0,
+          "detected_count": 0,
+          "trajectory_count": 8
+        },
+        {
+          "delay_ms": 250,
+          "detection_rate": 1.0,
+          "coverage": 1.0,
+          "detected_count": 8,
+          "trajectory_count": 8
+        }
+      ]
+    }
+  ],
+  "promotion_gate_passed": true,
+  "claim_boundary": "Offline deterministic delay response is not natural failure recall, production prediction, or intervention authority."
+}

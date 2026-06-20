@@ -410,6 +410,115 @@ class TestEvo13TrajectoryAdapters(unittest.TestCase):
         self.assertFalse(abstained)
         self.assertTrue(evidence[-1]["exceeded"])
 
+    def test_phase_delay_injection_preserves_profile(self):
+        from tessera.experiments.trajectory_benchmark import (
+            inject_phase_delay,
+            trajectory_profile,
+        )
+
+        events = [
+            AgentEvent(
+                "geometry",
+                "plan_transition",
+                1.0,
+                {"duration_ms": 100.0},
+                metadata={"phase": "GEOMETRY", "state": "OK"},
+            )
+        ]
+        perturbed = inject_phase_delay(
+            events, phase="GEOMETRY", delay_ms=50.0
+        )
+        self.assertEqual(trajectory_profile(events), trajectory_profile(perturbed))
+        self.assertEqual(perturbed[0].features["duration_ms"], 150.0)
+        self.assertEqual(events[0].features["duration_ms"], 100.0)
+
+    def test_perturbation_ladder_is_monotonic_and_bounded(self):
+        import tempfile
+        from pathlib import Path
+
+        from tessera.experiments.trajectory_benchmark import (
+            archive_trajectory_cohort,
+            calibrate_workflow_session_policy,
+            load_trajectory_cohort,
+            run_evo022_perturbation_ladder,
+        )
+
+        records = []
+        for session in range(40):
+            for index, (phase, duration) in enumerate(
+                (("MIRROR", 80.0), ("REHYDRATE", 130.0), ("GEOMETRY", 140.0))
+            ):
+                records.append(
+                    {
+                        "schema": "fixture",
+                        "timestamp": (
+                            f"2026-06-20T00:{session:02d}:{index:02d}+00:00"
+                        ),
+                        "phase": phase,
+                        "state": "OK",
+                        "session_id": f"session-{session}",
+                        "event_index": index + 1,
+                        "elapsed_ms": duration + session % 3,
+                        "exit_code": 0,
+                    }
+                )
+            for index in range(6):
+                records.append(
+                    {
+                        "schema": "fixture",
+                        "timestamp": (
+                            f"2026-06-20T00:{session:02d}:{index + 3:02d}+00:00"
+                        ),
+                        "phase": "LOOPBOOK",
+                        "state": "RUN",
+                        "session_id": f"session-{session}",
+                        "event_index": index + 4,
+                        "elapsed_ms": 0,
+                        "exit_code": 0,
+                    }
+                )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "events.jsonl"
+            cohort = root / "cohort.json"
+            calibration_path = root / "calibration.json"
+            plan_path = root / "plan.json"
+            source.write_text(
+                "\n".join(json.dumps(record) for record in records),
+                encoding="utf-8",
+            )
+            archived = archive_trajectory_cohort(
+                str(source),
+                str(cohort),
+                role="fixture",
+                minimum_prefix=9,
+            )
+            trajectories = load_trajectory_cohort(str(cohort))
+            calibration_path.write_text(
+                json.dumps(calibrate_workflow_session_policy(trajectories)),
+                encoding="utf-8",
+            )
+            plan_path.write_text(
+                json.dumps(
+                    {
+                        "target_phases": ["REHYDRATE"],
+                        "delay_ladder_ms": [0, 100, 250],
+                        "promotion_gate": {
+                            "zero_delay_warning_rate_max": 0.05,
+                            "monotonic_response_required": True,
+                            "full_detection_required_by_ms": 250,
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            result = run_evo022_perturbation_ladder(
+                str(cohort), str(calibration_path), str(plan_path)
+            )
+        self.assertEqual(archived["trajectory_count"], 40)
+        self.assertTrue(result["phase_results"][0]["monotonic_response"])
+        self.assertTrue(result["promotion_gate_passed"])
+
 
 class TestEvo13RepairAblation(unittest.TestCase):
     """EVO-013: Phase 3 — Replay-guided shadow repair ablation."""

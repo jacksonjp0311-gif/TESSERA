@@ -382,6 +382,26 @@ def cmd_trajectory_evo021(args):
     print(f"Results: {out_path}")
 
 
+def cmd_trajectory_evo022(args):
+    from tessera.experiments.trajectory_benchmark import (
+        run_evo022_perturbation_ladder,
+    )
+
+    result = run_evo022_perturbation_ladder(
+        args.base_cohort,
+        args.calibration,
+        args.preregistration,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "promotion_gate_passed": result["promotion_gate_passed"],
+        "phase_results": result["phase_results"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -635,6 +655,18 @@ def main(argv=None):
         default="outputs/evidence/evo021/natural_session_shadow_report.json",
     )
     evo021.set_defaults(func=cmd_trajectory_evo021)
+    evo022 = sub.add_parser(
+        "trajectory-evo022",
+        help="Run the preregistered offline natural-profile delay ladder.",
+    )
+    evo022.add_argument("--base-cohort", required=True)
+    evo022.add_argument("--calibration", required=True)
+    evo022.add_argument("--preregistration", required=True)
+    evo022.add_argument(
+        "--out",
+        default="outputs/evidence/evo022/perturbation_response.json",
+    )
+    evo022.set_defaults(func=cmd_trajectory_evo022)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

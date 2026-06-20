@@ -1,0 +1,64 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.22",
+  "operation": "TESSERA-EVO-022",
+  "previous_operation": "TESSERA-EVO-021",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "3eb77ad2cfb74deb76798e80b0447f6a4e55baa1",
+  "state_after_validation": "NATURAL_PROFILE_PERTURBATION_RESPONSE_MAPPED_COARSE_SENSITIVITY",
+  "implemented": [
+    "preregistered offline delay perturbation ladder",
+    "profile-preserving phase delay injection",
+    "frozen calibration response evaluation",
+    "monotonic response gate",
+    "detectable effect-size reporting"
+  ],
+  "finding": "The natural validation specialist responds monotonically but only to large injected delays: full response at 200 ms for REHYDRATE and 250 ms for MIRROR and GEOMETRY.",
+  "decision": "Support coarse perturbation response mapping only. Do not claim natural failure recall or sensitivity to modest degradation.",
+  "metrics": {
+    "base_trajectory_count": 8,
+    "zero_delay_warning_rate": 0.0,
+    "monotonic_response_all_phases": true,
+    "mirror_minimum_full_detection_delay_ms": 250,
+    "rehydrate_minimum_full_detection_delay_ms": 200,
+    "geometry_minimum_full_detection_delay_ms": 250,
+    "detection_rate_at_150_ms_all_phases": 0.0,
+    "promotion_gate_passed": true,
+    "natural_failure_recall_measured": false,
+    "host_warnings_emitted": 0,
+    "host_interventions": 0
+  },
+  "artifacts": {
+    "preregistration": {
+      "path": "docs/research/EVO022_PERTURBATION_PREREGISTRATION.json",
+      "sha256": "77770c17bb80387e54b7413c2dbac37188fff25cd8f17900b0586abfb4236bed"
+    },
+    "response": {
+      "path": "outputs/evidence/evo022/perturbation_response.json",
+      "sha256": "dccaefee58c37eb588c40420cd2057142b2ef541ed723113e5370f1c77c14cce"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 85,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "agent_cli_contract_gate": true,
+    "operator_geometry_gate": true,
+    "architecture_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 2,
+    "deterministic_response_report": true
+  },
+  "next_recommended_operation": "separate_operational_tail_modes_before_recalibrating_sensitivity",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Injected delay response is not natural failure recall, production incident prediction, causal diagnosis, consciousness, or autonomous authority."
+}

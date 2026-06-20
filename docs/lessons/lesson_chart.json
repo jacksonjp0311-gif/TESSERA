@@ -409,6 +409,18 @@
       "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
       "authority_boundary": "Clean false-warning control does not imply natural failure sensitivity or authorize host action.",
       "status": "promoted"
+    },
+    {
+      "id": "F035",
+      "observed_event": "The preregistered natural-profile delay ladder detected no injected delay at 150 ms or below and required 200-250 ms for full response.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-022-final-evidence.json",
+      "wound_class": "tail_dominated_coarse_sensitivity",
+      "diagnosis": "Slow valid calibration sessions inflated the session score threshold and protected specificity at the cost of moderate-delay sensitivity.",
+      "lesson": "Specificity and sensitivity must be reported separately; passing a coarse perturbation gate does not establish useful incident detection.",
+      "future_behavior_change": "Before recalibration, investigate privacy-safe operational modes and validate any mode split on later clean sessions.",
+      "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
+      "authority_boundary": "Perturbation response does not authorize natural failure claims, host warnings, or interventions.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

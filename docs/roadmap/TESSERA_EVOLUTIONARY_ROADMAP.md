@@ -439,6 +439,18 @@ The next gate preregisters a bounded perturbation ladder for this exact profile
 to measure detectable delay magnitude without calling synthetic perturbations
 natural failures.
 
+### Phase 4 diagnostic — TESSERA-EVO-022
+
+A preregistered delay ladder preserved the natural workflow profile while
+adding `0` through `250 ms` to one completed phase. The frozen session gate
+responded monotonically, with zero warnings at zero delay.
+
+Full response required `200 ms` for REHYDRATE and `250 ms` for MIRROR and
+GEOMETRY. No response occurred at `150 ms` or below. The specialist therefore
+has coarse latency sensitivity. The next gate investigates whether the slow
+clean tail contains distinct privacy-safe operational modes before any
+recalibration.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.

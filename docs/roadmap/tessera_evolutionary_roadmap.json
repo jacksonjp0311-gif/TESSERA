@@ -35,6 +35,14 @@
     "natural_clean_confirmation_warning_rate": 0.0,
     "session_level_conformal_gate": true,
     "natural_failure_sensitivity_measured": false,
+    "perturbation_response_mapped": true,
+    "perturbation_response_monotonic": true,
+    "minimum_full_detection_delay_ms": {
+      "MIRROR": 250,
+      "REHYDRATE": 200,
+      "GEOMETRY": 250
+    },
+    "moderate_delay_sensitivity_supported": false,
     "natural_session_shadow_validation_supported": false,
     "phase_1_passed": true,
     "latest_multi_seed_auc_mean": 0.8068148148148148,
@@ -96,8 +104,8 @@
     "evaluate a third clean benchmark family before Phase 2 completion",
     "run an offline agent-trajectory utility benchmark against non-neural memory controls",
     "repair shadow-ablation winner selection so wrong-target repair cannot be promoted by prediction loss alone",
-    "preregister a bounded delay perturbation ladder for the calibrated natural profile",
-    "measure detectable effect size without claiming natural failure recall",
+    "separate repeatable privacy-safe operational tail modes before recalibration",
+    "validate any proposed mode split on later clean sessions",
     "wait for or separately collect untouched natural incidents before utility promotion",
     "measure natural-session coverage, drift, warnings, memory retention, and abstention",
     "design a separate command-conditioned relational branch for NASA telemetry"
