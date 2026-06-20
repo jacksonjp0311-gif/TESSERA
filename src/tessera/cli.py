@@ -402,6 +402,27 @@ def cmd_trajectory_evo022(args):
     print(f"Results: {out_path}")
 
 
+def cmd_trajectory_evo023(args):
+    from tessera.experiments.trajectory_benchmark import (
+        run_evo023_mode_audit,
+    )
+
+    result = run_evo023_mode_audit(
+        args.cohort,
+        args.preregistration,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "mode_separation_supported": result["mode_separation_supported"],
+        "accepted_mode_count": result["accepted_mode_count"],
+        "candidate_signatures": result["candidate_signatures"],
+        "decision": result["decision"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -667,6 +688,17 @@ def main(argv=None):
         default="outputs/evidence/evo022/perturbation_response.json",
     )
     evo022.set_defaults(func=cmd_trajectory_evo022)
+    evo023 = sub.add_parser(
+        "trajectory-evo023",
+        help="Audit recurrence of privacy-safe natural workflow tail modes.",
+    )
+    evo023.add_argument("--cohort", required=True)
+    evo023.add_argument("--preregistration", required=True)
+    evo023.add_argument(
+        "--out",
+        default="outputs/evidence/evo023/mode_audit.json",
+    )
+    evo023.set_defaults(func=cmd_trajectory_evo023)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

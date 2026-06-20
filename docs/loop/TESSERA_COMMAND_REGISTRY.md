@@ -34,6 +34,7 @@ Every operational command must be documented here and mirrored in the README whe
 | `python -m tessera trajectory-evo020 --calibration ... --confirmation ... --natural-shadow ...` | Run finite-sample calibration, controlled confirmation, and read-only natural workflow shadow evaluation. |
 | `python -m tessera trajectory-evo021 --calibration outputs/evidence/evo021/natural_split_calibration.json --confirmation outputs/evidence/evo021/natural_session_confirmation.json` | Reproduce split-conformal session-level clean shadow evaluation for the natural validation workflow. |
 | `python -m tessera trajectory-evo022 --base-cohort outputs/evidence/evo021/natural_session_confirmation.json --calibration outputs/evidence/evo021/frozen_session_calibration.json --preregistration docs/research/EVO022_PERTURBATION_PREREGISTRATION.json` | Run the preregistered offline delay-response ladder without interpreting injected delays as natural failures. |
+| `python -m tessera trajectory-evo023 --cohort outputs/evidence/evo021/natural_split_calibration.json --preregistration docs/research/EVO023_MODE_AUDIT_PREREGISTRATION.json` | Audit whether privacy-safe slow-tail signatures recur strongly enough to justify separate operational modes. |
 | `python -m tessera.rhp summary --root .` | Print the canonical current-version summary: changes, findings, bounds, and next move. |
 | `python -m tessera.operator_geometry validate` | Low-level operator geometry validator. |
 | `.\scripts\tessera-agent.ps1` | Universal PowerShell Agent CLI entrypoint. |

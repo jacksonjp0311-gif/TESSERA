@@ -43,6 +43,9 @@
       "GEOMETRY": 250
     },
     "moderate_delay_sensitivity_supported": false,
+    "operational_tail_mode_audited": true,
+    "operational_tail_mode_supported": false,
+    "calibration_preserved_after_mode_rejection": true,
     "natural_session_shadow_validation_supported": false,
     "phase_1_passed": true,
     "latest_multi_seed_auc_mean": 0.8068148148148148,
@@ -104,8 +107,8 @@
     "evaluate a third clean benchmark family before Phase 2 completion",
     "run an offline agent-trajectory utility benchmark against non-neural memory controls",
     "repair shadow-ablation winner selection so wrong-target repair cannot be promoted by prediction loss alone",
-    "separate repeatable privacy-safe operational tail modes before recalibration",
-    "validate any proposed mode split on later clean sessions",
+    "add privacy-safe execution context for fresh tail attribution",
+    "collect fresh sessions before any context-conditioned calibration",
     "wait for or separately collect untouched natural incidents before utility promotion",
     "measure natural-session coverage, drift, warnings, memory retention, and abstention",
     "design a separate command-conditioned relational branch for NASA telemetry"

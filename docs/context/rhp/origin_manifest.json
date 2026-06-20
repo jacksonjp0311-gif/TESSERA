@@ -57,6 +57,8 @@
     "docs/research/NATURAL_CLEAN_SESSION_CALIBRATION_2026-06-20.md",
     "docs/research/NATURAL_PROFILE_PERTURBATION_RESPONSE_2026-06-20.md",
     "docs/research/EVO022_PERTURBATION_PREREGISTRATION.json",
+    "docs/research/NATURAL_TAIL_MODE_AUDIT_2026-06-20.md",
+    "docs/research/EVO023_MODE_AUDIT_PREREGISTRATION.json",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

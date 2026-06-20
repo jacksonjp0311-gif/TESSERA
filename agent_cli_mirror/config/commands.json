@@ -601,6 +601,27 @@
         }
       ]
     },
+    "trajectory-evo023": {
+      "purpose": "Audit whether privacy-safe slow-tail signatures recur strongly enough to justify natural workflow mode separation.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-023 operational mode audit",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-evo023",
+            "--cohort",
+            "outputs/evidence/evo021/natural_split_calibration.json",
+            "--preregistration",
+            "docs/research/EVO023_MODE_AUDIT_PREREGISTRATION.json",
+            "--out",
+            "outputs/evidence/evo023/mode_audit.json"
+          ]
+        }
+      ]
+    },
     "telemetry-probe-clean": {
       "purpose": "Generate one privacy-safe enriched clean telemetry session.",
       "steps": [

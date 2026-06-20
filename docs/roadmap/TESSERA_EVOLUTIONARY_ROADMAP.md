@@ -451,6 +451,16 @@ has coarse latency sensitivity. The next gate investigates whether the slow
 clean tail contains distinct privacy-safe operational modes before any
 recalibration.
 
+### Phase 4 diagnostic — TESSERA-EVO-023
+
+A chronological mode audit required each robust phase-tail signature to recur
+at least three times in both 20-session halves. The GEOMETRY tail appeared
+`0/1`; the REHYDRATE tail appeared `0/1`.
+
+Mode separation was rejected and calibration remained frozen. The next gate
+adds bounded execution-context sensors to fresh sessions so isolated latency
+tails can be attributed without using commands, paths, prompts, or outputs.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.

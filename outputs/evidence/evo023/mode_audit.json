@@ -1,0 +1,75 @@
+{
+  "schema": "TESSERA-EVO-023-MODE-AUDIT-v0.1",
+  "preregistration": {
+    "schema": "TESSERA-EVO-023-MODE-AUDIT-PREREGISTRATION-v0.1",
+    "operation": "TESSERA-EVO-023",
+    "cohort": "outputs/evidence/evo021/natural_split_calibration.json",
+    "chronological_split": {
+      "discovery_sessions": 20,
+      "validation_sessions": 20
+    },
+    "tail_definition": {
+      "robust_score_threshold": 6.0,
+      "minimum_scale_ms": 5.0
+    },
+    "candidate_mode_requirements": {
+      "minimum_discovery_support": 3,
+      "minimum_validation_support": 3,
+      "same_tail_phase_signature_required": true
+    },
+    "decision_rule": "Reject mode separation unless a phase-tail signature satisfies every support and recurrence requirement.",
+    "prohibited_actions": [
+      "remove valid slow sessions from calibration",
+      "lower threshold using confirmation outcomes",
+      "label isolated tail sessions as failures",
+      "claim production incident modes"
+    ],
+    "claim_boundary": "The audit tests recurrence of privacy-safe latency patterns only; it does not diagnose causes or authorize calibration changes."
+  },
+  "discovery_count": 20,
+  "validation_count": 20,
+  "reference": {
+    "GEOMETRY": {
+      "median_ms": 138.90425000863615,
+      "scale_ms": 10.729576197013374
+    },
+    "MIRROR": {
+      "median_ms": 85.39580000797287,
+      "scale_ms": 12.116400246962439
+    },
+    "REHYDRATE": {
+      "median_ms": 137.21470002201386,
+      "scale_ms": 7.820418482436798
+    }
+  },
+  "candidate_signatures": [
+    {
+      "tail_phase_signature": [
+        "GEOMETRY"
+      ],
+      "discovery_support": 0,
+      "validation_support": 1,
+      "discovery_session_ids": [],
+      "validation_session_ids": [
+        "cfb3383bbca7422086370a335efc2f8e"
+      ],
+      "accepted": false
+    },
+    {
+      "tail_phase_signature": [
+        "REHYDRATE"
+      ],
+      "discovery_support": 0,
+      "validation_support": 1,
+      "discovery_session_ids": [],
+      "validation_session_ids": [
+        "9bdf76116fdf452abebf27d60848becf"
+      ],
+      "accepted": false
+    }
+  ],
+  "accepted_mode_count": 0,
+  "mode_separation_supported": false,
+  "decision": "reject_mode_separation_keep_calibration_unchanged",
+  "claim_boundary": "Tail recurrence audit does not identify causes, failures, or production incident classes."
+}

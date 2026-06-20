@@ -519,6 +519,85 @@ class TestEvo13TrajectoryAdapters(unittest.TestCase):
         self.assertTrue(result["phase_results"][0]["monotonic_response"])
         self.assertTrue(result["promotion_gate_passed"])
 
+    def test_mode_audit_rejects_nonrecurring_tail(self):
+        import tempfile
+        from pathlib import Path
+
+        from tessera.experiments.trajectory_benchmark import (
+            archive_trajectory_cohort,
+            run_evo023_mode_audit,
+        )
+
+        records = []
+        for session in range(40):
+            slow = session == 25
+            for index, (phase, duration) in enumerate(
+                (("MIRROR", 80.0), ("REHYDRATE", 130.0), ("GEOMETRY", 140.0))
+            ):
+                records.append(
+                    {
+                        "schema": "fixture",
+                        "timestamp": (
+                            f"2026-06-20T00:{session:02d}:{index:02d}+00:00"
+                        ),
+                        "phase": phase,
+                        "state": "OK",
+                        "session_id": f"session-{session}",
+                        "event_index": index + 1,
+                        "elapsed_ms": (
+                            300.0 if slow and phase == "REHYDRATE"
+                            else duration + session % 3
+                        ),
+                        "exit_code": 0,
+                    }
+                )
+            for index in range(6):
+                records.append(
+                    {
+                        "schema": "fixture",
+                        "timestamp": (
+                            f"2026-06-20T00:{session:02d}:{index + 3:02d}+00:00"
+                        ),
+                        "phase": "LOOPBOOK",
+                        "state": "RUN",
+                        "session_id": f"session-{session}",
+                        "event_index": index + 4,
+                        "elapsed_ms": 0,
+                        "exit_code": 0,
+                    }
+                )
+        plan = {
+            "chronological_split": {"discovery_sessions": 20},
+            "tail_definition": {
+                "robust_score_threshold": 6.0,
+                "minimum_scale_ms": 5.0,
+            },
+            "candidate_mode_requirements": {
+                "minimum_discovery_support": 3,
+                "minimum_validation_support": 3,
+            },
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "events.jsonl"
+            cohort = root / "cohort.json"
+            preregistration = root / "plan.json"
+            source.write_text(
+                "\n".join(json.dumps(record) for record in records),
+                encoding="utf-8",
+            )
+            archive_trajectory_cohort(
+                str(source), str(cohort), role="fixture", minimum_prefix=9
+            )
+            preregistration.write_text(
+                json.dumps(plan), encoding="utf-8"
+            )
+            result = run_evo023_mode_audit(
+                str(cohort), str(preregistration)
+            )
+        self.assertFalse(result["mode_separation_supported"])
+        self.assertEqual(result["accepted_mode_count"], 0)
+
 
 class TestEvo13RepairAblation(unittest.TestCase):
     """EVO-013: Phase 3 — Replay-guided shadow repair ablation."""

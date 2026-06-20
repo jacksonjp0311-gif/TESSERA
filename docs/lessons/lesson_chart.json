@@ -421,6 +421,18 @@
       "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
       "authority_boundary": "Perturbation response does not authorize natural failure claims, host warnings, or interventions.",
       "status": "promoted"
+    },
+    {
+      "id": "F036",
+      "observed_event": "The slow clean tail contained two different one-off phase signatures and no recurrent signature in both chronological halves.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-023-final-evidence.json",
+      "wound_class": "post_hoc_mode_overfit_risk",
+      "diagnosis": "Sparse isolated tail events cannot support a separate operational mode or conditional threshold.",
+      "lesson": "Operational modes require repeated privacy-safe signatures in discovery and later validation; otherwise calibration remains unchanged.",
+      "future_behavior_change": "Tail attribution waits for fresh bounded execution-context telemetry instead of removing or relabeling valid slow sessions.",
+      "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
+      "authority_boundary": "Mode rejection does not identify causes or authorize host action.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

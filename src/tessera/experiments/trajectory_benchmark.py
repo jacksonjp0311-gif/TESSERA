@@ -736,6 +736,118 @@ def run_evo022_perturbation_ladder(
     }
 
 
+def run_evo023_mode_audit(
+    cohort_path: str,
+    preregistration_path: str,
+) -> dict:
+    from pathlib import Path
+
+    trajectories = load_trajectory_cohort(cohort_path)
+    plan = json.loads(
+        Path(preregistration_path).read_text(encoding="utf-8")
+    )
+    split = int(plan["chronological_split"]["discovery_sessions"])
+    discovery = trajectories[:split]
+    validation = trajectories[split:]
+    minimum_scale = float(plan["tail_definition"]["minimum_scale_ms"])
+    threshold = float(plan["tail_definition"]["robust_score_threshold"])
+    phase_names = sorted(
+        set.intersection(
+            *[
+                set(_completed_phase_durations(events))
+                for events, _ in discovery
+            ]
+        )
+    )
+    reference = {}
+    for phase in phase_names:
+        values = np.asarray(
+            [
+                _completed_phase_durations(events)[phase]
+                for events, _ in discovery
+            ],
+            dtype=float,
+        )
+        center = float(np.median(values))
+        mad = float(np.median(np.abs(values - center)))
+        reference[phase] = {
+            "median_ms": center,
+            "scale_ms": max(minimum_scale, 1.4826 * mad),
+        }
+
+    def signature(events: list[AgentEvent]) -> tuple[str, ...]:
+        durations = _completed_phase_durations(events)
+        return tuple(
+            phase
+            for phase in phase_names
+            if (
+                durations[phase] - reference[phase]["median_ms"]
+            ) / reference[phase]["scale_ms"] > threshold
+        )
+
+    def counts(rows):
+        result: dict[tuple[str, ...], int] = {}
+        examples: dict[tuple[str, ...], list[str]] = {}
+        for events, _ in rows:
+            value = signature(events)
+            if not value:
+                continue
+            result[value] = result.get(value, 0) + 1
+            examples.setdefault(value, []).append(
+                events[0].metadata.get("session_id", "")
+            )
+        return result, examples
+
+    discovery_counts, discovery_examples = counts(discovery)
+    validation_counts, validation_examples = counts(validation)
+    min_discovery = int(
+        plan["candidate_mode_requirements"]["minimum_discovery_support"]
+    )
+    min_validation = int(
+        plan["candidate_mode_requirements"]["minimum_validation_support"]
+    )
+    signatures = sorted(
+        set(discovery_counts) | set(validation_counts)
+    )
+    candidates = []
+    for value in signatures:
+        discovery_support = discovery_counts.get(value, 0)
+        validation_support = validation_counts.get(value, 0)
+        candidates.append(
+            {
+                "tail_phase_signature": list(value),
+                "discovery_support": discovery_support,
+                "validation_support": validation_support,
+                "discovery_session_ids": discovery_examples.get(value, []),
+                "validation_session_ids": validation_examples.get(value, []),
+                "accepted": (
+                    discovery_support >= min_discovery
+                    and validation_support >= min_validation
+                ),
+            }
+        )
+    accepted = [row for row in candidates if row["accepted"]]
+    return {
+        "schema": "TESSERA-EVO-023-MODE-AUDIT-v0.1",
+        "preregistration": plan,
+        "discovery_count": len(discovery),
+        "validation_count": len(validation),
+        "reference": reference,
+        "candidate_signatures": candidates,
+        "accepted_mode_count": len(accepted),
+        "mode_separation_supported": bool(accepted),
+        "decision": (
+            "accept_recurrent_modes"
+            if accepted
+            else "reject_mode_separation_keep_calibration_unchanged"
+        ),
+        "claim_boundary": (
+            "Tail recurrence audit does not identify causes, failures, or "
+            "production incident classes."
+        ),
+    }
+
+
 def _summarize(rows: list[dict]) -> dict:
     labels = np.asarray([row["degraded"] for row in rows], dtype=int)
     warnings = np.asarray([row["warning"] for row in rows], dtype=int)

@@ -78,6 +78,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Shared phase names do not make workflows exchangeable. | Specialists require finite-sample normal support and a matching privacy-safe workflow profile; otherwise they abstain. |
 | Several locally calibrated sensors can still over-warn together. | Calibrate the combined session decision when one host action follows multiple phase tests. |
 | Low false-warning rates can hide weak sensitivity. | Preregister effect-size response tests and report the minimum detectable perturbation separately. |
+| Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 
 Current evidence says: Tessera has two supported real-telemetry T1 families
 (NAB and UCR), one rejected NASA transfer branch, and no general transfer claim.
@@ -342,6 +343,12 @@ workflow specialist. Response was monotonic and zero-delay warnings remained
 `250 ms` for MIRROR and GEOMETRY. No phase responded at `150 ms` or below.
 This maps coarse detector sensitivity; injected delays are not natural
 failures.
+
+EVO-023 tested whether the slow clean tail justified separate operational
+modes. One GEOMETRY-only tail event and one REHYDRATE-only tail event appeared
+in validation, with no matching discovery recurrence. No candidate met the
+required `3 + 3` chronological support, so mode separation was rejected and
+calibration remained unchanged.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory
