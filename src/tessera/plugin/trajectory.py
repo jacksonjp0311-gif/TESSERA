@@ -23,6 +23,11 @@ DEFAULT_FEATURES = (
     "system_cpu_percent",
     "memory_available_ratio",
     "process_count",
+    "subprocess_spawn_ms",
+    "disk_read_bytes_delta",
+    "disk_write_bytes_delta",
+    "disk_read_time_ms_delta",
+    "disk_write_time_ms_delta",
 )
 
 

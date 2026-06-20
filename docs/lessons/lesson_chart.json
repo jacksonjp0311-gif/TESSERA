@@ -445,6 +445,18 @@
       "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
       "authority_boundary": "Aggregate context correlation does not authorize causal claims or host action.",
       "status": "promoted"
+    },
+    {
+      "id": "F038",
+      "observed_event": "Subprocess spawn timing and aggregate disk I/O failed to reproduce a tail-specific association across chronological discovery and validation.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-025-final-evidence.json",
+      "wound_class": "mechanism_sensor_resolution_insufficient",
+      "diagnosis": "Spawn-call duration is only a small part of child execution, while system-wide disk counters are too coarse and often quantized to zero for short validation steps.",
+      "lesson": "A sensor that is closer to the suspected mechanism can still be too coarse; require tail-specific replicated evidence before conditioning calibration.",
+      "future_behavior_change": "Test privacy-safe child CPU-time and context-switch aggregates on fresh sessions while preserving the frozen session gate.",
+      "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
+      "authority_boundary": "Mechanism rejection does not identify causes or authorize host action.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

@@ -1,0 +1,287 @@
+{
+  "schema": "TESSERA-EVO-025-MECHANISM-ATTRIBUTION-v0.1",
+  "preregistration": {
+    "schema": "TESSERA-EVO-025-MECHANISM-ATTRIBUTION-PREREGISTRATION-v0.1",
+    "operation": "TESSERA-EVO-025",
+    "fresh_cohort_target": 40,
+    "chronological_split": {
+      "discovery_sessions": 20,
+      "validation_sessions": 20
+    },
+    "context_fields": [
+      "subprocess_spawn_ms",
+      "disk_read_bytes_delta",
+      "disk_write_bytes_delta",
+      "disk_read_time_ms_delta",
+      "disk_write_time_ms_delta"
+    ],
+    "target_phases": [
+      "MIRROR",
+      "REHYDRATE",
+      "GEOMETRY"
+    ],
+    "association_gate": {
+      "minimum_absolute_spearman_both_halves": 0.4,
+      "same_sign_required": true,
+      "minimum_tail_support_both_halves": 3,
+      "tail_robust_score_threshold": 4.0
+    },
+    "decision_rule": "Mechanism conditioning is supported only when the same phase/field association passes every gate in chronological discovery and validation.",
+    "prohibited_fields": [
+      "process_id",
+      "process_name",
+      "command_line",
+      "path",
+      "prompt",
+      "raw_output"
+    ],
+    "claim_boundary": "Subprocess-startup and aggregate disk-I/O association does not establish causality, natural failure prediction, or host intervention authority."
+  },
+  "trajectory_count": 40,
+  "associations": [
+    {
+      "phase": "MIRROR",
+      "context_field": "subprocess_spawn_ms",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.5368421052631579,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.2571428571428572,
+        "tail_support": 1
+      },
+      "same_sign": true,
+      "accepted": false
+    },
+    {
+      "phase": "MIRROR",
+      "context_field": "disk_read_bytes_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 1
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "MIRROR",
+      "context_field": "disk_write_bytes_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.3675968293688282,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": -0.07793173379942742,
+        "tail_support": 1
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "MIRROR",
+      "context_field": "disk_read_time_ms_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 1
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "MIRROR",
+      "context_field": "disk_write_time_ms_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 1
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "REHYDRATE",
+      "context_field": "subprocess_spawn_ms",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.2781954887218045,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.3142857142857143,
+        "tail_support": 0
+      },
+      "same_sign": true,
+      "accepted": false
+    },
+    {
+      "phase": "REHYDRATE",
+      "context_field": "disk_read_bytes_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.21882153700534204,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "REHYDRATE",
+      "context_field": "disk_write_bytes_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.21882153700534204,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.28430651034235555,
+        "tail_support": 0
+      },
+      "same_sign": true,
+      "accepted": false
+    },
+    {
+      "phase": "REHYDRATE",
+      "context_field": "disk_read_time_ms_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "REHYDRATE",
+      "context_field": "disk_write_time_ms_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "GEOMETRY",
+      "context_field": "subprocess_spawn_ms",
+      "discovery": {
+        "support": 20,
+        "spearman": -0.03609022556390977,
+        "tail_support": 2
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "GEOMETRY",
+      "context_field": "disk_read_bytes_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 2
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "GEOMETRY",
+      "context_field": "disk_write_bytes_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.39118536981246743,
+        "tail_support": 2
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.09813625737705672,
+        "tail_support": 0
+      },
+      "same_sign": true,
+      "accepted": false
+    },
+    {
+      "phase": "GEOMETRY",
+      "context_field": "disk_read_time_ms_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 2
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "same_sign": false,
+      "accepted": false
+    },
+    {
+      "phase": "GEOMETRY",
+      "context_field": "disk_write_time_ms_delta",
+      "discovery": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 2
+      },
+      "validation": {
+        "support": 20,
+        "spearman": 0.0,
+        "tail_support": 0
+      },
+      "same_sign": false,
+      "accepted": false
+    }
+  ],
+  "accepted_association_count": 0,
+  "decision": "reject_mechanism_conditioning_keep_calibration_unchanged",
+  "claim_boundary": "Subprocess-startup and aggregate disk-I/O association is not causal attribution, natural failure prediction, or intervention authority.",
+  "mechanism_conditioning_supported": false
+}

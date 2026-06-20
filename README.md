@@ -78,6 +78,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Shared phase names do not make workflows exchangeable. | Specialists require finite-sample normal support and a matching privacy-safe workflow profile; otherwise they abstain. |
 | Several locally calibrated sensors can still over-warn together. | Calibrate the combined session decision when one host action follows multiple phase tests. |
 | Low false-warning rates can hide weak sensitivity. | Preregister effect-size response tests and report the minimum detectable perturbation separately. |
+| A mechanism-adjacent sensor can still be too coarse. | Require replicated tail-specific association; preserve calibration while testing higher-resolution privacy-safe execution aggregates. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -356,6 +357,13 @@ count to 40 fresh clean validation sessions. These fields reproducibly tracked
 ordinary MIRROR latency but did not explain the sparse REHYDRATE or GEOMETRY
 tails. No phase/context pair passed the preregistered correlation and tail
 support gates, so context-conditioned calibration was rejected.
+
+EVO-025 measured subprocess spawn-call duration and aggregate disk byte/time
+deltas across 40 fresh clean sessions. No phase/field pair passed the
+chronological correlation and tail-support gates. MIRROR spawn association
+weakened from `0.537` in discovery to `0.257` in validation, and aggregate disk
+time was usually zero. Mechanism-conditioned calibration was rejected; the
+next bounded sensor target is child CPU time and context-switch aggregates.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

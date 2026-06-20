@@ -35,6 +35,13 @@ PHASES = [
 ]
 SESSION_ID = ""
 EVENT_INDEX = 0
+STEP_TELEMETRY_FIELDS = {
+    "subprocess_spawn_ms",
+    "disk_read_bytes_delta",
+    "disk_write_bytes_delta",
+    "disk_read_time_ms_delta",
+    "disk_write_time_ms_delta",
+}
 
 
 def root_path(root: str | None = None) -> Path:
@@ -94,6 +101,49 @@ def resource_snapshot() -> dict[str, float]:
         }
 
 
+def disk_snapshot() -> dict[str, float]:
+    if psutil is None:
+        return {}
+    try:
+        value = psutil.disk_io_counters()
+        if value is None:
+            return {}
+        return {
+            "read_bytes": float(value.read_bytes),
+            "write_bytes": float(value.write_bytes),
+            "read_time": float(value.read_time),
+            "write_time": float(value.write_time),
+        }
+    except Exception:
+        return {}
+
+
+def disk_delta(
+    before: dict[str, float], after: dict[str, float]
+) -> dict[str, float]:
+    if not before or not after:
+        return {
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0,
+        }
+    return {
+        "disk_read_bytes_delta": max(
+            0.0, after["read_bytes"] - before["read_bytes"]
+        ),
+        "disk_write_bytes_delta": max(
+            0.0, after["write_bytes"] - before["write_bytes"]
+        ),
+        "disk_read_time_ms_delta": max(
+            0.0, after["read_time"] - before["read_time"]
+        ),
+        "disk_write_time_ms_delta": max(
+            0.0, after["write_time"] - before["write_time"]
+        ),
+    }
+
+
 def emit(
     root: Path,
     phase: str,
@@ -103,11 +153,17 @@ def emit(
     *,
     elapsed_ms: float = 0.0,
     exit_code: int | None = None,
+    step_telemetry: dict[str, float] | None = None,
 ) -> None:
     global EVENT_INDEX
     EVENT_INDEX += 1
     live = mirror_dir(root) / "state"
     live.mkdir(parents=True, exist_ok=True)
+    safe_step_telemetry = {
+        key: float(value)
+        for key, value in (step_telemetry or {}).items()
+        if key in STEP_TELEMETRY_FIELDS
+    }
     payload = {
         "schema": SCHEMA,
         "timestamp": datetime.now().isoformat(timespec="seconds"),
@@ -122,6 +178,7 @@ def emit(
         "elapsed_ms": float(elapsed_ms),
         "exit_code": exit_code,
         **resource_snapshot(),
+        **safe_step_telemetry,
     }
     write_json(live / "live_status.json", payload)
     append_jsonl(live / "events.jsonl", payload)
@@ -150,18 +207,32 @@ def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
     cmd = [expand_arg(x, root) for x in step]
     command_text = " ".join(cmd)
     started = time.perf_counter()
+    disk_before = disk_snapshot()
     emit(root, phase, "RUN", label, command_text)
     print("[CMD] " + command_text)
     creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
-    proc = subprocess.Popen(cmd, cwd=root, env=env_for(root), text=True, creationflags=creationflags)
+    spawn_started = time.perf_counter()
+    proc = subprocess.Popen(
+        cmd,
+        cwd=root,
+        env=env_for(root),
+        text=True,
+        creationflags=creationflags,
+    )
+    spawn_ms = (time.perf_counter() - spawn_started) * 1000.0
     try:
         returncode = proc.wait()
     except KeyboardInterrupt:
         elapsed = (time.perf_counter() - started) * 1000.0
+        step_telemetry = {
+            "subprocess_spawn_ms": spawn_ms,
+            **disk_delta(disk_before, disk_snapshot()),
+        }
         emit(
             root, phase, "STOP",
             f"{label} interrupted by operator", command_text,
             elapsed_ms=elapsed, exit_code=130,
+            step_telemetry=step_telemetry,
         )
         try:
             proc.terminate()
@@ -182,10 +253,15 @@ def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
         raise SystemExit(130)
     if returncode != 0:
         elapsed = (time.perf_counter() - started) * 1000.0
+        step_telemetry = {
+            "subprocess_spawn_ms": spawn_ms,
+            **disk_delta(disk_before, disk_snapshot()),
+        }
         emit(
             root, phase, "FAIL",
             f"{label} exit={returncode}", command_text,
             elapsed_ms=elapsed, exit_code=returncode,
+            step_telemetry=step_telemetry,
         )
         record_lesson(
             root,
@@ -196,9 +272,14 @@ def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
         )
         raise SystemExit(returncode)
     elapsed = (time.perf_counter() - started) * 1000.0
+    step_telemetry = {
+        "subprocess_spawn_ms": spawn_ms,
+        **disk_delta(disk_before, disk_snapshot()),
+    }
     emit(
         root, phase, "OK", label, command_text,
         elapsed_ms=elapsed, exit_code=0,
+        step_telemetry=step_telemetry,
     )
 
 

@@ -20,6 +20,11 @@ SAFE_TELEMETRY_FIELDS = {
     "system_cpu_percent",
     "memory_available_ratio",
     "process_count",
+    "subprocess_spawn_ms",
+    "disk_read_bytes_delta",
+    "disk_write_bytes_delta",
+    "disk_read_time_ms_delta",
+    "disk_write_time_ms_delta",
 }
 DENIED_SOURCE_FIELDS = {
     "command",
@@ -170,6 +175,21 @@ def _sanitize_prefix(
                     "process_count": float(
                         record.get("process_count", -1.0)
                     ),
+                    "subprocess_spawn_ms": float(
+                        record.get("subprocess_spawn_ms", -1.0)
+                    ),
+                    "disk_read_bytes_delta": float(
+                        record.get("disk_read_bytes_delta", -1.0)
+                    ),
+                    "disk_write_bytes_delta": float(
+                        record.get("disk_write_bytes_delta", -1.0)
+                    ),
+                    "disk_read_time_ms_delta": float(
+                        record.get("disk_read_time_ms_delta", -1.0)
+                    ),
+                    "disk_write_time_ms_delta": float(
+                        record.get("disk_write_time_ms_delta", -1.0)
+                    ),
                 },
                 metadata={
                     "capture": "privacy_sanitized_v0.1",
@@ -279,6 +299,11 @@ def capture_local_trajectories(
             "system_cpu_percent",
             "memory_available_ratio",
             "process_count",
+            "subprocess_spawn_ms",
+            "disk_read_bytes_delta",
+            "disk_write_bytes_delta",
+            "disk_read_time_ms_delta",
+            "disk_write_time_ms_delta",
         ],
         "denied_fields": sorted(DENIED_SOURCE_FIELDS),
         "raw_payload_retained": False,

@@ -998,6 +998,30 @@ def run_evo024_context_attribution(
     }
 
 
+def run_evo025_mechanism_attribution(
+    cohort_path: str,
+    preregistration_path: str,
+) -> dict:
+    result = run_evo024_context_attribution(
+        cohort_path,
+        preregistration_path,
+    )
+    result["schema"] = "TESSERA-EVO-025-MECHANISM-ATTRIBUTION-v0.1"
+    result["mechanism_conditioning_supported"] = result.pop(
+        "context_conditioning_supported"
+    )
+    result["decision"] = (
+        "allow_mechanism_conditioning_hypothesis"
+        if result["mechanism_conditioning_supported"]
+        else "reject_mechanism_conditioning_keep_calibration_unchanged"
+    )
+    result["claim_boundary"] = (
+        "Subprocess-startup and aggregate disk-I/O association is not causal "
+        "attribution, natural failure prediction, or intervention authority."
+    )
+    return result
+
+
 def _summarize(rows: list[dict]) -> dict:
     labels = np.asarray([row["degraded"] for row in rows], dtype=int)
     warnings = np.asarray([row["warning"] for row in rows], dtype=int)

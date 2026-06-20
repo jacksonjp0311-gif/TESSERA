@@ -604,6 +604,11 @@ class TestEvo13TrajectoryAdapters(unittest.TestCase):
         self.assertIn("system_cpu_percent", SAFE_TELEMETRY_FIELDS)
         self.assertIn("memory_available_ratio", SAFE_TELEMETRY_FIELDS)
         self.assertIn("process_count", SAFE_TELEMETRY_FIELDS)
+        self.assertIn("subprocess_spawn_ms", SAFE_TELEMETRY_FIELDS)
+        self.assertIn("disk_read_bytes_delta", SAFE_TELEMETRY_FIELDS)
+        self.assertIn("disk_write_bytes_delta", SAFE_TELEMETRY_FIELDS)
+        self.assertIn("disk_read_time_ms_delta", SAFE_TELEMETRY_FIELDS)
+        self.assertIn("disk_write_time_ms_delta", SAFE_TELEMETRY_FIELDS)
         self.assertNotIn("process_name", SAFE_TELEMETRY_FIELDS)
         self.assertNotIn("command_line", SAFE_TELEMETRY_FIELDS)
 

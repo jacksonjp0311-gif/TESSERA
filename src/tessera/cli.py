@@ -447,6 +447,30 @@ def cmd_trajectory_evo024(args):
     print(f"Results: {out_path}")
 
 
+def cmd_trajectory_evo025(args):
+    from tessera.experiments.trajectory_benchmark import (
+        run_evo025_mechanism_attribution,
+    )
+
+    result = run_evo025_mechanism_attribution(
+        args.cohort,
+        args.preregistration,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "mechanism_conditioning_supported": result[
+            "mechanism_conditioning_supported"
+        ],
+        "accepted_association_count": result[
+            "accepted_association_count"
+        ],
+        "decision": result["decision"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -734,6 +758,17 @@ def main(argv=None):
         default="outputs/evidence/evo024/context_attribution.json",
     )
     evo024.set_defaults(func=cmd_trajectory_evo024)
+    evo025 = sub.add_parser(
+        "trajectory-evo025",
+        help="Audit subprocess startup and aggregate disk I/O against tails.",
+    )
+    evo025.add_argument("--cohort", required=True)
+    evo025.add_argument("--preregistration", required=True)
+    evo025.add_argument(
+        "--out",
+        default="outputs/evidence/evo025/mechanism_attribution.json",
+    )
+    evo025.set_defaults(func=cmd_trajectory_evo025)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

@@ -643,6 +643,27 @@
         }
       ]
     },
+    "trajectory-evo025": {
+      "purpose": "Audit subprocess startup and aggregate disk I/O against fresh natural validation workflow tails.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-025 mechanism attribution",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-evo025",
+            "--cohort",
+            "outputs/evidence/evo025/fresh_mechanism_cohort.json",
+            "--preregistration",
+            "docs/research/EVO025_MECHANISM_ATTRIBUTION_PREREGISTRATION.json",
+            "--out",
+            "outputs/evidence/evo025/mechanism_attribution.json"
+          ]
+        }
+      ]
+    },
     "telemetry-probe-clean": {
       "purpose": "Generate one privacy-safe enriched clean telemetry session.",
       "steps": [

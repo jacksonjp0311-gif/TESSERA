@@ -25,6 +25,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F035 | clean-tail calibration required 200-250 ms injected delays for full response | report effect-size sensitivity separately and investigate operational modes before recalibration | preregistered perturbation ladder |
 | F036 | two isolated slow sessions could be miscast as a second operating mode | require recurrent signatures in chronological discovery and validation; otherwise keep calibration frozen | tail-mode recurrence audit |
 | F037 | broad host load correlated with routine latency but not the problematic tail | require tail-specific replicated association; instrument subprocess startup and I/O wait next | aggregate context attribution gate |
+| F038 | spawn timing and aggregate disk I/O did not explain the remaining tail | use higher-resolution privacy-safe child execution aggregates and preserve calibration | mechanism attribution gate |
 
 ## Lessons Law
 

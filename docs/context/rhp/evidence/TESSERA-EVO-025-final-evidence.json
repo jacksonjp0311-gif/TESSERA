@@ -1,0 +1,70 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.25",
+  "operation": "TESSERA-EVO-025",
+  "previous_operation": "TESSERA-EVO-024",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "81ce57c8c3860cc79237ccb1df73a8995137c96b",
+  "state_after_validation": "SUBPROCESS_IO_CAPTURED_MECHANISM_ATTRIBUTION_REJECTED",
+  "implemented": [
+    "payload-free subprocess spawn-call timing",
+    "aggregate disk byte deltas",
+    "aggregate disk time deltas",
+    "fresh 40-session natural mechanism cohort",
+    "chronological mechanism association validation",
+    "privacy allowlist regression coverage"
+  ],
+  "finding": "Spawn timing and aggregate disk I/O did not reproducibly explain the remaining natural workflow latency tails. No phase/field pair met correlation, sign, and tail-support gates in both halves.",
+  "decision": "Reject mechanism-conditioned calibration and preserve the frozen session gate. Test privacy-safe child-process CPU-time and context-switch aggregates on a fresh cohort.",
+  "metrics": {
+    "fresh_sessions": 40,
+    "discovery_sessions": 20,
+    "validation_sessions": 20,
+    "mechanism_fields": 5,
+    "phase_field_pairs": 15,
+    "accepted_association_count": 0,
+    "mechanism_conditioning_supported": false,
+    "mirror_spawn_spearman_discovery": 0.5368421052631579,
+    "mirror_spawn_spearman_validation": 0.2571428571428571,
+    "mirror_tail_support_discovery": 0,
+    "mirror_tail_support_validation": 1,
+    "rehydrate_tail_support_discovery": 0,
+    "rehydrate_tail_support_validation": 0,
+    "geometry_tail_support_discovery": 2,
+    "geometry_tail_support_validation": 0,
+    "calibration_changed": false
+  },
+  "artifacts": {
+    "preregistration": {
+      "path": "docs/research/EVO025_MECHANISM_ATTRIBUTION_PREREGISTRATION.json",
+      "sha256": "73eb544c5afe6d3f73289136d69fb85157f1459c9da1fa68053321a40d2c316c"
+    },
+    "fresh_mechanism_cohort": {
+      "path": "outputs/evidence/evo025/fresh_mechanism_cohort.json",
+      "sha256": "de7c2a96e0769a8aa85ff8db72687c59c4a007422e1ab1b1110be9ff5240ae38"
+    },
+    "mechanism_attribution": {
+      "path": "outputs/evidence/evo025/mechanism_attribution.json",
+      "sha256": "b6e71b1958d7f1e921a285341c1367cbbe56f4332b36f6a1c8f68508a716aa8e"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 87,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 3
+  },
+  "next_recommended_operation": "instrument_child_process_cpu_and_context_switch_aggregates",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Mechanism association does not establish tail causality, natural failure sensitivity, production readiness, consciousness, or autonomous authority."
+}

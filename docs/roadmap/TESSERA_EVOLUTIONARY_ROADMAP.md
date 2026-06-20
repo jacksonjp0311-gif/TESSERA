@@ -472,6 +472,18 @@ No pair passed the preregistered correlation, sign, and tail-support gates.
 Context-conditioned calibration was rejected. The next sensor target is
 payload-free subprocess startup latency and aggregate I/O wait.
 
+### Phase 4 diagnostic — TESSERA-EVO-025
+
+Forty fresh clean sessions measured subprocess spawn-call duration and
+aggregate disk byte/time deltas. No one of 15 phase/field pairs passed the
+preregistered chronological correlation, sign, and tail-support gates.
+
+MIRROR spawn association weakened from `0.537` in discovery to `0.257` in
+validation. REHYDRATE had no robust tails, and GEOMETRY tail support was `2/0`.
+Aggregate disk-time counters were usually zero at this workflow scale.
+Mechanism-conditioned calibration was rejected. The next bounded target is
+privacy-safe child-process CPU-time and context-switch aggregation.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -749,11 +761,12 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Build Phase 0 experiment-integrity gates and repair the unused replay path.
-2. Implement a multi-seed baseline benchmark runner and confidence-interval
-   report for Phase 1.
-3. Define the versioned `DatasetAdapter` and `PluginManifest` schemas without
-   enabling live agent integration.
+1. Instrument privacy-safe child-process CPU-time and context-switch
+   aggregates, then preregister and collect a fresh natural cohort.
+2. Collect untouched natural failure sessions before promoting any workflow
+   warning or intervention utility claim.
+3. Harden the plugin SDK boundary with compatibility, rollback, resource, and
+   host-isolation tests.
 
-The immediate priority is empirical recovery, not adding more operator
-infrastructure.
+The immediate priority is resolving natural-session sensitivity while keeping
+the plugin read-mostly and evidence-gated.
