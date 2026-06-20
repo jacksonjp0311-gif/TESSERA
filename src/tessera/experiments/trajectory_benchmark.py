@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import hashlib
+import json
+import math
 import time
 from dataclasses import asdict, dataclass
 
@@ -84,20 +87,38 @@ class PhaseDurationBound:
     upper_ms: float
 
 
+def trajectory_profile(events: list[AgentEvent]) -> str:
+    """Hash only privacy-safe phase/state structure, never payload content."""
+    structure = [
+        [
+            str(event.metadata.get("phase", "UNKNOWN")).upper(),
+            str(event.metadata.get("state", "")).upper(),
+        ]
+        for event in events
+    ]
+    payload = json.dumps(structure, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()[:16]
+
+
 def calibrate_phase_duration_policy(
     trajectories: list[tuple[list[AgentEvent], bool]],
     *,
-    minimum_support: int = 3,
-    minimum_margin_ms: float = 25.0,
-    mad_multiplier: float = 3.0,
+    false_warning_budget: float = 0.05,
+    execution_jitter_guard_ms: float = 10.0,
 ) -> dict:
-    """Calibrate phase duration bounds from declared-clean trajectories only."""
+    """Finite-sample rank calibration from declared-clean trajectories only."""
+    if not 0.0 < false_warning_budget < 1.0:
+        raise ValueError("false_warning_budget must be between zero and one")
+    minimum_support = math.ceil(1.0 / false_warning_budget) - 1
     by_phase: dict[str, list[float]] = {}
     clean_count = 0
+    profiles: dict[str, int] = {}
     for events, degraded in trajectories:
         if degraded:
             continue
         clean_count += 1
+        profile = trajectory_profile(events)
+        profiles[profile] = profiles.get(profile, 0) + 1
         for event in events:
             duration = float(event.features.get("duration_ms", 0.0))
             phase = str(event.metadata.get("phase", "UNKNOWN")).upper()
@@ -110,26 +131,46 @@ def calibrate_phase_duration_policy(
         sample = np.asarray(values, dtype=float)
         center = float(np.median(sample))
         mad = float(np.median(np.abs(sample - center)))
-        margin = max(minimum_margin_ms, mad_multiplier * 1.4826 * mad)
+        rank = min(
+            len(sample),
+            math.ceil(
+                (len(sample) + 1) * (1.0 - false_warning_budget)
+            ),
+        )
+        rank_value = float(np.sort(sample)[rank - 1])
         bound = PhaseDurationBound(
             phase=phase,
             support=len(values),
             median_ms=center,
             mad_ms=mad,
-            upper_ms=center + margin,
+            upper_ms=rank_value + execution_jitter_guard_ms,
         )
         if bound.support >= minimum_support:
             bounds[phase] = asdict(bound)
     return {
-        "schema": "TESSERA-PHASE-DURATION-CALIBRATION-v0.1",
+        "schema": "TESSERA-PHASE-DURATION-CALIBRATION-v0.2",
         "clean_trajectory_count": clean_count,
+        "false_warning_budget": false_warning_budget,
         "minimum_support": minimum_support,
-        "minimum_margin_ms": minimum_margin_ms,
-        "mad_multiplier": mad_multiplier,
+        "execution_jitter_guard_ms": execution_jitter_guard_ms,
+        "profile_counts": profiles,
+        "allowed_profiles": sorted(
+            profile
+            for profile, support in profiles.items()
+            if support >= minimum_support
+        ),
         "bounds": bounds,
+        "calibration_sufficient": bool(bounds)
+        and bool(profiles)
+        and all(
+            len(values) >= minimum_support for values in by_phase.values()
+        )
+        and any(
+            support >= minimum_support for support in profiles.values()
+        ),
         "claim_boundary": (
-            "Normal-only controlled calibration creates bounded diagnostic "
-            "thresholds; it does not establish production operating limits."
+            "Finite-sample rank calibration assumes exchangeable clean "
+            "sessions and does not establish production operating limits."
         ),
     }
 
@@ -139,6 +180,21 @@ def _phase_conditioned_policy(
     calibration: dict,
 ) -> tuple[bool, bool, bool, list[dict]]:
     """Return warning, memory candidate, abstention, and phase evidence."""
+    profile = trajectory_profile(events)
+    if (
+        not calibration.get("calibration_sufficient", False)
+        or profile not in calibration.get("allowed_profiles", [])
+    ):
+        return False, False, True, [
+            {
+                "profile": profile,
+                "reason": (
+                    "insufficient_calibration"
+                    if not calibration.get("calibration_sufficient", False)
+                    else "workflow_profile_mismatch"
+                ),
+            }
+        ]
     evidence = []
     for event in events:
         duration = float(event.features.get("duration_ms", 0.0))
@@ -161,6 +217,172 @@ def _phase_conditioned_policy(
     return warning, memory, abstained, evidence
 
 
+def archive_trajectory_cohort(
+    path: str,
+    out_path: str,
+    *,
+    role: str,
+    minimum_prefix: int = 9,
+    last_enriched_sessions: int | None = None,
+    session_ids: list[str] | None = None,
+) -> dict:
+    """Write an immutable privacy-sanitized cohort outside rotating latest."""
+    from pathlib import Path
+
+    from tessera.plugin.privacy_capture import capture_local_trajectories
+
+    trajectories, manifest = capture_local_trajectories(
+        path,
+        minimum_prefix=minimum_prefix,
+        last_enriched_sessions=last_enriched_sessions,
+        session_ids=session_ids,
+    )
+    rows = []
+    for events, degraded in trajectories:
+        rows.append(
+            {
+                "degraded": degraded,
+                "profile": trajectory_profile(events),
+                "events": [
+                    {
+                        "event_id": event.event_id,
+                        "kind": event.kind,
+                        "timestamp": event.timestamp,
+                        "features": event.features,
+                        "metadata": event.metadata,
+                    }
+                    for event in events
+                ],
+            }
+        )
+    cohort_payload = json.dumps(rows, sort_keys=True, separators=(",", ":"))
+    data = {
+        "schema": "TESSERA-SANITIZED-TRAJECTORY-COHORT-v0.1",
+        "role": role,
+        "cohort_sha256": hashlib.sha256(
+            cohort_payload.encode("utf-8")
+        ).hexdigest(),
+        "capture_manifest": manifest,
+        "trajectory_count": len(rows),
+        "clean_count": sum(not row["degraded"] for row in rows),
+        "degraded_count": sum(row["degraded"] for row in rows),
+        "trajectories": rows,
+        "claim_boundary": (
+            "Archived sanitized cohorts retain numeric operational metadata "
+            "only and grant no monitoring or intervention authority."
+        ),
+    }
+    target = Path(out_path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    rendered = json.dumps(data, indent=2)
+    if target.exists() and target.read_text(encoding="utf-8") != rendered:
+        raise FileExistsError(f"immutable cohort already exists: {target}")
+    target.write_text(rendered, encoding="utf-8")
+    return data
+
+
+def load_trajectory_cohort(path: str) -> list[tuple[list[AgentEvent], bool]]:
+    from pathlib import Path
+
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    payload = json.dumps(
+        data["trajectories"], sort_keys=True, separators=(",", ":")
+    )
+    observed = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    if observed != data["cohort_sha256"]:
+        raise ValueError("trajectory cohort hash mismatch")
+    trajectories = []
+    for row in data["trajectories"]:
+        events = [
+            AgentEvent(
+                event_id=event["event_id"],
+                kind=event["kind"],
+                timestamp=float(event["timestamp"]),
+                features={
+                    key: float(value)
+                    for key, value in event["features"].items()
+                },
+                metadata={
+                    key: str(value)
+                    for key, value in event["metadata"].items()
+                },
+            )
+            for event in row["events"]
+        ]
+        trajectories.append((events, bool(row["degraded"])))
+    return trajectories
+
+
+def evaluate_phase_specialist(
+    trajectories: list[tuple[list[AgentEvent], bool]],
+    calibration: dict,
+    *,
+    measure_latency: bool = True,
+) -> dict:
+    rows = []
+    for events, degraded in trajectories:
+        start = time.perf_counter()
+        warning, memory, abstained, evidence = _phase_conditioned_policy(
+            events, calibration
+        )
+        row = {
+            "degraded": degraded,
+            "warning": warning,
+            "memory_candidate": memory,
+            "abstained": abstained,
+            "profile": trajectory_profile(events),
+            "phase_evidence": evidence,
+        }
+        if measure_latency:
+            row["latency_ms"] = (time.perf_counter() - start) * 1000.0
+        rows.append(row)
+    covered = [row for row in rows if not row["abstained"]]
+    result = {
+        "trajectory_count": len(rows),
+        "coverage": len(covered) / max(1, len(rows)),
+        "warning_rate": (
+            sum(row["warning"] for row in covered) / max(1, len(covered))
+        ),
+        "rows": rows,
+    }
+    if covered and any(row["degraded"] for row in covered) and any(
+        not row["degraded"] for row in covered
+    ):
+        result["policy"] = _summarize(covered)
+    return result
+
+
+def run_evo020_archived_benchmark(
+    calibration_path: str,
+    confirmation_path: str,
+    natural_shadow_path: str,
+) -> dict:
+    calibration_set = load_trajectory_cohort(calibration_path)
+    confirmation_set = load_trajectory_cohort(confirmation_path)
+    natural_set = load_trajectory_cohort(natural_shadow_path)
+    calibration = calibrate_phase_duration_policy(calibration_set)
+    return {
+        "schema": "TESSERA-EVO-020-ARCHIVED-SHADOW-v0.1",
+        "calibration": calibration,
+        "controlled_confirmation": evaluate_phase_specialist(
+            confirmation_set, calibration, measure_latency=False
+        ),
+        "natural_shadow": evaluate_phase_specialist(
+            natural_set, calibration, measure_latency=False
+        ),
+        "authority": {
+            "read_only": True,
+            "warning_emitted_to_host": False,
+            "memory_write": False,
+            "intervention": False,
+        },
+        "claim_boundary": (
+            "Shadow evaluation measures coverage and diagnostic behavior only; "
+            "it does not authorize live warnings, interventions, or memory."
+        ),
+    }
+
+
 def _summarize(rows: list[dict]) -> dict:
     labels = np.asarray([row["degraded"] for row in rows], dtype=int)
     warnings = np.asarray([row["warning"] for row in rows], dtype=int)
@@ -172,13 +394,12 @@ def _summarize(rows: list[dict]) -> dict:
         "false_intervention_rate": float(warnings[normal].mean()),
         "safe_memory_recall": float(memories[normal].mean()),
         "unsafe_memory_rate": float(memories[anomaly].mean()),
-        "decision_accuracy": float(
-            np.mean(warnings == labels)
-        ),
-        "mean_latency_ms": float(
-            np.mean([row["latency_ms"] for row in rows])
-        ),
+        "decision_accuracy": float(np.mean(warnings == labels)),
     }
+    if rows and all("latency_ms" in row for row in rows):
+        summary["mean_latency_ms"] = float(
+            np.mean([row["latency_ms"] for row in rows])
+        )
     if any("abstained" in row for row in rows):
         summary["abstention_rate"] = float(
             np.mean([row.get("abstained", False) for row in rows])
@@ -323,22 +544,7 @@ def run_phase_conditioned_holdout_benchmark(
     calibration_set = trajectories[:calibration_sessions]
     holdout_set = trajectories[calibration_sessions:]
     calibration = calibrate_phase_duration_policy(calibration_set)
-    rows = []
-    for events, degraded in holdout_set:
-        start = time.perf_counter()
-        warning, memory, abstained, evidence = _phase_conditioned_policy(
-            events, calibration
-        )
-        rows.append(
-            {
-                "degraded": degraded,
-                "warning": warning,
-                "memory_candidate": memory,
-                "abstained": abstained,
-                "phase_evidence": evidence,
-                "latency_ms": (time.perf_counter() - start) * 1000.0,
-            }
-        )
+    evaluation = evaluate_phase_specialist(holdout_set, calibration)
     return {
         "schema": "TESSERA-PHASE-CONDITIONED-HOLDOUT-v0.1",
         "capture_manifest": manifest,
@@ -351,8 +557,9 @@ def run_phase_conditioned_holdout_benchmark(
         "holdout_identifiability": audit_trajectory_identifiability(
             holdout_set
         ),
-        "policy": _summarize(rows),
-        "rows": rows,
+        "policy": evaluation.get("policy", {}),
+        "coverage": evaluation["coverage"],
+        "rows": evaluation["rows"],
         "claim_boundary": (
             "Fresh controlled telemetry holdout evidence validates only this "
             "privacy-safe phase-duration diagnostic, not live agent utility."

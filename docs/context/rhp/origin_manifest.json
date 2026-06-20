@@ -53,6 +53,7 @@
     "docs/research/LOCAL_TRAJECTORY_PRIVACY_DIAGNOSTIC_2026-06-19.md",
     "docs/research/LOCAL_TRAJECTORY_IDENTIFIABILITY_2026-06-19.md",
     "docs/research/PHASE_CONDITIONED_TELEMETRY_SPECIALIST_2026-06-19.md",
+    "docs/research/FINITE_SAMPLE_WORKFLOW_SHADOW_2026-06-19.md",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

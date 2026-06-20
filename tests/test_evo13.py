@@ -247,13 +247,12 @@ class TestEvo13TrajectoryAdapters(unittest.TestCase):
             )
 
         calibration = [
-            ([event(80.0)], False),
-            ([event(90.0)], False),
-            ([event(100.0)], False),
-            ([event(250.0)], True),
-        ]
+            ([event(80.0 + index)], False)
+            for index in range(24)
+        ] + [([event(250.0)], True)]
         model = calibrate_phase_duration_policy(calibration)
-        self.assertEqual(model["clean_trajectory_count"], 3)
+        self.assertEqual(model["clean_trajectory_count"], 24)
+        self.assertTrue(model["calibration_sufficient"])
         self.assertIn("VALIDATE", model["bounds"])
         warning, memory, abstained, evidence = _phase_conditioned_policy(
             [event(240.0)], model
@@ -262,6 +261,99 @@ class TestEvo13TrajectoryAdapters(unittest.TestCase):
         self.assertFalse(memory)
         self.assertFalse(abstained)
         self.assertTrue(evidence[0]["exceeded"])
+
+    def test_phase_policy_abstains_on_workflow_profile_mismatch(self):
+        from tessera.experiments.trajectory_benchmark import (
+            _phase_conditioned_policy,
+            calibrate_phase_duration_policy,
+        )
+
+        def event(phase, duration):
+            return AgentEvent(
+                f"{phase}-{duration}",
+                "plan_transition",
+                duration,
+                {"duration_ms": duration},
+                metadata={"phase": phase, "state": "OK"},
+            )
+
+        calibration = [
+            ([event("VALIDATE", 80.0 + index)], False)
+            for index in range(24)
+        ]
+        model = calibrate_phase_duration_policy(calibration)
+        warning, memory, abstained, evidence = _phase_conditioned_policy(
+            [event("CHECK", 80.0), event("VALIDATE", 90.0)], model
+        )
+        self.assertFalse(warning)
+        self.assertFalse(memory)
+        self.assertTrue(abstained)
+        self.assertEqual(evidence[0]["reason"], "workflow_profile_mismatch")
+
+    def test_phase_calibration_requires_finite_sample_support(self):
+        from tessera.experiments.trajectory_benchmark import (
+            calibrate_phase_duration_policy,
+        )
+
+        event = AgentEvent(
+            "validate",
+            "plan_transition",
+            1.0,
+            {"duration_ms": 80.0},
+            metadata={"phase": "VALIDATE", "state": "OK"},
+        )
+        model = calibrate_phase_duration_policy(
+            [([event], False) for _ in range(18)]
+        )
+        self.assertEqual(model["minimum_support"], 19)
+        self.assertFalse(model["calibration_sufficient"])
+        self.assertEqual(model["bounds"], {})
+
+    def test_archived_trajectory_cohort_detects_tampering(self):
+        import tempfile
+        from pathlib import Path
+
+        from tessera.experiments.trajectory_benchmark import (
+            archive_trajectory_cohort,
+            load_trajectory_cohort,
+        )
+
+        records = []
+        session_id = "opaque-session"
+        for index in range(9):
+            records.append(
+                {
+                    "schema": "fixture",
+                    "timestamp": f"2026-06-19T00:00:0{index}+00:00",
+                    "phase": "CHECK",
+                    "state": "OK",
+                    "session_id": session_id,
+                    "event_index": index + 1,
+                    "elapsed_ms": 80.0,
+                    "exit_code": 0,
+                }
+            )
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "events.jsonl"
+            archive = Path(directory) / "cohort.json"
+            source.write_text(
+                "\n".join(json.dumps(record) for record in records),
+                encoding="utf-8",
+            )
+            archive_trajectory_cohort(
+                str(source),
+                str(archive),
+                role="test",
+                session_ids=[session_id],
+            )
+            self.assertEqual(len(load_trajectory_cohort(str(archive))), 1)
+            data = json.loads(archive.read_text(encoding="utf-8"))
+            data["trajectories"][0]["events"][0]["features"][
+                "duration_ms"
+            ] = 999.0
+            archive.write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_trajectory_cohort(str(archive))
 
 
 class TestEvo13RepairAblation(unittest.TestCase):

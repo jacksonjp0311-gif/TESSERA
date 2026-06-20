@@ -75,6 +75,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Privacy-safe metadata is still a new domain. | Local operator trajectories require phase-conditioned calibration; warning on everything is a failed utility result. |
 | A model cannot infer what the sensor never observed. | Trajectory identifiability is audited before calibration; label-conflicting feature collisions block promotion. |
 | An adequate sensor can still be wasted by the wrong router. | Phase-semantic telemetry is handled by a separately calibrated bounded specialist before integration. |
+| Shared phase names do not make workflows exchangeable. | Specialists require finite-sample normal support and a matching privacy-safe workflow profile; otherwise they abstain. |
 
 Current evidence says: Tessera has two supported real-telemetry T1 families
 (NAB and UCR), one rejected NASA transfer branch, and no general transfer claim.
@@ -315,6 +316,15 @@ separate fresh holdout cohort. The frozen phase-duration specialist reached
 sessions, with approximately `0.006 ms` mean decision latency. The precursor
 is visible, but four clean calibration sessions are not enough for stable
 operating bounds; live agent utility remains unsupported.
+
+EVO-020 expanded calibration to 24 new clean sessions and replaced the ad hoc
+margin with a finite-sample rank gate requiring 19 observations at a declared
+5% clean-warning budget. On a fresh eight-session controlled confirmation, the
+specialist reached `1.0` recall, `0.0` false intervention, `1.0` safe-memory
+recall, and `1.0` accuracy. Two natural full-loop sessions had a different
+privacy-safe structural workflow profile, so coverage was `0` and both
+decisions safely abstained. Controlled confirmation does not transfer to
+natural workflows without profile-specific calibration.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

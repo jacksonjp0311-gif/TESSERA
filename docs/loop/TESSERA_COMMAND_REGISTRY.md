@@ -30,6 +30,8 @@ Every operational command must be documented here and mirrored in the README whe
 | `python -m tessera trajectory-benchmark --seeds 100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123 --length 12 --precursor-only` | Run the fresh precursor-only utility benchmark without explicit failure flags. |
 | `python -m tessera trajectory-local --events agent_cli_mirror/state/events.jsonl --minimum-prefix 7` | Privacy-audit and benchmark sanitized local Agent CLI Mirror sessions. |
 | `python -m tessera trajectory-phase-holdout --events agent_cli_mirror/state/events.jsonl --minimum-prefix 9 --calibration-sessions 8 --holdout-sessions 8` | Calibrate normal phase-duration bounds and evaluate the frozen specialist on a later controlled holdout. |
+| `python -m tessera trajectory-archive --role calibration --session-ids ... --out outputs/evidence/evo020/calibration.json` | Archive an exact privacy-sanitized cohort with a content hash outside rotating latest-run output. |
+| `python -m tessera trajectory-evo020 --calibration ... --confirmation ... --natural-shadow ...` | Run finite-sample calibration, controlled confirmation, and read-only natural workflow shadow evaluation. |
 | `python -m tessera.rhp summary --root .` | Print the canonical current-version summary: changes, findings, bounds, and next move. |
 | `python -m tessera.operator_geometry validate` | Low-level operator geometry validator. |
 | `.\scripts\tessera-agent.ps1` | Universal PowerShell Agent CLI entrypoint. |

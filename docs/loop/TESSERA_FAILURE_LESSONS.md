@@ -20,6 +20,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F012 | alignment and geometry gap | command registry, loopbook, lessons, chart, and README must align | geometry gate |
 | F013 | launcher passed surface checks with invalid Python syntax | compile executable Python entrypoints before promotion | Agent CLI Mirror syntax gate |
 | F032 | safe precursor existed but general policies discarded phase history | phase-semantic signals require separately calibrated bounded specialists | phase-conditioned holdout gate |
+| F033 | controlled thresholds did not semantically transfer to full operator loops | require finite-sample support and matching privacy-safe workflow profiles; otherwise abstain | archived workflow-shadow gate |
 
 ## Lessons Law
 

@@ -1,0 +1,312 @@
+{
+  "schema": "TESSERA-EVO-020-ARCHIVED-SHADOW-v0.1",
+  "calibration": {
+    "schema": "TESSERA-PHASE-DURATION-CALIBRATION-v0.2",
+    "clean_trajectory_count": 24,
+    "false_warning_budget": 0.05,
+    "minimum_support": 19,
+    "execution_jitter_guard_ms": 10.0,
+    "profile_counts": {
+      "b78bfdceecf9feab": 24
+    },
+    "allowed_profiles": [
+      "b78bfdceecf9feab"
+    ],
+    "bounds": {
+      "CHECK": {
+        "phase": "CHECK",
+        "support": 24,
+        "median_ms": 82.00850000139326,
+        "mad_ms": 7.579050005006138,
+        "upper_ms": 112.00990000157617
+      },
+      "GEOMETRY": {
+        "phase": "GEOMETRY",
+        "support": 24,
+        "median_ms": 83.8016499983496,
+        "mad_ms": 5.355449997296091,
+        "upper_ms": 111.54709999915212
+      },
+      "VALIDATE": {
+        "phase": "VALIDATE",
+        "support": 24,
+        "median_ms": 89.53199999814387,
+        "mad_ms": 4.371300005004741,
+        "upper_ms": 107.29380000499077
+      }
+    },
+    "calibration_sufficient": true,
+    "claim_boundary": "Finite-sample rank calibration assumes exchangeable clean sessions and does not establish production operating limits."
+  },
+  "controlled_confirmation": {
+    "trajectory_count": 8,
+    "coverage": 1.0,
+    "warning_rate": 0.5,
+    "rows": [
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 73.94999999087304,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 87.44360000127926,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 99.19020000961609,
+            "upper_ms": 107.29380000499077,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 79.31359999929555,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 79.92030000605155,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 83.85219999763649,
+            "upper_ms": 107.29380000499077,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 80.64159999776166,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 86.43609999853652,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 86.45669999532402,
+            "upper_ms": 107.29380000499077,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 81.38479999615811,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 87.11130000301637,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 91.29370001028292,
+            "upper_ms": 107.29380000499077,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 79.2617999977665,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 89.45450000464916,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 246.38169999525417,
+            "upper_ms": 107.29380000499077,
+            "exceeded": true
+          }
+        ]
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 78.03350000176579,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 77.47620000736788,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 247.7182000002358,
+            "upper_ms": 107.29380000499077,
+            "exceeded": true
+          }
+        ]
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 83.65850000700448,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 83.1873999995878,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 249.8293999960879,
+            "upper_ms": 107.29380000499077,
+            "exceeded": true
+          }
+        ]
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "abstained": false,
+        "profile": "b78bfdceecf9feab",
+        "phase_evidence": [
+          {
+            "phase": "CHECK",
+            "duration_ms": 72.39519999711774,
+            "upper_ms": 112.00990000157617,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 78.22700000542682,
+            "upper_ms": 111.54709999915212,
+            "exceeded": false
+          },
+          {
+            "phase": "VALIDATE",
+            "duration_ms": 245.4800000123214,
+            "upper_ms": 107.29380000499077,
+            "exceeded": true
+          }
+        ]
+      }
+    ],
+    "policy": {
+      "failure_recall": 1.0,
+      "false_intervention_rate": 0.0,
+      "safe_memory_recall": 1.0,
+      "unsafe_memory_rate": 0.0,
+      "decision_accuracy": 1.0,
+      "abstention_rate": 0.0
+    }
+  },
+  "natural_shadow": {
+    "trajectory_count": 2,
+    "coverage": 0.0,
+    "warning_rate": 0.0,
+    "rows": [
+      {
+        "degraded": true,
+        "warning": false,
+        "memory_candidate": false,
+        "abstained": true,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "profile": "3078b121a8a688f3",
+            "reason": "workflow_profile_mismatch"
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": false,
+        "abstained": true,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "profile": "3078b121a8a688f3",
+            "reason": "workflow_profile_mismatch"
+          }
+        ]
+      }
+    ]
+  },
+  "authority": {
+    "read_only": true,
+    "warning_emitted_to_host": false,
+    "memory_write": false,
+    "intervention": false
+  },
+  "claim_boundary": "Shadow evaluation measures coverage and diagnostic behavior only; it does not authorize live warnings, interventions, or memory."
+}

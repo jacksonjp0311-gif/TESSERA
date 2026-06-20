@@ -1,0 +1,38 @@
+{
+  "schema": "TESSERA-PHASE-DURATION-CALIBRATION-v0.2",
+  "clean_trajectory_count": 24,
+  "false_warning_budget": 0.05,
+  "minimum_support": 19,
+  "execution_jitter_guard_ms": 10.0,
+  "profile_counts": {
+    "b78bfdceecf9feab": 24
+  },
+  "allowed_profiles": [
+    "b78bfdceecf9feab"
+  ],
+  "bounds": {
+    "CHECK": {
+      "phase": "CHECK",
+      "support": 24,
+      "median_ms": 82.00850000139326,
+      "mad_ms": 7.579050005006138,
+      "upper_ms": 112.00990000157617
+    },
+    "GEOMETRY": {
+      "phase": "GEOMETRY",
+      "support": 24,
+      "median_ms": 83.8016499983496,
+      "mad_ms": 5.355449997296091,
+      "upper_ms": 111.54709999915212
+    },
+    "VALIDATE": {
+      "phase": "VALIDATE",
+      "support": 24,
+      "median_ms": 89.53199999814387,
+      "mad_ms": 4.371300005004741,
+      "upper_ms": 107.29380000499077
+    }
+  },
+  "calibration_sufficient": true,
+  "claim_boundary": "Finite-sample rank calibration assumes exchangeable clean sessions and does not establish production operating limits."
+}

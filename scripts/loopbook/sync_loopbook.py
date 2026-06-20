@@ -53,7 +53,13 @@ FEATURE_FILES = [
     "docs/research/LOCAL_TRAJECTORY_PRIVACY_DIAGNOSTIC_2026-06-19.md",
     "docs/research/LOCAL_TRAJECTORY_IDENTIFIABILITY_2026-06-19.md",
     "docs/research/PHASE_CONDITIONED_TELEMETRY_SPECIALIST_2026-06-19.md",
+    "docs/research/FINITE_SAMPLE_WORKFLOW_SHADOW_2026-06-19.md",
     "scripts/telemetry/probe.py",
+    "outputs/evidence/evo020/clean_calibration.json",
+    "outputs/evidence/evo020/controlled_confirmation.json",
+    "outputs/evidence/evo020/natural_shadow.json",
+    "outputs/evidence/evo020/frozen_calibration.json",
+    "outputs/evidence/evo020/evo020_shadow_report.json",
     "src/tessera/rhp/core.py", "scripts/validation/validate_rhp_nexus.py",
 ]
 

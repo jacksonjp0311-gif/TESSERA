@@ -385,6 +385,18 @@
       "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
       "authority_boundary": "Controlled specialist accuracy does not authorize live intervention, monitoring authority, or memory writes.",
       "status": "promoted"
+    },
+    {
+      "id": "F033",
+      "observed_event": "Expanded clean calibration eliminated controlled false interventions, but natural full-loop sessions had a different structural workflow profile.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-020-final-evidence.json",
+      "wound_class": "workflow_profile_transfer_mismatch",
+      "diagnosis": "Phase names reused across workflows do not imply comparable duration distributions or command semantics.",
+      "lesson": "A specialist requires both finite-sample normal support and a matching privacy-safe workflow profile before it may cover a decision.",
+      "future_behavior_change": "Uncalibrated workflow profiles abstain; each natural profile requires its own immutable clean calibration and later shadow cohort.",
+      "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
+      "authority_boundary": "Profile coverage remains read-only and cannot authorize warnings, intervention, or memory writes.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

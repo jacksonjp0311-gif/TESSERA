@@ -411,6 +411,19 @@ but rejects the four-session calibration as an operating threshold. The next
 gate expands clean calibration, freezes new bounds, archives the cohort, and
 then runs read-only natural-session shadow evaluation.
 
+### Phase 4 diagnostic — TESSERA-EVO-020
+
+Twenty-four clean controlled sessions satisfied a finite-sample calibration
+gate for a declared 5% clean-warning budget. A later controlled confirmation
+reached `1.0` recall, `0.0` false intervention, `1.0` safe-memory recall, and
+`1.0` accuracy.
+
+Natural full-loop shadow sessions did not share the calibrated structural
+workflow profile. Tessera abstained on both, emitted no host-visible warning,
+and made no intervention or memory write. The next gate requires at least 19
+clean natural sessions for one exact workflow profile before natural coverage
+can be evaluated.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.

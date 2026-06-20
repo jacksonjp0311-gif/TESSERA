@@ -119,6 +119,7 @@ def _sanitize_prefix(
     records: list[dict],
     *,
     session_index: int,
+    session_id: str = "",
 ) -> list[AgentEvent]:
     events = []
     previous_time = None
@@ -162,6 +163,7 @@ def _sanitize_prefix(
                     "capture": "privacy_sanitized_v0.1",
                     "phase": phase,
                     "state": state,
+                    "session_id": session_id,
                 },
             )
         )
@@ -175,6 +177,7 @@ def capture_local_trajectories(
     *,
     minimum_prefix: int = 7,
     last_enriched_sessions: int | None = None,
+    session_ids: list[str] | None = None,
 ) -> tuple[list[tuple[list[AgentEvent], bool]], dict]:
     path = Path(path)
     audit = audit_event_source(path)
@@ -183,6 +186,14 @@ def capture_local_trajectories(
     captured = []
     excluded = []
     sessions = _sessions(_load_records(path))
+    selected_ids = set(session_ids or [])
+    if selected_ids:
+        sessions = [
+            session
+            for session in sessions
+            if session
+            and str(session[0].get("session_id", "")) in selected_ids
+        ]
     if last_enriched_sessions is not None:
         enriched = [
             session for session in sessions
@@ -190,6 +201,7 @@ def capture_local_trajectories(
         ]
         sessions = enriched[-last_enriched_sessions:]
     for session_index, session in enumerate(sessions):
+        session_id = str(session[0].get("session_id", ""))
         failure_indices = [
             index
             for index, record in enumerate(session)
@@ -220,7 +232,11 @@ def capture_local_trajectories(
         prefix = session[:minimum_prefix]
         captured.append(
             (
-                _sanitize_prefix(prefix, session_index=session_index),
+                _sanitize_prefix(
+                    prefix,
+                    session_index=session_index,
+                    session_id=session_id,
+                ),
                 degraded,
             )
         )
@@ -229,6 +245,12 @@ def capture_local_trajectories(
         "privacy_audit": audit,
         "minimum_prefix": minimum_prefix,
         "last_enriched_sessions": last_enriched_sessions,
+        "selected_session_ids": sorted(selected_ids),
+        "captured_session_ids": [
+            events[0].metadata.get("session_id", "")
+            for events, _ in captured
+            if events
+        ],
         "captured_session_count": len(captured),
         "degraded_session_count": sum(label for _, label in captured),
         "clean_session_count": sum(not label for _, label in captured),

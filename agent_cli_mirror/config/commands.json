@@ -534,6 +534,29 @@
         }
       ]
     },
+    "trajectory-evo020": {
+      "purpose": "Reproduce EVO-020 finite-sample calibration, controlled confirmation, and read-only natural shadow evaluation from immutable cohorts.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-020 archived trajectory shadow",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-evo020",
+            "--calibration",
+            "outputs/evidence/evo020/clean_calibration.json",
+            "--confirmation",
+            "outputs/evidence/evo020/controlled_confirmation.json",
+            "--natural-shadow",
+            "outputs/evidence/evo020/natural_shadow.json",
+            "--out",
+            "outputs/evidence/evo020/evo020_shadow_report.json"
+          ]
+        }
+      ]
+    },
     "telemetry-probe-clean": {
       "purpose": "Generate one privacy-safe enriched clean telemetry session.",
       "steps": [

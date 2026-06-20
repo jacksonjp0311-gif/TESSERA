@@ -309,6 +309,57 @@ def cmd_trajectory_phase_holdout(args):
     print(f"Results: {out_path}")
 
 
+def cmd_trajectory_archive(args):
+    from tessera.experiments.trajectory_benchmark import (
+        archive_trajectory_cohort,
+    )
+
+    session_ids = [
+        value.strip()
+        for value in (args.session_ids or "").split(",")
+        if value.strip()
+    ]
+    result = archive_trajectory_cohort(
+        args.events,
+        args.out,
+        role=args.role,
+        minimum_prefix=args.minimum_prefix,
+        last_enriched_sessions=args.last_enriched_sessions,
+        session_ids=session_ids or None,
+    )
+    print(json.dumps({
+        "path": args.out,
+        "role": result["role"],
+        "cohort_sha256": result["cohort_sha256"],
+        "trajectory_count": result["trajectory_count"],
+        "clean_count": result["clean_count"],
+        "degraded_count": result["degraded_count"],
+    }, indent=2))
+
+
+def cmd_trajectory_evo020(args):
+    from tessera.experiments.trajectory_benchmark import (
+        run_evo020_archived_benchmark,
+    )
+
+    result = run_evo020_archived_benchmark(
+        args.calibration,
+        args.confirmation,
+        args.natural_shadow,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "calibration_sufficient": result["calibration"][
+            "calibration_sufficient"
+        ],
+        "controlled_confirmation": result["controlled_confirmation"],
+        "natural_shadow": result["natural_shadow"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -525,6 +576,32 @@ def main(argv=None):
         default="outputs/runs/latest/evo019_phase_holdout",
     )
     phase_holdout.set_defaults(func=cmd_trajectory_phase_holdout)
+    trajectory_archive = sub.add_parser(
+        "trajectory-archive",
+        help="Archive an immutable privacy-sanitized trajectory cohort.",
+    )
+    trajectory_archive.add_argument(
+        "--events",
+        default="agent_cli_mirror/state/events.jsonl",
+    )
+    trajectory_archive.add_argument("--role", required=True)
+    trajectory_archive.add_argument("--minimum-prefix", type=int, default=9)
+    trajectory_archive.add_argument("--last-enriched-sessions", type=int)
+    trajectory_archive.add_argument("--session-ids")
+    trajectory_archive.add_argument("--out", required=True)
+    trajectory_archive.set_defaults(func=cmd_trajectory_archive)
+    evo020 = sub.add_parser(
+        "trajectory-evo020",
+        help="Evaluate archived controlled confirmation and natural shadow cohorts.",
+    )
+    evo020.add_argument("--calibration", required=True)
+    evo020.add_argument("--confirmation", required=True)
+    evo020.add_argument("--natural-shadow", required=True)
+    evo020.add_argument(
+        "--out",
+        default="outputs/evidence/evo020/evo020_shadow_report.json",
+    )
+    evo020.set_defaults(func=cmd_trajectory_evo020)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)
