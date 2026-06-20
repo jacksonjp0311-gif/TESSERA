@@ -39,7 +39,7 @@ def main() -> int:
     root_engine = [p.name for p in ROOT.glob("TESSERA_ENGINE_*.md")]
     passed = not any([missing, missing_readme, missing_registry, missing_chart, missing_geom, missing_ps, missing_sh, root_engine])
     report = {
-        "schema": "TESSERA-v0.3.8-operator-geometry-command-registry-validation",
+        "schema": "TESSERA-v0.3.9-operator-geometry-command-registry-validation",
         "passed": passed,
         "missing_files": missing,
         "missing_readme_tokens": missing_readme,

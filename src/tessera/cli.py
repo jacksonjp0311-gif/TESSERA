@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
+import uuid
 from pathlib import Path
 
 from tessera.experiments.run_synthetic import run as run_synthetic
@@ -18,7 +20,11 @@ def cmd_run(args):
 
 def cmd_validate(args):
     run_dir = Path(args.run)
-    cert_path = run_dir / "certificates" / "transfer_certificate.json"
+    cert_path = run_dir / "certificates" / "diagnostic_certificate.json"
+    if not cert_path.exists():
+        cert_path = run_dir / "certificates" / "dataset_transfer_certificate.json"
+    if not cert_path.exists():
+        cert_path = run_dir / "certificates" / "transfer_certificate.json"
     ev_path = run_dir / "evidence" / "evidence_package.json"
     missing = []
     for p in [cert_path, ev_path, run_dir / "metrics" / "tessera_timeseries.csv", run_dir / "ledgers" / "wounds.jsonl"]:
@@ -37,6 +43,346 @@ def cmd_validate(args):
 def cmd_loop(args):
     loop_compiler.main(args.loop_args)
 
+def cmd_benchmark(args):
+    from tessera.experiments.benchmark import multi_seed_benchmark
+    seeds = [int(value) for value in args.seeds.split(",") if value.strip()]
+    report = multi_seed_benchmark(
+        out=args.out, seeds=seeds, steps=args.steps, epochs=args.epochs
+    )
+    print(json.dumps(report, indent=2))
+
+
+def cmd_transfer_nab(args):
+    from tessera.experiments.run_nab_transfer import run_nab_diagnostic as run_nab_transfer
+    from pathlib import Path
+
+    result = run_nab_transfer(
+        root=Path(args.root),
+        field_dim=args.field_dim,
+        code_dim=args.code_dim,
+        alpha=args.alpha,
+        epochs=args.epochs,
+        seed=args.seed,
+        hidden_dim=args.hidden_dim if args.hidden_dim > 0 else None,
+        depth=args.depth,
+    )
+    out_path = Path(args.out) / "enhanced_nab_diagnostic.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps(result["metrics"], indent=2))
+
+
+def cmd_transfer_smap(args):
+    from tessera.experiments.run_smap_transfer import run
+
+    run_dir = run(
+        root=args.root,
+        out=args.out,
+        channel_id=args.channel,
+        epochs=args.epochs,
+        seed=args.seed,
+    )
+    certificate = json.loads(
+        (run_dir / "certificates" / "dataset_transfer_certificate.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    print(json.dumps({
+        "run": str(run_dir),
+        "claim_ceiling": certificate["claim_ceiling"],
+        "transfer_level": certificate["transfer_level"],
+        "dataset_scoped_transfer_supported": certificate[
+            "dataset_scoped_transfer_supported"
+        ],
+        "transfer_gates": certificate["transfer_gates"],
+        "metrics": certificate["metrics"],
+    }, indent=2))
+
+
+def cmd_transfer_ucr(args):
+    from tessera.experiments.run_ucr_transfer import run
+
+    run_dir = run(
+        root=args.root,
+        filename=args.filename,
+        role=args.role,
+        out=args.out,
+        epochs=args.epochs,
+        seed=args.seed,
+        episode_quarantine=args.episode_quarantine,
+        sensor_mode=args.sensor_mode,
+    )
+    certificate = json.loads(
+        (run_dir / "certificates" / "dataset_transfer_certificate.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    print(json.dumps({
+        "run": str(run_dir),
+        "role": args.role,
+        "dataset": certificate["dataset_name"],
+        "claim_ceiling": certificate["claim_ceiling"],
+        "dataset_scoped_transfer_supported": certificate[
+            "dataset_scoped_transfer_supported"
+        ],
+        "transfer_gates": certificate["transfer_gates"],
+        "metrics": certificate["metrics"],
+    }, indent=2))
+
+def cmd_plugin_demo(args):
+    from tessera.plugin import TesseraPlugin
+    from tessera.plugin.contracts import AgentEvent, InferenceQuery, ReplayPacket
+    plugin = TesseraPlugin()
+    events = [
+        AgentEvent(
+            event_id=str(uuid.uuid4()),
+            kind="test_result",
+            timestamp=time.time() + index,
+            features={
+                "duration_ms": 100 + index * 12,
+                "token_count": 300 + index * 20,
+                "tests_failed": float(index == args.events - 1),
+                "error": float(index == args.events - 1),
+            },
+        )
+        for index in range(args.events)
+    ]
+    receipt = plugin.observe(events)
+    inference = plugin.infer(InferenceQuery())
+    memory = plugin.propose_memory()
+    repair = plugin.propose_repair()
+    replay = plugin.replay(
+        ReplayPacket(expected_max_prediction_loss=args.max_prediction_loss)
+    )
+    print(json.dumps({
+        "manifest": plugin.describe().as_dict(),
+        "observation": receipt.__dict__,
+        "inference": inference.__dict__,
+        "memory_proposal": memory.__dict__,
+        "repair_proposal": repair.__dict__,
+        "replay_certificate": replay.__dict__,
+        "checkpoint": plugin.checkpoint(),
+    }, indent=2))
+
+
+def cmd_repair(args):
+    """Run replay-guided shadow repair ablation study."""
+    from tessera.experiments.repair_ablation import run_repair_ablation
+    result = run_repair_ablation(
+        seed=args.seed,
+        steps=args.steps,
+        channels=args.channels,
+        field_dim=args.field_dim,
+        code_dim=args.code_dim,
+        alpha=args.alpha,
+        epochs=args.epochs,
+        hidden_dim=args.hidden_dim,
+        depth=args.depth,
+    )
+    out_path = Path(args.out) / "repair_ablation.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w") as f:
+        json.dump(result, f, indent=2, default=str)
+    print(f"Repair ablation complete. Winner: {result['winner']}")
+    print(f"Results written to {out_path}")
+    for arm in result["arms"]:
+        print(f"  {arm['arm']}: loss={arm['prediction_loss']:.4f}, recall={arm['recall']:.3f}, fmr={arm['false_memory_rate']:.3f}")
+
+def cmd_benchmark_arch(args):
+    """Run multi-seed benchmark with architecture scaling."""
+    from tessera.experiments.benchmark import multi_seed_benchmark
+    seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
+    archs = None
+    if args.architectures:
+        archs = []
+        for spec in args.architectures.split(";"):
+            parts = spec.split(",")
+            archs.append({
+                "name": parts[0],
+                "depth": int(parts[1]),
+                "hidden_dim": int(parts[2]),
+            })
+    result = multi_seed_benchmark(
+        seeds=seeds,
+        steps=args.steps,
+        channels=args.channels,
+        field_dim=args.field_dim,
+        code_dim=args.code_dim,
+        alpha=args.alpha,
+        epochs=args.epochs,
+        architectures=archs,
+    )
+    out_path = Path(args.out) / "arch_benchmark.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w") as f:
+        json.dump(result, f, indent=2, default=str)
+    print(f"Architecture benchmark complete. Results written to {out_path}")
+    for arch_name, arch_result in result.items():
+        s = arch_result["summary"]
+        print(f"  {arch_name}: loss={s['mean_prediction_loss']:.4f}±{s['std_prediction_loss']:.4f}, "
+              f"recall={s['mean_recall']:.3f}, replay={s['mean_replay_pass_rate']:.3f}, "
+              f"params={s['mean_parameter_count']:.0f}, parity={s['baseline_parity']}")
+
+def cmd_trajectory_demo(args):
+    """Demonstrate agent trajectory adapter with synthetic events."""
+    from tessera.plugin.trajectory import (
+        create_agent_event, summarize_trajectory, vectorize_events, ADAPTER_REGISTRY,
+    )
+    events = [
+        create_agent_event("prompt-1", "prompt_metadata",
+            {"token_count": 1500, "prompt_length": 1200, "system_tokens": 300, "history_turns": 3, "tool_count": 2},
+            timestamp=1000.0),
+        create_agent_event("tool-1", "tool_call",
+            {"tool_name": "bash", "latency_ms": 250, "input_tokens": 50, "error": False, "retry_count": 0, "files_changed": 1},
+            timestamp=1250.0),
+        create_agent_event("result-1", "tool_result",
+            {"latency_ms": 250, "output_tokens": 200, "error": False, "retry_count": 0},
+            timestamp=1300.0),
+        create_agent_event("response-1", "response_metadata",
+            {"token_count": 800, "duration_ms": 2000, "finish_reason": "stop", "has_tool_call": True, "reasoning_tokens": 0},
+            timestamp=3300.0),
+        create_agent_event("test-1", "test_result",
+            {"duration_ms": 5000, "tests_failed": 0, "tests_passed": 15, "error": False, "output_tokens": 300},
+            timestamp=8300.0),
+    ]
+    summary = summarize_trajectory(events)
+    matrix = vectorize_events(events)
+    print(f"Trajectory demo: {summary.event_count} events, {len(summary.kinds)} kinds")
+    print(f"  Duration: {summary.total_duration_ms:.0f}ms, Errors: {summary.error_count}")
+    print(f"  Tokens: {summary.total_tokens:.0f}, Adapter coverage: {summary.adapter_coverage:.0%}")
+    print(f"  Feature matrix: {matrix.shape}")
+    print(f"  Hash: {summary.trajectory_hash}")
+
+
+def cmd_trajectory_benchmark(args):
+    from tessera.experiments.trajectory_benchmark import (
+        run_trajectory_benchmark,
+    )
+
+    seeds = [int(value) for value in args.seeds.split(",") if value.strip()]
+    result = run_trajectory_benchmark(
+        seeds=seeds,
+        length=args.length,
+        explicit_failure=not args.precursor_only,
+    )
+    out_path = Path(args.out) / "trajectory_benchmark.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps(result["policies"], indent=2))
+    print(f"Results: {out_path}")
+
+
+def cmd_trajectory_local(args):
+    from tessera.experiments.trajectory_benchmark import (
+        run_local_capture_benchmark,
+    )
+
+    result = run_local_capture_benchmark(
+        args.events,
+        minimum_prefix=args.minimum_prefix,
+        last_enriched_sessions=args.last_enriched_sessions,
+    )
+    out_path = Path(args.out) / "local_trajectory_benchmark.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps(result["capture_manifest"], indent=2))
+    print(json.dumps(result["policies"], indent=2))
+    print(f"Results: {out_path}")
+
+
+def cmd_trajectory_phase_holdout(args):
+    from tessera.experiments.trajectory_benchmark import (
+        run_phase_conditioned_holdout_benchmark,
+    )
+
+    result = run_phase_conditioned_holdout_benchmark(
+        args.events,
+        minimum_prefix=args.minimum_prefix,
+        calibration_sessions=args.calibration_sessions,
+        holdout_sessions=args.holdout_sessions,
+    )
+    out_path = Path(args.out) / "phase_conditioned_holdout.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps(result["calibration"], indent=2))
+    print(json.dumps(result["policy"], indent=2))
+    print(f"Results: {out_path}")
+
+
+def cmd_repair(args):
+    """Run replay-guided shadow repair ablation study."""
+    from tessera.experiments.repair_ablation import run_repair_ablation
+    result = run_repair_ablation(
+        seed=args.seed, steps=args.steps, channels=args.channels,
+        field_dim=args.field_dim, code_dim=args.code_dim, alpha=args.alpha,
+        epochs=args.epochs, hidden_dim=args.hidden_dim or None, depth=args.depth,
+    )
+    out_path = Path(args.out) / "repair_ablation.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w") as f:
+        json.dump(result, f, indent=2, default=str)
+    print(f"Repair ablation complete. Winner: {result['winner']}")
+    print(f"Results: {out_path}")
+    for arm in result["arms"]:
+        print(f"  {arm['arm']}: loss={arm['prediction_loss']:.4f}, recall={arm['recall']:.3f}, fmr={arm['false_memory_rate']:.3f}")
+
+def cmd_benchmark_arch(args):
+    """Run multi-seed benchmark with architecture scaling."""
+    from tessera.experiments.benchmark import multi_seed_benchmark
+    seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
+    archs = None
+    if args.architectures:
+        archs = []
+        for spec in args.architectures.split(";"):
+            parts = spec.split(",")
+            archs.append({"name": parts[0], "depth": int(parts[1]), "hidden_dim": int(parts[2])})
+    result = multi_seed_benchmark(
+        seeds=seeds, steps=args.steps, channels=args.channels,
+        field_dim=args.field_dim, code_dim=args.code_dim, alpha=args.alpha,
+        epochs=args.epochs, architectures=archs,
+    )
+    out_path = Path(args.out) / "arch_benchmark.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w") as f:
+        json.dump(result, f, indent=2, default=str)
+    print(f"Architecture benchmark complete: {out_path}")
+    for name, r in result.items():
+        s = r["summary"]
+        print(f"  {name}: loss={s['mean_prediction_loss']:.4f}±{s['std_prediction_loss']:.4f}, "
+              f"recall={s['mean_recall']:.3f}, replay={s['mean_replay_pass_rate']:.3f}, "
+              f"params={s['mean_parameter_count']:.0f}, parity={s['baseline_parity']}")
+
+def cmd_trajectory_demo(args):
+    """Demonstrate agent trajectory adapter with synthetic events."""
+    from tessera.plugin.trajectory import (
+        create_agent_event, summarize_trajectory, vectorize_events, ADAPTER_REGISTRY,
+    )
+    events = [
+        create_agent_event("prompt-1", "prompt_metadata",
+            {"token_count": 1500, "prompt_length": 1200, "system_tokens": 300, "history_turns": 3, "tool_count": 2},
+            timestamp=1000.0),
+        create_agent_event("tool-1", "tool_call",
+            {"tool_name": "bash", "latency_ms": 250, "input_tokens": 50, "error": False, "retry_count": 0, "files_changed": 1},
+            timestamp=1250.0),
+        create_agent_event("result-1", "tool_result",
+            {"latency_ms": 250, "output_tokens": 200, "error": False, "retry_count": 0},
+            timestamp=1300.0),
+        create_agent_event("response-1", "response_metadata",
+            {"token_count": 800, "duration_ms": 2000, "finish_reason": "stop", "has_tool_call": True, "reasoning_tokens": 0},
+            timestamp=3300.0),
+        create_agent_event("test-1", "test_result",
+            {"duration_ms": 5000, "tests_failed": 0, "tests_passed": 15, "error": False, "output_tokens": 300},
+            timestamp=8300.0),
+    ]
+    summary = summarize_trajectory(events)
+    matrix = vectorize_events(events)
+    print(f"Trajectory demo: {summary.event_count} events, {len(summary.kinds)} kinds")
+    print(f"  Duration: {summary.total_duration_ms:.0f}ms, Errors: {summary.error_count}")
+    print(f"  Tokens: {summary.total_tokens:.0f}, Adapter coverage: {summary.adapter_coverage:.0%}")
+    print(f"  Feature matrix: {matrix.shape}")
+    print(f"  Hash: {summary.trajectory_hash}")
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="tessera", description="TESSERA Engine")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -53,6 +399,133 @@ def main(argv=None):
     r.add_argument("--epochs", type=int, default=6)
     r.set_defaults(func=cmd_run)
     v = sub.add_parser("validate"); v.add_argument("--run", required=True); v.set_defaults(func=cmd_validate)
+    bench = sub.add_parser("benchmark", help="Run a deterministic multi-seed synthetic benchmark.")
+    bench.add_argument("--out", default="outputs/benchmarks")
+    bench.add_argument("--seeds", default="11,23,37")
+    bench.add_argument("--steps", type=int, default=300)
+    bench.add_argument("--epochs", type=int, default=2)
+    bench.set_defaults(func=cmd_benchmark)
+    transfer = sub.add_parser(
+        "transfer-nab",
+        help="Run the pinned NAB machine-temperature dataset-scoped T1 trial.",
+    )
+    transfer.add_argument("--root", default="datasets/nab")
+    transfer.add_argument(
+        "--out", default="outputs/transfers/nab-machine-temperature"
+    )
+    transfer.add_argument("--epochs", type=int, default=10)
+    transfer.add_argument("--seed", type=int, default=42)
+    transfer.add_argument("--field-dim", type=int, default=16)
+    transfer.add_argument("--code-dim", type=int, default=8)
+    transfer.add_argument("--alpha", type=float, default=0.5)
+    transfer.add_argument("--hidden-dim", type=int, default=0)
+    transfer.add_argument("--depth", type=int, default=2)
+    transfer.set_defaults(func=cmd_transfer_nab)
+    smap = sub.add_parser(
+        "transfer-smap",
+        help="Run a pinned NASA SMAP Telemanom channel diagnostic.",
+    )
+    smap.add_argument("--root", default=".")
+    smap.add_argument("--out", default="outputs/transfers/smap-p1")
+    smap.add_argument("--channel", default="P-1")
+    smap.add_argument("--epochs", type=int, default=5)
+    smap.add_argument("--seed", type=int, default=42)
+    smap.set_defaults(func=cmd_transfer_smap)
+    ucr = sub.add_parser(
+        "transfer-ucr",
+        help="Run a preregistered UCR anomaly archive series.",
+    )
+    ucr.add_argument("--root", default=".")
+    ucr.add_argument("--out", default="outputs/transfers/ucr")
+    ucr.add_argument("--filename", required=True)
+    ucr.add_argument("--role", choices=["discovery", "confirmation"], required=True)
+    ucr.add_argument("--epochs", type=int, default=5)
+    ucr.add_argument("--seed", type=int, default=42)
+    ucr.add_argument("--episode-quarantine", type=int, default=0)
+    ucr.add_argument(
+        "--sensor-mode",
+        choices=[
+            "subsequence",
+            "router",
+            "abstaining-router",
+            "selective-router",
+        ],
+        default="subsequence",
+    )
+    ucr.set_defaults(func=cmd_transfer_ucr)
+    plugin = sub.add_parser("plugin-demo", help="Run the permission-bounded agent sidecar prototype.")
+    plugin.add_argument("--events", type=int, default=8)
+    plugin.add_argument("--max-prediction-loss", type=float, default=500.0)
+    plugin.set_defaults(func=cmd_plugin_demo)
+    repair = sub.add_parser("repair", help="Run replay-guided shadow repair ablation.")
+    repair.add_argument("--out", default="outputs/runs/latest")
+    repair.add_argument("--seed", type=int, default=42)
+    repair.add_argument("--steps", type=int, default=600)
+    repair.add_argument("--channels", type=int, default=4)
+    repair.add_argument("--field-dim", type=int, default=16)
+    repair.add_argument("--code-dim", type=int, default=8)
+    repair.add_argument("--alpha", type=float, default=0.5)
+    repair.add_argument("--epochs", type=int, default=4)
+    repair.add_argument("--hidden-dim", type=int, default=0)
+    repair.add_argument("--depth", type=int, default=2)
+    repair.set_defaults(func=cmd_repair)
+    arch = sub.add_parser("benchmark-arch", help="Run multi-seed benchmark with architecture scaling.")
+    arch.add_argument("--out", default="outputs/runs/latest")
+    arch.add_argument("--seeds", default="11,23,37")
+    arch.add_argument("--steps", type=int, default=600)
+    arch.add_argument("--channels", type=int, default=4)
+    arch.add_argument("--field-dim", type=int, default=16)
+    arch.add_argument("--code-dim", type=int, default=8)
+    arch.add_argument("--alpha", type=float, default=0.5)
+    arch.add_argument("--epochs", type=int, default=4)
+    arch.add_argument("--architectures", default=None,
+                       help='Semicolon-separated arch specs: name,depth,hidden_dim;...')
+    arch.set_defaults(func=cmd_benchmark_arch)
+    sub.add_parser("trajectory-demo", help="Demonstrate agent trajectory adapter.").set_defaults(func=cmd_trajectory_demo)
+    trajectory_benchmark = sub.add_parser(
+        "trajectory-benchmark",
+        help="Run the offline agent-trajectory utility benchmark.",
+    )
+    trajectory_benchmark.add_argument("--seeds", default="0,1,2,3,4,5,6,7,8,9,10,11")
+    trajectory_benchmark.add_argument("--length", type=int, default=12)
+    trajectory_benchmark.add_argument("--out", default="outputs/runs/latest")
+    trajectory_benchmark.add_argument(
+        "--precursor-only",
+        action="store_true",
+        help="Remove explicit final error and retry flags.",
+    )
+    trajectory_benchmark.set_defaults(func=cmd_trajectory_benchmark)
+    trajectory_local = sub.add_parser(
+        "trajectory-local",
+        help="Privacy-audit and benchmark sanitized local Agent CLI events.",
+    )
+    trajectory_local.add_argument(
+        "--events",
+        default="agent_cli_mirror/state/events.jsonl",
+    )
+    trajectory_local.add_argument("--minimum-prefix", type=int, default=7)
+    trajectory_local.add_argument("--last-enriched-sessions", type=int)
+    trajectory_local.add_argument(
+        "--out", default="outputs/runs/latest/local_trajectory"
+    )
+    trajectory_local.set_defaults(func=cmd_trajectory_local)
+    phase_holdout = sub.add_parser(
+        "trajectory-phase-holdout",
+        help="Calibrate phase durations and evaluate a later controlled holdout.",
+    )
+    phase_holdout.add_argument(
+        "--events",
+        default="agent_cli_mirror/state/events.jsonl",
+    )
+    phase_holdout.add_argument("--minimum-prefix", type=int, default=9)
+    phase_holdout.add_argument("--calibration-sessions", type=int, default=8)
+    phase_holdout.add_argument("--holdout-sessions", type=int, default=8)
+    phase_holdout.add_argument(
+        "--out",
+        default="outputs/runs/latest/evo019_phase_holdout",
+    )
+    phase_holdout.set_defaults(func=cmd_trajectory_phase_holdout)
+
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)
     loop.set_defaults(func=cmd_loop)

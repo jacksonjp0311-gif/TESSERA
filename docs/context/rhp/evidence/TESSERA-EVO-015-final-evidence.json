@@ -1,0 +1,46 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.15",
+  "operation": "TESSERA-EVO-015",
+  "previous_operation": "TESSERA-EVO-014",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "SHADOW_REPAIR_GATE_FIXED_TRAJECTORY_BENCHMARK_CONTROL_SATURATED",
+  "repair_ablation": {
+    "winner": "targeted_shadow_repair",
+    "eligible_arms": ["targeted_shadow_repair"],
+    "wrong_target_eligible": false,
+    "eligibility_bundle": {
+      "prediction_parity": true,
+      "replay_pass_rate_minimum": 0.60,
+      "recall_minimum": 0.65,
+      "false_memory_rate_maximum": 0.05
+    }
+  },
+  "trajectory_benchmark": {
+    "trajectory_count": 12,
+    "recency_accuracy": 1.0,
+    "summary_accuracy": 0.8333333333333334,
+    "tessera_accuracy": 1.0,
+    "tessera_failure_recall": 1.0,
+    "tessera_false_intervention_rate": 0.0,
+    "tessera_safe_memory_recall": 0.5,
+    "tessera_unsafe_memory_rate": 0.0,
+    "tessera_mean_latency_ms": 158.7283666667645,
+    "tessera_beats_both_controls": false,
+    "limitation": "explicit final error saturates recency control"
+  },
+  "supported_T1_count": 2,
+  "supported_families": ["NAB", "UCR"],
+  "next_recommended_operation": "run_precursor_only_trajectory_benchmark_then_review_local_trajectory_capture",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "A saturated synthetic control benchmark does not prove superior or live agent utility."
+}

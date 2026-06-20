@@ -6,10 +6,12 @@ from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_sco
 
 def summarize_gates(df: pd.DataFrame) -> dict:
     y = df.get('label')
-    score = df['J_RD'].to_numpy()
+    score_column = 'anomaly_score' if 'anomaly_score' in df else 'J_RD'
+    score = df[score_column].to_numpy()
     pred = df['warn'].to_numpy()
     out = {
         'mean_J_RD': float(df['J_RD'].mean()),
+        'mean_anomaly_score': float(df[score_column].mean()),
         'mean_delta_phi': float(df['delta_phi'].mean()),
         'warn_rate': float(df['warn'].mean()),
         'block_rate': float(df['block'].mean()),
@@ -28,9 +30,10 @@ def summarize_gates(df: pd.DataFrame) -> dict:
         out['recall_warn'] = float(recall_score(y, pred, zero_division=0))
         normal = df[df['label']==0]
         anomaly = df[df['label']==1]
+        out['replay_pass_rate'] = float(normal['memory_candidate'].mean()) if len(normal) else 0.0
         out['false_memory_candidate_rate'] = float(anomaly['false_memory_candidate'].mean()) if len(anomaly) else 0.0
-        out['false_memory_rate'] = float(anomaly['promoted_memory'].mean()) if len(anomaly) else 0.0
-        out['memory_selectivity'] = float(normal['promoted_memory'].mean() - anomaly['promoted_memory'].mean()) if len(normal) and len(anomaly) else 0.0
+        out['false_memory_rate'] = out['false_memory_candidate_rate']
+        out['memory_selectivity'] = float(normal['memory_candidate'].mean() - anomaly['memory_candidate'].mean()) if len(normal) and len(anomaly) else 0.0
         out['block_false_positive'] = float(normal['block'].mean()) if len(normal) else 0.0
         out['missed_warning'] = float((anomaly['warn']==0).mean()) if len(anomaly) else 0.0
         out['governance_harm'] = float(0.35*out['false_memory_rate'] + 0.35*out['block_false_positive'] + 0.30*out['missed_warning'])

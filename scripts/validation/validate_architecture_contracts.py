@@ -4,12 +4,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 REQUIRED_DIRS = [
     "docs/alignment", "docs/context", "docs/theory", "docs/readme", "docs/benchmarks",
-    "rcc/nexus", "src/tessera", "tests", "reports/rcc_nexus", "reports/validation", "reports/readme",
+    "docs/context/rhp", "docs/context/nexus", "docs/geometry", "docs/lessons", "docs/roadmap", "docs/schemas",
+    "rcc/nexus", "src/tessera", "src/tessera/rhp", "src/tessera/plugin", "tests",
+    "reports/rcc_nexus", "reports/rhp_nexus", "reports/validation", "reports/readme",
 ]
 REQUIRED_FILES = [
     "docs/readme/README_DISCIPLINE.md",
     "docs/benchmarks/current_public_metrics.md",
     "scripts/readme/audit_readme_nexus_discipline.py",
+    "docs/context/rhp/latest-rhp.json",
+    "docs/context/nexus/surface_registry.json",
+    "docs/geometry/repository_geometry.json",
+    "docs/lessons/lesson_chart.json",
+    "docs/roadmap/tessera_evolutionary_roadmap.json",
+    "docs/schemas/dataset_manifest.schema.json",
+    "docs/schemas/plugin_manifest.schema.json",
+    "scripts/validation/validate_rhp_nexus.py",
 ]
 REQUIRED_LOCKS = ["navigation_is_not_validation", "documentation_is_not_correctness", "synthetic_success_is_not_transfer", "validation_remains_required"]
 

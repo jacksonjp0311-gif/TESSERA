@@ -1,0 +1,30 @@
+{
+  "schema": "TESSERA-MINI-README-PROFILES-v0.1",
+  "profile_law": "Use the lightest sufficient profile; do not over-govern simple surfaces or under-govern runtime and evidence surfaces.",
+  "profiles": {
+    "full": {
+      "purpose": "Load-bearing runtime, evidence, validation, or governance surface.",
+      "required_sections": [
+        "Specification",
+        "Hooks",
+        "Artifacts",
+        "Invariants",
+        "Claim Boundary"
+      ]
+    },
+    "compact": {
+      "purpose": "Important support, report, configuration, or documentation surface.",
+      "required_sections": [
+        "Specification",
+        "Claim Boundary"
+      ]
+    },
+    "pointer": {
+      "purpose": "Root, generated, or low-risk navigation pointer.",
+      "required_sections": [
+        "title"
+      ]
+    }
+  },
+  "claim_boundary": "Mini READMEs improve repository orientation only; they do not prove correctness or grant authority."
+}

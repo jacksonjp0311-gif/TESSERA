@@ -7,11 +7,54 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
-LOOP_STEPS = ["rehydrate", "loopbook", "launch", "observe", "worker", "check", "run", "validate", "ledger", "push", "root"]
+SCHEMA_VERSION = "v0.2.8"
+LOOP_STEPS = ["rehydrate", "agent-cli-mirror", "loopbook", "launch", "observe", "worker", "check", "run", "validate", "ledger", "push", "root"]
 FEATURE_FILES = [
     "README.md", "README_90_SECONDS.md", "AGENTS.md", "docs/loop/TESSERA_LOOPBOOK.md",
-    "scripts/run-tessera-full-loop.ps1", "scripts/tessera-dual-console.ps1", "scripts/tessera-worker.ps1",
-    "scripts/tessera-watch.ps1", "scripts/validation/validate_loopbook_gate.py", "src/tessera/loop_compiler.py", "src/tessera/cli.py",
+    "docs/loop/TESSERA_FAILURE_LESSONS.md", "docs/loop/TESSERA_OPERATOR_LOOP_CHART.md",
+    "scripts/run-tessera-full-loop.ps1", "scripts/run-tessera-full-loop.sh",
+    "scripts/agent-mirror.ps1", "scripts/agent-mirror.sh",
+    "scripts/loopbook/sync_loopbook.py", "scripts/validation/validate_loopbook_gate.py",
+    "agent_cli_mirror/agent_mirror.py", "agent_cli_mirror/config/commands.json",
+    "docs/context/rhp/latest-rhp.json", "docs/context/nexus/surface_registry.json",
+    "docs/geometry/repository_geometry.json", "docs/lessons/lesson_chart.json",
+    "docs/roadmap/tessera_evolutionary_roadmap.json",
+    "docs/research/CROSS_DOMAIN_EVOLUTION_2026-06-19.md",
+    "docs/research/MULTISCALE_AWARENESS_EVOLUTION_2026-06-19.md",
+    "docs/research/NAB_T1_TRANSFER_2026-06-19.md",
+    "datasets/nab/source_manifest.json",
+    "src/tessera/experiments/run_nab_transfer.py",
+    "datasets/telemanom/source_manifest.json",
+    "src/tessera/experiments/run_smap_transfer.py",
+    "docs/research/NASA_SMAP_DIAGNOSTIC_2026-06-19.md",
+    "datasets/ucr/source_manifest.json",
+    "src/tessera/experiments/run_ucr_transfer.py",
+    "src/tessera/metrics/subsequence.py",
+    "docs/research/UCR_SUBSEQUENCE_EVOLUTION_2026-06-19.md",
+    "src/tessera/memory/episodes.py",
+    "docs/research/UCR_EPISODE_GOVERNANCE_2026-06-19.md",
+    "src/tessera/metrics/router.py",
+    "docs/research/UCR_SENSOR_ROUTER_2026-06-19.md",
+    "src/tessera/memory/gates.py",
+    "docs/research/UCR_ABSTENTION_MEMORY_NORMALITY_2026-06-19.md",
+    "src/tessera/baselines/pca_codec.py",
+    "src/tessera/baselines/random_projection.py",
+    "src/tessera/baselines/matrix_profile.py",
+    "docs/research/UCR_SELECTIVE_FUSION_2026-06-19.md",
+    "src/tessera/model/prediction_experts.py",
+    "docs/research/UCR_PREDICTION_EXPERT_TRANSFER_2026-06-19.md",
+    "src/tessera/plugin/contracts.py",
+    "src/tessera/plugin/runtime.py",
+    "docs/research/NAB_ENHANCED_NETWORK_DIAGNOSTIC_2026-06-19.md",
+    "src/tessera/experiments/trajectory_benchmark.py",
+    "docs/research/OFFLINE_TRAJECTORY_UTILITY_2026-06-19.md",
+    "docs/research/PRECURSOR_TRAJECTORY_UTILITY_2026-06-19.md",
+    "src/tessera/plugin/privacy_capture.py",
+    "docs/research/LOCAL_TRAJECTORY_PRIVACY_DIAGNOSTIC_2026-06-19.md",
+    "docs/research/LOCAL_TRAJECTORY_IDENTIFIABILITY_2026-06-19.md",
+    "docs/research/PHASE_CONDITIONED_TELEMETRY_SPECIALIST_2026-06-19.md",
+    "scripts/telemetry/probe.py",
+    "src/tessera/rhp/core.py", "scripts/validation/validate_rhp_nexus.py",
 ]
 
 def sha(path: Path) -> str | None:
@@ -34,7 +77,7 @@ def loopbook_md(manifest: dict) -> str:
 The Loopbook is the canonical operator run record for Tessera. Every feature that changes the runtime loop, scripts, validation path, README run surface, or operator interface must update this file and `docs/loop/loopbook_manifest.json`.
 
 ```text
-rehydrate -> loopbook -> launch -> observe -> worker -> check -> run -> validate -> ledger -> push -> root
+rehydrate -> agent-cli-mirror -> loopbook -> launch -> observe -> worker -> check -> run -> validate -> ledger -> push -> root
 ```
 
 ## Canonical Command
@@ -54,7 +97,7 @@ Dry run without push:
 
 ```text
 Observer PowerShell = read-only human interface
-Worker PowerShell   = local code runner
+Worker PowerShell   = registered Agent CLI Mirror command runner
 ```
 
 ## Loop Steps
@@ -72,7 +115,7 @@ If validation fails, no commit/push promotion.
 ## Expected Result
 
 1. Repository root is locked.
-2. Loopbook sync runs.
+2. Agent CLI Mirror validates its launcher and command registry.
 3. Observer PowerShell opens.
 4. Worker PowerShell opens.
 5. Checkers run.
@@ -95,15 +138,16 @@ The Loopbook does not prove truth, safety, production readiness, code correctnes
 
 def main() -> int:
     manifest = {
-        "schema": "TESSERA-loopbook-manifest-v0.2.6",
+        "schema": f"TESSERA-loopbook-manifest-{SCHEMA_VERSION}",
         "updated_at_utc": datetime.now(timezone.utc).isoformat(),
         "git_head": git_head(),
         "loop_steps": LOOP_STEPS,
         "canonical_loopbook": "docs/loop/TESSERA_LOOPBOOK.md",
         "canonical_command": ".\\scripts\\run-tessera-full-loop.ps1",
-        "observer": "scripts/tessera-watch.ps1",
-        "worker": "scripts/tessera-worker.ps1",
-        "launcher": "scripts/tessera-dual-console.ps1",
+        "agent_cli_mirror": "agent_cli_mirror/agent_mirror.py",
+        "observer": "agent_cli_mirror/agent_mirror.py observe",
+        "worker": "agent_cli_mirror/agent_mirror.py worker",
+        "launcher": "scripts/agent-mirror.ps1",
         "gate": "scripts/validation/validate_loopbook_gate.py",
         "feature_hashes": {},
         "claim_boundary": "Loopbook sync records operator surfaces only; it does not prove real telemetry transfer.",
@@ -114,7 +158,7 @@ def main() -> int:
     (ROOT / "docs/loop/TESSERA_LOOPBOOK.md").write_text(loopbook_md(manifest), encoding="utf-8")
     manifest["feature_hashes"]["docs/loop/TESSERA_LOOPBOOK.md"] = sha(ROOT / "docs/loop/TESSERA_LOOPBOOK.md")
     (ROOT / "docs/loop/loopbook_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-    print(json.dumps({"schema": "TESSERA-loopbook-sync-v0.2.6", "status": "synced", "loopbook": "docs/loop/TESSERA_LOOPBOOK.md"}, indent=2))
+    print(json.dumps({"schema": f"TESSERA-loopbook-sync-{SCHEMA_VERSION}", "status": "synced", "loopbook": "docs/loop/TESSERA_LOOPBOOK.md"}, indent=2))
     return 0
 
 if __name__ == "__main__":

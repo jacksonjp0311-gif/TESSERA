@@ -16,6 +16,8 @@
   "route_map": "rcc/nexus/route_map.json",
   "echo_records": [
     "README.md",
+    "docs/context/rhp/README.md",
+    "docs/context/nexus/README.md",
     "docs/theory/README.md",
     "docs/theory/imports/README.md",
     "docs/theory/tessera_lineage/README.md",
@@ -57,6 +59,26 @@
       "id": "quick",
       "path": "README_90_SECONDS.md",
       "role": "fast orientation"
+    },
+    {
+      "id": "rhp",
+      "path": "docs/context/rhp/latest-rhp.json",
+      "role": "current truth and evidence pointer"
+    },
+    {
+      "id": "surface_registry",
+      "path": "docs/context/nexus/surface_registry.json",
+      "role": "canonical route and mini-README profile registry"
+    },
+    {
+      "id": "repository_geometry",
+      "path": "docs/geometry/repository_geometry.json",
+      "role": "repository node, edge, and loop-order contract"
+    },
+    {
+      "id": "lesson_chart",
+      "path": "docs/lessons/lesson_chart.json",
+      "role": "evidence-backed wound and lesson promotion registry"
     },
     {
       "id": "architecture",
@@ -200,6 +222,7 @@
     }
   ],
   "validators": [
+    "python scripts/validation/validate_rhp_nexus.py",
     "python scripts/rcc/check_rcc_nexus.py",
     "python scripts/validation/validate_architecture_contracts.py",
     "python -m unittest discover -s tests",

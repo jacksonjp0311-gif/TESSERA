@@ -1,0 +1,19 @@
+{
+  "schema": "TESSERA-EXTERNAL-DATA-SOURCE-v0.1",
+  "dataset": "NAB realKnownCause machine_temperature_system_failure",
+  "repository": "https://github.com/numenta/NAB",
+  "commit": "ea702d75cc2258d9d7dd35ca8e5e2539d71f3140",
+  "license": "MIT",
+  "stream_path": "data/realKnownCause/machine_temperature_system_failure.csv",
+  "labels_path": "labels/combined_windows.json",
+  "stream_sha256": "92bf5b87fc7f9bba8ca0b7ec63ccaac8cb4a1371a258e8c29a10ae9c018d82a4",
+  "labels_sha256": "1e1fbc4601321aad8d0f8b3784c8134299379f68f6c1f7777565f8ffd57ab6b1",
+  "license_sha256": "0a0b4d0b10cb1f7ed9ab2993ef93defc03447e6eba9daca1315dd32dae4877e3",
+  "retrieved_utc_date": "2026-06-19",
+  "known_caveats": [
+    "12 duplicate timestamps are preserved",
+    "labels are anomaly windows rather than instantaneous failure truth",
+    "single univariate stream"
+  ],
+  "claim_boundary": "Pinned source provenance does not prove transfer capability."
+}

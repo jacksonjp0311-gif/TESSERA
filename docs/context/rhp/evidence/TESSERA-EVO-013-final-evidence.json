@@ -1,0 +1,68 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.13",
+  "operation": "TESSERA-EVO-013",
+  "previous_operation": "TESSERA-EVO-012",
+  "state_after_validation": "EVO-013_TRAJECTORY_ADAPTERS_REPAIR_ABLATION_ARCH_BENCHMARK",
+  "timestamp": "2026-06-19T19:08:00.988Z",
+  "changes": {
+    "nab_transfer": {
+      "description": "Enhanced NAB real-telemetry transfer with evolved network (depth, hidden_dim params)",
+      "files_changed": [
+        "src/tessera/experiments/run_nab_transfer.py"
+      ]
+    },
+    "multi_seed_benchmark": {
+      "description": "Multi-seed benchmark with architecture scaling (depth=2/3, hidden_dim=64/128)",
+      "files_changed": [
+        "src/tessera/experiments/benchmark.py"
+      ]
+    },
+    "repair_ablation": {
+      "description": "Phase 3: Replay-guided shadow repair with 5 ablation arms (no repair, random, wrong-target, generic retrain, targeted shadow)",
+      "files_changed": [
+        "src/tessera/experiments/repair_ablation.py"
+      ]
+    },
+    "trajectory_adapters": {
+      "description": "Phase 4: Agent trajectory typed event adapters for prompt/tool/CI telemetry (10 adapter types, unified feature space)",
+      "files_changed": [
+        "src/tessera/plugin/trajectory.py"
+      ]
+    },
+    "cli_commands": {
+      "description": "New CLI commands: repair, benchmark-arch, trajectory-demo",
+      "files_changed": [
+        "src/tessera/cli.py"
+      ]
+    }
+  },
+  "metrics": {
+    "tests_total": 74,
+    "tests_passing": 74,
+    "tests_failing": 0,
+    "test_increase_from_evo011": "+36 tests (+94.7%)",
+    "synthetic_auc": 0.8281481481481482,
+    "claim_ceiling": "diagnostic"
+  },
+  "non_claim_lock": "EVO-013 adds trajectory adapters, repair ablation, and architecture benchmarking. All synthetic-only. No real-telemetry transfer claim.",
+  "next_operations": [
+    "Run NAB real telemetry transfer with enhanced network (depth=2, hidden_dim=64)",
+    "Run UCR confirmation with enhanced network",
+    "Compare architecture scaling results (d2_h64 vs d3_h128)",
+    "Integrate trajectory adapter with live agent event stream"
+  ],
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": true,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "external_ingestion_authorized_by_user": true,
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "next_recommended_operation": "run_nab_real_telemetry_with_enhanced_network"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tessera Plugin Manifest",
+  "type": "object",
+  "required": ["schema", "name", "version", "deterministic_mode", "permissions", "claim_boundary"],
+  "properties": {
+    "schema": {"const": "TESSERA-PLUGIN-MANIFEST-v0.1"},
+    "name": {"type": "string"},
+    "version": {"type": "string"},
+    "deterministic_mode": {"type": "boolean"},
+    "event_schema": {"type": "string"},
+    "permissions": {
+      "type": "object",
+      "required": [
+        "observe_allowlisted_events",
+        "local_neural_inference",
+        "host_memory_write",
+        "tool_invocation",
+        "prompt_mutation",
+        "live_codec_replacement",
+        "topology_mutation",
+        "external_api_calls"
+      ]
+    },
+    "claim_boundary": {"type": "string"}
+  }
+}

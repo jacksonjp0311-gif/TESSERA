@@ -1,0 +1,82 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.19",
+  "operation": "TESSERA-EVO-019",
+  "previous_operation": "TESSERA-EVO-018",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "CONTROLLED_PHASE_RECALL_CONFIRMED_CALIBRATION_UNDERPOWERED",
+  "implemented": [
+    "canonical per-version summary command",
+    "session-aware privacy-safe trajectory capture",
+    "controlled clean and degraded telemetry probes",
+    "normal-only phase duration calibration",
+    "frozen later-cohort holdout evaluation",
+    "explicit specialist abstention when no calibrated phase evidence exists"
+  ],
+  "finding": "Safe elapsed telemetry restored controlled precursor identifiability and the phase specialist detected every degraded holdout, but four clean calibration sessions produced one false intervention on replication.",
+  "decision": "Retain the phase-conditioned policy as a promising controlled diagnostic; expand clean normal calibration before natural-session shadow evaluation.",
+  "metrics": {
+    "calibration_sessions": 8,
+    "calibration_clean_sessions": 4,
+    "holdout_sessions": 8,
+    "holdout_clean_sessions": 4,
+    "holdout_degraded_sessions": 4,
+    "holdout_identifiability_accuracy_upper_bound": 1.0,
+    "holdout_recall_upper_bound_at_zero_false_intervention": 1.0,
+    "failure_recall": 1.0,
+    "false_intervention_rate": 0.25,
+    "safe_memory_recall": 0.75,
+    "unsafe_memory_rate": 0.0,
+    "decision_accuracy": 0.875,
+    "abstention_rate": 0.0,
+    "mean_latency_ms": 0.006312497134786099
+  },
+  "calibration_bounds_ms": {
+    "CHECK": 109.78594999905908,
+    "GEOMETRY": 119.42402057936269,
+    "VALIDATE": 118.88405000208877
+  },
+  "evidence_artifact": "outputs/runs/latest/evo019_phase_holdout/phase_conditioned_holdout.json",
+  "evidence_artifact_sha256": "2db9eec7b9ce2a80ae1fbda1ab5f3493753d316d5ef5553601ae0e05d7eb1933",
+  "holdout_observation_summary_ms": {
+    "clean_check": [
+      113.17229999986012,
+      75.81730000674725,
+      84.0594999899622,
+      87.22889999626204
+    ],
+    "clean_validate": [
+      102.45380000560544,
+      83.97289999993518,
+      84.99859999574255,
+      99.35859999677632
+    ],
+    "degraded_validate": [
+      260.455900002853,
+      262.0349999924656,
+      248.54670000786427,
+      258.119500009343
+    ]
+  },
+  "denied_payload_fields_preserved": [
+    "command",
+    "detail",
+    "root",
+    "mirror_dir",
+    "prompt",
+    "raw_output"
+  ],
+  "artifact_persistence_finding": "The canonical runtime rotates outputs/runs/latest; version evidence must be archived or regenerated after the runtime loop.",
+  "next_recommended_operation": "expand_clean_phase_calibration_then_run_frozen_natural_shadow",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Controlled precursor recall with a 0.25 false-intervention rate is not calibrated live agent utility, production monitoring authority, general failure prediction, consciousness, or autonomous capability."
+}

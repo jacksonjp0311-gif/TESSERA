@@ -1,5 +1,5 @@
 {
-  "schema": "AGENT-CLI-MIRROR-COMMANDS-v0.3.7",
+  "schema": "AGENT-CLI-MIRROR-COMMANDS-v0.3.9",
   "intent": "Portable script-to-agent mirror command registry. Copy agent_cli_mirror/ and the two wrapper scripts into another repository, edit commands.json, and run.",
   "default_command": "full",
   "commands": {
@@ -39,6 +39,58 @@
           "cmd": [
             "{python}",
             "scripts/validation/validate_agent_cli_mirror.py"
+          ]
+        },
+        {
+          "phase": "REHYDRATE",
+          "label": "RHP zero-context rehydrate",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera.rhp",
+            "rehydrate",
+            "--root",
+            "{root}"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "RHP Nexus geometry and lessons",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_rhp_nexus.py"
+          ]
+        },
+        {
+          "phase": "LOOPBOOK",
+          "label": "sync loopbook",
+          "cmd": [
+            "{python}",
+            "scripts/loopbook/sync_loopbook.py"
+          ]
+        },
+        {
+          "phase": "LOOPBOOK",
+          "label": "validate loopbook gate",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_loopbook_gate.py"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "agent cli contract",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_agent_cli_contract.py"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "operator command registry",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_operator_geometry_command_registry.py"
           ]
         },
         {
@@ -133,6 +185,405 @@
         }
       ]
     },
+    "benchmark": {
+      "purpose": "Run the default deterministic multi-seed neural benchmark.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "multi-seed benchmark",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "benchmark",
+            "--out",
+            "outputs/benchmarks",
+            "--seeds",
+            "11,23,37",
+            "--steps",
+            "300",
+            "--epochs",
+            "2"
+          ]
+        }
+      ]
+    },
+    "transfer-nab": {
+      "purpose": "Run the enhanced NAB machine-temperature diagnostic without replacing the canonical T1 codec.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "NAB enhanced network diagnostic",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "transfer-nab",
+            "--root",
+            "{root}/datasets/nab",
+            "--out",
+            "outputs/transfers/nab-machine-temperature",
+            "--epochs",
+            "10",
+            "--depth",
+            "3",
+            "--hidden-dim",
+            "128",
+            "--seed",
+            "42"
+          ]
+        }
+      ]
+    },
+    "transfer-smap": {
+      "purpose": "Run a pinned NASA SMAP Telemanom channel diagnostic.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "NASA SMAP channel diagnostic",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "transfer-smap",
+            "--root",
+            "{root}",
+            "--out",
+            "outputs/transfers/smap-p1",
+            "--channel",
+            "P-1",
+            "--epochs",
+            "5"
+          ]
+        }
+      ]
+    },
+    "transfer-ucr": {
+      "purpose": "Run the preregistered UCR confirmation series.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "UCR subsequence confirmation",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "transfer-ucr",
+            "--root",
+            "{root}",
+            "--out",
+            "outputs/transfers/ucr",
+            "--filename",
+            "174_UCR_Anomaly_insectEPG2_3700_8000_8025.txt",
+            "--role",
+            "confirmation",
+            "--epochs",
+            "5"
+          ]
+        }
+      ]
+    },
+    "transfer-ucr-router": {
+      "purpose": "Reproduce the EVO-008 point-tile confirmation with the diagnostic point/subsequence router and route-aware episode governance.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "UCR EVO-008 point-router confirmation",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "transfer-ucr",
+            "--root",
+            "{root}",
+            "--out",
+            "outputs/transfers/ucr-evo008-point-routed-governance",
+            "--filename",
+            "229_UCR_Anomaly_mit14134longtermecg_16363_57960_57970.txt",
+            "--role",
+            "confirmation",
+            "--sensor-mode",
+            "router",
+            "--episode-quarantine",
+            "12",
+            "--epochs",
+            "3"
+          ]
+        }
+      ]
+    },
+    "transfer-ucr-abstention": {
+      "purpose": "Reproduce the EVO-009 shape confirmation with abstention and independent memory normality.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "UCR EVO-009 abstention confirmation",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "transfer-ucr",
+            "--root",
+            "{root}",
+            "--out",
+            "outputs/transfers/ucr-evo009-shape-abstention",
+            "--filename",
+            "155_UCR_Anomaly_PowerDemand4_18000_24005_24077.txt",
+            "--role",
+            "confirmation",
+            "--sensor-mode",
+            "abstaining-router",
+            "--episode-quarantine",
+            "12",
+            "--epochs",
+            "3"
+          ]
+        }
+      ]
+    },
+    "transfer-ucr-selective": {
+      "purpose": "Reproduce the EVO-010 point confirmation with coverage-constrained selective fusion.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "UCR EVO-010 selective point confirmation",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "transfer-ucr",
+            "--root",
+            "{root}",
+            "--out",
+            "outputs/transfers/ucr-evo010-point-selective",
+            "--filename",
+            "235_UCR_Anomaly_mit14157longtermecg_18913_75450_75451.txt",
+            "--role",
+            "confirmation",
+            "--sensor-mode",
+            "selective-router",
+            "--episode-quarantine",
+            "12",
+            "--epochs",
+            "3"
+          ]
+        }
+      ]
+    },
+    "transfer-ucr-t1": {
+      "purpose": "Run the EVO-011 supported UCR confirmation with selective sensing, independent memory normality, and validation-selected forecasting.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "UCR EVO-011 supported T1 confirmation",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "transfer-ucr",
+            "--root",
+            "{root}",
+            "--out",
+            "outputs/transfers/ucr-evo011-prediction-experts",
+            "--filename",
+            "115_UCR_Anomaly_CIMIS44AirTemperature3_4000_6520_6544.txt",
+            "--role",
+            "confirmation",
+            "--sensor-mode",
+            "selective-router",
+            "--episode-quarantine",
+            "12",
+            "--epochs",
+            "3"
+          ]
+        }
+      ]
+    },
+    "plugin-demo": {
+      "purpose": "Run the permission-bounded sparse-neural sidecar demo.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "neural plugin demo",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "plugin-demo",
+            "--events",
+            "8"
+          ]
+        }
+      ]
+    },
+    "repair-ablation": {
+      "purpose": "Run the replay-gated five-arm shadow repair ablation.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "shadow repair ablation",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "repair",
+            "--seed",
+            "42",
+            "--steps",
+            "300",
+            "--channels",
+            "3",
+            "--epochs",
+            "2",
+            "--depth",
+            "2",
+            "--hidden-dim",
+            "64",
+            "--out",
+            "outputs/runs/latest"
+          ]
+        }
+      ]
+    },
+    "trajectory-benchmark": {
+      "purpose": "Run the offline typed agent-trajectory utility benchmark against recency and summary controls.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "offline trajectory utility benchmark",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-benchmark",
+            "--seeds",
+            "0,1,2,3,4,5,6,7,8,9,10,11",
+            "--length",
+            "12",
+            "--out",
+            "outputs/runs/latest"
+          ]
+        }
+      ]
+    },
+    "trajectory-precursor": {
+      "purpose": "Run the fresh precursor-only trajectory benchmark without explicit failure flags.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "precursor-only trajectory utility",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-benchmark",
+            "--seeds",
+            "100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123",
+            "--length",
+            "12",
+            "--precursor-only",
+            "--out",
+            "outputs/runs/latest/precursor"
+          ]
+        }
+      ]
+    },
+    "trajectory-local": {
+      "purpose": "Privacy-audit and benchmark sanitized local Agent CLI Mirror sessions.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "privacy-sanitized local trajectory diagnostic",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-local",
+            "--events",
+            "agent_cli_mirror/state/events.jsonl",
+            "--minimum-prefix",
+            "7",
+            "--out",
+            "outputs/runs/latest/local_trajectory"
+          ]
+        }
+      ]
+    },
+    "trajectory-phase-holdout": {
+      "purpose": "Calibrate a privacy-safe phase-duration specialist and evaluate it on a later controlled holdout cohort.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "phase-conditioned telemetry holdout",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-phase-holdout",
+            "--events",
+            "agent_cli_mirror/state/events.jsonl",
+            "--minimum-prefix",
+            "9",
+            "--calibration-sessions",
+            "8",
+            "--holdout-sessions",
+            "8",
+            "--out",
+            "outputs/runs/latest/evo019_phase_holdout"
+          ]
+        }
+      ]
+    },
+    "telemetry-probe-clean": {
+      "purpose": "Generate one privacy-safe enriched clean telemetry session.",
+      "steps": [
+        {
+          "phase": "CHECK",
+          "label": "probe warmup",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "10"]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "probe geometry",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "15"]
+        },
+        {
+          "phase": "VALIDATE",
+          "label": "probe precursor",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "20"]
+        },
+        {
+          "phase": "RUN",
+          "label": "probe terminal",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "10"]
+        }
+      ]
+    },
+    "telemetry-probe-degraded": {
+      "purpose": "Generate one controlled privacy-safe degraded telemetry session.",
+      "steps": [
+        {
+          "phase": "CHECK",
+          "label": "probe warmup",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "10"]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "probe geometry",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "15"]
+        },
+        {
+          "phase": "VALIDATE",
+          "label": "probe slow precursor",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "180"]
+        },
+        {
+          "phase": "RUN",
+          "label": "probe controlled failure",
+          "cmd": ["{python}", "scripts/telemetry/probe.py", "--delay-ms", "10", "--exit-code", "3"]
+        }
+      ]
+    },
     "full": {
       "purpose": "Run mirror validation, repository gates, diagnostic runtime, ledger, and push routing.",
       "steps": [
@@ -142,6 +593,58 @@
           "cmd": [
             "{python}",
             "scripts/validation/validate_agent_cli_mirror.py"
+          ]
+        },
+        {
+          "phase": "REHYDRATE",
+          "label": "RHP zero-context rehydrate",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera.rhp",
+            "rehydrate",
+            "--root",
+            "{root}"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "RHP Nexus geometry and lessons",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_rhp_nexus.py"
+          ]
+        },
+        {
+          "phase": "LOOPBOOK",
+          "label": "sync loopbook",
+          "cmd": [
+            "{python}",
+            "scripts/loopbook/sync_loopbook.py"
+          ]
+        },
+        {
+          "phase": "LOOPBOOK",
+          "label": "validate loopbook gate",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_loopbook_gate.py"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "agent cli contract",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_agent_cli_contract.py"
+          ]
+        },
+        {
+          "phase": "GEOMETRY",
+          "label": "operator command registry",
+          "cmd": [
+            "{python}",
+            "scripts/validation/validate_operator_geometry_command_registry.py"
           ]
         },
         {

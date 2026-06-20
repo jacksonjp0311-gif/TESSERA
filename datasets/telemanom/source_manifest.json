@@ -1,0 +1,33 @@
+{
+  "schema": "TESSERA-EXTERNAL-DATA-SOURCE-v0.1",
+  "dataset": "NASA SMAP/MSL Telemanom benchmark",
+  "repository": "https://github.com/khundman/telemanom",
+  "commit": "2e6c5b6c3558e7835601519b7bdef37c649bdbdc",
+  "distribution": "Kaggle mirror referenced by pinned upstream README",
+  "distribution_url": "https://www.kaggle.com/datasets/patrickfleith/nasa-anomaly-detection-dataset-smap-msl",
+  "license": "Apache-2.0",
+  "archive_sha256": "6084d3ee3906381f2c98aa3773b6b2d77c82413503faa78f962196582e873733",
+  "labels_sha256": "057ce2d6c8875982bf4e5404aefea14efdcbce413d80826d2b737c95b59b7539",
+  "license_sha256": "bc73d834d54c2e93170394487aa9cc1f63029432daa8e3a49e3ce95b34cf1ac7",
+  "retrieved_utc_date": "2026-06-19",
+  "known_caveats": [
+    "published arrays were scaled using test-set min and max",
+    "timestamps and channel identities are anonymized",
+    "command/event inputs are one-hot encoded and sparse"
+  ],
+  "evaluated_channels": {
+    "P-1": {
+      "train_sha256": "78b6eec2b3cb1e6711d07ce994c7375de94b036d839c0f06fe258f446dff667a",
+      "test_sha256": "5dbed44bbd0a643e5e3131578c233e73428c70cc678ea9727dde4f3a2da53ce1"
+    },
+    "S-1": {
+      "train_sha256": "196c8413ba0319ea6366273b1d558c07d87c286425e1611768fcb95df37fb309",
+      "test_sha256": "76dbe1a9717b1fc4e6e7119883c4ccdf984764a1e8599b225a4241b67d043652"
+    },
+    "E-2": {
+      "train_sha256": "8709cde1ac1d574fb0c85b2eb5c02c58dabed541aa3f90053adedd42c5ebaafb",
+      "test_sha256": "47f7e5bafc9bbc8f4f3f3547f2e77f794ab24bcaaa9662c7020fd18c2384129b"
+    }
+  },
+  "claim_boundary": "Inherited test-based scaling blocks clean T1 promotion."
+}

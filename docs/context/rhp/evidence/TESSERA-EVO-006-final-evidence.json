@@ -1,0 +1,47 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.6",
+  "operation": "TESSERA-EVO-006",
+  "source_repository": "jacksonjp0311-gif/hermes-agent-evo",
+  "source_commit": "27e379d4285b94ff8903f53a5742589aadd8f122",
+  "operation_base_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "UCR_SUBSEQUENCE_SENSOR_CONFIRMED_T1_NOT_SUPPORTED",
+  "source_capsule": "datasets/ucr/source_manifest.json",
+  "discovery": {
+    "series": "173_UCR_Anomaly_insectEPG1_3000_7000_7030.txt",
+    "pointwise_auc": 0.5605036312407592,
+    "subsequence_auc": 0.9304996326913956,
+    "selected_window": 24
+  },
+  "confirmation": {
+    "series": "174_UCR_Anomaly_insectEPG2_3700_8000_8025.txt",
+    "subsequence_auc": 0.670021682353521,
+    "causal_event_hold": 12,
+    "final_auc": 0.8784925836495343,
+    "recall": 0.8076923076923077,
+    "missed_warning": 0.19230769230769232,
+    "replay_pass_rate": 0.5832274459974587,
+    "false_memory_rate": 0.15384615384615385,
+    "governance_harm": 0.14270438082097275
+  },
+  "supported_T1_count": 1,
+  "supported_families": ["NAB"],
+  "confirmed_diagnostic_sensors": [
+    "UCR z-normalized subsequence discord with causal event persistence"
+  ],
+  "ucr_T1_supported": false,
+  "phase_2_completed": false,
+  "next_recommended_operation": "separate_UCR_event_detection_from_memory_eligibility_on_a_new_preregistered_pair",
+  "external_ingestion": true,
+  "external_ingestion_authorized_by_user": true,
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "UCR sensing transferred across two series, but replay, false-memory, and forecasting gates block T1 promotion."
+}

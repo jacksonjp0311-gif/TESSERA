@@ -6,6 +6,7 @@ import os
 import subprocess
 import sys
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -27,6 +28,8 @@ PHASES = [
     "ROOT",
     "FAIL",
 ]
+SESSION_ID = ""
+EVENT_INDEX = 0
 
 
 def root_path(root: str | None = None) -> Path:
@@ -61,7 +64,18 @@ def append_jsonl(path: Path, obj: dict) -> None:
         handle.write(json.dumps(obj, separators=(",", ":")) + "\n")
 
 
-def emit(root: Path, phase: str, state: str, detail: str = "", command: str | None = None) -> None:
+def emit(
+    root: Path,
+    phase: str,
+    state: str,
+    detail: str = "",
+    command: str | None = None,
+    *,
+    elapsed_ms: float = 0.0,
+    exit_code: int | None = None,
+) -> None:
+    global EVENT_INDEX
+    EVENT_INDEX += 1
     live = mirror_dir(root) / "state"
     live.mkdir(parents=True, exist_ok=True)
     payload = {
@@ -73,6 +87,10 @@ def emit(root: Path, phase: str, state: str, detail: str = "", command: str | No
         "command": command,
         "root": str(root),
         "mirror_dir": str(mirror_dir(root)),
+        "session_id": SESSION_ID,
+        "event_index": EVENT_INDEX,
+        "elapsed_ms": float(elapsed_ms),
+        "exit_code": exit_code,
     }
     write_json(live / "live_status.json", payload)
     append_jsonl(live / "events.jsonl", payload)
@@ -100,6 +118,7 @@ def expand_arg(arg: str, root: Path) -> str:
 def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
     cmd = [expand_arg(x, root) for x in step]
     command_text = " ".join(cmd)
+    started = time.perf_counter()
     emit(root, phase, "RUN", label, command_text)
     print("[CMD] " + command_text)
     creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
@@ -107,7 +126,12 @@ def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
     try:
         returncode = proc.wait()
     except KeyboardInterrupt:
-        emit(root, phase, "STOP", f"{label} interrupted by operator", command_text)
+        elapsed = (time.perf_counter() - started) * 1000.0
+        emit(
+            root, phase, "STOP",
+            f"{label} interrupted by operator", command_text,
+            elapsed_ms=elapsed, exit_code=130,
+        )
         try:
             proc.terminate()
             proc.wait(timeout=5)
@@ -123,11 +147,15 @@ def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
             repair="Use -SkipRun or command=validate for interface checks; let heavy imports finish during full runtime.",
             gate="agent_cli_mirror graceful stop",
         )
-        print("
-[AGENT] Worker command interrupted by operator. Event recorded; exiting cleanly.")
+        print("\n[AGENT] Worker command interrupted by operator. Event recorded; exiting cleanly.")
         raise SystemExit(130)
     if returncode != 0:
-        emit(root, phase, "FAIL", f"{label} exit={returncode}", command_text)
+        elapsed = (time.perf_counter() - started) * 1000.0
+        emit(
+            root, phase, "FAIL",
+            f"{label} exit={returncode}", command_text,
+            elapsed_ms=elapsed, exit_code=returncode,
+        )
         record_lesson(
             root,
             failure=f"command failed: {label}",
@@ -136,7 +164,11 @@ def run_step(root: Path, step: list[str], phase: str, label: str) -> None:
             gate="agent_cli_mirror worker",
         )
         raise SystemExit(returncode)
-    emit(root, phase, "OK", label, command_text)
+    elapsed = (time.perf_counter() - started) * 1000.0
+    emit(
+        root, phase, "OK", label, command_text,
+        elapsed_ms=elapsed, exit_code=0,
+    )
 
 
 def git(root: Path, args: list[str], label: str) -> str:
@@ -157,7 +189,7 @@ def git(root: Path, args: list[str], label: str) -> str:
 
 def record_lesson(root: Path, failure: str, diagnosis: str, repair: str, gate: str) -> None:
     lesson = {
-        "schema": "AGENT-CLI-MIRROR-LESSON-v0.3.7",
+        "schema": "AGENT-CLI-MIRROR-LESSON-v0.3.9",
         "timestamp": now(),
         "failure": failure,
         "diagnosis": diagnosis,
@@ -226,7 +258,7 @@ def validate(root: Path) -> bool:
     missing_commands = [cmd for cmd in required_commands if cmd not in config.get("commands", {})]
     passed = not missing and not missing_tokens and not missing_commands
     report = {
-        "schema": "AGENT-CLI-MIRROR-VALIDATION-v0.3.7",
+        "schema": "AGENT-CLI-MIRROR-VALIDATION-v0.3.9",
         "passed": passed,
         "missing_files": missing,
         "missing_readme_tokens": missing_tokens,
@@ -276,8 +308,7 @@ def observer(root: Path, refresh: float = 1.0) -> None:
                     except Exception:
                         pass
             latest = {event.get("phase"): event for event in events}
-            print("
-PHASE BOARD")
+            print("\nPHASE BOARD")
             print("-----------")
             for phase in PHASES:
                 event = latest.get(phase)
@@ -285,33 +316,34 @@ PHASE BOARD")
                     print(f"{phase:<10} {event.get('state',''):<7} {event.get('detail','')}")
                 else:
                     print(f"{phase:<10} [...]")
-            print("
-RECENT EVENTS")
+            print("\nRECENT EVENTS")
             print("-------------")
             for event in events:
                 print(f"{event.get('timestamp','')} | {event.get('phase',''):<10} {event.get('state',''):<7} {event.get('detail','')}")
-            cert = root / "outputs" / "runs" / "latest" / "certificates" / "transfer_certificate.json"
+            cert = root / "outputs" / "runs" / "latest" / "certificates" / "diagnostic_certificate.json"
+            if not cert.exists():
+                cert = root / "outputs" / "runs" / "latest" / "certificates" / "transfer_certificate.json"
             if cert.exists():
                 try:
                     c = json.loads(cert.read_text(encoding="utf-8"))
-                    print("
-LATEST CERTIFICATE")
+                    print("\nLATEST CERTIFICATE")
                     print("------------------")
                     print(f"claim_ceiling:    {c.get('claim_ceiling')}")
                     print(f"certificate_hash: {c.get('certificate_hash')}")
                 except Exception:
                     pass
-            print("
-controls: Ctrl+C closes Observer cleanly. Worker continues in its own window unless interrupted there.")
+            print("\ncontrols: Ctrl+C closes Observer cleanly. Worker continues in its own window unless interrupted there.")
             time.sleep(refresh)
     except KeyboardInterrupt:
         emit(root, "ROOT", "STOP", "observer closed by operator")
-        print("
-[AGENT] Observer closed by operator. Worker continues in its own window.")
+        print("\n[AGENT] Observer closed by operator. Worker continues in its own window.")
         return
 
 
 def worker(root: Path, command: str, no_push: bool = False, skip_run: bool = False, skip_tests: bool = False) -> None:
+    global SESSION_ID, EVENT_INDEX
+    SESSION_ID = uuid.uuid4().hex
+    EVENT_INDEX = 0
     emit(root, "REHYDRATE", "RUN", f"worker opened for command={command}")
     config = load_commands(root)
     commands = config.get("commands", {})
@@ -334,7 +366,7 @@ def worker(root: Path, command: str, no_push: bool = False, skip_run: bool = Fal
     write_json(
         mirror_dir(root) / "ledger" / "last_worker_report.json",
         {
-            "schema": "AGENT-CLI-MIRROR-WORKER-REPORT-v0.3.7",
+            "schema": "AGENT-CLI-MIRROR-WORKER-REPORT-v0.3.9",
             "completed_at": now(),
             "command": command,
             "root": str(root),
@@ -450,6 +482,5 @@ if __name__ == "__main__":
             emit(root, "ROOT", "STOP", "operator interrupt")
         except Exception:
             pass
-        print("
-[AGENT] Operator interrupt received. Exiting cleanly.")
+        print("\n[AGENT] Operator interrupt received. Exiting cleanly.")
         raise SystemExit(130)

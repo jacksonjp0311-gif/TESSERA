@@ -1,0 +1,38 @@
+{
+  "schema": "TESSERA-EXTERNAL-DATA-SOURCE-v0.1",
+  "dataset": "UCR Time Series Anomaly Detection datasets (2021)",
+  "doi": "10.6084/m9.figshare.26410744.v1",
+  "figshare_article_id": 26410744,
+  "figshare_file_id": 48036268,
+  "license": "CC BY 4.0",
+  "archive_sha256": "3d80622074d07b7fe70e356aa093c59a8d31febd65a26099a31c60abd54f931a",
+  "archive_md5_supplied": "4740e64e7a3242773b4570c1537095c1",
+  "retrieved_utc_date": "2026-06-19",
+  "preregistered_series": {
+    "discovery": "173_UCR_Anomaly_insectEPG1_3000_7000_7030.txt",
+    "confirmation": "174_UCR_Anomaly_insectEPG2_3700_8000_8025.txt",
+    "evo_007_discovery": "176_UCR_Anomaly_insectEPG4_1300_6508_6558.txt",
+    "evo_007_confirmation": "177_UCR_Anomaly_insectEPG5_3200_8500_8501.txt"
+    ,
+    "evo_008_point_discovery": "228_UCR_Anomaly_mit14134longtermecg_11361_47830_47850.txt",
+    "evo_008_point_confirmation": "229_UCR_Anomaly_mit14134longtermecg_16363_57960_57970.txt",
+    "evo_008_subsequence_discovery": "192_UCR_Anomaly_s20101mML2_12000_35774_35874.txt",
+    "evo_008_subsequence_confirmation": "193_UCR_Anomaly_s20101m_10000_35774_35874.txt",
+    "evo_009_point_discovery": "159_UCR_Anomaly_TkeepSecondMARS_3500_9330_9340.txt",
+    "evo_009_point_confirmation": "250_UCR_Anomaly_weallwalk_2951_7290_7296.txt",
+    "evo_009_subsequence_discovery": "154_UCR_Anomaly_PowerDemand3_16000_23405_23477.txt",
+    "evo_009_subsequence_confirmation": "155_UCR_Anomaly_PowerDemand4_18000_24005_24077.txt",
+    "evo_010_point_discovery": "051_UCR_Anomaly_DISTORTEDTkeepSecondMARS_3500_9330_9340.txt",
+    "evo_010_point_confirmation": "235_UCR_Anomaly_mit14157longtermecg_18913_75450_75451.txt",
+    "evo_010_subsequence_discovery": "143_UCR_Anomaly_InternalBleeding8_2500_5865_5974.txt",
+    "evo_010_subsequence_confirmation": "144_UCR_Anomaly_InternalBleeding9_4200_6599_6681.txt",
+    "evo_011_prediction_discovery": "007_UCR_Anomaly_DISTORTEDCIMIS44AirTemperature3_4000_6520_6544.txt",
+    "evo_011_prediction_confirmation": "115_UCR_Anomaly_CIMIS44AirTemperature3_4000_6520_6544.txt"
+  },
+  "known_caveats": [
+    "each series contains one filename-encoded anomaly interval",
+    "archive literature warns that anomaly benchmarks can create illusions of progress",
+    "series-level success does not imply archive-wide performance"
+  ],
+  "claim_boundary": "UCR trials are dataset-scoped and require untouched confirmation."
+}

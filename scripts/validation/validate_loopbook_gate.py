@@ -7,13 +7,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "docs/loop/loopbook_manifest.json"
 LOOPBOOK = ROOT / "docs/loop/TESSERA_LOOPBOOK.md"
+EXPECTED_SCHEMA = "TESSERA-loopbook-manifest-v0.2.8"
 
 REQUIRED_FILES = [
     "docs/loop/TESSERA_LOOPBOOK.md", "docs/loop/loopbook_manifest.json", "scripts/loopbook/sync_loopbook.py",
-    "scripts/run-tessera-full-loop.ps1", "scripts/tessera-dual-console.ps1", "scripts/tessera-worker.ps1", "scripts/tessera-watch.ps1",
+    "scripts/run-tessera-full-loop.ps1", "scripts/run-tessera-full-loop.sh",
+    "scripts/agent-mirror.ps1", "scripts/agent-mirror.sh", "agent_cli_mirror/agent_mirror.py",
 ]
 README_TOKENS = [
-    "TESSERA Loopbook Gate", "scripts\\run-tessera-full-loop.ps1", "Observer PowerShell", "Worker PowerShell", "If feature surfaces change, sync the Loopbook.",
+    "PowerShell All-One Loop Box", "scripts\\run-tessera-full-loop.ps1",
+    "Observer CLI opens first", "Worker CLI opens second", "Agent CLI Mirror",
 ]
 
 def sha(path: Path) -> str | None:
@@ -38,10 +41,10 @@ def main() -> int:
     readme = (ROOT / "README.md").read_text(encoding="utf-8") if (ROOT / "README.md").exists() else ""
     loopbook = LOOPBOOK.read_text(encoding="utf-8") if LOOPBOOK.exists() else ""
     missing_readme = [t for t in README_TOKENS if t not in readme]
-    missing_loopbook_tokens = [t for t in ["Canonical Command", "Gate Rule", "Observer PowerShell", "Worker PowerShell"] if t not in loopbook]
-    passed = (not missing and not stale and not missing_readme and not missing_loopbook_tokens and schema == "TESSERA-loopbook-manifest-v0.2.6")
+    missing_loopbook_tokens = [t for t in ["Canonical Command", "Gate Rule", "Observer PowerShell", "Worker PowerShell", "agent-cli-mirror"] if t not in loopbook]
+    passed = (not missing and not stale and not missing_readme and not missing_loopbook_tokens and schema == EXPECTED_SCHEMA)
     report = {
-        "schema": "TESSERA-loopbook-gate-validation-v0.2.6", "passed": passed, "manifest_schema": schema,
+        "schema": "TESSERA-loopbook-gate-validation-v0.2.8", "passed": passed, "manifest_schema": schema,
         "missing_files": missing, "stale_hashes": stale, "missing_readme_tokens": missing_readme, "missing_loopbook_tokens": missing_loopbook_tokens,
         "claim_boundary": "Loopbook gate validates operator run surfaces only; it does not prove real telemetry transfer.",
     }

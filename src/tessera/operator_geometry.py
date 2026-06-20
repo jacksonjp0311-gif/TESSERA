@@ -106,7 +106,9 @@ def observer(root: Path, refresh: float = 1.0) -> None:
         print("\nRECENT EVENTS\n-------------")
         for e in events:
             print(f"{e.get('timestamp','')} | {e.get('phase',''):<10} {e.get('state',''):<7} {e.get('detail','')}")
-        cert = root / "outputs/runs/latest/certificates/transfer_certificate.json"
+        cert = root / "outputs/runs/latest/certificates/diagnostic_certificate.json"
+        if not cert.exists():
+            cert = root / "outputs/runs/latest/certificates/transfer_certificate.json"
         if cert.exists():
             try:
                 c = json.loads(cert.read_text(encoding="utf-8"))

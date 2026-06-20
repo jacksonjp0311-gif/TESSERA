@@ -2,38 +2,36 @@
 
 ## Purpose
 
-The Loopbook is the canonical operator run record for Tessera. The loop is now Python-owned. PowerShell only launches terminals.
+The Loopbook is the canonical operator run record for Tessera. Every feature that changes the runtime loop, scripts, validation path, README run surface, or operator interface must update this file and `docs/loop/loopbook_manifest.json`.
 
 ```text
-rehydrate -> python-loop-kernel -> loopbook -> launch -> observe -> worker -> check -> run -> validate -> ledger -> push -> root
+rehydrate -> agent-cli-mirror -> loopbook -> launch -> observe -> worker -> check -> run -> validate -> ledger -> push -> root
 ```
 
-## Canonical Python Command
-
-```powershell
-cd "C:\Users\jacks\OneDrive\Desktop\Tessera"
-$env:PYTHONPATH = ".\src"
-python -m tessera.loop_runtime launch
-```
-
-## Canonical PowerShell Launcher
+## Canonical Command
 
 ```powershell
 cd "C:\Users\jacks\OneDrive\Desktop\Tessera"
 .\scripts\run-tessera-full-loop.ps1
 ```
 
+Dry run without push:
+
+```powershell
+.\scripts\run-tessera-full-loop.ps1 -NoPush
+```
+
 ## What Opens Every Time
 
 ```text
 Observer PowerShell = read-only human interface
-Worker PowerShell   = Python loop worker
+Worker PowerShell   = registered Agent CLI Mirror command runner
 ```
 
 ## Loop Steps
 
 1. `rehydrate`
-2. `python-loop-kernel`
+2. `agent-cli-mirror`
 3. `loopbook`
 4. `launch`
 5. `observe`
@@ -49,10 +47,22 @@ Worker PowerShell   = Python loop worker
 
 ```text
 If feature surfaces change, sync the Loopbook.
-If failures occur, update Failure Lessons.
-If the chart is stale, validation fails.
+If the Loopbook manifest is stale, validation fails.
 If validation fails, no commit/push promotion.
 ```
+
+## Expected Result
+
+1. Repository root is locked.
+2. Agent CLI Mirror validates its launcher and command registry.
+3. Observer PowerShell opens.
+4. Worker PowerShell opens.
+5. Checkers run.
+6. Tessera runtime runs.
+7. Latest evidence validates.
+8. Ledger/report files update.
+9. Git commit/push runs unless `-NoPush` is used.
+10. RootMirror returns to the Tessera root.
 
 ## Non-Claim Boundary
 
@@ -63,11 +73,11 @@ The Loopbook does not prove truth, safety, production readiness, code correctnes
 ```json
 {
   "schema": "TESSERA-loopbook-manifest-v0.2.8",
-  "updated_at_utc": "2026-06-17T11:44:35.836142+00:00",
-  "git_head": "b0e236a",
+  "updated_at_utc": "2026-06-20T01:26:42.349659+00:00",
+  "git_head": "409a8ec",
   "loop_steps": [
     "rehydrate",
-    "python-loop-kernel",
+    "agent-cli-mirror",
     "loopbook",
     "launch",
     "observe",
@@ -79,23 +89,71 @@ The Loopbook does not prove truth, safety, production readiness, code correctnes
     "push",
     "root"
   ],
-  "python_loop_kernel": "src/tessera/loop_runtime.py",
-  "canonical_command": "python -m tessera.loop_runtime launch",
-  "powershell_launcher": "scripts/run-tessera-full-loop.ps1",
-  "claim_boundary": "Loop kernel records operator surfaces only; it does not prove real telemetry transfer.",
+  "canonical_loopbook": "docs/loop/TESSERA_LOOPBOOK.md",
+  "canonical_command": ".\\scripts\\run-tessera-full-loop.ps1",
+  "agent_cli_mirror": "agent_cli_mirror/agent_mirror.py",
+  "observer": "agent_cli_mirror/agent_mirror.py observe",
+  "worker": "agent_cli_mirror/agent_mirror.py worker",
+  "launcher": "scripts/agent-mirror.ps1",
+  "gate": "scripts/validation/validate_loopbook_gate.py",
   "feature_hashes": {
-    "README.md": "6bc6124f09fb995410789fc4bb97ff74873d1d8466210ce5770b9e860cf6de3e",
-    "README_90_SECONDS.md": "ae20c88824fc21c649a46f8c9a11589cdc047740cf7618f5b31deb713617a8e8",
-    "AGENTS.md": "cff09709179d0b1d27af0cf5473a99ffc5573f3e76e11e21373dc3f83f716136",
-    "docs/loop/TESSERA_LOOPBOOK.md": "9833ee50b8937cd98ed21e63387fecb798ed29a283ab8d3db96ca4e450d66d36",
-    "docs/loop/loopbook_manifest.json": "4e4803e611286062f48d8c7f9412c1597837fd3abe5774c484965bca3b18a9d3",
-    "docs/loop/TESSERA_FAILURE_LESSONS.md": "b801f73b984c3f0a5bff278464f57e96f6a14d431929f7223819af95763daf13",
-    "docs/loop/TESSERA_OPERATOR_LOOP_CHART.md": "840650a4b68c3d4e9a6828f1afd95c6d4e9b8c90dbdc9461c2c57b82dba2baca",
-    "scripts/run-tessera-full-loop.ps1": "9b5db004960d3ddcaffff4c4cddf9c33184189925930746d84087d622a73b4da",
-    "scripts/run-tessera-full-loop.sh": "1635d9b01a8648ee7f5f9a1eeae145153a3daefd6c8a236db10f44c4a4e41839",
-    "src/tessera/loop_runtime.py": "81a36d7991becf0410e6a85ff47af1a61d587fd48c974998ad6e379e96b65806",
-    "src/tessera/loop_compiler.py": "bcb45e897518499265a4b63ddf4dca1d4070d10658135610eb3a7cffa79ddd16",
-    "src/tessera/cli.py": "e38403de5f873a1f63c59cecaa69f5b00fe9ac19867c621c7bee4d4c289fc0ff"
-  }
+    "README.md": "bd8a69672219ff220162c47e8739beb431b2bde317d1f028055d9e76260ba2cf",
+    "README_90_SECONDS.md": "893e524e264fad2733dd18dfdd1e2165bb9cfc40e6edca29b1c39fd726a9cb9c",
+    "AGENTS.md": "165a8cd3a90dfb738aafe85bdbea88890fd6a9284a2e03b7741027de35f334ef",
+    "docs/loop/TESSERA_LOOPBOOK.md": "7852a5ca1b92799ed48cca9b24fbe9c69615238ec2897ac9e1d7526cee53fc02",
+    "docs/loop/TESSERA_FAILURE_LESSONS.md": "0674ba5186948dcaae4f8a7c87c8863ee59a07d23afdb6d4f8885ec8e702dca1",
+    "docs/loop/TESSERA_OPERATOR_LOOP_CHART.md": "b2307dc67281c158ec0fa0eecd4900cc19229c8a79ced3036bc90e2144088e65",
+    "scripts/run-tessera-full-loop.ps1": "99a61210dec85e0d20a4e05791c685518200d46c7451324f60ffe7674499f157",
+    "scripts/run-tessera-full-loop.sh": "7c345b156c998ceb0bf8e7ed1adab78c0ea00731c59fac76900d918d4ec87ed5",
+    "scripts/agent-mirror.ps1": "c247add82707f37d8663ddec5536c73ac156afe09b3a67c620f72d5b8940d434",
+    "scripts/agent-mirror.sh": "de9606e85045c4529f82e58cbf28a9ebffbc83b4a6db9a5bde5f8c57920c1aaf",
+    "scripts/loopbook/sync_loopbook.py": "c7e70292da3b50758bb04bbd001bb8dc4c97f8034d2b5f409dd3ee85ec6ec9d1",
+    "scripts/validation/validate_loopbook_gate.py": "d5c7a21df4e4dbbcd857c360c846542b19a7d84ad49d02ccc171894e85b9e8b9",
+    "agent_cli_mirror/agent_mirror.py": "cdde0a0354b08f44338243bf0c272ddc81fce7b072adef272d50e60dc11ba1af",
+    "agent_cli_mirror/config/commands.json": "c1de49ca964773be49d1492f2d795b9d8ebad816a9e50323427c791b809aa2c5",
+    "docs/context/rhp/latest-rhp.json": "fdf352be058439174b926f689559f455d2c6a54021f812c82ca33fccd69bc939",
+    "docs/context/nexus/surface_registry.json": "357a596d1fce0aa8022d60297e9c27b54f8370b41adb4171a725a477195bb451",
+    "docs/geometry/repository_geometry.json": "f433be0bff97710aac4ff40b5a75a2ca2cbd6c9ba6241365831715806b7abbfc",
+    "docs/lessons/lesson_chart.json": "d664cca49b182e8ef6ac53504714de8658d5ea2297800083cea9372ea5e60cf6",
+    "docs/roadmap/tessera_evolutionary_roadmap.json": "8e4bfbeecc41accabc1f337f179a6dc2d8cfcd5cfab4b4822f8c210d2e68b76c",
+    "docs/research/CROSS_DOMAIN_EVOLUTION_2026-06-19.md": "1b7e04cf290452ab391cbbd68eef0ebcb1684357bbee54c11e91250026eb489b",
+    "docs/research/MULTISCALE_AWARENESS_EVOLUTION_2026-06-19.md": "3f2f5657959610080aaaf9ce9294543b2fba7e42e77cf7f3947178502893b1ed",
+    "docs/research/NAB_T1_TRANSFER_2026-06-19.md": "a80a538a24cf33e5b837d6d6a31052116d3944b3f23a309127cc27cdfb19c099",
+    "datasets/nab/source_manifest.json": "30e206b446c7d541d6d7f6f639bd5474f774434daaf8841e0acddf839bda49fd",
+    "src/tessera/experiments/run_nab_transfer.py": "a0bce4fb2819593405692b055c2532ae260e017a0eb54928d705044944c9c469",
+    "datasets/telemanom/source_manifest.json": "e02089a2009701392e84d88157dc0774449e8893d9561e5e7a9a0d25c49b99b0",
+    "src/tessera/experiments/run_smap_transfer.py": "da318dd027889d13c16495cb65642e1b2dd4571b5b0669609761c5be14e29258",
+    "docs/research/NASA_SMAP_DIAGNOSTIC_2026-06-19.md": "73075cf7f8065d7525b7ad77971119ceba627a6c633991cb4e9d9cdb67b295bb",
+    "datasets/ucr/source_manifest.json": "9c41f96324d72b999a66b104f880add08b7d67e79e337cad816513869abbdf2f",
+    "src/tessera/experiments/run_ucr_transfer.py": "e20c85754667fdeb5c436d146a8c20be59c52d87c8d2292db6bab8a4dd3f5dad",
+    "src/tessera/metrics/subsequence.py": "a14f462025aa8b6dfe42ed797d27a8e98c4fa2ccd630e723f75e0e0d3d02cadf",
+    "docs/research/UCR_SUBSEQUENCE_EVOLUTION_2026-06-19.md": "46226d73d011ae5978b5864df8d2f509446a1393e4b77d61ca727f3d66abf27c",
+    "src/tessera/memory/episodes.py": "f98483e5986c68fce5a89645ad041ed6de3a96346eda2dbb49854003bd10d9c2",
+    "docs/research/UCR_EPISODE_GOVERNANCE_2026-06-19.md": "f0bce4776a533914246866463e6bfdee337df143b5a38a0c99bcd011ea9edae7",
+    "src/tessera/metrics/router.py": "a77bc3c52d7e4956ce095a6b28301c9cbd0ab853bdedd2247afdecf97c6cb5c0",
+    "docs/research/UCR_SENSOR_ROUTER_2026-06-19.md": "b2d264f90f6d77fb83f7bfd13615cf2a41ffd30bced39b8f6758e70a1e777bec",
+    "src/tessera/memory/gates.py": "b32780ed269f120b1753807c0764372f6111157778050d451b6e4c2eb729a125",
+    "docs/research/UCR_ABSTENTION_MEMORY_NORMALITY_2026-06-19.md": "e9242a3d60830cfcd3d0ca4ecd98511d33b4e4dcb38f9878178ba172b0599f38",
+    "src/tessera/baselines/pca_codec.py": "0bccdb8d3ac34f88b0f08f92d78d638694515b22c5e4a4fcf1c489aaeda5fc6b",
+    "src/tessera/baselines/random_projection.py": "864c554b003c34184e1fab5c84d66a69723be74bc2ff7fa04f3e7e60630ae914",
+    "src/tessera/baselines/matrix_profile.py": "95d5ea9fc48f42e4f6cbad41023dee5b61f7c4a9b030a9543014493abce3d8da",
+    "docs/research/UCR_SELECTIVE_FUSION_2026-06-19.md": "b5a6549fa9275d64cd93af995f3667a13567abf6ee82f6d11457456230925166",
+    "src/tessera/model/prediction_experts.py": "d7b59ea795b47861b1e13b45e1442602e8e9c15d121a90385f6e7f7e4b5a9992",
+    "docs/research/UCR_PREDICTION_EXPERT_TRANSFER_2026-06-19.md": "8b5552e9c9994bf2357b0e7d7e0353251bd556fc63b4995f14590a925ed91cce",
+    "src/tessera/plugin/contracts.py": "eff9a6c19cdc275670bc8c10fc295d29ace310d8f7f23f154b7ab00c97e07878",
+    "src/tessera/plugin/runtime.py": "88fdb063e4652ee6c574ce3fad5488e8b545a590077671393f5b48cdeb35c577",
+    "docs/research/NAB_ENHANCED_NETWORK_DIAGNOSTIC_2026-06-19.md": "b6e54b91b5e861cb1c6647e0076229bfaa3d12889f8255991fc41b1512be0711",
+    "src/tessera/experiments/trajectory_benchmark.py": "b9360fe97811a3bdd5da874c783a8404432a62f4280f49ef34015fbbf3408459",
+    "docs/research/OFFLINE_TRAJECTORY_UTILITY_2026-06-19.md": "b886e0c04b614c9c2837e97d648e435d263cd41592cd2ee93b4915b39127550d",
+    "docs/research/PRECURSOR_TRAJECTORY_UTILITY_2026-06-19.md": "9d181e6f3a207e095be3248e4d6a0e0ff30fc8aeb66d0fb932b7d06dcec1c7ba",
+    "src/tessera/plugin/privacy_capture.py": "8f0971c082668d755326c118babff7220cd124338683aa392bbf12b29e4c75db",
+    "docs/research/LOCAL_TRAJECTORY_PRIVACY_DIAGNOSTIC_2026-06-19.md": "b390a6a53a55b8203d927b70c42a0280178dd362991e150854b6476cacb039a7",
+    "docs/research/LOCAL_TRAJECTORY_IDENTIFIABILITY_2026-06-19.md": "37791be706b2989a0eef63f82a00f72bbf1f3796a0a1c58fd03ce4a0c9818bea",
+    "docs/research/PHASE_CONDITIONED_TELEMETRY_SPECIALIST_2026-06-19.md": "d3f66a4a5924fbb36401b924ceaec916b9687145825b2ef56ee22dcebd3efde3",
+    "scripts/telemetry/probe.py": "947dc1439ebf8407acbcad170bae81adb48272ea119f3b8959970fb08bb1ec22",
+    "src/tessera/rhp/core.py": "5a5de2c6dd4424700d73ef4117e387c37e400c824ba0edc12e79d3123b15462c",
+    "scripts/validation/validate_rhp_nexus.py": "e03fd4c3f2e2d681cbe06d39d99e48dffb78245f06e006e2157a1fdfb9ed92de"
+  },
+  "claim_boundary": "Loopbook sync records operator surfaces only; it does not prove real telemetry transfer."
 }
 ```

@@ -1,0 +1,47 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.8",
+  "operation": "TESSERA-EVO-008",
+  "source_repository": "jacksonjp0311-gif/hermes-agent-evo",
+  "source_commit": "27e379d4285b94ff8903f53a5742589aadd8f122",
+  "operation_base_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "POINT_SENSOR_TILE_CONFIRMED_ROUTER_AND_UCR_T1_BLOCKED",
+  "point_confirmation": {
+    "series": "229_UCR_Anomaly_mit14134longtermecg_16363_57960_57970.txt",
+    "auc": 0.9473135162579946,
+    "recall": 1.0,
+    "false_memory_rate": 0.0,
+    "replay_before_routed_governance": 0.36262138199559035,
+    "replay_after_routed_governance": 0.4653562884083126,
+    "result": "point_tile_confirmed"
+  },
+  "subsequence_confirmation": {
+    "series": "193_UCR_Anomaly_s20101m_10000_35774_35874.txt",
+    "routed_auc": 0.648056287706902,
+    "subsequence_only_auc": 0.7711773392401665,
+    "missed_warning": 0.6534653465346535,
+    "false_memory_rate": 0.39603960396039606,
+    "result": "max_router_rejected"
+  },
+  "implemented": [
+    "robust point level velocity and acceleration tile",
+    "normal-calibrated point/subsequence router",
+    "route-specific point and subsequence episode holds"
+  ],
+  "supported_T1_count": 1,
+  "supported_families": ["NAB"],
+  "phase_2_completed": false,
+  "next_recommended_operation": "build_confidence_aware_router_abstention_and_independent_memory_normality_on_new_preregistered_pairs",
+  "external_ingestion": true,
+  "external_ingestion_authorized_by_user": true,
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "A confirmed point sensor tile is not a universal router, UCR transfer certificate, forecasting capability, or autonomous authority."
+}

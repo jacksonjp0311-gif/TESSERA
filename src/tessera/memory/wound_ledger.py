@@ -10,7 +10,11 @@ def classify_wounds(df: pd.DataFrame, thresholds: dict) -> list[dict]:
         types=[]
         if r['reconstruction_loss'] > df['reconstruction_loss'].quantile(.95): types.append('W_reconstruct')
         if r['prediction_loss'] > df['prediction_loss'].quantile(.95): types.append('W_predict')
-        if r['code_drift'] > thresholds['block_code_drift']: types.append('W_codedrift')
+        if 'score_code_drift' in r:
+            if r['score_code_drift'] > thresholds.get('block_score', float('inf')):
+                types.append('W_codedrift')
+        elif r['code_drift'] > thresholds.get('block_code_drift', float('inf')):
+            types.append('W_codedrift')
         if r.get('false_memory_candidate',0) == 1: types.append('W_falsememory')
         if r.get('block',0) == 1 and r.get('label',0) == 0: types.append('W_block_false_positive')
         for t in types:

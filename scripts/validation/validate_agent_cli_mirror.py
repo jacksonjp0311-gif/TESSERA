@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import py_compile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -39,22 +40,33 @@ def main() -> int:
     config_path = ROOT / "agent_cli_mirror/config/commands.json"
     missing_commands = []
     schema_ok = False
+    syntax_errors = []
+    launcher_path = ROOT / "agent_cli_mirror/agent_mirror.py"
+    if launcher_path.exists():
+        try:
+            py_compile.compile(str(launcher_path), doraise=True)
+        except py_compile.PyCompileError as exc:
+            syntax_errors.append(str(exc))
     if config_path.exists():
-        config = json.loads(config_path.read_text(encoding="utf-8"))
-        schema_ok = config.get("schema") == "AGENT-CLI-MIRROR-COMMANDS-v0.3.7"
-        for command in ["full", "validate", "diagnostic", "status"]:
-            if command not in config.get("commands", {}):
-                missing_commands.append(command)
+        try:
+            config = json.loads(config_path.read_text(encoding="utf-8"))
+            schema_ok = config.get("schema") == "AGENT-CLI-MIRROR-COMMANDS-v0.3.9"
+            for command in ["full", "validate", "diagnostic", "status"]:
+                if command not in config.get("commands", {}):
+                    missing_commands.append(command)
+        except json.JSONDecodeError as exc:
+            syntax_errors.append(f"commands.json: {exc}")
     else:
         missing_commands = ["full", "validate", "diagnostic", "status"]
-    passed = not missing_files and not missing_readme and not missing_commands and schema_ok
+    passed = not missing_files and not missing_readme and not missing_commands and schema_ok and not syntax_errors
     report = {
-        "schema": "TESSERA-agent-cli-mirror-validation-v0.3.7",
+        "schema": "TESSERA-agent-cli-mirror-validation-v0.3.9",
         "passed": passed,
         "missing_files": missing_files,
         "missing_readme_tokens": missing_readme,
         "missing_commands": missing_commands,
         "command_schema_ok": schema_ok,
+        "syntax_errors": syntax_errors,
         "claim_boundary": "Agent CLI Mirror validation checks operator surfaces only; it does not prove autonomy, safety, correctness, or real telemetry transfer.",
     }
     out = ROOT / "reports/agent_cli_mirror/latest_agent_cli_mirror_validation.json"

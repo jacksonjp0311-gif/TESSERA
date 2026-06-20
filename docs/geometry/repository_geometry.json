@@ -1,0 +1,548 @@
+{
+  "schema": "TESSERA-REPOSITORY-GEOMETRY-v0.1",
+  "expected_loop": [
+    "REHYDRATE",
+    "RHP",
+    "NEXUS",
+    "GEOMETRY",
+    "LESSONS",
+    "MIRROR",
+    "LOOPBOOK",
+    "CHECK",
+    "RUN",
+    "VALIDATE",
+    "LEDGER",
+    "PUSH",
+    "ROOT"
+  ],
+  "canonical_loop": [
+    "REHYDRATE",
+    "RHP",
+    "NEXUS",
+    "GEOMETRY",
+    "LESSONS",
+    "MIRROR",
+    "LOOPBOOK",
+    "CHECK",
+    "RUN",
+    "VALIDATE",
+    "LEDGER",
+    "PUSH",
+    "ROOT"
+  ],
+  "nodes": [
+    {
+      "id": "rhp_truth",
+      "kind": "truth",
+      "path": "docs/context/rhp/latest-rhp.json"
+    },
+    {
+      "id": "nexus_routes",
+      "kind": "route",
+      "path": "docs/context/nexus/surface_registry.json"
+    },
+    {
+      "id": "geometry",
+      "kind": "route",
+      "path": "docs/geometry/repository_geometry.json"
+    },
+    {
+      "id": "lesson_chart",
+      "kind": "lesson",
+      "path": "docs/lessons/lesson_chart.json"
+    },
+    {
+      "id": "roadmap",
+      "kind": "route",
+      "path": "docs/roadmap/tessera_evolutionary_roadmap.json"
+    },
+    {
+      "id": "research",
+      "kind": "evidence",
+      "path": "docs/research/CROSS_DOMAIN_EVOLUTION_2026-06-19.md"
+    },
+    {
+      "id": "external_dataset",
+      "kind": "evidence",
+      "path": "datasets/nab/source_manifest.json"
+    },
+    {
+      "id": "dataset_transfer",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/run_nab_transfer.py"
+    },
+    {
+      "id": "nasa_dataset",
+      "kind": "evidence",
+      "path": "datasets/telemanom/source_manifest.json"
+    },
+    {
+      "id": "nasa_transfer",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/run_smap_transfer.py"
+    },
+    {
+      "id": "ucr_dataset",
+      "kind": "evidence",
+      "path": "datasets/ucr/source_manifest.json"
+    },
+    {
+      "id": "ucr_transfer",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/run_ucr_transfer.py"
+    },
+    {
+      "id": "root_readme",
+      "kind": "readme",
+      "path": "README.md"
+    },
+    {
+      "id": "runtime_readme",
+      "kind": "readme",
+      "path": "src/tessera/README.md"
+    },
+    {
+      "id": "agent_readme",
+      "kind": "readme",
+      "path": "agent_cli_mirror/README.md"
+    },
+    {
+      "id": "tessera_runtime",
+      "kind": "runtime",
+      "path": "src/tessera"
+    },
+    {
+      "id": "agent_cli_runtime",
+      "kind": "runtime",
+      "path": "agent_cli_mirror/agent_mirror.py"
+    },
+    {
+      "id": "neural_plugin",
+      "kind": "runtime",
+      "path": "src/tessera/plugin"
+    },
+    {
+      "id": "plugin_readme",
+      "kind": "readme",
+      "path": "src/tessera/plugin/README.md"
+    },
+    {
+      "id": "rhp_validator",
+      "kind": "validator",
+      "path": "scripts/validation/validate_rhp_nexus.py"
+    },
+    {
+      "id": "test_validator",
+      "kind": "validator",
+      "path": "tests"
+    },
+    {
+      "id": "run_evidence",
+      "kind": "evidence",
+      "path": "outputs/runs/latest"
+    },
+    {
+      "id": "rhp_evidence",
+      "kind": "evidence",
+      "path": "docs/context/rhp/evidence/TESSERA-RHP-001-final-evidence.json"
+    },
+    {
+      "id": "claim_boundary",
+      "kind": "boundary",
+      "path": "docs/alignment/non_claim_locks.md"
+    },
+    {
+      "id": "operator",
+      "kind": "operator",
+      "path": "scripts/run-tessera-full-loop.ps1"
+    },
+    {
+      "id": "evo12_evidence",
+      "kind": "evidence",
+      "path": "docs/context/rhp/evidence/TESSERA-EVO-012-final-evidence.json"
+    },
+    {
+      "id": "evo12_tests",
+      "kind": "validator",
+      "path": "tests/test_evo12.py"
+    },
+    {
+      "id": "enhanced_network",
+      "kind": "runtime",
+      "path": "src/tessera/model/network.py"
+    },
+    {
+      "id": "enhanced_train",
+      "kind": "runtime",
+      "path": "src/tessera/model/train.py"
+    },
+    {
+      "id": "enhanced_plugin",
+      "kind": "runtime",
+      "path": "src/tessera/plugin/runtime.py"
+    },
+    {
+      "id": "evo13_evidence",
+      "kind": "evidence",
+      "path": "docs/context/rhp/evidence/TESSERA-EVO-013-final-evidence.json"
+    },
+    {
+      "id": "evo13_tests",
+      "kind": "validator",
+      "path": "tests/test_evo13.py"
+    },
+    {
+      "id": "repair_ablation",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/repair_ablation.py"
+    },
+    {
+      "id": "arch_benchmark",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/benchmark.py"
+    },
+    {
+      "id": "trajectory_adapters",
+      "kind": "runtime",
+      "path": "src/tessera/plugin/trajectory.py"
+    },
+    {
+      "id": "nab_enhanced",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/run_nab_transfer.py"
+    }
+  ],
+  "edges": [
+    {
+      "source": "operator",
+      "target": "rhp_truth",
+      "kind": "reads"
+    },
+    {
+      "source": "rhp_truth",
+      "target": "rhp_evidence",
+      "kind": "routes_to"
+    },
+    {
+      "source": "rhp_truth",
+      "target": "nexus_routes",
+      "kind": "routes_to"
+    },
+    {
+      "source": "nexus_routes",
+      "target": "geometry",
+      "kind": "routes_to"
+    },
+    {
+      "source": "geometry",
+      "target": "lesson_chart",
+      "kind": "governed_by"
+    },
+    {
+      "source": "lesson_chart",
+      "target": "roadmap",
+      "kind": "promotes"
+    },
+    {
+      "source": "research",
+      "target": "roadmap",
+      "kind": "routes_to"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "research",
+      "kind": "learns_from"
+    },
+    {
+      "source": "external_dataset",
+      "target": "dataset_transfer",
+      "kind": "routes_to"
+    },
+    {
+      "source": "dataset_transfer",
+      "target": "run_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "dataset_transfer",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "dataset_transfer",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "test_validator",
+      "target": "dataset_transfer",
+      "kind": "validates"
+    },
+    {
+      "source": "nasa_dataset",
+      "target": "nasa_transfer",
+      "kind": "routes_to"
+    },
+    {
+      "source": "nasa_transfer",
+      "target": "run_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "nasa_transfer",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "test_validator",
+      "target": "nasa_transfer",
+      "kind": "validates"
+    },
+    {
+      "source": "nasa_transfer",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "ucr_dataset",
+      "target": "ucr_transfer",
+      "kind": "routes_to"
+    },
+    {
+      "source": "ucr_transfer",
+      "target": "run_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "ucr_transfer",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "test_validator",
+      "target": "ucr_transfer",
+      "kind": "validates"
+    },
+    {
+      "source": "ucr_transfer",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "roadmap",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "lesson_chart",
+      "target": "rhp_validator",
+      "kind": "promotes"
+    },
+    {
+      "source": "rhp_validator",
+      "target": "tessera_runtime",
+      "kind": "validates"
+    },
+    {
+      "source": "test_validator",
+      "target": "tessera_runtime",
+      "kind": "validates"
+    },
+    {
+      "source": "rhp_validator",
+      "target": "agent_cli_runtime",
+      "kind": "validates"
+    },
+    {
+      "source": "test_validator",
+      "target": "neural_plugin",
+      "kind": "validates"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "agent_cli_runtime",
+      "target": "agent_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "neural_plugin",
+      "target": "plugin_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "neural_plugin",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "run_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "run_evidence",
+      "target": "lesson_chart",
+      "kind": "learns_from"
+    },
+    {
+      "source": "rhp_evidence",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "agent_cli_runtime",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "root_readme",
+      "target": "nexus_routes",
+      "kind": "routes_to"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "enhanced_network",
+      "kind": "reads"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "enhanced_train",
+      "kind": "reads"
+    },
+    {
+      "source": "neural_plugin",
+      "target": "enhanced_plugin",
+      "kind": "reads"
+    },
+    {
+      "source": "enhanced_network",
+      "target": "evo12_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "enhanced_plugin",
+      "target": "evo12_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "evo12_tests",
+      "target": "enhanced_network",
+      "kind": "validates"
+    },
+    {
+      "source": "evo12_tests",
+      "target": "enhanced_plugin",
+      "kind": "validates"
+    },
+    {
+      "source": "evo12_tests",
+      "target": "enhanced_train",
+      "kind": "validates"
+    },
+    {
+      "source": "test_validator",
+      "target": "evo12_tests",
+      "kind": "reads"
+    },
+    {
+      "source": "evo12_evidence",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "enhanced_network",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "enhanced_train",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "enhanced_plugin",
+      "target": "plugin_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "repair_ablation",
+      "kind": "reads"
+    },
+    {
+      "source": "tessera_runtime",
+      "target": "arch_benchmark",
+      "kind": "reads"
+    },
+    {
+      "source": "neural_plugin",
+      "target": "trajectory_adapters",
+      "kind": "reads"
+    },
+    {
+      "source": "repair_ablation",
+      "target": "evo13_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "arch_benchmark",
+      "target": "evo13_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "evo13_tests",
+      "target": "repair_ablation",
+      "kind": "validates"
+    },
+    {
+      "source": "evo13_tests",
+      "target": "arch_benchmark",
+      "kind": "validates"
+    },
+    {
+      "source": "evo13_tests",
+      "target": "trajectory_adapters",
+      "kind": "validates"
+    },
+    {
+      "source": "evo13_evidence",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "repair_ablation",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "arch_benchmark",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "trajectory_adapters",
+      "target": "plugin_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "nab_enhanced",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "dataset_transfer",
+      "target": "nab_enhanced",
+      "kind": "validates"
+    }
+  ],
+  "claim_boundary": "Geometry validates declared relationships and order only; it does not prove runtime correctness or model capability."
+}

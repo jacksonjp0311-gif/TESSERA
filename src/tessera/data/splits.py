@@ -27,7 +27,27 @@ def chronological_splits(df: pd.DataFrame) -> SplitBundle:
     )
 
 
+def fixed_index_splits(
+    df: pd.DataFrame,
+    *,
+    calibration_end: int,
+    train_end: int,
+    validation_end: int,
+    replay_end: int,
+) -> SplitBundle:
+    boundaries = (0, calibration_end, train_end, validation_end, replay_end, len(df))
+    if tuple(sorted(boundaries)) != boundaries or len(set(boundaries)) != len(boundaries):
+        raise ValueError("split boundaries must be strictly increasing")
+    return SplitBundle(
+        calibration=df.iloc[:calibration_end].copy(),
+        train=df.iloc[calibration_end:train_end].copy(),
+        validation=df.iloc[train_end:validation_end].copy(),
+        replay=df.iloc[validation_end:replay_end].copy(),
+        final_test=df.iloc[replay_end:].copy(),
+    )
+
+
 def features_labels(df: pd.DataFrame):
-    X = df.drop(columns=['label']).to_numpy(dtype='float32')
+    X = df.drop(columns=['label', 'timestamp'], errors='ignore').to_numpy(dtype='float32')
     y = df['label'].to_numpy(dtype=int)
     return X, y

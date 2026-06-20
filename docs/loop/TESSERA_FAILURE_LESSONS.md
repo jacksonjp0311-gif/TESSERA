@@ -18,6 +18,8 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F010 | PowerShell absorbed loop logic | Python owns loop logic; shell launches only | Python loop kernel |
 | F011 | engine patch notes accumulated in repo root | release docs live under docs/releases/engine | root hygiene |
 | F012 | alignment and geometry gap | command registry, loopbook, lessons, chart, and README must align | geometry gate |
+| F013 | launcher passed surface checks with invalid Python syntax | compile executable Python entrypoints before promotion | Agent CLI Mirror syntax gate |
+| F032 | safe precursor existed but general policies discarded phase history | phase-semantic signals require separately calibrated bounded specialists | phase-conditioned holdout gate |
 
 ## Lessons Law
 

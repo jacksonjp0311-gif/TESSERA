@@ -71,7 +71,7 @@ def main() -> int:
     missing_contract = [t for t in CONTRACT_TOKENS if t not in contract]
     passed = not missing and not missing_script_tokens and not missing_readme and not missing_registry and not missing_contract
     report = {
-        "schema": "TESSERA-v0.3.8-agent-cli-contract-validation",
+        "schema": "TESSERA-v0.3.9-agent-cli-contract-validation",
         "passed": passed,
         "missing_files": missing,
         "missing_script_tokens": missing_script_tokens,

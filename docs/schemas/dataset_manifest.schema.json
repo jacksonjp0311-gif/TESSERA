@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tessera v1.7 Dataset Manifest",
+  "type": "object",
+  "required": [
+    "schema",
+    "dataset_name",
+    "dataset_version",
+    "raw_data_hash",
+    "preprocess_hash",
+    "split_hashes",
+    "split_policy",
+    "label_policy",
+    "source",
+    "license",
+    "timebase",
+    "leakage_controls"
+  ],
+  "properties": {
+    "schema": {"const": "TESSERA-v1.7-dataset-manifest"},
+    "source": {"type": "string", "minLength": 1},
+    "license": {"type": "string", "minLength": 1},
+    "labels_hash": {"type": ["string", "null"]},
+    "timebase": {"type": "string", "minLength": 1},
+    "known_caveats": {"type": "array", "items": {"type": "string"}},
+    "split_hashes": {
+      "type": "object",
+      "required": ["calibration", "train", "validation", "replay", "final_test"]
+    },
+    "leakage_controls": {
+      "type": "object",
+      "required": [
+        "future_statistics_blocked",
+        "test_labels_blocked_from_tuning",
+        "preprocessing_fit_on_train_only",
+        "time_order_preserved",
+        "replay_held_out_from_repair",
+        "final_test_read_only"
+      ]
+    }
+  }
+}

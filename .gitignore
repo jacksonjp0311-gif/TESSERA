@@ -10,3 +10,18 @@ build/
 Thumbs.db
 .env
 .env.*
+
+# Local benchmark downloads and extracted third-party corpora.
+datasets/**/extracted/
+datasets/**/*.zip
+
+# Generated experiment history and scratch analysis.
+outputs/runs/tessera_run_*/
+outputs/transfers/
+work/
+*.bak
+/_check_params.py
+/_debug_repair.py
+
+# Mutable operator ledgers are local runtime state.
+agent_cli_mirror/ledger/

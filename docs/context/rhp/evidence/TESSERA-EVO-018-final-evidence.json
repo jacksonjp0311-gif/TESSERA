@@ -1,0 +1,46 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.18",
+  "operation": "TESSERA-EVO-018",
+  "previous_operation": "TESSERA-EVO-017",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "LOCAL_TRAJECTORY_NOT_IDENTIFIABLE_SAFE_TELEMETRY_EVOLVED",
+  "identifiability_audit": {
+    "trajectory_count": 18,
+    "unique_observation_count": 5,
+    "conflicting_observation_count": 2,
+    "conflicting_trajectory_count": 7,
+    "deterministic_accuracy_upper_bound": 0.8888888888888888,
+    "failure_recall_upper_bound_at_zero_false_intervention": 0.0,
+    "identifiable_for_zero_false_intervention": false
+  },
+  "finding": "both degraded prefixes exactly collide with clean prefixes under the allowed feature contract",
+  "implemented": [
+    "trajectory identifiability promotion gate",
+    "opaque session identifier",
+    "monotonic event index",
+    "safe elapsed milliseconds",
+    "numeric exit code"
+  ],
+  "denied_payload_fields_preserved": [
+    "command",
+    "detail",
+    "root",
+    "mirror_dir",
+    "prompt",
+    "raw_output"
+  ],
+  "frozen_cohort_reused_for_tuning": false,
+  "next_recommended_operation": "collect_fresh_enriched_sessions_before_phase_conditioned_calibration",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Sensor enrichment is not trajectory utility, live monitoring authority, or autonomous capability."
+}

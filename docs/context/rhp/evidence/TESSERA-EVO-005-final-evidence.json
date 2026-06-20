@@ -1,0 +1,56 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.5",
+  "operation": "TESSERA-EVO-005",
+  "source_repository": "jacksonjp0311-gif/hermes-agent-evo",
+  "source_commit": "27e379d4285b94ff8903f53a5742589aadd8f122",
+  "operation_base_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "NASA_SMAP_DIAGNOSTIC_EVALUATED_T1_NOT_SUPPORTED",
+  "source_capsule": "datasets/telemanom/source_manifest.json",
+  "evaluations": [
+    {
+      "channel": "P-1",
+      "class": "contextual",
+      "result": "diagnostic_failed"
+    },
+    {
+      "channel": "S-1",
+      "class": "point",
+      "result": "diagnostic_failed"
+    },
+    {
+      "channel": "E-2",
+      "class": "point",
+      "role": "untouched_confirmation",
+      "auc": 0.5689589442888415,
+      "replay_pass_rate": 0.7301289566236812,
+      "missed_warning": 0.9964234620886981,
+      "false_memory_rate": 0.9492131616595136,
+      "result": "hypothesis_rejected"
+    }
+  ],
+  "supported_T1_count": 1,
+  "supported_families": ["NAB"],
+  "evaluated_diagnostic_families": ["NASA SMAP Telemanom"],
+  "phase_2_completed": false,
+  "promotion_allowed": false,
+  "promotion_blockers": [
+    "upstream arrays scaled using test-set extrema",
+    "NASA channel metrics fail anomaly and false-memory gates",
+    "UCR family not yet evaluated",
+    "three-family diversity gate not met"
+  ],
+  "external_ingestion": true,
+  "external_ingestion_authorized_by_user": true,
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "next_recommended_operation": "ingest_one_pinned_UCR_anomaly_archive_series_with_clean_preprocessing_lineage",
+  "non_claim_lock": "NASA SMAP evaluation produced diagnostic wounds only; NAB remains the sole supported T1 dataset."
+}

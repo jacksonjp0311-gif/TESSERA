@@ -1,0 +1,50 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.10",
+  "operation": "TESSERA-EVO-010",
+  "source_repository": "jacksonjp0311-gif/hermes-agent-evo",
+  "source_commit": "27e379d4285b94ff8903f53a5742589aadd8f122",
+  "operation_base_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "POINT_SELECTIVE_FUSION_CONFIRMED_SHAPE_AND_PREDICTION_BLOCKED",
+  "point_confirmation": {
+    "series": "235_UCR_Anomaly_mit14157longtermecg_18913_75450_75451.txt",
+    "auc": 0.9999744839376388,
+    "recall": 1.0,
+    "replay_pass_rate": 0.6272453561951419,
+    "false_memory_rate": 0.0,
+    "specialist_coverage": 0.21781950858571683,
+    "prediction_loss": 0.4238195196114824,
+    "best_baseline_prediction_loss": 0.014014136992625856,
+    "result": "detector_and_memory_gates_pass_prediction_blocked"
+  },
+  "shape_confirmation": {
+    "series": "144_UCR_Anomaly_InternalBleeding9_4200_6599_6681.txt",
+    "auc": 0.24390093879025992,
+    "recall": 0.024096385542168676,
+    "replay_pass_rate": 0.5906610066707095,
+    "false_memory_rate": 0.7951807228915663,
+    "result": "current_shape_sensor_family_rejected"
+  },
+  "implemented": [
+    "normal-validation coverage constrained specialist routing",
+    "abstention-aware consensus score fusion",
+    "single-channel PCA and random projection output-shape repair",
+    "batched nearest-neighbor matrix-profile baseline"
+  ],
+  "supported_T1_count": 1,
+  "supported_families": ["NAB"],
+  "phase_2_completed": false,
+  "next_recommended_operation": "build_validation_selected_prediction_experts_and_morphology_aware_shape_sensing",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": true,
+  "external_ingestion_authorized_by_user": true,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Point selective fusion on one confirmation is not UCR-wide transfer, forecasting recovery, general memory safety, or autonomous authority."
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.7",
+  "operation": "TESSERA-EVO-007",
+  "source_repository": "jacksonjp0311-gif/hermes-agent-evo",
+  "source_commit": "27e379d4285b94ff8903f53a5742589aadd8f122",
+  "operation_base_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "state_after_validation": "UCR_EPISODE_GOVERNANCE_IMPLEMENTED_UNIVERSAL_SHAPE_HYPOTHESIS_REJECTED",
+  "discovery": {
+    "series": "176_UCR_Anomaly_insectEPG4_1300_6508_6558.txt",
+    "anomaly_length": 51,
+    "auc": 0.976287606036131,
+    "recall": 1.0,
+    "replay_pass_rate": 0.7470101195952162,
+    "false_memory_rate": 0.0
+  },
+  "confirmation": {
+    "series": "177_UCR_Anomaly_insectEPG5_3200_8500_8501.txt",
+    "anomaly_length": 2,
+    "episode_quarantine": 12,
+    "auc": 0.43674875403107594,
+    "recall": 0.0,
+    "replay_pass_rate": 0.6642250219748023,
+    "false_memory_rate": 1.0,
+    "result": "universal_shape_hypothesis_rejected"
+  },
+  "implemented": [
+    "causal event episode identifiers",
+    "post-warning memory quarantine",
+    "recomputed replay and false-memory fields after quarantine"
+  ],
+  "lesson": "Episode governance contains detected events but cannot compensate for scale-mismatched sensor blindness.",
+  "supported_T1_count": 1,
+  "supported_families": ["NAB"],
+  "phase_2_completed": false,
+  "next_recommended_operation": "build_duration_stratified_point_subsequence_sensor_router_on_new_preregistered_UCR_pairs",
+  "external_ingestion": true,
+  "external_ingestion_authorized_by_user": true,
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Episode quarantine is a governance primitive, not a universal anomaly detector or transfer capability."
+}

@@ -13,6 +13,10 @@
                         "README.md",
                         "AGENTS.md",
                         "README_90_SECONDS.md",
+                        "docs/context/rhp/latest-rhp.json",
+                        "docs/context/nexus/surface_registry.json",
+                        "docs/geometry/repository_geometry.json",
+                        "docs/lessons/lesson_chart.json",
                         "docs/context/repository_context_index.json",
                         "docs/context/rcc_nexus_index.json",
                         "rcc/nexus/route_map.json"
@@ -32,6 +36,26 @@
                        "id":  "quick",
                        "path":  "README_90_SECONDS.md",
                        "role":  "fast orientation"
+                   },
+                   {
+                       "id":  "rhp",
+                       "path":  "docs/context/rhp/latest-rhp.json",
+                       "role":  "current truth and evidence pointer"
+                   },
+                   {
+                       "id":  "surface_registry",
+                       "path":  "docs/context/nexus/surface_registry.json",
+                       "role":  "canonical route and mini-README profile registry"
+                   },
+                   {
+                       "id":  "repository_geometry",
+                       "path":  "docs/geometry/repository_geometry.json",
+                       "role":  "repository node, edge, and loop-order contract"
+                   },
+                   {
+                       "id":  "lesson_chart",
+                       "path":  "docs/lessons/lesson_chart.json",
+                       "role":  "evidence-backed wound and lesson promotion registry"
                    },
                    {
                        "id":  "architecture",
@@ -185,6 +209,7 @@
                    }
                ],
     "validation_commands":  [
+                                "python scripts/validation/validate_rhp_nexus.py",
                                 "python scripts/rcc/check_rcc_nexus.py",
                                 "python scripts/validation/validate_architecture_contracts.py",
                                 "python -m unittest discover -s tests",
