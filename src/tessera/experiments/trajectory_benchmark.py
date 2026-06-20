@@ -217,6 +217,192 @@ def _phase_conditioned_policy(
     return warning, memory, abstained, evidence
 
 
+def _completed_phase_durations(events: list[AgentEvent]) -> dict[str, float]:
+    values = {}
+    for event in events:
+        duration = float(event.features.get("duration_ms", 0.0))
+        phase = str(event.metadata.get("phase", "UNKNOWN")).upper()
+        state = str(event.metadata.get("state", "")).upper()
+        if duration > 0.0 and state == "OK":
+            values[phase] = duration
+    return values
+
+
+def calibrate_workflow_session_policy(
+    trajectories: list[tuple[list[AgentEvent], bool]],
+    *,
+    false_warning_budget: float = 0.05,
+    minimum_scale_ms: float = 5.0,
+) -> dict:
+    """Split-conformal calibration of one maximum cross-phase session score."""
+    if not 0.0 < false_warning_budget < 1.0:
+        raise ValueError("false_warning_budget must be between zero and one")
+    minimum_support = math.ceil(1.0 / false_warning_budget) - 1
+    clean = [
+        events for events, degraded in trajectories if not degraded
+    ]
+    profiles = {trajectory_profile(events) for events in clean}
+    reference_count = len(clean) // 2
+    reference = clean[:reference_count]
+    score_calibration = clean[reference_count:]
+    phases = sorted(
+        set.intersection(
+            *[
+                set(_completed_phase_durations(events))
+                for events in reference
+            ]
+        )
+    ) if reference else []
+    phase_reference = {}
+    for phase in phases:
+        sample = np.asarray(
+            [
+                _completed_phase_durations(events)[phase]
+                for events in reference
+            ],
+            dtype=float,
+        )
+        center = float(np.median(sample))
+        mad = float(np.median(np.abs(sample - center)))
+        phase_reference[phase] = {
+            "median_ms": center,
+            "mad_ms": mad,
+            "scale_ms": max(minimum_scale_ms, 1.4826 * mad),
+            "support": len(sample),
+        }
+
+    def score(events: list[AgentEvent]) -> float:
+        durations = _completed_phase_durations(events)
+        return max(
+            (
+                (durations[phase] - values["median_ms"])
+                / values["scale_ms"]
+                for phase, values in phase_reference.items()
+                if phase in durations
+            ),
+            default=float("-inf"),
+        )
+
+    calibration_scores = [score(events) for events in score_calibration]
+    threshold = None
+    if calibration_scores:
+        rank = min(
+            len(calibration_scores),
+            math.ceil(
+                (len(calibration_scores) + 1)
+                * (1.0 - false_warning_budget)
+            ),
+        )
+        threshold = float(np.sort(calibration_scores)[rank - 1])
+    sufficient = (
+        len(profiles) == 1
+        and len(reference) >= minimum_support
+        and len(score_calibration) >= minimum_support
+        and bool(phase_reference)
+        and threshold is not None
+    )
+    return {
+        "schema": "TESSERA-WORKFLOW-SESSION-CALIBRATION-v0.1",
+        "clean_trajectory_count": len(clean),
+        "reference_count": len(reference),
+        "score_calibration_count": len(score_calibration),
+        "false_warning_budget": false_warning_budget,
+        "minimum_support_per_partition": minimum_support,
+        "minimum_scale_ms": minimum_scale_ms,
+        "allowed_profiles": sorted(profiles) if sufficient else [],
+        "phase_reference": phase_reference,
+        "session_score_threshold": threshold,
+        "calibration_sufficient": sufficient,
+        "claim_boundary": (
+            "Split-conformal calibration controls one session-level score "
+            "under exchangeability; it does not establish production safety."
+        ),
+    }
+
+
+def _workflow_session_policy(
+    events: list[AgentEvent],
+    calibration: dict,
+) -> tuple[bool, bool, bool, list[dict]]:
+    profile = trajectory_profile(events)
+    if (
+        not calibration.get("calibration_sufficient", False)
+        or profile not in calibration.get("allowed_profiles", [])
+    ):
+        return False, False, True, [
+            {
+                "profile": profile,
+                "reason": (
+                    "insufficient_calibration"
+                    if not calibration.get("calibration_sufficient", False)
+                    else "workflow_profile_mismatch"
+                ),
+            }
+        ]
+    durations = _completed_phase_durations(events)
+    evidence = []
+    scores = []
+    for phase, reference in calibration["phase_reference"].items():
+        if phase not in durations:
+            continue
+        score = (
+            durations[phase] - float(reference["median_ms"])
+        ) / float(reference["scale_ms"])
+        scores.append(score)
+        evidence.append(
+            {
+                "phase": phase,
+                "duration_ms": durations[phase],
+                "score": score,
+            }
+        )
+    if not scores:
+        return False, False, True, [
+            {"profile": profile, "reason": "no_calibrated_phase_observed"}
+        ]
+    session_score = max(scores)
+    threshold = float(calibration["session_score_threshold"])
+    warning = session_score > threshold
+    evidence.append(
+        {
+            "session_score": session_score,
+            "session_score_threshold": threshold,
+            "exceeded": warning,
+        }
+    )
+    return warning, not warning, False, evidence
+
+
+def evaluate_workflow_session_specialist(
+    trajectories: list[tuple[list[AgentEvent], bool]],
+    calibration: dict,
+) -> dict:
+    rows = []
+    for events, degraded in trajectories:
+        warning, memory, abstained, evidence = _workflow_session_policy(
+            events, calibration
+        )
+        rows.append(
+            {
+                "degraded": degraded,
+                "warning": warning,
+                "memory_candidate": memory,
+                "abstained": abstained,
+                "profile": trajectory_profile(events),
+                "evidence": evidence,
+            }
+        )
+    covered = [row for row in rows if not row["abstained"]]
+    return {
+        "trajectory_count": len(rows),
+        "coverage": len(covered) / max(1, len(rows)),
+        "warning_rate": (
+            sum(row["warning"] for row in covered) / max(1, len(covered))
+        ),
+        "rows": rows,
+    }
+
+
 def archive_trajectory_cohort(
     path: str,
     out_path: str,
@@ -379,6 +565,34 @@ def run_evo020_archived_benchmark(
         "claim_boundary": (
             "Shadow evaluation measures coverage and diagnostic behavior only; "
             "it does not authorize live warnings, interventions, or memory."
+        ),
+    }
+
+
+def run_evo021_natural_clean_benchmark(
+    calibration_path: str,
+    confirmation_path: str,
+) -> dict:
+    calibration_set = load_trajectory_cohort(calibration_path)
+    confirmation_set = load_trajectory_cohort(confirmation_path)
+    calibration = calibrate_workflow_session_policy(calibration_set)
+    return {
+        "schema": "TESSERA-EVO-021-NATURAL-SESSION-SHADOW-v0.1",
+        "calibration": calibration,
+        "confirmation": evaluate_workflow_session_specialist(
+            confirmation_set, calibration
+        ),
+        "failure_recall_measured": False,
+        "authority": {
+            "read_only": True,
+            "warning_emitted_to_host": False,
+            "memory_write": False,
+            "intervention": False,
+        },
+        "claim_boundary": (
+            "Natural clean session shadow measures profile coverage and "
+            "false-warning behavior only; failure sensitivity remains "
+            "unmeasured."
         ),
     }
 

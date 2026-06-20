@@ -1,0 +1,1722 @@
+{
+  "schema": "TESSERA-SANITIZED-TRAJECTORY-COHORT-v0.1",
+  "role": "evo021-natural-validation-clean-confirmation",
+  "cohort_sha256": "68f3dde407de12333b8ffdcbdfc600e5fb8e77d3c49e05b7ebf5a3826207e86c",
+  "capture_manifest": {
+    "schema": "TESSERA-LOCAL-TRAJECTORY-CAPTURE-v0.1",
+    "privacy_audit": {
+      "schema": "TESSERA-LOCAL-TRAJECTORY-PRIVACY-AUDIT-v0.1",
+      "source_sha256": "4af57f95f4251b1ef6b6f17fc85c08ad3381dfcc1c086db917960a00559e9389",
+      "record_count": 1589,
+      "malformed_count": 0,
+      "observed_fields": [
+        "command",
+        "detail",
+        "elapsed_ms",
+        "event_index",
+        "exit_code",
+        "mirror_dir",
+        "phase",
+        "root",
+        "schema",
+        "session_id",
+        "state",
+        "timestamp"
+      ],
+      "allowed_fields": [
+        "phase",
+        "schema",
+        "state",
+        "timestamp"
+      ],
+      "safe_optional_fields": [
+        "elapsed_ms",
+        "event_index",
+        "exit_code",
+        "session_id"
+      ],
+      "denied_fields_present": [
+        "command",
+        "detail",
+        "mirror_dir",
+        "root"
+      ],
+      "raw_payload_retained": false,
+      "capture_permitted": true,
+      "claim_boundary": "Privacy audit permits numeric metadata capture only; it does not authorize prompts, commands, paths, details, or raw outputs."
+    },
+    "minimum_prefix": 9,
+    "last_enriched_sessions": 8,
+    "selected_session_ids": [],
+    "captured_session_ids": [
+      "8aac2f30fe4b45b5b7381e741b82b46e",
+      "e1103934a1284fa9bb153c6e7a500313",
+      "0d0e60e5c94a432f8eec15956186cdf8",
+      "d0785a9298db45d2a87e8d05d69e493f",
+      "6aba851d55ee478daf1d36b89e7baf5d",
+      "e6f9653b3bd149928e4a19fb743056e0",
+      "96c618acac1c433bb928e17863feacb9",
+      "8eaf780c966a4234a153b0b59493e37f"
+    ],
+    "captured_session_count": 8,
+    "degraded_session_count": 0,
+    "clean_session_count": 8,
+    "excluded_sessions": [],
+    "retained_fields": [
+      "duration_ms",
+      "phase",
+      "state",
+      "phase_code",
+      "transition",
+      "phase_repetition",
+      "skip_indicator",
+      "event_index"
+    ],
+    "denied_fields": [
+      "command",
+      "detail",
+      "mirror_dir",
+      "root"
+    ],
+    "raw_payload_retained": false,
+    "claim_boundary": "Sanitized local capture is an offline diagnostic dataset only."
+  },
+  "trajectory_count": 8,
+  "clean_count": 8,
+  "degraded_count": 0,
+  "trajectories": [
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-0-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956290.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956290.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956290.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956290.0,
+          "features": {
+            "duration_ms": 82.86110000335611,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956290.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956290.0,
+          "features": {
+            "duration_ms": 134.3701999867335,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956290.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956291.0,
+          "features": {
+            "duration_ms": 150.72910001617856,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        },
+        {
+          "event_id": "captured-0-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956291.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "8aac2f30fe4b45b5b7381e741b82b46e"
+          }
+        }
+      ]
+    },
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-1-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956291.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956291.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956291.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956291.0,
+          "features": {
+            "duration_ms": 88.28450000146404,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956291.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956292.0,
+          "features": {
+            "duration_ms": 123.84190000011586,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956292.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956292.0,
+          "features": {
+            "duration_ms": 123.5756000096444,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        },
+        {
+          "event_id": "captured-1-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956292.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "e1103934a1284fa9bb153c6e7a500313"
+          }
+        }
+      ]
+    },
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-2-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956292.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956292.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956292.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 81.20759998564608,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 123.73110000044107,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 121.5622000163421,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        },
+        {
+          "event_id": "captured-2-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "0d0e60e5c94a432f8eec15956186cdf8"
+          }
+        }
+      ]
+    },
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-3-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956293.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956294.0,
+          "features": {
+            "duration_ms": 75.19159998628311,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956294.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956294.0,
+          "features": {
+            "duration_ms": 124.2740000016056,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956294.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956294.0,
+          "features": {
+            "duration_ms": 142.98229999258183,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        },
+        {
+          "event_id": "captured-3-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956294.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "d0785a9298db45d2a87e8d05d69e493f"
+          }
+        }
+      ]
+    },
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-4-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 78.44179999665357,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 138.07570000062697,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 145.795199990971,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        },
+        {
+          "event_id": "captured-4-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956295.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "6aba851d55ee478daf1d36b89e7baf5d"
+          }
+        }
+      ]
+    },
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-5-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 79.07929999055341,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 141.26480001141317,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 143.37390000582673,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        },
+        {
+          "event_id": "captured-5-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956296.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "e6f9653b3bd149928e4a19fb743056e0"
+          }
+        }
+      ]
+    },
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-6-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 72.98950001131743,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 118.25410000164993,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 134.1971000074409,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        },
+        {
+          "event_id": "captured-6-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956297.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "96c618acac1c433bb928e17863feacb9"
+          }
+        }
+      ]
+    },
+    {
+      "degraded": false,
+      "profile": "3078b121a8a688f3",
+      "events": [
+        {
+          "event_id": "captured-7-0",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-1",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-2",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-3",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 80.52369998767972,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-4",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-5",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 163.4018000040669,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-6",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-7",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 127.40649998886511,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        },
+        {
+          "event_id": "captured-7-8",
+          "kind": "plan_transition",
+          "timestamp": 1781956298.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "8eaf780c966a4234a153b0b59493e37f"
+          }
+        }
+      ]
+    }
+  ],
+  "claim_boundary": "Archived sanitized cohorts retain numeric operational metadata only and grant no monitoring or intervention authority."
+}

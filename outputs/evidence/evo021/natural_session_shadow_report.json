@@ -1,0 +1,285 @@
+{
+  "schema": "TESSERA-EVO-021-NATURAL-SESSION-SHADOW-v0.1",
+  "calibration": {
+    "schema": "TESSERA-WORKFLOW-SESSION-CALIBRATION-v0.1",
+    "clean_trajectory_count": 40,
+    "reference_count": 20,
+    "score_calibration_count": 20,
+    "false_warning_budget": 0.05,
+    "minimum_support_per_partition": 19,
+    "minimum_scale_ms": 5.0,
+    "allowed_profiles": [
+      "3078b121a8a688f3"
+    ],
+    "phase_reference": {
+      "GEOMETRY": {
+        "median_ms": 138.90425000863615,
+        "mad_ms": 7.236999997985549,
+        "scale_ms": 10.729576197013374,
+        "support": 20
+      },
+      "MIRROR": {
+        "median_ms": 85.39580000797287,
+        "mad_ms": 8.172400004696101,
+        "scale_ms": 12.116400246962439,
+        "support": 20
+      },
+      "REHYDRATE": {
+        "median_ms": 137.21470002201386,
+        "mad_ms": 5.274800001643598,
+        "scale_ms": 7.820418482436798,
+        "support": 20
+      }
+    },
+    "session_score_threshold": 18.463372555620328,
+    "calibration_sufficient": true,
+    "claim_boundary": "Split-conformal calibration controls one session-level score under exchangeability; it does not establish production safety."
+  },
+  "confirmation": {
+    "trajectory_count": 8,
+    "coverage": 1.0,
+    "warning_rate": 0.0,
+    "rows": [
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 122.45270001585595,
+            "score": -1.5332898234470402
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 73.91169999027625,
+            "score": -0.9478145145110788
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 125.77060001785867,
+            "score": -1.4633615873442711
+          },
+          {
+            "session_score": -0.9478145145110788,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 128.72090001474135,
+            "score": -0.9490915397692399
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 77.47600000584498,
+            "score": -0.6536429831222658
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 127.90880000102334,
+            "score": -1.1899491110213394
+          },
+          {
+            "session_score": -0.6536429831222658,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 119.9557000072673,
+            "score": -1.766011038408327
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 71.68520000413992,
+            "score": -1.1315737120247555
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 126.33139998069964,
+            "score": -1.3916518746095337
+          },
+          {
+            "session_score": -1.1315737120247555,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 124.94340000557713,
+            "score": -1.3011557722983587
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 75.36209997488186,
+            "score": -0.8281089951288495
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 122.63450000318699,
+            "score": -1.864375934813627
+          },
+          {
+            "session_score": -0.8281089951288495,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 135.36139999632724,
+            "score": -0.3301947763132607
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 85.69809998152778,
+            "score": 0.024949652321917586
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 124.74150001071393,
+            "score": -1.5949530116978272
+          },
+          {
+            "session_score": 0.024949652321917586,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 121.75280001247302,
+            "score": -1.598520731968642
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 80.2409999887459,
+            "score": -0.42543989255548637
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 119.2354999948293,
+            "score": -2.299007408307176
+          },
+          {
+            "session_score": -0.42543989255548637,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 125.96489998395555,
+            "score": -1.2059516412477067
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 73.12450002063997,
+            "score": -1.0127843036886546
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 117.7495000010822,
+            "score": -2.489022814398855
+          },
+          {
+            "session_score": -1.0127843036886546,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "evidence": [
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 130.01470000017434,
+            "score": -0.8285089592761601
+          },
+          {
+            "phase": "MIRROR",
+            "duration_ms": 77.01060001272708,
+            "score": -0.6920537308387399
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 124.44070001947694,
+            "score": -1.633416425377356
+          },
+          {
+            "session_score": -0.6920537308387399,
+            "session_score_threshold": 18.463372555620328,
+            "exceeded": false
+          }
+        ]
+      }
+    ]
+  },
+  "failure_recall_measured": false,
+  "authority": {
+    "read_only": true,
+    "warning_emitted_to_host": false,
+    "memory_write": false,
+    "intervention": false
+  },
+  "claim_boundary": "Natural clean session shadow measures profile coverage and false-warning behavior only; failure sensitivity remains unmeasured."
+}

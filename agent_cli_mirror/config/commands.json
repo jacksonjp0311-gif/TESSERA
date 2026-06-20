@@ -557,6 +557,27 @@
         }
       ]
     },
+    "trajectory-evo021": {
+      "purpose": "Reproduce EVO-021 split-conformal clean shadow evaluation for the natural validation workflow.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-021 natural clean session shadow",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-evo021",
+            "--calibration",
+            "outputs/evidence/evo021/natural_split_calibration.json",
+            "--confirmation",
+            "outputs/evidence/evo021/natural_session_confirmation.json",
+            "--out",
+            "outputs/evidence/evo021/natural_session_shadow_report.json"
+          ]
+        }
+      ]
+    },
     "telemetry-probe-clean": {
       "purpose": "Generate one privacy-safe enriched clean telemetry session.",
       "steps": [

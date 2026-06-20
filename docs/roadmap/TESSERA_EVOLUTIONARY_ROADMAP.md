@@ -424,6 +424,21 @@ and made no intervention or memory write. The next gate requires at least 19
 clean natural sessions for one exact workflow profile before natural coverage
 can be evaluated.
 
+### Phase 4 diagnostic — TESSERA-EVO-021
+
+The natural validation profile was calibrated from clean operator sessions.
+Separate phase bounds produced one warning in eight clean sessions because
+phase-local error budgets compounded at the session decision.
+
+A split-conformal session gate used 20 clean reference sessions and 20 clean
+score-calibration sessions. Eight later clean sessions reached full coverage
+with zero warnings. Two slow calibration runs produced a conservative
+`18.46`-scale threshold; natural failure sensitivity remains unmeasured.
+
+The next gate preregisters a bounded perturbation ladder for this exact profile
+to measure detectable delay magnitude without calling synthetic perturbations
+natural failures.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.

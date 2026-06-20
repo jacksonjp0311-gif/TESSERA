@@ -1,0 +1,35 @@
+{
+  "schema": "TESSERA-WORKFLOW-SESSION-CALIBRATION-v0.1",
+  "clean_trajectory_count": 40,
+  "reference_count": 20,
+  "score_calibration_count": 20,
+  "false_warning_budget": 0.05,
+  "minimum_support_per_partition": 19,
+  "minimum_scale_ms": 5.0,
+  "allowed_profiles": [
+    "3078b121a8a688f3"
+  ],
+  "phase_reference": {
+    "GEOMETRY": {
+      "median_ms": 138.90425000863615,
+      "mad_ms": 7.236999997985549,
+      "scale_ms": 10.729576197013374,
+      "support": 20
+    },
+    "MIRROR": {
+      "median_ms": 85.39580000797287,
+      "mad_ms": 8.172400004696101,
+      "scale_ms": 12.116400246962439,
+      "support": 20
+    },
+    "REHYDRATE": {
+      "median_ms": 137.21470002201386,
+      "mad_ms": 5.274800001643598,
+      "scale_ms": 7.820418482436798,
+      "support": 20
+    }
+  },
+  "session_score_threshold": 18.463372555620328,
+  "calibration_sufficient": true,
+  "claim_boundary": "Split-conformal calibration controls one session-level score under exchangeability; it does not establish production safety."
+}

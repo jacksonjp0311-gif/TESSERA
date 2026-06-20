@@ -21,6 +21,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F013 | launcher passed surface checks with invalid Python syntax | compile executable Python entrypoints before promotion | Agent CLI Mirror syntax gate |
 | F032 | safe precursor existed but general policies discarded phase history | phase-semantic signals require separately calibrated bounded specialists | phase-conditioned holdout gate |
 | F033 | controlled thresholds did not semantically transfer to full operator loops | require finite-sample support and matching privacy-safe workflow profiles; otherwise abstain | archived workflow-shadow gate |
+| F034 | phase-local warning budgets compounded at the session level | calibrate the combined host decision with a split-conformal session score | natural clean session-shadow gate |
 
 ## Lessons Law
 

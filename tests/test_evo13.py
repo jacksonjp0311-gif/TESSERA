@@ -355,6 +355,61 @@ class TestEvo13TrajectoryAdapters(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_trajectory_cohort(str(archive))
 
+    def test_workflow_session_policy_requires_split_support(self):
+        from tessera.experiments.trajectory_benchmark import (
+            calibrate_workflow_session_policy,
+        )
+
+        event = AgentEvent(
+            "validate",
+            "plan_transition",
+            1.0,
+            {"duration_ms": 80.0},
+            metadata={"phase": "VALIDATE", "state": "OK"},
+        )
+        insufficient = calibrate_workflow_session_policy(
+            [([event], False) for _ in range(37)]
+        )
+        sufficient = calibrate_workflow_session_policy(
+            [([event], False) for _ in range(38)]
+        )
+        self.assertFalse(insufficient["calibration_sufficient"])
+        self.assertTrue(sufficient["calibration_sufficient"])
+
+    def test_workflow_session_policy_controls_max_phase_score(self):
+        from tessera.experiments.trajectory_benchmark import (
+            _workflow_session_policy,
+            calibrate_workflow_session_policy,
+        )
+
+        def trajectory(offset):
+            return [
+                AgentEvent(
+                    f"{phase}-{offset}",
+                    "plan_transition",
+                    1.0,
+                    {"duration_ms": base + offset},
+                    metadata={"phase": phase, "state": "OK"},
+                )
+                for phase, base in (
+                    ("MIRROR", 80.0),
+                    ("REHYDRATE", 130.0),
+                    ("GEOMETRY", 140.0),
+                )
+            ]
+
+        model = calibrate_workflow_session_policy(
+            [(trajectory(index % 5), False) for index in range(40)]
+        )
+        warning, memory, abstained, evidence = _workflow_session_policy(
+            trajectory(100.0), model
+        )
+        self.assertTrue(model["calibration_sufficient"])
+        self.assertTrue(warning)
+        self.assertFalse(memory)
+        self.assertFalse(abstained)
+        self.assertTrue(evidence[-1]["exceeded"])
+
 
 class TestEvo13RepairAblation(unittest.TestCase):
     """EVO-013: Phase 3 — Replay-guided shadow repair ablation."""

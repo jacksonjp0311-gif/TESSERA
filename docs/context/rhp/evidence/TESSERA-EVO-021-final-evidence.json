@@ -1,0 +1,99 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.21",
+  "operation": "TESSERA-EVO-021",
+  "previous_operation": "TESSERA-EVO-020",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "23ffd621535b74259e1f7dbdfbc8c87dbaaad186",
+  "state_after_validation": "NATURAL_CLEAN_PROFILE_COVERAGE_CONFIRMED_SENSITIVITY_UNMEASURED",
+  "implemented": [
+    "natural validation workflow clean calibration",
+    "untouched natural clean shadow cohort",
+    "session-level maximum cross-phase scoring",
+    "split-conformal clean warning calibration",
+    "minimum 19-session support for both reference and score partitions",
+    "deterministic natural clean shadow replay"
+  ],
+  "finding": "Phase-wise 5% bounds produced one warning in eight clean natural sessions because multiple phase tests inflated session risk. A split-conformal session score eliminated warnings on a later eight-session clean cohort, but two slow valid calibration runs made the threshold highly conservative.",
+  "decision": "Support clean profile coverage and false-warning control for the natural validation workflow only. Do not claim natural failure recall or useful sensitivity.",
+  "metrics": {
+    "natural_profile": "3078b121a8a688f3",
+    "initial_clean_calibration_sessions": 24,
+    "initial_clean_confirmation_sessions": 8,
+    "initial_phasewise_coverage": 1.0,
+    "initial_phasewise_warning_rate": 0.125,
+    "split_conformal_calibration_sessions": 40,
+    "reference_sessions": 20,
+    "score_calibration_sessions": 20,
+    "required_support_per_partition": 19,
+    "declared_false_warning_budget": 0.05,
+    "session_score_threshold": 18.463372555620328,
+    "final_clean_confirmation_sessions": 8,
+    "final_clean_coverage": 1.0,
+    "final_clean_warning_rate": 0.0,
+    "failure_recall_measured": false,
+    "host_warnings_emitted": 0,
+    "host_interventions": 0
+  },
+  "tail_findings": [
+    {
+      "phase": "REHYDRATE",
+      "duration_ms": 281.6060000041034,
+      "robust_score": 18.463372555620328
+    },
+    {
+      "phase": "GEOMETRY",
+      "duration_ms": 310.9431000193581,
+      "robust_score": 16.03407691522893
+    }
+  ],
+  "validation": {
+    "unit_tests_passed": 83,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "agent_cli_contract_gate": true,
+    "operator_geometry_gate": true,
+    "architecture_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 6,
+    "deterministic_session_report": true
+  },
+  "artifacts": {
+    "initial_clean_confirmation": {
+      "path": "outputs/evidence/evo021/natural_clean_confirmation.json",
+      "sha256": "b18042c3a6e1dd208f0f18977a1366b53b07b926167ff9b20ecb76e1803362b8"
+    },
+    "initial_phasewise_report": {
+      "path": "outputs/evidence/evo021/natural_clean_shadow_report.json",
+      "sha256": "5ecb58e04737dea7e14480d4b95ef5378e5b0256ec00b6ec610e7a71fe8d326d"
+    },
+    "split_calibration": {
+      "path": "outputs/evidence/evo021/natural_split_calibration.json",
+      "sha256": "f94e5ed3301420aafc3c6f314380f7910ac8b9a6e31d168a3881ccc687ee79cf"
+    },
+    "frozen_session_calibration": {
+      "path": "outputs/evidence/evo021/frozen_session_calibration.json",
+      "sha256": "2a343b00e5576ac10b715075dc9fa61a3a65d9e09ad315dffd4d369411b2fea1"
+    },
+    "final_clean_confirmation": {
+      "path": "outputs/evidence/evo021/natural_session_confirmation.json",
+      "sha256": "a55ec4a723c52d5238016936c1e6e1a81ae7eddd7466735272d7e0a51308d171"
+    },
+    "final_session_report": {
+      "path": "outputs/evidence/evo021/natural_session_shadow_report.json",
+      "sha256": "50367dee60b99a100d6a7429fbb985ecbe3e8533dfa8953cc6fba46610f51021"
+    }
+  },
+  "next_recommended_operation": "preregister_natural_profile_perturbation_ladder_without_failure_claim",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Clean natural-profile coverage and zero observed clean warnings do not measure failure sensitivity, production utility, consciousness, or autonomous authority."
+}

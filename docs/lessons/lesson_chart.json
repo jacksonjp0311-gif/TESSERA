@@ -397,6 +397,18 @@
       "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
       "authority_boundary": "Profile coverage remains read-only and cannot authorize warnings, intervention, or memory writes.",
       "status": "promoted"
+    },
+    {
+      "id": "F034",
+      "observed_event": "Independent 5% phase bounds warned on one of eight clean natural sessions, while a session-level split-conformal gate warned on none.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-021-final-evidence.json",
+      "wound_class": "multiple_testing_session_risk",
+      "diagnosis": "Phase-local error budgets compounded when any phase exceedance triggered a session warning.",
+      "lesson": "When one host action follows many sensor tests, calibrate the combined session decision rather than each test in isolation.",
+      "future_behavior_change": "Natural workflow specialists use one preregistered session-level score and preserve sensitivity as a separate unclaimed gate.",
+      "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
+      "authority_boundary": "Clean false-warning control does not imply natural failure sensitivity or authorize host action.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

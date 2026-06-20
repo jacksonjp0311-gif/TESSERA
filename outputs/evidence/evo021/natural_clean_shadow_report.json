@@ -1,0 +1,272 @@
+{
+  "schema": "TESSERA-EVO-021-NATURAL-CLEAN-SHADOW-v0.1",
+  "calibration": {
+    "schema": "TESSERA-PHASE-DURATION-CALIBRATION-v0.2",
+    "clean_trajectory_count": 24,
+    "false_warning_budget": 0.05,
+    "minimum_support": 19,
+    "execution_jitter_guard_ms": 10.0,
+    "profile_counts": {
+      "3078b121a8a688f3": 24
+    },
+    "allowed_profiles": [
+      "3078b121a8a688f3"
+    ],
+    "bounds": {
+      "GEOMETRY": {
+        "phase": "GEOMETRY",
+        "support": 24,
+        "median_ms": 138.90425000863615,
+        "mad_ms": 7.236999997985549,
+        "upper_ms": 179.6290000109002
+      },
+      "MIRROR": {
+        "phase": "MIRROR",
+        "support": 24,
+        "median_ms": 82.11040000605863,
+        "mad_ms": 6.72725000185892,
+        "upper_ms": 139.55410001450218
+      },
+      "REHYDRATE": {
+        "phase": "REHYDRATE",
+        "support": 24,
+        "median_ms": 135.80790000560228,
+        "mad_ms": 5.334100016625598,
+        "upper_ms": 160.6422999955248
+      }
+    },
+    "calibration_sufficient": true,
+    "claim_boundary": "Finite-sample rank calibration assumes exchangeable clean sessions and does not establish production operating limits."
+  },
+  "confirmation": {
+    "trajectory_count": 8,
+    "coverage": 1.0,
+    "warning_rate": 0.125,
+    "rows": [
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 82.86110000335611,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 134.3701999867335,
+            "upper_ms": 160.6422999955248,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 150.72910001617856,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 88.28450000146404,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 123.84190000011586,
+            "upper_ms": 160.6422999955248,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 123.5756000096444,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 81.20759998564608,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 123.73110000044107,
+            "upper_ms": 160.6422999955248,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 121.5622000163421,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 75.19159998628311,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 124.2740000016056,
+            "upper_ms": 160.6422999955248,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 142.98229999258183,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 78.44179999665357,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 138.07570000062697,
+            "upper_ms": 160.6422999955248,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 145.795199990971,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 79.07929999055341,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 141.26480001141317,
+            "upper_ms": 160.6422999955248,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 143.37390000582673,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 72.98950001131743,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 118.25410000164993,
+            "upper_ms": 160.6422999955248,
+            "exceeded": false
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 134.1971000074409,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      },
+      {
+        "degraded": false,
+        "warning": true,
+        "memory_candidate": false,
+        "abstained": false,
+        "profile": "3078b121a8a688f3",
+        "phase_evidence": [
+          {
+            "phase": "MIRROR",
+            "duration_ms": 80.52369998767972,
+            "upper_ms": 139.55410001450218,
+            "exceeded": false
+          },
+          {
+            "phase": "REHYDRATE",
+            "duration_ms": 163.4018000040669,
+            "upper_ms": 160.6422999955248,
+            "exceeded": true
+          },
+          {
+            "phase": "GEOMETRY",
+            "duration_ms": 127.40649998886511,
+            "upper_ms": 179.6290000109002,
+            "exceeded": false
+          }
+        ]
+      }
+    ]
+  },
+  "failure_recall_measured": false,
+  "authority": {
+    "read_only": true,
+    "warning_emitted_to_host": false,
+    "memory_write": false,
+    "intervention": false
+  },
+  "claim_boundary": "Clean natural shadow measures coverage and false-warning behavior only; it does not measure natural failure recall or authorize intervention."
+}
