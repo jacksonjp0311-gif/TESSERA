@@ -20,6 +20,9 @@ DEFAULT_FEATURES = (
     "tests_failed",
     "tool_latency_ms",
     "resource_cost",
+    "system_cpu_percent",
+    "memory_available_ratio",
+    "process_count",
 )
 
 

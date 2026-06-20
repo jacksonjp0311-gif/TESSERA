@@ -59,6 +59,8 @@ FEATURE_FILES = [
     "docs/research/EVO022_PERTURBATION_PREREGISTRATION.json",
     "docs/research/NATURAL_TAIL_MODE_AUDIT_2026-06-20.md",
     "docs/research/EVO023_MODE_AUDIT_PREREGISTRATION.json",
+    "docs/research/AGGREGATE_CONTEXT_ATTRIBUTION_2026-06-20.md",
+    "docs/research/EVO024_CONTEXT_ATTRIBUTION_PREREGISTRATION.json",
     "scripts/telemetry/probe.py",
     "outputs/evidence/evo020/clean_calibration.json",
     "outputs/evidence/evo020/controlled_confirmation.json",
@@ -73,6 +75,8 @@ FEATURE_FILES = [
     "outputs/evidence/evo021/natural_session_shadow_report.json",
     "outputs/evidence/evo022/perturbation_response.json",
     "outputs/evidence/evo023/mode_audit.json",
+    "outputs/evidence/evo024/fresh_context_cohort.json",
+    "outputs/evidence/evo024/context_attribution.json",
     "src/tessera/rhp/core.py", "scripts/validation/validate_rhp_nexus.py",
 ]
 

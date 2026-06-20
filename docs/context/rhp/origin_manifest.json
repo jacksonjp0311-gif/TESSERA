@@ -59,6 +59,8 @@
     "docs/research/EVO022_PERTURBATION_PREREGISTRATION.json",
     "docs/research/NATURAL_TAIL_MODE_AUDIT_2026-06-20.md",
     "docs/research/EVO023_MODE_AUDIT_PREREGISTRATION.json",
+    "docs/research/AGGREGATE_CONTEXT_ATTRIBUTION_2026-06-20.md",
+    "docs/research/EVO024_CONTEXT_ATTRIBUTION_PREREGISTRATION.json",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

@@ -461,6 +461,17 @@ Mode separation was rejected and calibration remained frozen. The next gate
 adds bounded execution-context sensors to fresh sessions so isolated latency
 tails can be attributed without using commands, paths, prompts, or outputs.
 
+### Phase 4 diagnostic — TESSERA-EVO-024
+
+Forty fresh clean sessions added aggregate CPU percentage, available-memory
+ratio, and process count. MIRROR latency correlated with all three fields in
+both chronological halves, but no MIRROR tail occurred.
+
+REHYDRATE and GEOMETRY tails were sparse and lacked stable context association.
+No pair passed the preregistered correlation, sign, and tail-support gates.
+Context-conditioned calibration was rejected. The next sensor target is
+payload-free subprocess startup latency and aggregate I/O wait.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.

@@ -622,6 +622,27 @@
         }
       ]
     },
+    "trajectory-evo024": {
+      "purpose": "Audit aggregate resource context against fresh natural validation workflow tails.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-024 aggregate context attribution",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "trajectory-evo024",
+            "--cohort",
+            "outputs/evidence/evo024/fresh_context_cohort.json",
+            "--preregistration",
+            "docs/research/EVO024_CONTEXT_ATTRIBUTION_PREREGISTRATION.json",
+            "--out",
+            "outputs/evidence/evo024/context_attribution.json"
+          ]
+        }
+      ]
+    },
     "telemetry-probe-clean": {
       "purpose": "Generate one privacy-safe enriched clean telemetry session.",
       "steps": [

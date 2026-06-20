@@ -1,0 +1,74 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.24",
+  "operation": "TESSERA-EVO-024",
+  "previous_operation": "TESSERA-EVO-023",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "dbe1c6d152f399c2550c9a92c5dc997cd763464d",
+  "state_after_validation": "AGGREGATE_CONTEXT_CAPTURED_TAIL_ATTRIBUTION_REJECTED",
+  "implemented": [
+    "allowlisted aggregate CPU telemetry",
+    "allowlisted available-memory ratio",
+    "allowlisted process count",
+    "fresh 40-session natural context cohort",
+    "chronological context association validation",
+    "tail-support gate for context conditioning"
+  ],
+  "finding": "Aggregate load reproducibly associated with ordinary MIRROR latency but did not explain robust REHYDRATE or GEOMETRY tails. No phase/context pair met correlation, sign, and tail-support gates in both halves.",
+  "decision": "Reject context-conditioned calibration and preserve the frozen session gate. Instrument subprocess startup and I/O wait directly on fresh sessions.",
+  "metrics": {
+    "fresh_sessions": 40,
+    "discovery_sessions": 20,
+    "validation_sessions": 20,
+    "context_fields": 3,
+    "phase_context_pairs": 9,
+    "accepted_association_count": 0,
+    "context_conditioning_supported": false,
+    "mirror_cpu_spearman_discovery": 0.44770516812406447,
+    "mirror_cpu_spearman_validation": 0.7635550827808776,
+    "mirror_memory_spearman_discovery": -0.4827067669172932,
+    "mirror_memory_spearman_validation": -0.4270676691729323,
+    "mirror_process_count_spearman_discovery": 0.5306637447810644,
+    "mirror_process_count_spearman_validation": 0.43006771615239575,
+    "mirror_tail_support_discovery": 0,
+    "mirror_tail_support_validation": 0,
+    "rehydrate_tail_support_discovery": 1,
+    "rehydrate_tail_support_validation": 1,
+    "geometry_tail_support_discovery": 2,
+    "geometry_tail_support_validation": 1,
+    "calibration_changed": false
+  },
+  "artifacts": {
+    "preregistration": {
+      "path": "docs/research/EVO024_CONTEXT_ATTRIBUTION_PREREGISTRATION.json",
+      "sha256": "23aea5c5c9de78b0951e0f15d24be14f8339b8c7f0b839ab3480386b126f3ae2"
+    },
+    "fresh_context_cohort": {
+      "path": "outputs/evidence/evo024/fresh_context_cohort.json",
+      "sha256": "112805c97e4527e2633b6a2c4ac816ef8589305191b6138ea09b6b66a7790ec2"
+    },
+    "context_attribution": {
+      "path": "outputs/evidence/evo024/context_attribution.json",
+      "sha256": "105f247f7b699263fd0027354b015f7e9a8f6bd3a3662a86be0228f11f87db08"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 87,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 3
+  },
+  "next_recommended_operation": "instrument_subprocess_startup_and_io_wait_without_payload_capture",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Aggregate resource association does not establish tail causality, natural failure sensitivity, production readiness, consciousness, or autonomous authority."
+}

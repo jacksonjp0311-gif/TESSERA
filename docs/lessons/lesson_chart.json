@@ -433,6 +433,18 @@
       "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
       "authority_boundary": "Mode rejection does not identify causes or authorize host action.",
       "status": "promoted"
+    },
+    {
+      "id": "F037",
+      "observed_event": "Aggregate CPU, memory, and process-count context tracked ordinary MIRROR variance but did not reproducibly explain robust REHYDRATE or GEOMETRY tails.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-024-final-evidence.json",
+      "wound_class": "context_sensor_too_coarse",
+      "diagnosis": "Broad host-load measurements are correlated with routine latency but are not specific enough for tail attribution.",
+      "lesson": "Context conditioning requires reproducible association with the actual tail, not merely correlation with ordinary phase duration.",
+      "future_behavior_change": "Measure payload-free subprocess startup and aggregate I/O wait before proposing context-conditioned calibration.",
+      "validation_gate": "src/tessera/experiments/trajectory_benchmark.py",
+      "authority_boundary": "Aggregate context correlation does not authorize causal claims or host action.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

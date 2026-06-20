@@ -24,6 +24,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F034 | phase-local warning budgets compounded at the session level | calibrate the combined host decision with a split-conformal session score | natural clean session-shadow gate |
 | F035 | clean-tail calibration required 200-250 ms injected delays for full response | report effect-size sensitivity separately and investigate operational modes before recalibration | preregistered perturbation ladder |
 | F036 | two isolated slow sessions could be miscast as a second operating mode | require recurrent signatures in chronological discovery and validation; otherwise keep calibration frozen | tail-mode recurrence audit |
+| F037 | broad host load correlated with routine latency but not the problematic tail | require tail-specific replicated association; instrument subprocess startup and I/O wait next | aggregate context attribution gate |
 
 ## Lessons Law
 

@@ -848,6 +848,156 @@ def run_evo023_mode_audit(
     }
 
 
+def _rank(values: np.ndarray) -> np.ndarray:
+    order = np.argsort(values, kind="mergesort")
+    ranks = np.empty(len(values), dtype=float)
+    ranks[order] = np.arange(len(values), dtype=float)
+    unique, inverse, counts = np.unique(
+        values, return_inverse=True, return_counts=True
+    )
+    for index, count in enumerate(counts):
+        if count > 1:
+            positions = np.flatnonzero(inverse == index)
+            ranks[positions] = float(np.mean(ranks[positions]))
+    return ranks
+
+
+def _spearman(left: list[float], right: list[float]) -> float:
+    if len(left) < 3 or len(right) != len(left):
+        return 0.0
+    x = _rank(np.asarray(left, dtype=float))
+    y = _rank(np.asarray(right, dtype=float))
+    if float(np.std(x)) <= 1e-12 or float(np.std(y)) <= 1e-12:
+        return 0.0
+    return float(np.corrcoef(x, y)[0, 1])
+
+
+def run_evo024_context_attribution(
+    cohort_path: str,
+    preregistration_path: str,
+) -> dict:
+    from pathlib import Path
+
+    trajectories = load_trajectory_cohort(cohort_path)
+    plan = json.loads(
+        Path(preregistration_path).read_text(encoding="utf-8")
+    )
+    split = int(plan["chronological_split"]["discovery_sessions"])
+    halves = {
+        "discovery": trajectories[:split],
+        "validation": trajectories[split:],
+    }
+    phases = plan["target_phases"]
+    fields = plan["context_fields"]
+    threshold = float(
+        plan["association_gate"]["tail_robust_score_threshold"]
+    )
+
+    def phase_rows(rows, phase):
+        values = []
+        for events, _ in rows:
+            for event in events:
+                if (
+                    str(event.metadata.get("phase", "")).upper() == phase
+                    and str(event.metadata.get("state", "")).upper() == "OK"
+                    and float(event.features.get("duration_ms", 0.0)) > 0.0
+                ):
+                    values.append(event)
+                    break
+        return values
+
+    results = []
+    min_corr = float(
+        plan["association_gate"]["minimum_absolute_spearman_both_halves"]
+    )
+    min_tail = int(
+        plan["association_gate"]["minimum_tail_support_both_halves"]
+    )
+    for phase in phases:
+        phase_halves = {
+            name: phase_rows(rows, phase)
+            for name, rows in halves.items()
+        }
+        references = {}
+        for name, events in phase_halves.items():
+            durations = np.asarray(
+                [event.features["duration_ms"] for event in events],
+                dtype=float,
+            )
+            center = float(np.median(durations))
+            mad = float(np.median(np.abs(durations - center)))
+            scale = max(5.0, 1.4826 * mad)
+            references[name] = (center, scale)
+        for field in fields:
+            halves_result = {}
+            for name, events in phase_halves.items():
+                durations = [
+                    float(event.features["duration_ms"]) for event in events
+                ]
+                context = [
+                    float(event.features.get(field, -1.0))
+                    for event in events
+                ]
+                valid = [
+                    index for index, value in enumerate(context)
+                    if value >= 0.0
+                ]
+                duration_valid = [durations[index] for index in valid]
+                context_valid = [context[index] for index in valid]
+                center, scale = references[name]
+                tail_count = sum(
+                    (value - center) / scale > threshold
+                    for value in duration_valid
+                )
+                halves_result[name] = {
+                    "support": len(valid),
+                    "spearman": _spearman(
+                        duration_valid, context_valid
+                    ),
+                    "tail_support": tail_count,
+                }
+            discovery = halves_result["discovery"]
+            validation = halves_result["validation"]
+            same_sign = (
+                discovery["spearman"] * validation["spearman"] > 0.0
+            )
+            accepted = (
+                abs(discovery["spearman"]) >= min_corr
+                and abs(validation["spearman"]) >= min_corr
+                and same_sign
+                and discovery["tail_support"] >= min_tail
+                and validation["tail_support"] >= min_tail
+            )
+            results.append(
+                {
+                    "phase": phase,
+                    "context_field": field,
+                    "discovery": discovery,
+                    "validation": validation,
+                    "same_sign": same_sign,
+                    "accepted": accepted,
+                }
+            )
+    accepted = [row for row in results if row["accepted"]]
+    return {
+        "schema": "TESSERA-EVO-024-CONTEXT-ATTRIBUTION-v0.1",
+        "preregistration": plan,
+        "trajectory_count": len(trajectories),
+        "associations": results,
+        "accepted_association_count": len(accepted),
+        "context_conditioning_supported": bool(accepted),
+        "decision": (
+            "allow_context_conditioning_hypothesis"
+            if accepted
+            else "reject_context_conditioning_keep_calibration_unchanged"
+        ),
+        "claim_boundary": (
+            "Aggregate context association is not causal attribution, natural "
+            "failure prediction, or intervention authority."
+        ),
+    }
+
+
 def _summarize(rows: list[dict]) -> dict:
     labels = np.asarray([row["degraded"] for row in rows], dtype=int)
     warnings = np.asarray([row["warning"] for row in rows], dtype=int)

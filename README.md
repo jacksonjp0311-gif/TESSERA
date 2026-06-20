@@ -79,6 +79,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Several locally calibrated sensors can still over-warn together. | Calibrate the combined session decision when one host action follows multiple phase tests. |
 | Low false-warning rates can hide weak sensitivity. | Preregister effect-size response tests and report the minimum detectable perturbation separately. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
+| General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
 Current evidence says: Tessera has two supported real-telemetry T1 families
 (NAB and UCR), one rejected NASA transfer branch, and no general transfer claim.
@@ -349,6 +350,12 @@ modes. One GEOMETRY-only tail event and one REHYDRATE-only tail event appeared
 in validation, with no matching discovery recurrence. No candidate met the
 required `3 + 3` chronological support, so mode separation was rejected and
 calibration remained unchanged.
+
+EVO-024 added allowlisted aggregate CPU, available-memory ratio, and process
+count to 40 fresh clean validation sessions. These fields reproducibly tracked
+ordinary MIRROR latency but did not explain the sparse REHYDRATE or GEOMETRY
+tails. No phase/context pair passed the preregistered correlation and tail
+support gates, so context-conditioned calibration was rejected.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

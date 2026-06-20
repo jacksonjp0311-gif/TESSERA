@@ -598,6 +598,15 @@ class TestEvo13TrajectoryAdapters(unittest.TestCase):
         self.assertFalse(result["mode_separation_supported"])
         self.assertEqual(result["accepted_mode_count"], 0)
 
+    def test_privacy_capture_retains_only_aggregate_resource_context(self):
+        from tessera.plugin.privacy_capture import SAFE_TELEMETRY_FIELDS
+
+        self.assertIn("system_cpu_percent", SAFE_TELEMETRY_FIELDS)
+        self.assertIn("memory_available_ratio", SAFE_TELEMETRY_FIELDS)
+        self.assertIn("process_count", SAFE_TELEMETRY_FIELDS)
+        self.assertNotIn("process_name", SAFE_TELEMETRY_FIELDS)
+        self.assertNotIn("command_line", SAFE_TELEMETRY_FIELDS)
+
 
 class TestEvo13RepairAblation(unittest.TestCase):
     """EVO-013: Phase 3 — Replay-guided shadow repair ablation."""

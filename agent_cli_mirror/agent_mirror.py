@@ -10,6 +10,11 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    import psutil
+except ImportError:
+    psutil = None
+
 SCHEMA = "AGENT-CLI-MIRROR-v0.3.9"
 DEFAULT_ROOT = Path(os.environ.get("TESSERA_ROOT", r"C:\Users\jacks\OneDrive\Desktop\Tessera"))
 MIRROR_DIRNAME = "agent_cli_mirror"
@@ -64,6 +69,31 @@ def append_jsonl(path: Path, obj: dict) -> None:
         handle.write(json.dumps(obj, separators=(",", ":")) + "\n")
 
 
+def resource_snapshot() -> dict[str, float]:
+    """Return allowlisted aggregate resource context without process details."""
+    if psutil is None:
+        return {
+            "system_cpu_percent": -1.0,
+            "memory_available_ratio": -1.0,
+            "process_count": -1.0,
+        }
+    try:
+        memory = psutil.virtual_memory()
+        return {
+            "system_cpu_percent": float(psutil.cpu_percent(interval=None)),
+            "memory_available_ratio": float(
+                memory.available / max(1, memory.total)
+            ),
+            "process_count": float(len(psutil.pids())),
+        }
+    except Exception:
+        return {
+            "system_cpu_percent": -1.0,
+            "memory_available_ratio": -1.0,
+            "process_count": -1.0,
+        }
+
+
 def emit(
     root: Path,
     phase: str,
@@ -91,6 +121,7 @@ def emit(
         "event_index": EVENT_INDEX,
         "elapsed_ms": float(elapsed_ms),
         "exit_code": exit_code,
+        **resource_snapshot(),
     }
     write_json(live / "live_status.json", payload)
     append_jsonl(live / "events.jsonl", payload)

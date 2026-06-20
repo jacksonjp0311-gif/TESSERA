@@ -17,6 +17,9 @@ SAFE_TELEMETRY_FIELDS = {
     "event_index",
     "elapsed_ms",
     "exit_code",
+    "system_cpu_percent",
+    "memory_available_ratio",
+    "process_count",
 }
 DENIED_SOURCE_FIELDS = {
     "command",
@@ -158,6 +161,15 @@ def _sanitize_prefix(
                     ),
                     "error": 0.0,
                     "token_count": 0.0,
+                    "system_cpu_percent": float(
+                        record.get("system_cpu_percent", -1.0)
+                    ),
+                    "memory_available_ratio": float(
+                        record.get("memory_available_ratio", -1.0)
+                    ),
+                    "process_count": float(
+                        record.get("process_count", -1.0)
+                    ),
                 },
                 metadata={
                     "capture": "privacy_sanitized_v0.1",
@@ -264,6 +276,9 @@ def capture_local_trajectories(
             "phase_repetition",
             "skip_indicator",
             "event_index",
+            "system_cpu_percent",
+            "memory_available_ratio",
+            "process_count",
         ],
         "denied_fields": sorted(DENIED_SOURCE_FIELDS),
         "raw_payload_retained": False,

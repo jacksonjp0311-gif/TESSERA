@@ -1,0 +1,35 @@
+{
+  "schema": "TESSERA-EVO-024-CONTEXT-ATTRIBUTION-PREREGISTRATION-v0.1",
+  "operation": "TESSERA-EVO-024",
+  "fresh_cohort_target": 40,
+  "chronological_split": {
+    "discovery_sessions": 20,
+    "validation_sessions": 20
+  },
+  "context_fields": [
+    "system_cpu_percent",
+    "memory_available_ratio",
+    "process_count"
+  ],
+  "target_phases": [
+    "MIRROR",
+    "REHYDRATE",
+    "GEOMETRY"
+  ],
+  "association_gate": {
+    "minimum_absolute_spearman_both_halves": 0.4,
+    "same_sign_required": true,
+    "minimum_tail_support_both_halves": 3,
+    "tail_robust_score_threshold": 4.0
+  },
+  "decision_rule": "Context conditioning is supported only when the same phase/context association passes every gate in discovery and validation.",
+  "prohibited_fields": [
+    "process_id",
+    "process_name",
+    "command_line",
+    "path",
+    "prompt",
+    "raw_output"
+  ],
+  "claim_boundary": "Aggregate resource association does not establish causality, natural failure prediction, or host intervention authority."
+}
