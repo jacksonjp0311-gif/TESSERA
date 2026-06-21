@@ -1,0 +1,85 @@
+{
+  "schema": "TESSERA-EVO-035-LAUNCH-READINESS-v0.1",
+  "passed": true,
+  "status": "repository_launch_candidate",
+  "certification_order": [
+    "runtime_semantic_latency_restart_rollback_soak",
+    "wheel_build_integrity_install_smoke"
+  ],
+  "production_candidate": {
+    "passed": true,
+    "checks": {
+      "semantic_adapter_matches_calibration": true,
+      "json_adapter_matches_direct_adapter": true,
+      "selected_feature_contract_stable": true,
+      "runtime_routes_match_offline_final_test": true,
+      "abstention_blocks_memory_candidate": true,
+      "forecast_status_preserved": true,
+      "warm_latency_gate_passed": true,
+      "restart_is_deterministic": true,
+      "soak_passed": true,
+      "failure_isolation_passed": true,
+      "checkpoint_rollback_passed": true,
+      "release_integrity_manifest_complete": true
+    },
+    "metrics": {
+      "baseline_loss": 0.08403712511062622,
+      "candidate_loss": 0.04824817580510925,
+      "replay_pass_rate": 0.5263157894736842,
+      "neural_awareness_loss": 0.045525368783273734,
+      "train_rows": 60,
+      "validation_rows": 20,
+      "replay_rows": 20,
+      "selected_prediction_expert": "ewma_0.05",
+      "sessions": 120,
+      "selected_session_features": 5,
+      "final_route_count": 20,
+      "trusted_count": 18,
+      "abstain_count": 2,
+      "route_parity_rate": 1.0,
+      "cold_start_latency_ms": 3759.699299989734,
+      "warm_latency_ms_p50": 71.68685000215191,
+      "warm_latency_ms_p95": 93.33982501993887,
+      "warm_latency_ms_max": 93.40869999141432,
+      "soak_requests": 100,
+      "soak_failures": 0,
+      "soak_latency_ms_p99": 139.1964679979742,
+      "latency_budget_ms": 250.0
+    }
+  },
+  "release_readiness": {
+    "passed": true,
+    "checks": {
+      "version_coherence": true,
+      "direct_dependencies_satisfied": true,
+      "wheel_build_passed": true,
+      "wheel_metadata_version_matches": true,
+      "wheel_record_integrity_passed": true,
+      "wheel_contains_no_forbidden_paths": true,
+      "isolated_install_passed": true,
+      "isolated_import_and_inference_passed": true,
+      "installed_cli_passed": true
+    },
+    "version": {
+      "project": "0.3.1",
+      "package": "0.3.1",
+      "plugin_manifest": "0.3.1",
+      "wheel_metadata": "0.3.1"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.1-py3-none-any.whl",
+      "sha256": "009b4cc4436dc28cb7299a2a95cca8b7ef03fd973c98cfec9985ffcf2ccd78ba",
+      "file_count": 74,
+      "forbidden_paths": [],
+      "record_failures": []
+    }
+  },
+  "external_launch_gates": [
+    "untouched natural failure-and-recovery cohort",
+    "two genuinely independent external host integrations",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "claim_boundary": "Repository launch candidacy certifies local runtime and package gates in a non-contending order. External host, security, failure-recovery, clean-environment, and cross-platform gates remain open."
+}

@@ -87,6 +87,8 @@
     "src/tessera/experiments/runtime_uncertainty_readiness.py",
     "src/tessera/plugin/host_adapters.py",
     "src/tessera/experiments/production_candidate.py",
+    "src/tessera/experiments/release_readiness.py",
+    "src/tessera/experiments/launch_readiness.py",
     "docs/release/PRODUCTION_CANDIDATE.md",
     "configs/production.json",
     "src/tessera/rhp/core.py",

@@ -2,16 +2,19 @@
 
 # Tessera
 
-### Sparse compressive memory engine with replay-certified memory and RCC Nexus discipline.
+### A neural trust layer for agent systems.
 
-**Declare the graph. Compress the stream. Replay every memory. Wound every failure. Repair only in shadow. Validate before mutation. Claim only what transfers.**
+**Tessera watches an agent’s privacy-safe operational trajectory, compresses it
+into sparse neural state, and answers a deliberately narrow question: should
+the host trust this session—or abstain?**
 
-![Operator Surface](https://img.shields.io/badge/Operator%20Surface-v0.3.9-blue)
+![Package](https://img.shields.io/badge/tessera-v0.3.1-blue)
+![Release Gate](https://img.shields.io/badge/release%20gate-9%2F9-brightgreen)
+![Tests](https://img.shields.io/badge/tests-111%20passing-brightgreen)
+![Warm p95](https://img.shields.io/badge/EVO--034%20warm%20p95-95.19%20ms-brightgreen)
+![Route parity](https://img.shields.io/badge/route%20parity-100%25-brightgreen)
 ![RCC-N](https://img.shields.io/badge/RCC--N-Full-brightgreen)
-![README Discipline](https://img.shields.io/badge/README%20discipline-passing-brightgreen)
-![Alignment](https://img.shields.io/badge/alignment-geometry--guarded-brightgreen)
-![Claim Ceiling](https://img.shields.io/badge/claim%20ceiling-one--dataset--T1--supported-blue)
-![Non-Claim](https://img.shields.io/badge/non--claim--locks-active-black)
+![Authority](https://img.shields.io/badge/host%20mutation-denied-black)
 
 </div>
 
@@ -19,20 +22,82 @@
 
 ## What Tessera Is
 
-Tessera is a local-first Python reference engine for sparse compressive memory. It tests whether a sparse spectral field can compress telemetry into latent codes, reconstruct and predict the stream, gate candidate memories, replay those memories, record wounds, compare against simple baselines, and emit certificate-bound evidence packages.
+Agent systems can generate plausible output while their execution state is
+drifting, their evidence is weak, or their memory candidate is unsafe. Most
+agent stacks still force a binary choice: continue or fail.
 
-Tessera is built to answer one engineering question:
+Tessera adds a third option:
 
 ```text
-What is this compressed telemetry state allowed to become next?
+trusted | abstain
 ```
+
+It runs as a supervised local sidecar. Stable experts retain forecast
+ownership; the sparse neural field measures latent drift and earns only
+selective trust-routing authority. An abstention cannot write memory, call
+tools, mutate prompts, replace models, or overrule the host.
+
+## Verified Snapshot
+
+| Evidence-backed result | Current value |
+|---|---:|
+| Offline-to-runtime route parity | **20 / 20 sessions** |
+| Untouched final routing | **18 trusted / 2 abstained** |
+| EVO-034 warm supervised inference p95 | **95.19 ms** |
+| EVO-034 100-request soak | **0 failures, 126.79 ms p99** |
+| Final retained-risk change vs full coverage | **-6.53%** |
+| Final retained-risk change vs simple router | **-10.37%** |
+| Release artifact verification | **9 / 9 checks passed** |
+| Test suite | **111 passing** |
+| Real telemetry families with dataset-scoped T1 support | **NAB + UCR** |
+| NAB machine-temperature AUC | **0.94865** |
+| UCR untouched confirmation AUC | **0.96081** |
+
+The numbers above are scoped results, not universal performance claims. Full
+lineage lives in
+[`docs/benchmarks/current_public_metrics.md`](docs/benchmarks/current_public_metrics.md)
+and [`outputs/evidence/`](outputs/evidence/).
+
+## What It Can Do
+
+| Capability | Production behavior |
+|---|---|
+| Neural trust routing | Emits explicit `trusted` or `abstain` decisions from calibrated latent drift. |
+| Session-semantic adapters | Converts native `AgentEvent` or JSON host sessions into the exact versioned calibration space. |
+| Fail-closed supervision | Contains crashes and timeouts, opens a circuit breaker, and emits no proposal on failure. |
+| Memory governance | Suppresses memory candidacy whenever the router abstains. |
+| Shadow evolution | Trains immutable checkpoint proposals outside the request path. |
+| Replay admission | Hash-checks, replay-gates, atomically activates, and rolls back checkpoints. |
+| Release verification | Builds the wheel, verifies its RECORD, installs it in isolation, and smoke-tests package inference and CLI execution. |
+| Evidence lineage | Converts failures into wounds, lessons, gates, RHP state, and immutable evidence artifacts. |
+
+## Try the Production Gates
+
+```powershell
+git clone https://github.com/jacksonjp0311-gif/TESSERA.git
+cd TESSERA
+python -m pip install -e .
+python -m tessera launch-readiness --root .
+```
+
+Expected state:
+
+```text
+local_production_candidate
+reproducible_release_candidate
+```
+
+External launch still requires an untouched natural failure/recovery cohort,
+two independent host integrations, independent security review, reproduction
+without inherited packages, and cross-platform subprocess certification.
 
 ## Current Health Snapshot
 
 | Surface | Current result |
 |---|---:|
 | Repository | `Tessera` |
-| Package / CLI | `tessera` v0.3.0 |
+| Package / CLI | `tessera` v0.3.1 |
+| Launch gate | repository launch candidate; external gates open |
 | Diagnostic engine | Engine v0.1 |
 | Operator surface | v0.3.9 Agent CLI Mirror Graceful Stop |
 | Command registry | `docs/loop/TESSERA_COMMAND_REGISTRY.md` |

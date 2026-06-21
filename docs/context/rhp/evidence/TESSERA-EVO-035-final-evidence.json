@@ -1,0 +1,69 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.35",
+  "operation": "TESSERA-EVO-035",
+  "previous_operation": "TESSERA-EVO-034",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "ad5ae71",
+  "state_after_validation": "REPOSITORY_LAUNCH_CANDIDATE_EXTERNAL_GATES_OPEN",
+  "implemented": [
+    "coherent package, plugin, project, and wheel version 0.3.1",
+    "wheel build and metadata certification",
+    "wheel RECORD hash and size verification",
+    "forbidden repository payload audit",
+    "isolated wheel installation",
+    "packaged inference and installed CLI smoke tests",
+    "direct dependency inventory",
+    "sequential runtime and release launch gate",
+    "benchmark-led public README introduction"
+  ],
+  "finding": "The supervised runtime and distributable wheel passed a single sequential launch gate. Source-to-wheel execution is reproducible on the tested Windows environment, while unrelated ambient dependency conflicts remain explicitly excluded.",
+  "decision": "Promote Tessera v0.3.1 to repository launch candidate while preserving all external launch gates.",
+  "metrics": {
+    "unit_tests_expected": 111,
+    "runtime_sessions": 120,
+    "final_route_parity_rate": 1.0,
+    "trusted_count": 18,
+    "abstain_count": 2,
+    "cold_start_latency_ms": 3759.699299989734,
+    "warm_latency_ms_p95": 93.33982501993887,
+    "warm_latency_ms_max": 93.40869999141432,
+    "soak_requests": 100,
+    "soak_failures": 0,
+    "soak_latency_ms_p99": 139.1964679979742,
+    "latency_budget_ms": 250.0,
+    "release_checks_passed": 9,
+    "release_checks_total": 9,
+    "wheel_file_count": 74,
+    "wheel_forbidden_path_count": 0
+  },
+  "artifacts": {
+    "launch_readiness": {
+      "path": "outputs/evidence/evo035/launch_readiness.json",
+      "sha256": "5b673fd17879df53308a202528308f7636fdd051e9320cf80d37996aff852cf4"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.1-py3-none-any.whl",
+      "sha256": "009b4cc4436dc28cb7299a2a95cca8b7ef03fd973c98cfec9985ffcf2ccd78ba"
+    }
+  },
+  "external_launch_gates": [
+    "untouched natural failure-and-recovery cohort",
+    "two genuinely independent external host integrations",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "next_recommended_operation": "collect_untouched_failure_recovery_cohort_and_run_independent_host_security_validation",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Repository launch candidacy does not prove external production readiness, vulnerability absence, general safety, natural failure sensitivity, consciousness, or autonomous authority."
+}

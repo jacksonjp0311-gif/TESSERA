@@ -565,6 +565,18 @@
       "validation_gate": "src/tessera/experiments/production_candidate.py",
       "authority_boundary": "Local production candidacy does not establish external deployment safety or authorize host mutation.",
       "status": "promoted"
+    },
+    {
+      "id": "F048",
+      "observed_event": "The source tree passed runtime gates while package version surfaces disagreed, and concurrent wheel construction distorted the latency certification.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-035-final-evidence.json",
+      "wound_class": "source_success_without_release_reproducibility",
+      "diagnosis": "Production promotion requires the distributable artifact, version identity, dependency scope, installed CLI, and certification order to be tested—not merely the checkout.",
+      "lesson": "Build and smoke-test the wheel, verify its hashes, and run latency-sensitive certification before resource-intensive release construction.",
+      "future_behavior_change": "The canonical launch gate runs runtime certification and release certification sequentially and rejects version, wheel, install, integrity, or packaged-execution drift.",
+      "validation_gate": "src/tessera/experiments/launch_readiness.py",
+      "authority_boundary": "Repository launch candidacy does not replace independent security, external host, clean-environment, cross-platform, or natural failure validation.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

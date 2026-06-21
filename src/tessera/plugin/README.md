@@ -41,10 +41,15 @@ proposals.
 - The persistent worker loads admitted neural state once during readiness.
 - Operational prediction may use a normal-history-selected causal expert while
   neural field loss remains separately visible for anomaly awareness.
+- Versioned session adapters preserve the calibrated mean/std/latest semantic
+  space across native AgentEvent and JSON host records.
+- Release verification builds and integrity-checks the wheel, installs it into
+  an isolated environment, and executes packaged inference and CLI smoke tests.
 
 ## Claim Boundary
 
-Containment and warm interactive latency are locally validated. Asynchronous
-checkpoint lifecycle and controlled neural loading are locally validated, but
-natural checkpoint utility, host compatibility, load, signing, and security
-review still block production readiness.
+Containment, semantic route parity, warm latency, sustained load, restart,
+rollback, wheel integrity, isolated package installation, and packaged smoke
+execution are locally validated. Untouched natural failure/recovery evidence,
+independent hosts, independent package reproduction, cross-platform
+certification, and external security review remain open.

@@ -630,6 +630,42 @@ def cmd_production_candidate(args):
     print(f"Results: {out_path}")
 
 
+def cmd_release_readiness(args):
+    from tessera.experiments.release_readiness import run_release_readiness
+
+    result = run_release_readiness(args.root)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "status": result["status"],
+        "checks": result["checks"],
+        "version": result["version"],
+        "wheel": result["wheel"],
+        "remaining_external_gates": result["remaining_external_gates"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
+def cmd_launch_readiness(args):
+    from tessera.experiments.launch_readiness import run_launch_readiness
+
+    result = run_launch_readiness(args.root)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "status": result["status"],
+        "certification_order": result["certification_order"],
+        "runtime_metrics": result["production_candidate"]["metrics"],
+        "wheel": result["release_readiness"]["wheel"],
+        "external_launch_gates": result["external_launch_gates"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1010,6 +1046,26 @@ def main(argv=None):
         default="outputs/evidence/evo034/production_candidate.json",
     )
     production_candidate.set_defaults(func=cmd_production_candidate)
+    release_readiness = sub.add_parser(
+        "release-readiness",
+        help="Build, verify, install, and smoke-test the release wheel.",
+    )
+    release_readiness.add_argument("--root", default=".")
+    release_readiness.add_argument(
+        "--out",
+        default="outputs/evidence/evo035/release_readiness.json",
+    )
+    release_readiness.set_defaults(func=cmd_release_readiness)
+    launch_readiness = sub.add_parser(
+        "launch-readiness",
+        help="Run runtime and release certification sequentially.",
+    )
+    launch_readiness.add_argument("--root", default=".")
+    launch_readiness.add_argument(
+        "--out",
+        default="outputs/evidence/evo035/launch_readiness.json",
+    )
+    launch_readiness.set_defaults(func=cmd_launch_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

@@ -1,5 +1,5 @@
 {
-  "schema": "TESSERA-PRODUCTION-CONFIG-v0.1",
+  "schema": "TESSERA-PRODUCTION-CONFIG-v0.2",
   "runtime": {
     "execution_model": "host-supervised-local-subprocess",
     "timeout_ms": 5000,
@@ -30,7 +30,12 @@
     "external_api_calls": false
   },
   "release_gate": {
-    "command": "python -m tessera production-candidate --root .",
+    "command": "python -m tessera launch-readiness --root .",
+    "certification_order": [
+      "production-candidate",
+      "release-readiness"
+    ],
+    "parallel_execution_allowed": false,
     "warm_p95_budget_ms": 250,
     "soak_p99_budget_ms": 250,
     "route_parity_required": 1.0,

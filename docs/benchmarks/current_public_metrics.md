@@ -2,7 +2,7 @@
 
 | Surface | Current value |
 |---|---|
-| Engine | TESSERA Engine v0.2.0 |
+| Engine | TESSERA Engine v0.3.1 |
 | Runtime loop compiler | active |
 | CLI loop | `python -m tessera loop ascii` |
 | Compile surface | `reports/runtime_loop/` |
@@ -25,7 +25,15 @@
 | UCR untouched confirmation AUC | 0.87849 |
 | UCR confirmation recall | 0.80769 |
 | UCR T1 | supported on preregistered CIMIS discovery and confirmation pair |
-| Next operation | collect fresh enriched sessions before trajectory calibration |
+| EVO-034 semantic route parity | 20 / 20 untouched final sessions |
+| EVO-034 final trusted / abstain | 18 / 2 |
+| EVO-034 certified warm p95 / soak p99 | 95.19 ms / 126.79 ms |
+| EVO-034 soak failures | 0 of 100 |
+| EVO-032 final risk reduction vs full / simple | 6.53% / 10.37% |
+| EVO-035 release checks | 9 of 9 passed |
+| EVO-035 package version coherence | pyproject, package, plugin, wheel all 0.3.1 |
+| EVO-035 wheel integrity | RECORD verified; forbidden paths 0 |
+| Next operation | untouched natural failure/recovery and independent host/security validation |
 | UCR EVO-007 discovery AUC | 0.97629 |
 | UCR EVO-007 confirmation AUC | 0.43675 |
 | EVO-007 conclusion | universal shape window rejected; scale router required |
