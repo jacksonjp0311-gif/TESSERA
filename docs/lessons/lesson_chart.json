@@ -541,6 +541,18 @@
       "validation_gate": "src/tessera/experiments/neural_uncertainty_router.py",
       "authority_boundary": "Selective routing does not authorize forecast mutation or host intervention.",
       "status": "promoted"
+    },
+    {
+      "id": "F046",
+      "observed_event": "The latent-drift route integrated into the event runtime with acceptable latency, but offline session semantics did not automatically transfer.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-033-final-evidence.json",
+      "wound_class": "router_semantic_space_mismatch",
+      "diagnosis": "A correct routing algorithm still requires a host adapter that reproduces the feature space and chronology used during calibration.",
+      "lesson": "Runtime integration and semantic transfer are separate gates; passing mechanics does not validate the adapter.",
+      "future_behavior_change": "Host adapters must emit versioned session summaries or receive independent chronological router calibration.",
+      "validation_gate": "src/tessera/experiments/runtime_uncertainty_readiness.py",
+      "authority_boundary": "Runtime routing does not authorize cross-host threshold reuse.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

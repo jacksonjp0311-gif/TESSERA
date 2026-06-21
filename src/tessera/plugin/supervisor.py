@@ -130,6 +130,17 @@ class PluginSupervisor:
             buffer_size=len(self._events),
         )
 
+    def replace_events(self, events: list[AgentEvent]) -> ObservationReceipt:
+        if self._lifecycle == "unloaded":
+            return ObservationReceipt(
+                accepted=0,
+                rejected=len(events),
+                reasons=("runtime_unloaded",),
+                buffer_size=0,
+            )
+        self._events.clear()
+        return self.observe(events)
+
     def infer(self) -> RuntimeResult:
         if self._lifecycle == "unloaded":
             return self._closed_result("runtime_unloaded")

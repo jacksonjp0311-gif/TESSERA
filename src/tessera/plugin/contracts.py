@@ -86,6 +86,9 @@ class InferencePacket:
     memory_candidate: bool
     claim_boundary: str
     selected_prediction_expert: str = "not_selected"
+    trust_route: str = "not_routed"
+    abstained: bool = False
+    uncertainty_score: float = 0.0
 
 
 @dataclass(frozen=True)

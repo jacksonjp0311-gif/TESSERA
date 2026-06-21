@@ -33,6 +33,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F043 | the natural checkpoint beat persistence but lost to stable EWMA and failed replay consistency | preserve stable expert ownership and test only bounded neural residual authority | natural checkpoint utility gate |
 | F044 | every nonzero bounded neural correction worsened validation loss | collapse authority to zero and test neural uncertainty routing instead of forecast mutation | bounded residual gate |
 | F045 | neural state was unhelpful as a correction but useful for identifying low-trust forecast regions | grant selective routing authority independently from prediction authority | neural uncertainty router gate |
+| F046 | an offline session router integrated mechanically but its semantic feature space did not automatically transfer to host events | version and validate the host session-summary adapter separately | runtime uncertainty integration gate |
 
 ## Lessons Law
 

@@ -526,6 +526,23 @@
         }
       ]
     },
+    "runtime-uncertainty-readiness": {
+      "purpose": "Run EVO-033 host-facing trusted/abstain routing, fail-closed memory suppression, and latency validation.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-033 runtime uncertainty readiness",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "runtime-uncertainty-readiness",
+            "--out",
+            "outputs/evidence/evo033/runtime_uncertainty_readiness.json"
+          ]
+        }
+      ]
+    },
     "repair-ablation": {
       "purpose": "Run the replay-gated five-arm shadow repair ablation.",
       "steps": [

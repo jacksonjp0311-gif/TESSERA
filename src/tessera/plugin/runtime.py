@@ -61,6 +61,7 @@ class TesseraPlugin:
         code_dim: int = 4,
         inline_neural_training: bool = True,
         checkpoint_payload: dict | None = None,
+        uncertainty_router: dict | None = None,
     ):
         self._events: deque[AgentEvent] = deque(maxlen=max_events)
         self.warning_quantile = warning_quantile
@@ -74,6 +75,7 @@ class TesseraPlugin:
             if checkpoint_payload is not None
             else None
         )
+        self.uncertainty_router = dict(uncertainty_router or {})
         self._last_packet: InferencePacket | None = None
         self._last_prediction_expert = "not_selected"
         self._wound_history: list[str] = []
@@ -173,17 +175,33 @@ class TesseraPlugin:
             history=normalized[:-2],
         )
         prediction_loss = float(expert_losses[-1])
+        latest_drift = float(rows[-1]["code_drift"])
+        router_enabled = (
+            self.uncertainty_router.get("score") == "latent_drift"
+            and "threshold" in self.uncertainty_router
+        )
+        abstained = (
+            router_enabled
+            and latest_drift > float(self.uncertainty_router["threshold"])
+        )
         return InferencePacket(
             status="admitted_neural_checkpoint",
             anomaly_score=score,
             prediction_loss=prediction_loss,
             warning=score > 1.5,
-            memory_candidate=score <= 1.5,
+            memory_candidate=score <= 1.5 and not abstained,
             claim_boundary=(
                 "Replay-admitted checkpoint inference remains read-only and "
                 "does not authorize host mutation."
             ),
             selected_prediction_expert=loaded["expert"].name,
+            trust_route=(
+                "abstain" if abstained
+                else "trusted" if router_enabled
+                else "not_routed"
+            ),
+            abstained=abstained,
+            uncertainty_score=latest_drift,
         )
 
     def _fallback_infer(self, matrix: np.ndarray) -> InferencePacket:
@@ -334,6 +352,7 @@ class TesseraPlugin:
                 and not self.inline_neural_training
             ),
             "admitted_checkpoint_loaded": self._loaded_checkpoint is not None,
+            "uncertainty_router": self.uncertainty_router,
             "live_codec_replacement": False,
             "memory_write": False,
             "tool_invocation": False,

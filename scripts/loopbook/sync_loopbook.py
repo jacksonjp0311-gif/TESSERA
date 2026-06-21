@@ -83,6 +83,8 @@ FEATURE_FILES = [
     "docs/research/EVO032_NEURAL_UNCERTAINTY_ROUTER_PREREGISTRATION.json",
     "docs/research/NEURAL_UNCERTAINTY_ROUTING_2026-06-21.md",
     "src/tessera/experiments/neural_uncertainty_router.py",
+    "docs/research/RUNTIME_UNCERTAINTY_INTEGRATION_2026-06-21.md",
+    "src/tessera/experiments/runtime_uncertainty_readiness.py",
     "scripts/telemetry/probe.py",
     "outputs/evidence/evo020/clean_calibration.json",
     "outputs/evidence/evo020/controlled_confirmation.json",
@@ -108,6 +110,7 @@ FEATURE_FILES = [
     "outputs/evidence/evo030/natural_checkpoint_utility.json",
     "outputs/evidence/evo031/bounded_neural_residual.json",
     "outputs/evidence/evo032/neural_uncertainty_router.json",
+    "outputs/evidence/evo033/runtime_uncertainty_readiness.json",
     "src/tessera/rhp/core.py", "scripts/validation/validate_rhp_nexus.py",
 ]
 

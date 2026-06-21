@@ -1,0 +1,35 @@
+{
+  "schema": "TESSERA-EVO-033-RUNTIME-UNCERTAINTY-v0.1",
+  "passed": true,
+  "checks": {
+    "host_route_is_explicit": true,
+    "forecast_status_preserved": true,
+    "abstention_blocks_memory_candidate": true,
+    "both_routes_observed": true,
+    "warm_latency_gate_passed": true,
+    "fail_closed_contract_preserved": true
+  },
+  "metrics": {
+    "baseline_loss": 0.0006110994727350771,
+    "candidate_loss": 2.1672867905635278e-09,
+    "replay_pass_rate": 1.0,
+    "neural_awareness_loss": 0.00904613858438097,
+    "train_rows": 43,
+    "validation_rows": 14,
+    "replay_rows": 15,
+    "selected_prediction_expert": "ridge_ar_lag_8",
+    "router_threshold": 0.011216132156550884,
+    "trial_count": 14,
+    "trusted_count": 8,
+    "abstain_count": 6,
+    "coverage": 0.5714285714285714,
+    "cold_start_latency_ms": 4225.803000008455,
+    "warm_latency_ms_p50": 55.62964999990072,
+    "warm_latency_ms_p95": 80.29039499670034,
+    "warm_latency_ms_max": 90.02459998009726,
+    "latency_budget_ms": 250.0
+  },
+  "semantic_transfer_validated": false,
+  "production_candidate": false,
+  "claim_boundary": "Runtime routing mechanics do not prove that a session-level threshold transfers to arbitrary host event streams."
+}

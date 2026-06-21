@@ -43,6 +43,7 @@ Every operational command must be documented here and mirrored in the README whe
 | `python -m tessera natural-checkpoint-utility --preregistration docs/research/EVO030_NATURAL_CHECKPOINT_UTILITY_PREREGISTRATION.json` | Evaluate a real checkpoint chronologically on 120 immutable natural sessions against matched non-neural controls. |
 | `python -m tessera bounded-neural-residual --preregistration docs/research/EVO031_BOUNDED_NEURAL_RESIDUAL_PREREGISTRATION.json` | Test clipped neural correction authority over the validation-selected stable expert with automatic collapse to zero. |
 | `python -m tessera neural-uncertainty-router --preregistration docs/research/EVO032_NEURAL_UNCERTAINTY_ROUTER_PREREGISTRATION.json` | Test target-free neural abstention around the stable expert against a simple jump router without forecast mutation. |
+| `python -m tessera runtime-uncertainty-readiness --out outputs/evidence/evo033/runtime_uncertainty_readiness.json` | Validate host-facing trusted/abstain packets, memory suppression, containment, and runtime latency. |
 | `python -m tessera.rhp summary --root .` | Print the canonical current-version summary: changes, findings, bounds, and next move. |
 | `python -m tessera.operator_geometry validate` | Low-level operator geometry validator. |
 | `.\scripts\tessera-agent.ps1` | Universal PowerShell Agent CLI entrypoint. |

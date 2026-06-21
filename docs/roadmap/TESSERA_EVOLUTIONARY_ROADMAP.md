@@ -590,6 +590,19 @@ This is the first natural-session neural authority supported by Tessera:
 metacognitive abstention. The neural field estimates where the stable expert
 should be trusted, while the stable expert continues to act.
 
+### Phase 6 runtime routing — TESSERA-EVO-033
+
+The supervised runtime now emits explicit `trusted` or `abstain` decisions with
+the unchanged stable forecast. Abstention suppresses memory candidacy and does
+not grant intervention authority.
+
+Fourteen runtime trials exercised both routes. Warm p95 was `80.29 ms`, within
+the `250 ms` budget, and all fail-closed checks passed.
+
+Semantic transfer remains open. EVO-032 validated session-summary latent drift;
+EVO-033 validates event-runtime mechanics. A versioned host adapter must
+reproduce those session semantics or calibrate its own router.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -867,8 +880,8 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Integrate latent-drift abstention into the supervised runtime and verify
-   host-facing latency, coverage, and fail-closed behavior.
+1. Build a versioned session-summary host adapter and validate semantic
+   transfer on later natural sessions.
 2. Collect immutable natural failure sessions for precursor and recovery
    utility rather than weakening clean-session prediction gates.
 3. Build two host adapters and run sustained mixed-load validation.
