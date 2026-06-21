@@ -1,0 +1,20 @@
+{
+  "schema": "TESSERA-EVO-028-CHECKPOINT-READINESS-v0.1",
+  "passed": true,
+  "checks": {
+    "shadow_job_submitted": true,
+    "candidate_created_without_activation": true,
+    "replay_gated_admission": true,
+    "injected_failure_preserved_active": true,
+    "rollback_restored_previous": true
+  },
+  "metrics": {
+    "baseline_loss": 2.0,
+    "candidate_loss": 0.0,
+    "training_rows": 24,
+    "active_pointer_changes_on_injected_failure": 0,
+    "rollback_success_rate": 1.0
+  },
+  "production_candidate": false,
+  "claim_boundary": "Checkpoint lifecycle integrity does not prove model utility, production readiness, or autonomous learning authority."
+}

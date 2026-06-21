@@ -481,6 +481,18 @@
       "validation_gate": "src/tessera/experiments/plugin_readiness.py",
       "authority_boundary": "Passing latency does not authorize checkpoint admission, host mutation, or a production claim.",
       "status": "promoted"
+    },
+    {
+      "id": "F041",
+      "observed_event": "Moving fitting off the request path created a separate risk: a shadow trainer could still corrupt or replace live state without an admission protocol.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-028-final-evidence.json",
+      "wound_class": "shadow_candidate_without_atomic_admission",
+      "diagnosis": "Asynchronous learning is safe only when candidates are immutable, integrity-checked, replay-gated, atomically activated, and rollback-capable.",
+      "lesson": "A trainer may propose a checkpoint but never activate it; admission is a separate evidence-gated transaction.",
+      "future_behavior_change": "All learned state enters through hash verification, replay gates, atomic pointer replacement, and preserved rollback lineage.",
+      "validation_gate": "src/tessera/experiments/checkpoint_readiness.py",
+      "authority_boundary": "Checkpoint admission does not authorize autonomous learning or host mutation.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

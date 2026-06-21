@@ -67,6 +67,10 @@
     "src/tessera/plugin/supervisor.py",
     "src/tessera/experiments/plugin_readiness.py",
     "docs/research/PLUGIN_LATENCY_SEPARATION_2026-06-20.md",
+    "docs/research/SHADOW_CHECKPOINT_ADMISSION_2026-06-20.md",
+    "src/tessera/plugin/checkpoints.py",
+    "src/tessera/plugin/shadow_training.py",
+    "src/tessera/experiments/checkpoint_readiness.py",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

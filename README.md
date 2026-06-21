@@ -81,6 +81,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | A mechanism-adjacent sensor can still be too coarse. | Require replicated tail-specific association; preserve calibration while testing higher-resolution privacy-safe execution aggregates. |
 | Permission declarations are not runtime isolation. | Production-facing inference must be supervised, time-bounded, fail-closed, unloadable, and adversarially tested. |
 | Learning does not belong on the interactive request path. | Fast inference remains synchronous; fitting and repair stay shadow-only until replay-gated checkpoint admission. |
+| A shadow trainer must never activate its own output. | Checkpoints are immutable proposals admitted through integrity, replay, atomic activation, and rollback gates. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -382,6 +383,12 @@ checks remained active. The interactive runtime latency gate now passes.
 Production status remains blocked because asynchronous shadow training,
 checkpoint admission and rollback, host adapters, sustained load, signing,
 security review, and natural agent utility are still open.
+
+EVO-028 added the asynchronous learning control plane: immutable hash-bound
+checkpoint candidates, replay-gated admission, atomic activation, injected
+failure preservation, and rollback. Five of five lifecycle probes passed.
+The trainer still has no activation authority. The next target is a real
+neural checkpoint evaluated on held-out agent-trajectory replay.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

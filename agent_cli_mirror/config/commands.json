@@ -433,6 +433,23 @@
         }
       ]
     },
+    "checkpoint-readiness": {
+      "purpose": "Run EVO-028 asynchronous shadow candidate, replay admission, failure preservation, and rollback probes.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-028 checkpoint readiness",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "checkpoint-readiness",
+            "--out",
+            "outputs/evidence/evo028/checkpoint_readiness.json"
+          ]
+        }
+      ]
+    },
     "repair-ablation": {
       "purpose": "Run the replay-gated five-arm shadow repair ablation.",
       "steps": [

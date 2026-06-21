@@ -34,12 +34,15 @@ proposals.
 - Crossing the neural-support threshold emits a shadow-training-required
   status while the bounded fast path continues serving the host.
 - Direct research-mode plugin instances may still run inline neural fitting.
+- Shadow trainers emit immutable checkpoint candidates only.
+- Checkpoint activation requires payload integrity and replay gates.
+- Active versions change through atomic pointers with preserved rollback.
 - Operational prediction may use a normal-history-selected causal expert while
   neural field loss remains separately visible for anomaly awareness.
 
 ## Claim Boundary
 
 Containment and warm interactive latency are locally validated. Asynchronous
-checkpoint training/admission, host compatibility, load, signing, security
-review, and natural agent utility still block production readiness. This is
-not autonomous authority or a replacement language model.
+checkpoint lifecycle is locally validated, but real neural checkpoint utility,
+host compatibility, load, signing, security review, and natural agent utility
+still block production readiness.

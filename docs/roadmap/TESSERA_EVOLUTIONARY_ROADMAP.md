@@ -516,6 +516,21 @@ asynchronous fitting, immutable checkpoint admission, replay, atomic rollback,
 host adapters, sustained load, signing, security review, and natural utility
 remain open.
 
+### Phase 6 hardening — TESSERA-EVO-028
+
+EVO-028 added a separate checkpoint control plane. Shadow jobs emit immutable
+hash-bound candidates with lineage and metrics but cannot activate them.
+Admission verifies integrity and replay evidence before atomically replacing
+the active pointer.
+
+Five of five lifecycle probes passed. An injected pre-activation failure caused
+zero active-pointer changes, and rollback restored the previous version.
+
+The lifecycle is promoted, but the probe used a bounded robust fast-path state.
+The next gate trains and admits a real Tessera neural checkpoint on held-out
+agent trajectories, then verifies that loading it preserves interactive
+latency and containment.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -793,10 +808,10 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Build an asynchronous shadow trainer that emits immutable candidate
-   checkpoints without blocking host inference.
-2. Replay-gate candidate checkpoints, atomically admit eligible versions, and
-   prove rollback under injected failure.
+1. Train a real Tessera neural checkpoint in shadow and evaluate it on held-out
+   agent-trajectory replay.
+2. Load only admitted checkpoints into the isolated worker and revalidate the
+   `250 ms` p95 latency and rollback gates.
 3. Build two host adapters and run sustained mixed-load validation.
 
 The immediate priority is resolving natural-session sensitivity while keeping
