@@ -34,6 +34,24 @@ def _safe_id(host: str, session_id: str, index: int) -> str:
 
 
 @dataclass(frozen=True)
+class HostObservability:
+    supported_summary_features: tuple[str, ...]
+    missing_summary_features: tuple[str, ...]
+    coverage: float
+    effective_rank: int
+    required_rank: int
+    sufficient: bool
+
+
+@dataclass(frozen=True)
+class ObservabilityRoute:
+    route: str
+    memory_candidate: bool
+    observability_coverage: float
+    reason: str
+
+
+@dataclass(frozen=True)
 class HostSession:
     host: str
     session_id_hash: str
@@ -41,6 +59,7 @@ class HostSession:
     failed: bool
     terminal_ok: bool
     rejected_records: int
+    supported_features: tuple[str, ...]
     schema: str = HOST_INTEGRATION_SCHEMA
 
     def summary_event(
@@ -50,6 +69,61 @@ class HostSession:
         return AgentEventSessionAdapter(contract).adapt(
             self.session_id_hash,
             list(self.events),
+        )
+
+    def observability(
+        self,
+        contract: SessionSummaryContract,
+        *,
+        minimum_coverage: float = 1.0,
+    ) -> HostObservability:
+        supported = set(self.supported_features)
+        available = []
+        missing = []
+        for name in contract.feature_names:
+            _, base = name.split("_", 1)
+            if base in supported:
+                available.append(name)
+            else:
+                missing.append(name)
+        rank = len(available)
+        required = len(contract.feature_names)
+        coverage = rank / max(1, required)
+        return HostObservability(
+            supported_summary_features=tuple(available),
+            missing_summary_features=tuple(missing),
+            coverage=coverage,
+            effective_rank=rank,
+            required_rank=required,
+            sufficient=coverage >= minimum_coverage,
+        )
+
+    def govern_observability(
+        self,
+        contract: SessionSummaryContract,
+        neural_route: str,
+        *,
+        neural_memory_candidate: bool,
+        minimum_coverage: float = 1.0,
+    ) -> ObservabilityRoute:
+        profile = self.observability(
+            contract,
+            minimum_coverage=minimum_coverage,
+        )
+        if not profile.sufficient:
+            return ObservabilityRoute(
+                route="abstain",
+                memory_candidate=False,
+                observability_coverage=profile.coverage,
+                reason="insufficient_semantic_observability",
+            )
+        return ObservabilityRoute(
+            route=neural_route,
+            memory_candidate=bool(
+                neural_route == "trusted" and neural_memory_candidate
+            ),
+            observability_coverage=profile.coverage,
+            reason="semantic_observability_sufficient",
         )
 
 
@@ -135,6 +209,12 @@ class AgentCliMirrorIntegration:
             failed=failed,
             terminal_ok=terminal_ok and not failed,
             rejected_records=rejected,
+            supported_features=(
+                "duration_ms",
+                "error",
+                "blocked",
+                "history_turns",
+            ),
         )
 
 
@@ -177,6 +257,8 @@ class HermesStreamIntegration:
                 failed = failed or not ok
                 kind = "tool_result" if ok else "error"
                 features = {
+                    "duration_ms": float(record.get("duration") or 0.0)
+                    * 1000.0,
                     "tool_latency_ms": float(record.get("duration") or 0.0)
                     * 1000.0,
                     "error": float(not ok),
@@ -236,4 +318,13 @@ class HermesStreamIntegration:
             failed=failed,
             terminal_ok=terminal_ok and not failed,
             rejected_records=rejected,
+            supported_features=(
+                "duration_ms",
+                "token_count",
+                "error",
+                "blocked",
+                "history_turns",
+                "tool_count",
+                "tool_latency_ms",
+            ),
         )

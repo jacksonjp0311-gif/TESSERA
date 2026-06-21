@@ -31,6 +31,25 @@ def full_session_feature_names() -> tuple[str, ...]:
     )
 
 
+def effective_session_feature_indices(
+    summaries: np.ndarray,
+    *,
+    relative_tolerance: float = 1e-6,
+) -> tuple[int, ...]:
+    """Select genuinely varying coordinates without float32 variance ghosts."""
+    values = np.asarray(summaries, dtype="float64")
+    if values.ndim != 2 or len(values) == 0:
+        raise ValueError("effective_feature_selection_requires_matrix")
+    span = np.ptp(values, axis=0)
+    scale = np.maximum(np.max(np.abs(values), axis=0), 1.0)
+    return tuple(
+        int(index)
+        for index in np.flatnonzero(
+            span > float(relative_tolerance) * scale
+        )
+    )
+
+
 @dataclass(frozen=True)
 class SessionSummaryContract:
     """Versioned projection of the 84-value calibrated session space."""

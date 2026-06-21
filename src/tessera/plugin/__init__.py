@@ -14,6 +14,8 @@ from .incident_governor import GovernedRoute, IncidentGovernor
 from .host_integrations import (
     AgentCliMirrorIntegration,
     HermesStreamIntegration,
+    HostObservability,
+    ObservabilityRoute,
     HostSession,
 )
 
@@ -25,6 +27,8 @@ __all__ = [
     "IncidentGovernor",
     "AgentCliMirrorIntegration",
     "HermesStreamIntegration",
+    "HostObservability",
+    "ObservabilityRoute",
     "HostSession",
     "PluginSupervisor",
     "ReplayGate",

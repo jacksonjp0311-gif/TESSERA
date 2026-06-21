@@ -1,6 +1,6 @@
 # Tessera Host Integrations
 
-Tessera v0.3.3 includes two source-bound reference integrations.
+Tessera v0.3.4 includes two source-bound reference integrations.
 
 ## Agent CLI Mirror
 
@@ -37,7 +37,8 @@ python -m tessera host-integration-readiness `
 Both integrations must:
 
 - emit only allowlisted numeric and categorical metadata;
-- produce the versioned five-feature session summary;
+- cover the effective two-feature duration manifold;
+- abstain if effective semantic observability drops below 100%;
 - reject unsupported records;
 - trigger deterministic incident containment on observed failure;
 - remain below the 10 ms adapter budget.

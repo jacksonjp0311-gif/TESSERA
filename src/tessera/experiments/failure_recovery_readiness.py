@@ -10,6 +10,7 @@ from tessera.model.prediction_experts import predict_with_expert
 from tessera.plugin.host_adapters import (
     SessionSummaryContract,
     full_session_summary,
+    effective_session_feature_indices,
 )
 from tessera.plugin.incident_governor import IncidentGovernor
 from tessera.plugin.neural_checkpoints import (
@@ -46,10 +47,7 @@ def run_failure_recovery_readiness(
         [full_session_summary(events) for events, _ in trajectories],
         dtype="float32",
     )
-    selected_indices = tuple(
-        int(index)
-        for index in np.flatnonzero(raw[:100].std(axis=0) > 1e-6)
-    )
+    selected_indices = effective_session_feature_indices(raw[:100])
     contract = SessionSummaryContract(selected_indices)
     sequence = raw[:, selected_indices]
     payload, checkpoint_metrics = train_neural_checkpoint(sequence[:100])
@@ -68,7 +66,25 @@ def run_failure_recovery_readiness(
         normalized,
         predictions,
     )["latent_drift"]
-    threshold = float(plan["router"]["threshold"])
+    from tessera.experiments.neural_uncertainty_router import _select_router
+
+    calibration_predictions = predictions[:119]
+    calibration_errors = np.mean(
+        (calibration_predictions - normalized[1:120]) ** 2,
+        axis=1,
+    )
+    selected_router, _ = _select_router(
+        {name: values[:119] for name, values in neural_awareness_features(
+            payload,
+            normalized[:120],
+            calibration_predictions,
+        ).items()},
+        calibration_errors,
+        59,
+        79,
+        [0.6, 0.8, 0.9],
+    )
+    threshold = float(selected_router["threshold"])
     failure_score = float(scores[119])
     recovery_score = float(scores[120])
     failure_abstained = failure_score > threshold

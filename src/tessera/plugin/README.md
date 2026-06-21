@@ -48,6 +48,8 @@ proposals.
 - Agent CLI Mirror and Hermes stream integrations map distinct host contracts
   into the shared session schema while discarding commands, text, arguments,
   previews, paths, and user identifiers.
+- Effective-rank selection removes constant coordinates introduced by numeric
+  variance noise; host trust requires full support of the resulting manifold.
 - Release verification builds and integrity-checks the wheel, installs it into
   an isolated environment, and executes packaged inference and CLI smoke tests.
 

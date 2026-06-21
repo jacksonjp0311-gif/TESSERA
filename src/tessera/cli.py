@@ -737,6 +737,30 @@ def cmd_host_integration_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_effective_geometry_readiness(args):
+    from tessera.experiments.effective_geometry_readiness import (
+        run_effective_geometry_readiness,
+    )
+
+    result = run_effective_geometry_readiness(
+        args.preregistration,
+        root=args.root,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "geometry": result["geometry"],
+        "router": result["router"],
+        "mathematical_interpretation": result[
+            "mathematical_interpretation"
+        ],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1171,6 +1195,17 @@ def main(argv=None):
         default="outputs/evidence/evo037/host_integration.json",
     )
     host_integration.set_defaults(func=cmd_host_integration_readiness)
+    effective_geometry = sub.add_parser(
+        "effective-geometry-readiness",
+        help="Audit calibrated rank and remove phantom constant dimensions.",
+    )
+    effective_geometry.add_argument("--root", default=".")
+    effective_geometry.add_argument("--preregistration", required=True)
+    effective_geometry.add_argument(
+        "--out",
+        default="outputs/evidence/evo038/effective_geometry.json",
+    )
+    effective_geometry.set_defaults(func=cmd_effective_geometry_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

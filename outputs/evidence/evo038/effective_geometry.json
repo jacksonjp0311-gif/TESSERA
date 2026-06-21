@@ -1,0 +1,47 @@
+{
+  "schema": "TESSERA-EVO-038-EFFECTIVE-GEOMETRY-v0.1",
+  "passed": true,
+  "checks": {
+    "effective_rank_is_two": true,
+    "phantom_dimensions_are_constant": true,
+    "router_replay_gate_passed": true,
+    "router_final_gate_passed": true,
+    "forecast_remains_unmutated": true
+  },
+  "geometry": {
+    "ambient_summary_dimension": 84,
+    "legacy_declared_router_dimension": 5,
+    "effective_rank": 2,
+    "selected_indices": [
+      0,
+      28
+    ],
+    "selected_features": [
+      "mean_duration_ms",
+      "std_duration_ms"
+    ],
+    "phantom_indices": [
+      7,
+      35,
+      38
+    ],
+    "phantom_features": [
+      "mean_resource_cost",
+      "std_resource_cost",
+      "std_history_turns"
+    ],
+    "selection_rule": "range_j > 1e-6 * max(max_abs_j, 1)"
+  },
+  "router": {
+    "threshold": 0.07666110247373581,
+    "final_coverage": 0.9,
+    "final_retained_risk": 0.0704466388393363,
+    "final_full_risk": 0.07537017994905315,
+    "final_simple_risk": 0.0785987678803972,
+    "risk_reduction_vs_full": 0.06532478910153783,
+    "risk_reduction_vs_simple": 0.10371828033571584,
+    "decision": "promote_neural_uncertainty_abstention"
+  },
+  "mathematical_interpretation": "The calibrated host manifold is a two-dimensional duration plane embedded in an 84-dimensional summary space. Three legacy coordinates were constant axes selected by finite-precision variance noise. Trust must be gated by effective rank, not tensor width.",
+  "claim_boundary": "Effective-rank repair preserves this cohort's selective routing result but does not establish general host transfer or failure prediction."
+}

@@ -8,9 +8,9 @@
 into sparse neural state, and answers a deliberately narrow question: should
 the host trust this session—or abstain?**
 
-![Package](https://img.shields.io/badge/tessera-v0.3.3-blue)
+![Package](https://img.shields.io/badge/tessera-v0.3.4-blue)
 ![Release Gate](https://img.shields.io/badge/release%20gate-9%2F9-brightgreen)
-![Tests](https://img.shields.io/badge/tests-118%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-121%20passing-brightgreen)
 ![Warm p95](https://img.shields.io/badge/EVO--034%20warm%20p95-95.19%20ms-brightgreen)
 ![Route parity](https://img.shields.io/badge/route%20parity-100%25-brightgreen)
 ![RCC-N](https://img.shields.io/badge/RCC--N-Full-brightgreen)
@@ -50,7 +50,8 @@ tools, mutate prompts, replace models, or overrule the host.
 | Release artifact verification | **9 / 9 checks passed** |
 | Local security scan | **release source, 0 findings** |
 | Host contract integrations | **Agent CLI Mirror + Hermes** |
-| Test suite | **118 passing** |
+| Effective calibrated rank | **2 of 84 summary coordinates** |
+| Test suite | **121 passing** |
 | Real telemetry families with dataset-scoped T1 support | **NAB + UCR** |
 | NAB machine-temperature AUC | **0.94865** |
 | UCR untouched confirmation AUC | **0.96081** |
@@ -67,6 +68,7 @@ and [`outputs/evidence/`](outputs/evidence/).
 | Neural trust routing | Emits explicit `trusted` or `abstain` decisions from calibrated latent drift. |
 | Session-semantic adapters | Converts native `AgentEvent` or JSON host sessions into the exact versioned calibration space. |
 | Concrete host integrations | Adapts Agent CLI phase/state telemetry and Hermes typed stream events without retaining payload content. |
+| Observability governance | Abstains when a host cannot observe the effective calibrated manifold. |
 | Fail-closed supervision | Contains crashes and timeouts, opens a circuit breaker, and emits no proposal on failure. |
 | Memory governance | Suppresses memory candidacy whenever the router abstains. |
 | Incident containment | Latches `abstain` after an observed failure and releases only after a clean terminal recovery. |
@@ -101,7 +103,7 @@ certification.
 | Surface | Current result |
 |---|---:|
 | Repository | `Tessera` |
-| Package / CLI | `tessera` v0.3.3 |
+| Package / CLI | `tessera` v0.3.4 |
 | Launch gate | repository launch candidate; external gates open |
 | Diagnostic engine | Engine v0.1 |
 | Operator surface | v0.3.9 Agent CLI Mirror Graceful Stop |
@@ -500,13 +502,21 @@ semantic transfer remains open because the validated offline router operates
 on session summaries rather than arbitrary host events.
 
 EVO-034 closed that semantic gap. The AgentEvent and JSON reference adapters
-reproduced the calibrated five-feature session projection exactly, and all 20
+reproduced the then-declared session projection exactly, and all 20
 untouched final routes matched offline decisions. The supervised runtime passed
 restart, rollback, crash containment, and a 100-request soak with zero failures,
 `95.19 ms` warm p95, and `126.79 ms` soak p99. Tessera v0.3.0 is therefore a
 local production candidate. Natural failure sensitivity, independent host
 integration, security review, and clean-environment reproduction remain
 external launch blockers.
+
+EVO-038 audited the projection's effective rank and found that three of five
+declared coordinates were constants admitted by float32 variance noise. The
+true calibrated manifold is the two-dimensional plane
+`(mean_duration_ms, std_duration_ms)` embedded in the 84-dimensional summary
+space. Recalibration preserved 90% final coverage and the same 6.53% / 10.37%
+risk reductions. Host trust now requires full observability of that effective
+manifold; tensor width alone no longer counts as semantic support.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

@@ -52,5 +52,11 @@
     ],
     "independent_production_trials_required": true
   },
+  "semantic_observability_gate": {
+    "effective_feature_selection": "range_j > 1e-6 * max(max_abs_j, 1)",
+    "minimum_coverage": 1.0,
+    "insufficient_coverage_route": "abstain",
+    "insufficient_coverage_memory_candidate": false
+  },
   "claim_boundary": "This configuration defines a local candidate profile. External launch blockers remain authoritative."
 }

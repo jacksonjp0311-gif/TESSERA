@@ -601,6 +601,18 @@
       "validation_gate": "src/tessera/experiments/host_integration_readiness.py",
       "authority_boundary": "Reference integration conformance does not establish independent deployment, task utility, or host mutation authority.",
       "status": "promoted"
+    },
+    {
+      "id": "F051",
+      "observed_event": "Three of five declared calibration coordinates were mathematically constant but appeared varying under float32 standard-deviation arithmetic.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-038-final-evidence.json",
+      "wound_class": "phantom_feature_rank_from_finite_precision",
+      "diagnosis": "Tensor width and noisy variance tests overstated the semantic dimension of the host manifold.",
+      "lesson": "Trust geometry is defined by effective rank under scale-aware range tests, not by serialized coordinate count.",
+      "future_behavior_change": "Feature selection uses float64 relative-span support; hosts must observe every effective coordinate or abstain.",
+      "validation_gate": "src/tessera/experiments/effective_geometry_readiness.py",
+      "authority_boundary": "Correcting effective rank preserves one cohort result but does not prove universal transfer or consciousness.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

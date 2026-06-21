@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 
 from tessera.experiments.natural_checkpoint_utility import _session_vector
+from tessera.plugin.host_adapters import effective_session_feature_indices
 from tessera.experiments.trajectory_benchmark import load_trajectory_cohort
 from tessera.model.prediction_experts import (
     predict_with_expert,
@@ -80,8 +81,8 @@ def run_neural_uncertainty_router(preregistration_path: str) -> dict:
         [_session_vector(events) for events, _ in trajectories],
         dtype="float32",
     )
-    varying = raw[:100].std(axis=0) > 1e-6
-    sequence = raw[:, varying]
+    selected_indices = effective_session_feature_indices(raw[:100])
+    sequence = raw[:, selected_indices]
     payload, checkpoint_metrics = train_neural_checkpoint(sequence[:100])
     mean = np.asarray(payload["normalization"]["mean"], dtype=float)
     scale = np.asarray(payload["normalization"]["scale"], dtype=float)
@@ -184,7 +185,8 @@ def run_neural_uncertainty_router(preregistration_path: str) -> dict:
     return {
         "schema": "TESSERA-EVO-032-NEURAL-UNCERTAINTY-ROUTER-v0.1",
         "preregistration": plan,
-        "varying_session_features": int(varying.sum()),
+        "varying_session_features": len(selected_indices),
+        "selected_session_feature_indices": list(selected_indices),
         "checkpoint_metrics": checkpoint_metrics,
         "stable_expert": selection["selected_expert"],
         "validation": {

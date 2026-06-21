@@ -7,6 +7,10 @@
     "hermes_contract_adapted": true,
     "privacy_denied_payloads_absent": true,
     "summary_contract_matches_calibration": true,
+    "effective_rank_is_two_not_five": true,
+    "agent_cli_observability_sufficient": true,
+    "hermes_observability_sufficient": true,
+    "insufficient_observability_forces_abstention": true,
     "malformed_records_fail_closed": true,
     "host_failure_triggers_incident_latch": true,
     "adapter_latency_below_10_ms": true,
@@ -16,9 +20,14 @@
     "host_integrations": 2,
     "agent_cli_events": 3,
     "hermes_events": 4,
-    "summary_features": 5,
-    "agent_cli_adapter_latency_ms": 0.09400001727044582,
-    "hermes_adapter_latency_ms": 0.04710000939667225,
+    "summary_features": 2,
+    "calibration_declared_dimensions": 5,
+    "calibration_effective_rank": 2,
+    "phantom_constant_dimensions_removed": 3,
+    "agent_cli_observability_coverage": 1.0,
+    "hermes_observability_coverage": 1.0,
+    "agent_cli_adapter_latency_ms": 0.08449997403658926,
+    "hermes_adapter_latency_ms": 0.041799998143687844,
     "rejected_malformed_records": 2,
     "privacy_payload_leaks": 0
   },
@@ -26,7 +35,7 @@
     "agent_cli_mirror": {
       "path": "agent_cli_mirror\\agent_mirror.py",
       "sha256": "6e329d37e6f67ed5bf1b12b439e65eb510aee299257a4f6148a0374715120ae8",
-      "repository_commit": "cc0d5ad615e62ef7611cc16d31e9dd470dc1845b"
+      "repository_commit": "5630640a01cbfde66ee0e773b35dd3093383f65c"
     },
     "hermes_agent": {
       "path": "gateway/stream_events.py",
@@ -74,19 +83,25 @@
     ],
     "selected_indices": [
       0,
-      7,
-      28,
-      35,
-      38
+      28
     ],
     "feature_names": [
       "mean_duration_ms",
-      "mean_resource_cost",
-      "std_duration_ms",
-      "std_resource_cost",
-      "std_history_turns"
+      "std_duration_ms"
     ],
     "chronology": "one completed session per runtime event"
+  },
+  "observability": {
+    "agent_cli_mirror": {
+      "coverage": 1.0,
+      "effective_rank": 2,
+      "missing": []
+    },
+    "hermes_agent": {
+      "coverage": 1.0,
+      "effective_rank": 2,
+      "missing": []
+    }
   },
   "independently_operated_production_hosts": 0,
   "claim_boundary": "Two source-bound reference integrations prove adapter compatibility only. They are not independent production deployments or evidence of cross-host task utility."

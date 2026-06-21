@@ -36,11 +36,14 @@ certifications concurrently on the same host.
 4. Emit one summary only after each host session closes; preserve chronological
    order and never include sensitive payloads.
 5. Run the host-specific conformance adapter before enabling a host trial.
-6. Treat `abstain` as no memory candidacy and no automated host intervention.
-7. Latch abstention after any observed host failure; release only after the
+6. Require 100% effective-manifold observability; missing calibrated
+   coordinates force abstention.
+7. Treat `abstain` as no memory candidacy and no automated host intervention.
+8. Latch abstention after any observed host failure; release only after the
    configured number of clean terminal sessions.
-8. Monitor latency, worker failures, route coverage, and schema mismatches.
-9. On failure, unload the worker or roll back the active checkpoint pointer.
+9. Monitor latency, worker failures, route coverage, effective rank, and schema
+   mismatches.
+10. On failure, unload the worker or roll back the active checkpoint pointer.
 
 ## External launch blockers
 

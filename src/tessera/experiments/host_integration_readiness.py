@@ -12,6 +12,7 @@ from tessera.experiments.trajectory_benchmark import load_trajectory_cohort
 from tessera.plugin.host_adapters import (
     SessionSummaryContract,
     full_session_summary,
+    effective_session_feature_indices,
 )
 from tessera.plugin.host_integrations import (
     AgentCliMirrorIntegration,
@@ -70,10 +71,7 @@ def run_host_integration_readiness(
         [full_session_summary(events) for events, _ in trajectories],
         dtype="float32",
     )
-    selected = tuple(
-        int(index)
-        for index in np.flatnonzero(raw[:100].std(axis=0) > 1e-6)
-    )
+    selected = effective_session_feature_indices(raw[:100])
     contract = SessionSummaryContract(selected)
 
     started = time.perf_counter()
@@ -87,6 +85,14 @@ def run_host_integration_readiness(
     hermes_latency = (time.perf_counter() - started) * 1000.0
     agent_summary = agent_session.summary_event(contract)
     hermes_summary = hermes_session.summary_event(contract)
+    agent_observability = agent_session.observability(contract)
+    hermes_observability = hermes_session.observability(contract)
+    unsupported_contract = SessionSummaryContract((0, 7, 28))
+    unsupported_route = hermes_session.govern_observability(
+        unsupported_contract,
+        "trusted",
+        neural_memory_candidate=True,
+    )
 
     failed_hermes = HermesStreamIntegration().adapt(
         "hermes-failed",
@@ -135,7 +141,22 @@ def run_host_integration_readiness(
             len(agent_summary.features)
             == len(hermes_summary.features)
             == len(contract.feature_names)
-            == 5
+            == 2
+        ),
+        "effective_rank_is_two_not_five": (
+            list(selected) == [0, 28]
+        ),
+        "agent_cli_observability_sufficient": (
+            agent_observability.sufficient
+            and agent_observability.effective_rank == 2
+        ),
+        "hermes_observability_sufficient": (
+            hermes_observability.sufficient
+            and hermes_observability.effective_rank == 2
+        ),
+        "insufficient_observability_forces_abstention": (
+            unsupported_route.route == "abstain"
+            and not unsupported_route.memory_candidate
         ),
         "malformed_records_fail_closed": (
             AgentCliMirrorIntegration().adapt([{"detail": "bad"}])
@@ -171,6 +192,15 @@ def run_host_integration_readiness(
             "agent_cli_events": len(agent_session.events),
             "hermes_events": len(hermes_session.events),
             "summary_features": len(contract.feature_names),
+            "calibration_declared_dimensions": 5,
+            "calibration_effective_rank": len(contract.feature_names),
+            "phantom_constant_dimensions_removed": 3,
+            "agent_cli_observability_coverage": (
+                agent_observability.coverage
+            ),
+            "hermes_observability_coverage": (
+                hermes_observability.coverage
+            ),
             "agent_cli_adapter_latency_ms": agent_latency,
             "hermes_adapter_latency_ms": hermes_latency,
             "rejected_malformed_records": 2,
@@ -191,6 +221,22 @@ def run_host_integration_readiness(
             },
         },
         "session_contract": contract.as_dict(),
+        "observability": {
+            "agent_cli_mirror": {
+                "coverage": agent_observability.coverage,
+                "effective_rank": agent_observability.effective_rank,
+                "missing": list(
+                    agent_observability.missing_summary_features
+                ),
+            },
+            "hermes_agent": {
+                "coverage": hermes_observability.coverage,
+                "effective_rank": hermes_observability.effective_rank,
+                "missing": list(
+                    hermes_observability.missing_summary_features
+                ),
+            },
+        },
         "independently_operated_production_hosts": 0,
         "claim_boundary": (
             "Two source-bound reference integrations prove adapter "

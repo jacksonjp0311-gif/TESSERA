@@ -8,6 +8,7 @@ from tessera.plugin.host_integrations import (
     AgentCliMirrorIntegration,
     HermesStreamIntegration,
 )
+from tessera.plugin.host_adapters import SessionSummaryContract
 
 
 class TestHostIntegrations(unittest.TestCase):
@@ -47,6 +48,25 @@ class TestHostIntegrations(unittest.TestCase):
         self.assertEqual(hermes.rejected_records, 1)
         self.assertEqual(agent.events, ())
         self.assertEqual(hermes.events, ())
+
+    def test_hosts_cover_true_duration_geometry(self):
+        contract = SessionSummaryContract((0, 28))
+        agent = AgentCliMirrorIntegration().adapt(
+            self.fixture("agent_cli_session")
+        )
+        hermes = HermesStreamIntegration().adapt(
+            "fixture",
+            self.fixture("hermes_session"),
+        )
+        self.assertTrue(agent.observability(contract).sufficient)
+        self.assertTrue(hermes.observability(contract).sufficient)
+        underobserved = hermes.govern_observability(
+            SessionSummaryContract((0, 7, 28)),
+            "trusted",
+            neural_memory_candidate=True,
+        )
+        self.assertEqual(underobserved.route, "abstain")
+        self.assertFalse(underobserved.memory_candidate)
 
 
 if __name__ == "__main__":

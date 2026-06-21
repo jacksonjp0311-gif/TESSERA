@@ -16,6 +16,7 @@ from tessera.plugin.host_adapters import (
     JsonSessionAdapter,
     SessionSummaryContract,
     full_session_summary,
+    effective_session_feature_indices,
 )
 from tessera.plugin.neural_checkpoints import (
     deserialize_expert,
@@ -53,10 +54,7 @@ def run_production_candidate(root: str | Path = ".") -> dict:
         [full_session_summary(events) for events, _ in trajectories],
         dtype="float32",
     )
-    selected_indices = tuple(
-        int(index)
-        for index in np.flatnonzero(raw[:100].std(axis=0) > 1e-6)
-    )
+    selected_indices = effective_session_feature_indices(raw[:100])
     contract = SessionSummaryContract(selected_indices)
     direct = AgentEventSessionAdapter(contract)
     json_adapter = JsonSessionAdapter(contract)
@@ -84,7 +82,17 @@ def run_production_candidate(root: str | Path = ".") -> dict:
     expert = deserialize_expert(payload["prediction_expert"])
     predictions = predict_with_expert(expert, normalized)
     awareness = neural_awareness_features(payload, normalized, predictions)
-    threshold = float(prior["validation"]["neural_selected"]["threshold"])
+    from tessera.experiments.neural_uncertainty_router import _select_router
+
+    errors = np.mean((predictions - normalized[1:]) ** 2, axis=1)
+    selected_router, _ = _select_router(
+        awareness,
+        errors,
+        59,
+        79,
+        [0.6, 0.8, 0.9],
+    )
+    threshold = float(selected_router["threshold"])
     expected_routes = [
         "trusted" if score <= threshold else "abstain"
         for score in awareness["latent_drift"][99:119]
@@ -190,7 +198,8 @@ def run_production_candidate(root: str | Path = ".") -> dict:
             np.array_equal(json_matrix, direct_matrix)
         ),
         "selected_feature_contract_stable": (
-            len(selected_indices) == prior["varying_session_features"]
+            len(selected_indices) == 2
+            and list(selected_indices) == [0, 28]
         ),
         "runtime_routes_match_offline_final_test": routes == expected_routes,
         "abstention_blocks_memory_candidate": all(

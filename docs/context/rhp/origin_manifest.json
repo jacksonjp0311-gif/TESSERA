@@ -95,6 +95,7 @@
     "src/tessera/plugin/host_integrations.py",
     "src/tessera/experiments/host_integration_readiness.py",
     "docs/integrations/README.md",
+    "src/tessera/experiments/effective_geometry_readiness.py",
     "docs/release/PRODUCTION_CANDIDATE.md",
     "configs/production.json",
     "src/tessera/rhp/core.py",

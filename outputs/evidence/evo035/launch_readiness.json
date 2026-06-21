@@ -24,27 +24,27 @@
       "release_integrity_manifest_complete": true
     },
     "metrics": {
-      "baseline_loss": 0.08403712511062622,
-      "candidate_loss": 0.04824817580510925,
+      "baseline_loss": 0.21009282767772675,
+      "candidate_loss": 0.12062043951277313,
       "replay_pass_rate": 0.5263157894736842,
-      "neural_awareness_loss": 0.045525368783273734,
+      "neural_awareness_loss": 0.11398515196158673,
       "train_rows": 60,
       "validation_rows": 20,
       "replay_rows": 20,
       "selected_prediction_expert": "ewma_0.05",
       "sessions": 120,
-      "selected_session_features": 5,
+      "selected_session_features": 2,
       "final_route_count": 20,
       "trusted_count": 18,
       "abstain_count": 2,
       "route_parity_rate": 1.0,
-      "cold_start_latency_ms": 3510.370000003604,
-      "warm_latency_ms_p50": 66.10689999070019,
-      "warm_latency_ms_p95": 73.17705499444857,
-      "warm_latency_ms_max": 94.79249999276362,
+      "cold_start_latency_ms": 3491.79020000156,
+      "warm_latency_ms_p50": 68.7171499885153,
+      "warm_latency_ms_p95": 77.13897998619359,
+      "warm_latency_ms_max": 79.79099999647588,
       "soak_requests": 100,
       "soak_failures": 0,
-      "soak_latency_ms_p99": 85.28634499700294,
+      "soak_latency_ms_p99": 93.82011500332737,
       "latency_budget_ms": 250.0
     }
   },
@@ -62,15 +62,15 @@
       "installed_cli_passed": true
     },
     "version": {
-      "project": "0.3.3",
-      "package": "0.3.3",
-      "plugin_manifest": "0.3.3",
-      "wheel_metadata": "0.3.3"
+      "project": "0.3.4",
+      "package": "0.3.4",
+      "plugin_manifest": "0.3.4",
+      "wheel_metadata": "0.3.4"
     },
     "wheel": {
-      "filename": "tessera-0.3.3-py3-none-any.whl",
-      "sha256": "e492bd129de0ba6f89269aab82755d6c50b67c1cf442bbb870bacf4a7e20a69c",
-      "file_count": 79,
+      "filename": "tessera-0.3.4-py3-none-any.whl",
+      "sha256": "94e83889a999fc14159cf6b8fb8d15091cdd8ef5ae4b736d1b2e171c76191552",
+      "file_count": 80,
       "forbidden_paths": [],
       "record_failures": []
     }
@@ -87,7 +87,7 @@
       "hard_timeout_and_circuit_breaker_present": true
     },
     "metrics": {
-      "release_files_scanned": 152,
+      "release_files_scanned": 155,
       "python_findings": 0,
       "secret_findings": 0,
       "denied_authorities": 6

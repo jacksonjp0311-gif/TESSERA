@@ -1,0 +1,84 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.38",
+  "operation": "TESSERA-EVO-038",
+  "previous_operation": "TESSERA-EVO-037",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "5630640",
+  "state_after_validation": "EFFECTIVE_RANK_REPAIRED_HOST_OBSERVABILITY_GATED",
+  "implemented": [
+    "scale-aware float64 effective-feature selection",
+    "phantom constant-dimension removal",
+    "two-dimensional duration manifold recalibration",
+    "per-host semantic observability profiles",
+    "insufficient-observability forced abstention",
+    "Hermes duration semantic alignment",
+    "effective-rank regression tests",
+    "Tessera v0.3.4 package"
+  ],
+  "finding": "The legacy five-coordinate router space had effective rank two. Three constant axes were admitted by finite-precision variance noise. Recalibration on mean and dispersion of duration preserved selective-risk performance.",
+  "decision": "Promote effective-rank geometry and require full host observability before neural trust.",
+  "metrics": {
+    "unit_tests_expected": 121,
+    "ambient_summary_dimension": 84,
+    "legacy_declared_dimension": 5,
+    "effective_rank": 2,
+    "phantom_dimensions_removed": 3,
+    "router_threshold": 0.07666110247373581,
+    "final_coverage": 0.9,
+    "final_retained_risk": 0.0704466388393363,
+    "full_coverage_risk": 0.07537017994905315,
+    "simple_router_risk": 0.0785987678803972,
+    "risk_reduction_vs_full": 0.06532478910153783,
+    "risk_reduction_vs_simple": 0.10371828033571584,
+    "agent_cli_observability_coverage": 1.0,
+    "hermes_observability_coverage": 1.0,
+    "agent_cli_adapter_latency_ms": 0.08449997403658926,
+    "hermes_adapter_latency_ms": 0.041799998143687844,
+    "underobserved_route": "abstain",
+    "underobserved_memory_candidate": false,
+    "launch_warm_latency_ms_p95": 77.13897998619359,
+    "launch_soak_latency_ms_p99": 93.82011500332737,
+    "launch_soak_failures": 0,
+    "wheel_version": "0.3.4",
+    "wheel_file_count": 80
+  },
+  "artifacts": {
+    "effective_geometry": {
+      "path": "outputs/evidence/evo038/effective_geometry.json",
+      "sha256": "b2371960613e3671723f13d73d0d91a879fa813e2d152580b553b9f3ef00fabc"
+    },
+    "host_integration": {
+      "path": "outputs/evidence/evo037/host_integration.json",
+      "sha256": "654a092d2dc8cc4c886056613dd8748ba28cd11fab601808e4610e698204da2b"
+    },
+    "launch_readiness": {
+      "path": "outputs/evidence/evo035/launch_readiness.json",
+      "sha256": "96cc169ee5d8555705953c89fdeae5e8464a938f77c529447ae619d1a42bb536"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.4-py3-none-any.whl",
+      "sha256": "94e83889a999fc14159cf6b8fb8d15091cdd8ef5ae4b736d1b2e171c76191552"
+    }
+  },
+  "external_launch_gates": [
+    "four more independent natural failure/recovery incidents",
+    "independently operated Agent CLI integration trial",
+    "independently operated Hermes integration trial",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "next_recommended_operation": "run_independent_host_trials_with_rank_drift_monitoring",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Effective-rank geometry and observability governance do not prove consciousness, general transfer, production safety, or autonomous authority."
+}
