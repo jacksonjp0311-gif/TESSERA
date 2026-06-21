@@ -1,0 +1,34 @@
+{
+  "schema": "TESSERA-EVO-030-NATURAL-CHECKPOINT-UTILITY-PREREGISTRATION-v0.1",
+  "operation": "TESSERA-EVO-030",
+  "cohorts": [
+    "outputs/evidence/evo021/natural_split_calibration.json",
+    "outputs/evidence/evo024/fresh_context_cohort.json",
+    "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+  ],
+  "chronological_sessions": 120,
+  "checkpoint_sessions": 100,
+  "untouched_final_test_sessions": 20,
+  "checkpoint_internal_split": {
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2,
+    "replay_fraction": 0.2
+  },
+  "admission_gate": {
+    "maximum_mean_loss_regression_fraction": 0.02,
+    "minimum_row_replay_pass_rate": 0.6
+  },
+  "final_test_controls": [
+    "persistence",
+    "validation_selected_ewma",
+    "rolling_mean_8",
+    "nearest_transition_retrieval"
+  ],
+  "utility_gate": {
+    "checkpoint_must_be_admitted": true,
+    "maximum_final_test_loss_ratio_to_best_control": 1.0,
+    "warm_latency_budget_ms": 250.0
+  },
+  "decision_rule": "Natural checkpoint utility is supported only if replay admission passes before final-test inspection and untouched final-test loss is no worse than every matched control.",
+  "claim_boundary": "Clean-session prediction utility does not establish natural failure sensitivity, task success improvement, production readiness, or autonomous authority."
+}

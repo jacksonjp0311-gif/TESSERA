@@ -83,6 +83,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Learning does not belong on the interactive request path. | Fast inference remains synchronous; fitting and repair stay shadow-only until replay-gated checkpoint admission. |
 | A shadow trainer must never activate its own output. | Checkpoints are immutable proposals admitted through integrity, replay, atomic activation, and rollback gates. |
 | A controlled neural win is not natural agent utility. | Promote integration separately; natural chronological cohorts must beat persistence, summaries, and retrieval controls. |
+| A checkpoint that beats persistence may still be unnecessary. | Stable expert ownership remains until neural utility beats every preregistered matched control. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -396,6 +397,13 @@ validation-selected causal prediction expert. It passed controlled held-out
 replay and served 20 warm neural requests at `11.19 ms` p95 and `15.66 ms`
 maximum latency. The integration path works; natural agent utility remains
 unproven because the controlled trajectory strongly favored autoregression.
+
+EVO-030 tested 120 immutable clean natural sessions chronologically. The
+checkpoint improved over persistence but won only `52.63%` of replay rows,
+below the `60%` admission gate, and was `24.15%` worse than
+validation-selected EWMA on the untouched final 20 sessions. Admission was
+rejected. The validated fast path remains intact, with stable expert prediction
+ownership and neural awareness separated.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

@@ -40,6 +40,7 @@ Every operational command must be documented here and mirrored in the README whe
 | `python -m tessera plugin-readiness --out outputs/evidence/evo027/plugin_latency_separation.json` | Test supervised subprocess success, fitting exclusion, crash containment, timeout closure, circuit breaking, input rejection, unload, and warm latency. |
 | `python -m tessera checkpoint-readiness --out outputs/evidence/evo028/checkpoint_readiness.json` | Test asynchronous candidate creation, replay admission, atomic failure preservation, and rollback. |
 | `python -m tessera neural-checkpoint-readiness --out outputs/evidence/evo029/neural_checkpoint_readiness.json` | Train, replay-gate, admit, load, and latency-test a real Tessera neural checkpoint. |
+| `python -m tessera natural-checkpoint-utility --preregistration docs/research/EVO030_NATURAL_CHECKPOINT_UTILITY_PREREGISTRATION.json` | Evaluate a real checkpoint chronologically on 120 immutable natural sessions against matched non-neural controls. |
 | `python -m tessera.rhp summary --root .` | Print the canonical current-version summary: changes, findings, bounds, and next move. |
 | `python -m tessera.operator_geometry validate` | Low-level operator geometry validator. |
 | `.\scripts\tessera-agent.ps1` | Universal PowerShell Agent CLI entrypoint. |

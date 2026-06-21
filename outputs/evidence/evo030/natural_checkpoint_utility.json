@@ -1,0 +1,71 @@
+{
+  "schema": "TESSERA-EVO-030-NATURAL-CHECKPOINT-UTILITY-v0.1",
+  "preregistration": {
+    "schema": "TESSERA-EVO-030-NATURAL-CHECKPOINT-UTILITY-PREREGISTRATION-v0.1",
+    "operation": "TESSERA-EVO-030",
+    "cohorts": [
+      "outputs/evidence/evo021/natural_split_calibration.json",
+      "outputs/evidence/evo024/fresh_context_cohort.json",
+      "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+    ],
+    "chronological_sessions": 120,
+    "checkpoint_sessions": 100,
+    "untouched_final_test_sessions": 20,
+    "checkpoint_internal_split": {
+      "train_fraction": 0.6,
+      "validation_fraction": 0.2,
+      "replay_fraction": 0.2
+    },
+    "admission_gate": {
+      "maximum_mean_loss_regression_fraction": 0.02,
+      "minimum_row_replay_pass_rate": 0.6
+    },
+    "final_test_controls": [
+      "persistence",
+      "validation_selected_ewma",
+      "rolling_mean_8",
+      "nearest_transition_retrieval"
+    ],
+    "utility_gate": {
+      "checkpoint_must_be_admitted": true,
+      "maximum_final_test_loss_ratio_to_best_control": 1.0,
+      "warm_latency_budget_ms": 250.0
+    },
+    "decision_rule": "Natural checkpoint utility is supported only if replay admission passes before final-test inspection and untouched final-test loss is no worse than every matched control.",
+    "claim_boundary": "Clean-session prediction utility does not establish natural failure sensitivity, task success improvement, production readiness, or autonomous authority."
+  },
+  "session_count": 120,
+  "varying_session_features": 5,
+  "checkpoint_metrics": {
+    "baseline_loss": 0.08403712511062622,
+    "candidate_loss": 0.04824817580510925,
+    "replay_pass_rate": 0.5263157894736842,
+    "neural_awareness_loss": 0.045525368783273734,
+    "train_rows": 60,
+    "validation_rows": 20,
+    "replay_rows": 20,
+    "selected_prediction_expert": "ewma_0.05"
+  },
+  "admission": {
+    "admitted": false,
+    "reason": "replay_gate_failed",
+    "active": null
+  },
+  "final_test": {
+    "session_count": 20,
+    "losses": {
+      "checkpoint": 0.03189287940854035,
+      "persistence": 0.05101531281322863,
+      "rolling_mean_8": 0.030581113424513785,
+      "nearest_transition_retrieval": 1.8168802715009542,
+      "validation_selected_ewma": 0.025687959121701135
+    },
+    "selected_ewma_alpha": 0.05,
+    "best_control": "validation_selected_ewma",
+    "best_control_loss": 0.025687959121701135,
+    "checkpoint_loss_ratio_to_best_control": 1.241549757123263
+  },
+  "natural_checkpoint_utility_supported": false,
+  "decision": "reject_natural_checkpoint_admission_preserve_fast_path",
+  "claim_boundary": "Clean-session next-state prediction does not establish natural failure sensitivity, task success, or production readiness."
+}

@@ -467,6 +467,27 @@
         }
       ]
     },
+    "natural-checkpoint-utility": {
+      "purpose": "Run EVO-030 preregistered chronological natural checkpoint utility against matched non-neural controls.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-030 natural checkpoint utility",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "natural-checkpoint-utility",
+            "--preregistration",
+            "docs/research/EVO030_NATURAL_CHECKPOINT_UTILITY_PREREGISTRATION.json",
+            "--store",
+            "outputs/evidence/evo030/checkpoint_store",
+            "--out",
+            "outputs/evidence/evo030/natural_checkpoint_utility.json"
+          ]
+        }
+      ]
+    },
     "repair-ablation": {
       "purpose": "Run the replay-gated five-arm shadow repair ablation.",
       "steps": [

@@ -74,6 +74,9 @@
     "docs/research/NEURAL_CHECKPOINT_RUNTIME_2026-06-20.md",
     "src/tessera/plugin/neural_checkpoints.py",
     "src/tessera/experiments/neural_checkpoint_readiness.py",
+    "docs/research/EVO030_NATURAL_CHECKPOINT_UTILITY_PREREGISTRATION.json",
+    "docs/research/NATURAL_CHECKPOINT_UTILITY_2026-06-21.md",
+    "src/tessera/experiments/natural_checkpoint_utility.py",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

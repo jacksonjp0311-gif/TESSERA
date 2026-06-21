@@ -1,0 +1,67 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.30",
+  "operation": "TESSERA-EVO-030",
+  "previous_operation": "TESSERA-EVO-029",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "9e52898",
+  "state_after_validation": "NATURAL_CHECKPOINT_REJECTED_EXPERT_OWNERSHIP_PRESERVED",
+  "implemented": [
+    "preregistered chronological natural checkpoint utility gate",
+    "120-session immutable natural stream",
+    "untouched 20-session final test",
+    "persistence control",
+    "validation-selected EWMA control",
+    "rolling summary control",
+    "nearest-transition retrieval control"
+  ],
+  "finding": "The checkpoint improved over persistence but failed the 60% row-level replay gate and was 24.15% worse than validation-selected EWMA on the untouched final test.",
+  "decision": "Reject natural checkpoint admission, preserve the fast stable expert path, and test only bounded neural residual authority next.",
+  "metrics": {
+    "unit_tests_passed": 103,
+    "natural_sessions": 120,
+    "checkpoint_sessions": 100,
+    "untouched_final_test_sessions": 20,
+    "varying_session_features": 5,
+    "replay_baseline_loss": 0.08403712511062622,
+    "replay_candidate_loss": 0.04824817580510925,
+    "replay_pass_rate": 0.5263157894736842,
+    "minimum_replay_pass_rate": 0.6,
+    "checkpoint_admitted": false,
+    "final_checkpoint_loss": 0.03189287940854035,
+    "final_best_control": "validation_selected_ewma",
+    "final_best_control_loss": 0.025687959121701135,
+    "checkpoint_loss_ratio_to_best_control": 1.241549757123263,
+    "natural_checkpoint_utility_supported": false,
+    "production_candidate": false
+  },
+  "artifacts": {
+    "preregistration": {
+      "path": "docs/research/EVO030_NATURAL_CHECKPOINT_UTILITY_PREREGISTRATION.json",
+      "sha256": "48ee1b4202f33c05595d2684a31f93ad1b07db9d9eb38826e4e3114e9a7e0a0d"
+    },
+    "natural_checkpoint_utility": {
+      "path": "outputs/evidence/evo030/natural_checkpoint_utility.json",
+      "sha256": "83f4434b8db6cf62f3aa28e95c8f4dd506149b19428d56fb32a66fb130999d8c"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 103,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 2
+  },
+  "next_recommended_operation": "test_bounded_neural_residual_over_validation_selected_stable_expert",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Natural checkpoint rejection does not establish failure sensitivity, production readiness, consciousness, or autonomous authority."
+}

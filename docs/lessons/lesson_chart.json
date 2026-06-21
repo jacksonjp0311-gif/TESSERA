@@ -505,6 +505,18 @@
       "validation_gate": "src/tessera/experiments/neural_checkpoint_readiness.py",
       "authority_boundary": "Checkpoint utility does not authorize host mutation or general production claims.",
       "status": "promoted"
+    },
+    {
+      "id": "F043",
+      "observed_event": "The natural checkpoint improved over persistence but failed replay consistency and lost to validation-selected EWMA on untouched sessions.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-030-final-evidence.json",
+      "wound_class": "neural_checkpoint_does_not_beat_stable_expert",
+      "diagnosis": "Real checkpoint integration did not translate into natural prediction ownership; a slow stable process was modeled better by low-alpha EWMA.",
+      "lesson": "Neural machinery earns bounded residual authority only after the stable expert is selected and protected.",
+      "future_behavior_change": "The production path preserves stable expert ownership and tests neural corrections under an explicit influence budget.",
+      "validation_gate": "src/tessera/experiments/natural_checkpoint_utility.py",
+      "authority_boundary": "Natural prediction rejection does not authorize threshold relaxation or neural promotion.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

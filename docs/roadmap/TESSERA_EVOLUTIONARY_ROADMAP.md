@@ -546,6 +546,21 @@ and the selected `ridge_ar_lag_16` expert had an unusually favorable signal.
 The next gate uses chronological natural agent cohorts and matched non-neural
 controls.
 
+### Phase 6 natural gate — TESSERA-EVO-030
+
+The real checkpoint was tested on 120 immutable clean natural sessions in
+chronological order. The first 100 sessions contained train, validation, and
+replay; the final 20 were untouched.
+
+The checkpoint beat persistence but passed only `52.63%` of replay rows, below
+the preregistered `60%` admission gate. It was therefore rejected before final
+test inspection. On the untouched final sessions it was `24.15%` worse than
+validation-selected EWMA.
+
+This rejection preserves the architecture: stable experts own operational
+prediction; the neural field retains awareness and may earn only bounded
+residual authority through later replay.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -823,10 +838,10 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Evaluate the admitted checkpoint on chronological natural agent cohorts
-   with replay and untouched final-test partitions.
-2. Compare against persistence, text summaries, recency context, and
-   non-neural retrieval under matched budgets.
+1. Test a bounded neural residual over the validation-selected stable expert,
+   with zero authority when replay consistency fails.
+2. Collect immutable natural failure sessions for precursor and recovery
+   utility rather than weakening clean-session prediction gates.
 3. Build two host adapters and run sustained mixed-load validation.
 
 The immediate priority is resolving natural-session sensitivity while keeping

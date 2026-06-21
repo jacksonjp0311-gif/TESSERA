@@ -30,6 +30,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F040 | synchronous model fitting drove warm plugin latency above one second | separate fast inference from shadow learning and require replay-gated checkpoint admission | latency separation gate |
 | F041 | asynchronous learning without transactional admission could replace live state unsafely | require immutable candidates, replay gates, atomic activation, and rollback | checkpoint lifecycle gate |
 | F042 | controlled neural checkpoint success could be mistaken for natural agent utility | separate integration proof from chronological natural utility against matched controls | neural checkpoint gate |
+| F043 | the natural checkpoint beat persistence but lost to stable EWMA and failed replay consistency | preserve stable expert ownership and test only bounded neural residual authority | natural checkpoint utility gate |
 
 ## Lessons Law
 
