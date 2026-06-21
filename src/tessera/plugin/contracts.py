@@ -35,15 +35,16 @@ class PluginPermissions:
 
 @dataclass(frozen=True)
 class PluginManifest:
-    schema: str = "TESSERA-PLUGIN-MANIFEST-v0.2"
+    schema: str = "TESSERA-PLUGIN-MANIFEST-v0.3"
     name: str = "tessera-neural-sidecar"
-    version: str = "0.2.0"
+    version: str = "0.3.0"
     deterministic_mode: bool = True
     event_schema: str = "TESSERA-AGENT-EVENT-v0.1"
     execution_model: str = "host-supervised-local-subprocess"
     health_schema: str = "TESSERA-PLUGIN-HEALTH-v0.1"
     supports_hard_timeout: bool = True
     supports_unload: bool = True
+    session_summary_schema: str = "TESSERA-SESSION-SUMMARY-v0.1"
     permissions: PluginPermissions = field(default_factory=PluginPermissions)
     claim_boundary: str = (
         "The plugin provides local inference and proposals only; the host retains "

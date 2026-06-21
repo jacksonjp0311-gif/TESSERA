@@ -553,6 +553,18 @@
       "validation_gate": "src/tessera/experiments/runtime_uncertainty_readiness.py",
       "authority_boundary": "Runtime routing does not authorize cross-host threshold reuse.",
       "status": "promoted"
+    },
+    {
+      "id": "F047",
+      "observed_event": "A runtime adapter could be promoted only after its session vectors and all untouched final routes matched the offline calibration path exactly.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-034-final-evidence.json",
+      "wound_class": "semantic_equivalence_without_release_certification",
+      "diagnosis": "Matching schemas and dimensions are insufficient; production-facing adapters must preserve aggregation, selected features, chronology, and routing behavior.",
+      "lesson": "Semantic transfer is an executable parity contract spanning host serialization, calibrated features, runtime routes, restart behavior, and rollback.",
+      "future_behavior_change": "Every production candidate runs exact adapter parity, route parity, sustained-load, failure-isolation, integrity, restart, and rollback gates.",
+      "validation_gate": "src/tessera/experiments/production_candidate.py",
+      "authority_boundary": "Local production candidacy does not establish external deployment safety or authorize host mutation.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

@@ -1,0 +1,117 @@
+{
+  "schema": "TESSERA-EVO-034-PRODUCTION-CANDIDATE-v0.1",
+  "passed": true,
+  "status": "local_production_candidate",
+  "checks": {
+    "semantic_adapter_matches_calibration": true,
+    "json_adapter_matches_direct_adapter": true,
+    "selected_feature_contract_stable": true,
+    "runtime_routes_match_offline_final_test": true,
+    "abstention_blocks_memory_candidate": true,
+    "forecast_status_preserved": true,
+    "warm_latency_gate_passed": true,
+    "restart_is_deterministic": true,
+    "soak_passed": true,
+    "failure_isolation_passed": true,
+    "checkpoint_rollback_passed": true,
+    "release_integrity_manifest_complete": true
+  },
+  "session_contract": {
+    "schema": "TESSERA-SESSION-SUMMARY-v0.1",
+    "source_event_schema": "TESSERA-AGENT-EVENT-v0.1",
+    "aggregation": [
+      "mean",
+      "std",
+      "latest"
+    ],
+    "source_features": [
+      "duration_ms",
+      "token_count",
+      "error",
+      "retry",
+      "files_changed",
+      "tests_failed",
+      "tool_latency_ms",
+      "resource_cost",
+      "prompt_length",
+      "system_prompt_ratio",
+      "history_turns",
+      "tool_count",
+      "finish_reason_length",
+      "has_tool_call",
+      "reasoning_tokens",
+      "lines_added",
+      "lines_removed",
+      "diff_tokens",
+      "tests_passed",
+      "step_number",
+      "blocked",
+      "revision_count",
+      "error_tokens",
+      "is_test_failure",
+      "previous_error",
+      "cost_usd",
+      "rate_limited",
+      "retry_after_ms"
+    ],
+    "selected_indices": [
+      0,
+      7,
+      28,
+      35,
+      38
+    ],
+    "feature_names": [
+      "mean_duration_ms",
+      "mean_resource_cost",
+      "std_duration_ms",
+      "std_resource_cost",
+      "std_history_turns"
+    ],
+    "chronology": "one completed session per runtime event"
+  },
+  "metrics": {
+    "baseline_loss": 0.08403712511062622,
+    "candidate_loss": 0.04824817580510925,
+    "replay_pass_rate": 0.5263157894736842,
+    "neural_awareness_loss": 0.045525368783273734,
+    "train_rows": 60,
+    "validation_rows": 20,
+    "replay_rows": 20,
+    "selected_prediction_expert": "ewma_0.05",
+    "sessions": 120,
+    "selected_session_features": 5,
+    "final_route_count": 20,
+    "trusted_count": 18,
+    "abstain_count": 2,
+    "route_parity_rate": 1.0,
+    "cold_start_latency_ms": 3631.2993000028655,
+    "warm_latency_ms_p50": 75.48340001085307,
+    "warm_latency_ms_p95": 95.19158499751939,
+    "warm_latency_ms_max": 96.29899999708869,
+    "soak_requests": 100,
+    "soak_failures": 0,
+    "soak_latency_ms_p99": 126.79136498161827,
+    "latency_budget_ms": 250.0
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "files": {
+      "pyproject.toml": "4e076b7497cf957a26b44383277dc9e0cdca330785162c60c246c22b1dd85e58",
+      "src/tessera/plugin/contracts.py": "709e0502581310e6e9535db2209546ec8bf7ba60bbf49a867c84f46589151f12",
+      "src/tessera/plugin/runtime.py": "6d803a5646418db2600e8c5f7eb9efbf2ac92d323442466d82018c4f4eeb683d",
+      "src/tessera/plugin/supervisor.py": "7f1a96088a58f0cd0079baacf5d768da34cff0d5a9835aef84fd089889be4926",
+      "src/tessera/plugin/host_adapters.py": "e6c59715e43f60241edd3ca95d0fb4319d3c57179acb4befbb3634160916d53f",
+      "src/tessera/plugin/neural_checkpoints.py": "6c1519ab5fd877e8718449e6f22cafe9964c0b9f3af7dc7572eb5c9710e81be1",
+      "src/tessera/plugin/checkpoints.py": "0995468de3659fd929b33fe283ce18987c5ac33b3093835eee291114fa41b34c",
+      "configs/production.json": "614e5b47b046ebc6549b6422cf946358380d47e2e40b34b20cb22c74f31eabac"
+    }
+  },
+  "external_launch_blockers": [
+    "untouched natural failure-and-recovery cohort",
+    "two genuinely independent external host integrations",
+    "independent security review and dependency vulnerability scan",
+    "independent reproducibility run in a clean environment"
+  ],
+  "claim_boundary": "Local production candidacy proves the checked repository and runtime properties only; it does not establish general safety, natural failure sensitivity, or authorization for host mutation."
+}

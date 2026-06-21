@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tessera"
-version = "0.2.0"
-description = "TESSERA Engine v0.2.0: sparse compressive memory runtime with ASCII loop compiler, RCC Nexus geometry, and evidence-bound transfer discipline."
+version = "0.3.0"
+description = "TESSERA Engine v0.3.0: supervised sparse-neural sidecar with session-semantic routing, replay admission, and fail-closed authority."
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name="James Paul Jackson"}]

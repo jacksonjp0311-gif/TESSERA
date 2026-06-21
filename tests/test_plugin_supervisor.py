@@ -85,7 +85,12 @@ class TestPluginSupervisor(unittest.TestCase):
         from tessera.plugin import TesseraPlugin
 
         manifest = TesseraPlugin().describe()
-        self.assertEqual(manifest.schema, "TESSERA-PLUGIN-MANIFEST-v0.2")
+        self.assertEqual(manifest.schema, "TESSERA-PLUGIN-MANIFEST-v0.3")
+        self.assertEqual(manifest.version, "0.3.0")
+        self.assertEqual(
+            manifest.session_summary_schema,
+            "TESSERA-SESSION-SUMMARY-v0.1",
+        )
         self.assertEqual(
             manifest.execution_model,
             "host-supervised-local-subprocess",

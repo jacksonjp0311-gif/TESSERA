@@ -1,0 +1,42 @@
+{
+  "schema": "TESSERA-PRODUCTION-CONFIG-v0.1",
+  "runtime": {
+    "execution_model": "host-supervised-local-subprocess",
+    "timeout_ms": 5000,
+    "max_consecutive_failures": 3,
+    "max_events": 512,
+    "max_feature_count": 32,
+    "max_metadata_count": 16,
+    "warmup_required": true,
+    "inline_neural_training": false
+  },
+  "session_adapter": {
+    "schema": "TESSERA-SESSION-SUMMARY-v0.1",
+    "aggregation": [
+      "mean",
+      "std",
+      "latest"
+    ],
+    "completion_rule": "emit exactly one summary event after host session completion",
+    "ordering_rule": "preserve completed-session chronology",
+    "sensitive_payloads_allowed": false
+  },
+  "authority": {
+    "host_memory_write": false,
+    "tool_invocation": false,
+    "prompt_mutation": false,
+    "live_codec_replacement": false,
+    "topology_mutation": false,
+    "external_api_calls": false
+  },
+  "release_gate": {
+    "command": "python -m tessera production-candidate --root .",
+    "warm_p95_budget_ms": 250,
+    "soak_p99_budget_ms": 250,
+    "route_parity_required": 1.0,
+    "restart_determinism_required": true,
+    "rollback_required": true,
+    "failure_isolation_required": true
+  },
+  "claim_boundary": "This configuration defines a local candidate profile. External launch blockers remain authoritative."
+}

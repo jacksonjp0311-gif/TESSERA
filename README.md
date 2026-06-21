@@ -32,7 +32,7 @@ What is this compressed telemetry state allowed to become next?
 | Surface | Current result |
 |---|---:|
 | Repository | `Tessera` |
-| Package / CLI | `tessera` v0.2.0 |
+| Package / CLI | `tessera` v0.3.0 |
 | Diagnostic engine | Engine v0.1 |
 | Operator surface | v0.3.9 Agent CLI Mirror Graceful Stop |
 | Command registry | `docs/loop/TESSERA_COMMAND_REGISTRY.md` |
@@ -87,6 +87,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Bounded neural influence may still point the wrong way. | Validation may collapse residual authority completely to zero while retaining neural awareness. |
 | Neural value may emerge as metacognition rather than prediction. | Latent state may earn abstention authority while stable experts retain forecast ownership. |
 | A validated router still needs a semantically matching host adapter. | Runtime mechanics and cross-host threshold transfer remain separate promotion gates. |
+| Semantic equivalence is testable, not assumed. | Versioned host adapters must reproduce calibration vectors and offline routes exactly before local release candidacy. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -426,6 +427,15 @@ runtime. Abstention blocks memory candidacy, forecasts remain unchanged, and
 warm p95 was `80.29 ms` against the `250 ms` budget. Runtime mechanics pass;
 semantic transfer remains open because the validated offline router operates
 on session summaries rather than arbitrary host events.
+
+EVO-034 closed that semantic gap. The AgentEvent and JSON reference adapters
+reproduced the calibrated five-feature session projection exactly, and all 20
+untouched final routes matched offline decisions. The supervised runtime passed
+restart, rollback, crash containment, and a 100-request soak with zero failures,
+`95.19 ms` warm p95, and `126.79 ms` soak p99. Tessera v0.3.0 is therefore a
+local production candidate. Natural failure sensitivity, independent host
+integration, security review, and clean-environment reproduction remain
+external launch blockers.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

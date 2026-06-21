@@ -62,6 +62,7 @@ class TesseraPlugin:
         inline_neural_training: bool = True,
         checkpoint_payload: dict | None = None,
         uncertainty_router: dict | None = None,
+        feature_names: tuple[str, ...] | list[str] | None = None,
     ):
         self._events: deque[AgentEvent] = deque(maxlen=max_events)
         self.warning_quantile = warning_quantile
@@ -76,6 +77,9 @@ class TesseraPlugin:
             else None
         )
         self.uncertainty_router = dict(uncertainty_router or {})
+        self.feature_names = (
+            tuple(feature_names) if feature_names is not None else None
+        )
         self._last_packet: InferencePacket | None = None
         self._last_prediction_expert = "not_selected"
         self._wound_history: list[str] = []
@@ -110,7 +114,13 @@ class TesseraPlugin:
 
     def infer(self, query: InferenceQuery | None = None) -> InferencePacket:
         _ = query or InferenceQuery()
-        matrix = vectorize_events(list(self._events))
+        if self.feature_names is None:
+            matrix = vectorize_events(list(self._events))
+        else:
+            matrix = vectorize_events(
+                list(self._events),
+                self.feature_names,
+            )
         if len(matrix) < 3:
             packet = InferencePacket(
                 status="insufficient_context",
@@ -353,6 +363,7 @@ class TesseraPlugin:
             ),
             "admitted_checkpoint_loaded": self._loaded_checkpoint is not None,
             "uncertainty_router": self.uncertainty_router,
+            "feature_names": list(self.feature_names or ()),
             "live_codec_replacement": False,
             "memory_write": False,
             "tool_invocation": False,
