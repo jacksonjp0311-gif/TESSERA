@@ -38,12 +38,15 @@ certifications concurrently on the same host.
 5. Run the host-specific conformance adapter before enabling a host trial.
 6. Require 100% effective-manifold observability; missing calibrated
    coordinates force abstention.
-7. Treat `abstain` as no memory candidacy and no automated host intervention.
-8. Latch abstention after any observed host failure; release only after the
+7. Bind the signed manifold contract and monitor support, intrinsic rank,
+   principal angle, robust location, and scale over completed-session windows.
+8. Treat any manifold drift as `abstain`, no memory candidacy, and no automated
+   host intervention.
+9. Latch abstention after any observed host failure; release only after the
    configured number of clean terminal sessions.
-9. Monitor latency, worker failures, route coverage, effective rank, and schema
+10. Monitor latency, worker failures, route coverage, effective rank, and schema
    mismatches.
-10. On failure, unload the worker or roll back the active checkpoint pointer.
+11. On failure, unload the worker or roll back the active checkpoint pointer.
 
 ## External launch blockers
 

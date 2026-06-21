@@ -1,0 +1,170 @@
+{
+  "schema": "TESSERA-EVO-039-MANIFOLD-STABILITY-v0.1",
+  "passed": true,
+  "checks": {
+    "calibration_intrinsic_rank_is_one": true,
+    "calibration_first_axis_explains_at_least_98_percent": true,
+    "chronological_windows_stable": true,
+    "support_collapse_rejected": true,
+    "support_expansion_rejected": true,
+    "rotation_rejected": true,
+    "translation_rejected": true
+  },
+  "contract": {
+    "selected_indices": [
+      0,
+      28
+    ],
+    "center": [
+      38.88292694091797,
+      57.21651840209961
+    ],
+    "scale": [
+      3.088742459106445,
+      4.8030241596221925
+    ],
+    "principal_axis": [
+      0.7219784547950486,
+      0.6919155373394602
+    ],
+    "principal_scale": 2.3319034543562402,
+    "explained_variance": 0.9914285134658539,
+    "intrinsic_rank": 1,
+    "relative_tolerance": 1e-06,
+    "trim_quantile": 0.9,
+    "maximum_angle_degrees": 10.0,
+    "maximum_center_shift": 2.0,
+    "minimum_scale_ratio": 0.2,
+    "maximum_scale_ratio": 3.0,
+    "minimum_explained_variance": 0.95,
+    "schema": "TESSERA-MANIFOLD-CONTRACT-v0.1",
+    "fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828",
+    "selected_features": [
+      "mean_duration_ms",
+      "std_duration_ms"
+    ]
+  },
+  "chronological_audits": {
+    "validation": {
+      "accepted": true,
+      "status": "stable",
+      "observed_indices": [
+        0,
+        28
+      ],
+      "missing_indices": [],
+      "unexpected_indices": [],
+      "principal_angle_degrees": 0.7173118845853561,
+      "center_shift": 1.104983895723714,
+      "scale_ratio": 2.0413018271106624,
+      "explained_variance": 0.99328999684389,
+      "intrinsic_rank": 1,
+      "contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828"
+    },
+    "replay": {
+      "accepted": true,
+      "status": "stable",
+      "observed_indices": [
+        0,
+        28
+      ],
+      "missing_indices": [],
+      "unexpected_indices": [],
+      "principal_angle_degrees": 4.14404792205411,
+      "center_shift": 0.972345580403949,
+      "scale_ratio": 0.29799702177874793,
+      "explained_variance": 0.9856730312599218,
+      "intrinsic_rank": 1,
+      "contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828"
+    },
+    "final": {
+      "accepted": true,
+      "status": "stable",
+      "observed_indices": [
+        0,
+        28
+      ],
+      "missing_indices": [],
+      "unexpected_indices": [],
+      "principal_angle_degrees": 0.49468444671910894,
+      "center_shift": 0.9078912523947601,
+      "scale_ratio": 0.2374805310570042,
+      "explained_variance": 0.9852256487136617,
+      "intrinsic_rank": 1,
+      "contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828"
+    }
+  },
+  "fault_injections": {
+    "support_collapse": {
+      "accepted": false,
+      "status": "support_collapse",
+      "observed_indices": [
+        0
+      ],
+      "missing_indices": [
+        28
+      ],
+      "unexpected_indices": [],
+      "principal_angle_degrees": null,
+      "center_shift": null,
+      "scale_ratio": null,
+      "explained_variance": 0.0,
+      "intrinsic_rank": 1,
+      "contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828"
+    },
+    "support_expansion": {
+      "accepted": false,
+      "status": "support_expansion",
+      "observed_indices": [
+        0,
+        7,
+        28
+      ],
+      "missing_indices": [],
+      "unexpected_indices": [
+        7
+      ],
+      "principal_angle_degrees": null,
+      "center_shift": null,
+      "scale_ratio": null,
+      "explained_variance": 0.0,
+      "intrinsic_rank": 3,
+      "contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828"
+    },
+    "manifold_rotation": {
+      "accepted": false,
+      "status": "manifold_rotation",
+      "observed_indices": [
+        0,
+        28
+      ],
+      "missing_indices": [],
+      "unexpected_indices": [],
+      "principal_angle_degrees": 84.08330487909949,
+      "center_shift": 0.8792890959233086,
+      "scale_ratio": 0.030608998997910777,
+      "explained_variance": 1.0,
+      "intrinsic_rank": 1,
+      "contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828"
+    },
+    "location_drift": {
+      "accepted": false,
+      "status": "location_drift",
+      "observed_indices": [
+        0,
+        28
+      ],
+      "missing_indices": [],
+      "unexpected_indices": [],
+      "principal_angle_degrees": 0.49468444671837214,
+      "center_shift": 10.408866112257968,
+      "scale_ratio": 0.2374805310570042,
+      "explained_variance": 0.9852256487136618,
+      "intrinsic_rank": 1,
+      "contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828"
+    }
+  },
+  "mathematical_interpretation": "The two-coordinate duration support contains a stable approximately one-dimensional filament. Mean duration and duration dispersion co-move, so support rank, intrinsic rank, principal angle, location, and scale are separate invariants.",
+  "decision": "promote_manifold_drift_gate",
+  "claim_boundary": "Reference-cohort manifold stability and injected-fault sensitivity do not establish independent production-host stability, causal failure prediction, or autonomous authority."
+}

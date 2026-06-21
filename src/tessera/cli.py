@@ -761,6 +761,31 @@ def cmd_effective_geometry_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_manifold_stability_readiness(args):
+    from tessera.experiments.manifold_stability_readiness import (
+        run_manifold_stability_readiness,
+    )
+
+    result = run_manifold_stability_readiness(
+        args.preregistration,
+        root=args.root,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "contract": result["contract"],
+        "chronological_audits": result["chronological_audits"],
+        "fault_injections": result["fault_injections"],
+        "mathematical_interpretation": result[
+            "mathematical_interpretation"
+        ],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1206,6 +1231,17 @@ def main(argv=None):
         default="outputs/evidence/evo038/effective_geometry.json",
     )
     effective_geometry.set_defaults(func=cmd_effective_geometry_readiness)
+    manifold_stability = sub.add_parser(
+        "manifold-stability-readiness",
+        help="Audit support, intrinsic rank, and duration-filament drift.",
+    )
+    manifold_stability.add_argument("--root", default=".")
+    manifold_stability.add_argument("--preregistration", required=True)
+    manifold_stability.add_argument(
+        "--out",
+        default="outputs/evidence/evo039/manifold_stability.json",
+    )
+    manifold_stability.set_defaults(func=cmd_manifold_stability_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

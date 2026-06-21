@@ -8,9 +8,9 @@
 into sparse neural state, and answers a deliberately narrow question: should
 the host trust this session—or abstain?**
 
-![Package](https://img.shields.io/badge/tessera-v0.3.4-blue)
+![Package](https://img.shields.io/badge/tessera-v0.3.5-blue)
 ![Release Gate](https://img.shields.io/badge/release%20gate-9%2F9-brightgreen)
-![Tests](https://img.shields.io/badge/tests-121%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-126%20passing-brightgreen)
 ![Warm p95](https://img.shields.io/badge/EVO--034%20warm%20p95-95.19%20ms-brightgreen)
 ![Route parity](https://img.shields.io/badge/route%20parity-100%25-brightgreen)
 ![RCC-N](https://img.shields.io/badge/RCC--N-Full-brightgreen)
@@ -51,7 +51,9 @@ tools, mutate prompts, replace models, or overrule the host.
 | Local security scan | **release source, 0 findings** |
 | Host contract integrations | **Agent CLI Mirror + Hermes** |
 | Effective calibrated rank | **2 of 84 summary coordinates** |
-| Test suite | **121 passing** |
+| Intrinsic duration-manifold rank | **1; 99.14% calibration variance** |
+| Manifold fault injections rejected | **4 / 4** |
+| Test suite | **126 passing** |
 | Real telemetry families with dataset-scoped T1 support | **NAB + UCR** |
 | NAB machine-temperature AUC | **0.94865** |
 | UCR untouched confirmation AUC | **0.96081** |
@@ -69,6 +71,7 @@ and [`outputs/evidence/`](outputs/evidence/).
 | Session-semantic adapters | Converts native `AgentEvent` or JSON host sessions into the exact versioned calibration space. |
 | Concrete host integrations | Adapts Agent CLI phase/state telemetry and Hermes typed stream events without retaining payload content. |
 | Observability governance | Abstains when a host cannot observe the effective calibrated manifold. |
+| Manifold drift governance | Detects support collapse/expansion, rotation, location drift, and scale drift; drift forces abstention. |
 | Fail-closed supervision | Contains crashes and timeouts, opens a circuit breaker, and emits no proposal on failure. |
 | Memory governance | Suppresses memory candidacy whenever the router abstains. |
 | Incident containment | Latches `abstain` after an observed failure and releases only after a clean terminal recovery. |
@@ -103,7 +106,7 @@ certification.
 | Surface | Current result |
 |---|---:|
 | Repository | `Tessera` |
-| Package / CLI | `tessera` v0.3.4 |
+| Package / CLI | `tessera` v0.3.5 |
 | Launch gate | repository launch candidate; external gates open |
 | Diagnostic engine | Engine v0.1 |
 | Operator surface | v0.3.9 Agent CLI Mirror Graceful Stop |
@@ -517,6 +520,14 @@ true calibrated manifold is the two-dimensional plane
 space. Recalibration preserved 90% final coverage and the same 6.53% / 10.37%
 risk reductions. Host trust now requires full observability of that effective
 manifold; tensor width alone no longer counts as semantic support.
+
+EVO-039 looked inside that two-coordinate support and found an approximately
+one-dimensional duration filament: the first robust principal direction
+explains `99.14%` of calibration variance. Untouched validation, replay, and
+final windows preserved its support and orientation. Controlled support
+collapse, support expansion, relationship rotation, and location translation
+were all rejected. A failed manifold audit now forces abstention and suppresses
+memory even when the host still emits correctly named fields.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

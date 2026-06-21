@@ -2,7 +2,7 @@
 
 | Surface | Current value |
 |---|---|
-| Engine | TESSERA Engine v0.3.4 |
+| Engine | TESSERA Engine v0.3.5 |
 | Runtime loop compiler | active |
 | CLI loop | `python -m tessera loop ascii` |
 | Compile surface | `reports/runtime_loop/` |
@@ -49,7 +49,14 @@
 | EVO-038 final coverage | 0.90 |
 | EVO-038 risk reduction vs full / simple | 6.53% / 10.37% |
 | EVO-038 host observability coverage | Agent CLI 1.0 / Hermes 1.0 |
-| Next operation | independently operate both hosts with effective-rank monitoring |
+| EVO-039 intrinsic duration-manifold rank | 1 |
+| EVO-039 calibration first-axis variance | 99.1429% |
+| EVO-039 validation / replay / final angle | 0.717 / 4.144 / 0.495 degrees |
+| EVO-039 geometric fault injections rejected | 4 of 4 |
+| EVO-039 launch warm p95 / soak p99 | 199.72 ms / 236.99 ms |
+| EVO-039 launch soak failures | 0 of 100 |
+| EVO-039 wheel | v0.3.5, 82 files, RECORD verified |
+| Next operation | independently operate both hosts with manifold-drift monitoring |
 | UCR EVO-007 discovery AUC | 0.97629 |
 | UCR EVO-007 confirmation AUC | 0.43675 |
 | EVO-007 conclusion | universal shape window rejected; scale router required |

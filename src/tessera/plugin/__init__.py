@@ -18,6 +18,14 @@ from .host_integrations import (
     ObservabilityRoute,
     HostSession,
 )
+from .manifold_monitor import (
+    ManifoldAudit,
+    ManifoldContract,
+    ManifoldRoute,
+    audit_manifold_window,
+    fit_manifold_contract,
+    govern_manifold_audit,
+)
 
 __all__ = [
     "CheckpointStore",
@@ -30,11 +38,17 @@ __all__ = [
     "HostObservability",
     "ObservabilityRoute",
     "HostSession",
+    "ManifoldAudit",
+    "ManifoldContract",
+    "ManifoldRoute",
     "PluginSupervisor",
     "ReplayGate",
     "ShadowTrainer",
     "ShadowTrainingJob",
     "SessionSummaryContract",
     "TesseraPlugin",
+    "audit_manifold_window",
+    "fit_manifold_contract",
+    "govern_manifold_audit",
     "train_neural_checkpoint",
 ]

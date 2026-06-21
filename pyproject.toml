@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tessera"
-version = "0.3.4"
-description = "TESSERA Engine v0.3.4: effective-rank sparse-neural trust routing with host observability gates, incident containment, replay admission, and fail-closed authority."
+version = "0.3.5"
+description = "TESSERA Engine v0.3.5: manifold-monitored sparse-neural trust routing with host observability, incident containment, replay admission, and fail-closed authority."
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name="James Paul Jackson"}]

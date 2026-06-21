@@ -1,0 +1,85 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.39",
+  "operation": "TESSERA-EVO-039",
+  "previous_operation": "TESSERA-EVO-038",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "85750b6",
+  "state_after_validation": "INTRINSIC_MANIFOLD_DRIFT_GATED",
+  "implemented": [
+    "robust duration-manifold contract",
+    "intrinsic-rank audit at 98 percent cumulative energy",
+    "principal-angle drift detection",
+    "robust location and scale drift detection",
+    "support collapse and expansion detection",
+    "fingerprinted calibration contract",
+    "manifold-drift forced abstention and memory suppression",
+    "persistent-worker CPU thread containment",
+    "Tessera v0.3.5 package"
+  ],
+  "finding": "The two-coordinate effective duration support contains an approximately one-dimensional filament. Mean duration and duration dispersion co-move, with the first robust principal direction explaining 99.1429 percent of calibration variance.",
+  "decision": "Promote bounded manifold-drift governance and require stable support, intrinsic rank, orientation, location, and scale before preserving neural trust.",
+  "metrics": {
+    "unit_tests_expected": 126,
+    "ambient_summary_dimension": 84,
+    "effective_coordinate_rank": 2,
+    "intrinsic_manifold_rank": 1,
+    "calibration_first_axis_explained_variance": 0.9914285134658539,
+    "validation_principal_angle_degrees": 0.7173118845853561,
+    "replay_principal_angle_degrees": 4.14404792205411,
+    "final_principal_angle_degrees": 0.49468444671910894,
+    "maximum_allowed_principal_angle_degrees": 10.0,
+    "validation_center_shift": 1.104983895723714,
+    "replay_center_shift": 0.972345580403949,
+    "final_center_shift": 0.9078912523947601,
+    "fault_injections_rejected": 4,
+    "fault_injections_total": 4,
+    "injected_rotation_degrees": 84.08330487909949,
+    "injected_location_shift": 10.408866112257968,
+    "drift_route": "abstain",
+    "drift_memory_candidate": false,
+    "manifold_contract_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828",
+    "launch_warm_latency_ms_p95": 199.72389997710707,
+    "launch_soak_latency_ms_p99": 236.98704799258857,
+    "launch_soak_failures": 0,
+    "wheel_version": "0.3.5",
+    "wheel_file_count": 82
+  },
+  "artifacts": {
+    "manifold_stability": {
+      "path": "outputs/evidence/evo039/manifold_stability.json",
+      "sha256": "0a6b75213128b1147dafef47fe1c77f903dda17ab4db020b3be46b2cd5e918d0"
+    },
+    "research_report": {
+      "path": "docs/research/MANIFOLD_DRIFT_GOVERNANCE_2026-06-21.md"
+    },
+    "launch_readiness": {
+      "path": "outputs/evidence/evo039/launch_readiness.json",
+      "sha256": "1d77a74eb53b18cb83421fc5e844a554d6f1c547215bee364c24cc6fd819f938"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.5-py3-none-any.whl",
+      "sha256": "77e62b9abb793682f4acc7651876e53297152b0425611c143c8c4dcb846a2d07"
+    }
+  },
+  "external_launch_gates": [
+    "four more independent natural failure/recovery incidents",
+    "independently operated Agent CLI integration trial with rolling manifold windows",
+    "independently operated Hermes integration trial with rolling manifold windows",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "next_recommended_operation": "run_independent_host_trials_with_rolling_manifold_drift_windows",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Manifold stability on reference cohorts and injected faults does not prove consciousness, general transfer, independent production safety, causal incident prediction, or autonomous authority."
+}

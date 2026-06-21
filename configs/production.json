@@ -3,6 +3,7 @@
   "runtime": {
     "execution_model": "host-supervised-local-subprocess",
     "timeout_ms": 5000,
+    "worker_cpu_threads": 1,
     "max_consecutive_failures": 3,
     "max_events": 512,
     "max_feature_count": 32,
@@ -57,6 +58,18 @@
     "minimum_coverage": 1.0,
     "insufficient_coverage_route": "abstain",
     "insufficient_coverage_memory_candidate": false
+  },
+  "manifold_drift_gate": {
+    "support_rule": "observed effective indices must exactly match calibration",
+    "intrinsic_rank_energy": 0.98,
+    "maximum_principal_angle_degrees": 10.0,
+    "maximum_robust_center_shift": 2.0,
+    "accepted_principal_scale_ratio": [
+      0.2,
+      3.0
+    ],
+    "drift_route": "abstain",
+    "drift_memory_candidate": false
   },
   "claim_boundary": "This configuration defines a local candidate profile. External launch blockers remain authoritative."
 }

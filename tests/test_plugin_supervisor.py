@@ -86,8 +86,9 @@ class TestPluginSupervisor(unittest.TestCase):
 
         manifest = TesseraPlugin().describe()
         self.assertEqual(manifest.schema, "TESSERA-PLUGIN-MANIFEST-v0.3")
-        self.assertEqual(manifest.version, "0.3.4")
+        self.assertEqual(manifest.version, "0.3.5")
         self.assertTrue(manifest.supports_host_observability_gate)
+        self.assertTrue(manifest.supports_manifold_drift_gate)
         self.assertEqual(
             manifest.session_summary_schema,
             "TESSERA-SESSION-SUMMARY-v0.1",
@@ -120,7 +121,10 @@ class TestPluginSupervisor(unittest.TestCase):
         )
 
     def test_warmup_transitions_health_to_ready(self):
-        supervisor = PluginSupervisor()
+        supervisor = PluginSupervisor(
+            budget=RuntimeBudget(worker_cpu_threads=1)
+        )
+        self.assertEqual(supervisor.budget.worker_cpu_threads, 1)
         self.assertEqual(supervisor.health().status, "starting")
         result = supervisor.warmup()
         self.assertEqual(result.status, "ok")

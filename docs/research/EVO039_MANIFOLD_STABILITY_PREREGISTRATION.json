@@ -1,0 +1,47 @@
+{
+  "schema": "TESSERA-EVO-039-MANIFOLD-STABILITY-PREREGISTRATION-v0.1",
+  "cohorts": [
+    "outputs/evidence/evo021/natural_split_calibration.json",
+    "outputs/evidence/evo024/fresh_context_cohort.json",
+    "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+  ],
+  "selected_indices": [
+    0,
+    28
+  ],
+  "splits": {
+    "calibration": [
+      0,
+      60
+    ],
+    "validation": [
+      60,
+      80
+    ],
+    "replay": [
+      80,
+      100
+    ],
+    "final": [
+      100,
+      120
+    ]
+  },
+  "trim_quantile": 0.9,
+  "acceptance": {
+    "intrinsic_rank": 1,
+    "minimum_calibration_explained_variance": 0.98,
+    "maximum_principal_angle_degrees": 10.0,
+    "maximum_center_shift": 2.0,
+    "minimum_scale_ratio": 0.2,
+    "maximum_scale_ratio": 3.0,
+    "minimum_window_explained_variance": 0.95
+  },
+  "fault_injections": [
+    "support_collapse",
+    "support_expansion",
+    "manifold_rotation",
+    "location_drift"
+  ],
+  "claim_boundary": "This audit tests reference-cohort manifold stability and synthetic fault sensitivity only."
+}

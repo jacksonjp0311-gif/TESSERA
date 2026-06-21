@@ -42,7 +42,24 @@ def _infer_worker(
         })
 
 
-def _persistent_worker(request_queue, output_queue, plugin_options) -> None:
+def _configure_worker_threads(worker_cpu_threads: int) -> None:
+    threads = max(1, int(worker_cpu_threads))
+    try:
+        import torch
+
+        torch.set_num_threads(threads)
+        torch.set_num_interop_threads(threads)
+    except (ImportError, RuntimeError):
+        pass
+
+
+def _persistent_worker(
+    request_queue,
+    output_queue,
+    plugin_options,
+    worker_cpu_threads,
+) -> None:
+    _configure_worker_threads(worker_cpu_threads)
     plugin = TesseraPlugin(**plugin_options)
     while True:
         request = request_queue.get()
@@ -311,6 +328,7 @@ class PluginSupervisor:
                 self._request_queue,
                 self._output_queue,
                 self.plugin_options,
+                self.budget.worker_cpu_threads,
             ),
         )
         self._process.start()

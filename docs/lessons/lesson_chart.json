@@ -613,6 +613,30 @@
       "validation_gate": "src/tessera/experiments/effective_geometry_readiness.py",
       "authority_boundary": "Correcting effective rank preserves one cohort result but does not prove universal transfer or consciousness.",
       "status": "promoted"
+    },
+    {
+      "id": "F052",
+      "observed_event": "The two supported duration coordinates occupied an approximately one-dimensional filament, so matching field names and support rank could still conceal a changed operating relationship.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-039-final-evidence.json",
+      "wound_class": "support_equivalence_without_manifold_stability",
+      "diagnosis": "Semantic observability proves that required coordinates are available, but not that their joint distribution remains inside the calibrated trust region.",
+      "lesson": "Trust contracts must preserve support, intrinsic rank, orientation, robust location, and scale; coordinate presence alone is insufficient.",
+      "future_behavior_change": "Completed-session windows are audited against a fingerprinted manifold contract, and any geometric drift forces abstention and suppresses memory.",
+      "validation_gate": "src/tessera/experiments/manifold_stability_readiness.py",
+      "authority_boundary": "Reference-cohort stability and fault injection do not prove independent host stability, failure prediction, or autonomous authority.",
+      "status": "promoted"
+    },
+    {
+      "id": "F053",
+      "observed_event": "Release certification passed warm latency but intermittently exceeded the soak p99 budget while an unrelated training process was active.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-039-final-evidence.json",
+      "wound_class": "unbounded_worker_thread_contention",
+      "diagnosis": "A persistent inference worker inherited numeric-library thread behavior from the host, allowing background compute to amplify tail latency.",
+      "lesson": "A production sidecar must bound its own compute concurrency instead of assuming an idle host.",
+      "future_behavior_change": "Supervised persistent workers bind PyTorch CPU and interop threads to the declared runtime budget while preserving the 250 ms latency gate.",
+      "validation_gate": "src/tessera/experiments/production_candidate.py",
+      "authority_boundary": "Thread containment improves local latency isolation but does not prove cross-platform or externally operated performance.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

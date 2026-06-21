@@ -37,7 +37,7 @@ class PluginPermissions:
 class PluginManifest:
     schema: str = "TESSERA-PLUGIN-MANIFEST-v0.3"
     name: str = "tessera-neural-sidecar"
-    version: str = "0.3.4"
+    version: str = "0.3.5"
     deterministic_mode: bool = True
     event_schema: str = "TESSERA-AGENT-EVENT-v0.1"
     execution_model: str = "host-supervised-local-subprocess"
@@ -46,6 +46,7 @@ class PluginManifest:
     supports_unload: bool = True
     session_summary_schema: str = "TESSERA-SESSION-SUMMARY-v0.1"
     supports_host_observability_gate: bool = True
+    supports_manifold_drift_gate: bool = True
     permissions: PluginPermissions = field(default_factory=PluginPermissions)
     claim_boundary: str = (
         "The plugin provides local inference and proposals only; the host retains "
@@ -126,6 +127,7 @@ class ReplayCertificate:
 @dataclass(frozen=True)
 class RuntimeBudget:
     timeout_ms: int = 30_000
+    worker_cpu_threads: int = 1
     max_events: int = 512
     max_feature_count: int = 32
     max_metadata_count: int = 16
