@@ -575,6 +575,21 @@ The next useful neural role is uncertainty routing or abstention around the
 stable expert. Neural state may help identify where the expert should be
 trusted less without changing its forecast.
 
+### Phase 6 metacognitive routing — TESSERA-EVO-032
+
+Target-free neural scores were evaluated as trust routers around the stable
+expert. Validation selected latent drift at `60%` target coverage. Replay
+reduced retained risk while matching the simple jump control.
+
+On untouched final sessions, latent drift retained `90%` coverage and reduced
+risk by `6.53%` versus full coverage. It reduced risk by `10.37%` versus the
+simple router while retaining three more sessions. Forecast values were never
+changed.
+
+This is the first natural-session neural authority supported by Tessera:
+metacognitive abstention. The neural field estimates where the stable expert
+should be trusted, while the stable expert continues to act.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -852,8 +867,8 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Test neural uncertainty routing and abstention around the stable expert,
-   without forecast mutation.
+1. Integrate latent-drift abstention into the supervised runtime and verify
+   host-facing latency, coverage, and fail-closed behavior.
 2. Collect immutable natural failure sessions for precursor and recovery
    utility rather than weakening clean-session prediction gates.
 3. Build two host adapters and run sustained mixed-load validation.

@@ -85,6 +85,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | A controlled neural win is not natural agent utility. | Promote integration separately; natural chronological cohorts must beat persistence, summaries, and retrieval controls. |
 | A checkpoint that beats persistence may still be unnecessary. | Stable expert ownership remains until neural utility beats every preregistered matched control. |
 | Bounded neural influence may still point the wrong way. | Validation may collapse residual authority completely to zero while retaining neural awareness. |
+| Neural value may emerge as metacognition rather than prediction. | Latent state may earn abstention authority while stable experts retain forecast ownership. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -411,6 +412,13 @@ the stable expert. Every nonzero correction increased validation loss, so
 validation selected gain `0.0`. Replay and final-test behavior remained exactly
 the stable expert. Neural forecast authority was safely collapsed to zero; the
 next neural role is uncertainty routing and abstention.
+
+EVO-032 found that role. Neural latent drift routed abstention without changing
+forecasts. On untouched final sessions it retained `90%` coverage, reduced
+retained risk by `6.53%` versus full coverage, and reduced risk by `10.37%`
+versus a simple jump router while retaining three additional sessions. This is
+the first supported natural-session neural authority in Tessera: selective
+trust routing, not prediction ownership.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

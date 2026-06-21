@@ -1,0 +1,39 @@
+{
+  "schema": "TESSERA-EVO-032-NEURAL-UNCERTAINTY-ROUTER-PREREGISTRATION-v0.1",
+  "operation": "TESSERA-EVO-032",
+  "cohorts": [
+    "outputs/evidence/evo021/natural_split_calibration.json",
+    "outputs/evidence/evo024/fresh_context_cohort.json",
+    "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+  ],
+  "chronological_split": {
+    "train_sessions": 60,
+    "validation_sessions": 20,
+    "replay_sessions": 20,
+    "final_test_sessions": 20
+  },
+  "neural_uncertainty_scores": [
+    "reconstruction_surprise",
+    "latent_drift",
+    "field_movement",
+    "neural_expert_disagreement"
+  ],
+  "simple_control_scores": [
+    "recent_observation_jump"
+  ],
+  "target_coverages": [0.6, 0.8, 0.9],
+  "selection_rule": "Within each router family select minimum validation retained risk; ties prefer higher coverage and lexical score name.",
+  "replay_gate": {
+    "maximum_risk_ratio_to_full_coverage": 0.98,
+    "minimum_coverage_below_target": 0.1,
+    "maximum_coverage_above_target": 0.15,
+    "maximum_risk_ratio_to_simple_router": 1.0
+  },
+  "final_test_gate": {
+    "maximum_risk_ratio_to_full_coverage": 1.0,
+    "maximum_risk_ratio_to_simple_router": 1.0,
+    "minimum_coverage": 0.5
+  },
+  "forecast_mutation": false,
+  "claim_boundary": "Selective clean-session risk does not establish natural failure sensitivity, task success, production readiness, consciousness, or autonomous authority."
+}

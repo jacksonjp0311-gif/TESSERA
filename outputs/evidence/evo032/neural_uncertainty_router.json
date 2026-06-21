@@ -1,0 +1,216 @@
+{
+  "schema": "TESSERA-EVO-032-NEURAL-UNCERTAINTY-ROUTER-v0.1",
+  "preregistration": {
+    "schema": "TESSERA-EVO-032-NEURAL-UNCERTAINTY-ROUTER-PREREGISTRATION-v0.1",
+    "operation": "TESSERA-EVO-032",
+    "cohorts": [
+      "outputs/evidence/evo021/natural_split_calibration.json",
+      "outputs/evidence/evo024/fresh_context_cohort.json",
+      "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+    ],
+    "chronological_split": {
+      "train_sessions": 60,
+      "validation_sessions": 20,
+      "replay_sessions": 20,
+      "final_test_sessions": 20
+    },
+    "neural_uncertainty_scores": [
+      "reconstruction_surprise",
+      "latent_drift",
+      "field_movement",
+      "neural_expert_disagreement"
+    ],
+    "simple_control_scores": [
+      "recent_observation_jump"
+    ],
+    "target_coverages": [
+      0.6,
+      0.8,
+      0.9
+    ],
+    "selection_rule": "Within each router family select minimum validation retained risk; ties prefer higher coverage and lexical score name.",
+    "replay_gate": {
+      "maximum_risk_ratio_to_full_coverage": 0.98,
+      "minimum_coverage_below_target": 0.1,
+      "maximum_coverage_above_target": 0.15,
+      "maximum_risk_ratio_to_simple_router": 1.0
+    },
+    "final_test_gate": {
+      "maximum_risk_ratio_to_full_coverage": 1.0,
+      "maximum_risk_ratio_to_simple_router": 1.0,
+      "minimum_coverage": 0.5
+    },
+    "forecast_mutation": false,
+    "claim_boundary": "Selective clean-session risk does not establish natural failure sensitivity, task success, production readiness, consciousness, or autonomous authority."
+  },
+  "varying_session_features": 5,
+  "checkpoint_metrics": {
+    "baseline_loss": 0.08403712511062622,
+    "candidate_loss": 0.04824817580510925,
+    "replay_pass_rate": 0.5263157894736842,
+    "neural_awareness_loss": 0.045525368783273734,
+    "train_rows": 60,
+    "validation_rows": 20,
+    "replay_rows": 20,
+    "selected_prediction_expert": "ewma_0.05"
+  },
+  "stable_expert": "ewma_0.05",
+  "validation": {
+    "full_risk": 1.7534537804783699,
+    "neural_selected": {
+      "score": "latent_drift",
+      "target_coverage": 0.6,
+      "threshold": 0.03937917947769165,
+      "validation_coverage": 0.6,
+      "validation_risk": 0.09890305681534621
+    },
+    "simple_selected": {
+      "score": "recent_observation_jump",
+      "target_coverage": 0.6,
+      "threshold": 0.05000881687128851,
+      "validation_coverage": 0.6,
+      "validation_risk": 0.09890305681534621
+    },
+    "neural_candidates": [
+      {
+        "score": "reconstruction_surprise",
+        "target_coverage": 0.6,
+        "threshold": 0.11180057376623154,
+        "validation_coverage": 0.6,
+        "validation_risk": 2.84810980362415
+      },
+      {
+        "score": "reconstruction_surprise",
+        "target_coverage": 0.8,
+        "threshold": 0.1521557867527008,
+        "validation_coverage": 0.8,
+        "validation_risk": 2.1657373090303933
+      },
+      {
+        "score": "reconstruction_surprise",
+        "target_coverage": 0.9,
+        "threshold": 0.18586942553520203,
+        "validation_coverage": 0.9,
+        "validation_risk": 1.937479919546811
+      },
+      {
+        "score": "latent_drift",
+        "target_coverage": 0.6,
+        "threshold": 0.03937917947769165,
+        "validation_coverage": 0.6,
+        "validation_risk": 0.09890305681534621
+      },
+      {
+        "score": "latent_drift",
+        "target_coverage": 0.8,
+        "threshold": 0.07947847247123718,
+        "validation_coverage": 0.8,
+        "validation_risk": 2.166977903473101
+      },
+      {
+        "score": "latent_drift",
+        "target_coverage": 0.9,
+        "threshold": 0.11702409386634827,
+        "validation_coverage": 0.9,
+        "validation_risk": 1.929880750796669
+      },
+      {
+        "score": "field_movement",
+        "target_coverage": 0.6,
+        "threshold": 0.08241540938615799,
+        "validation_coverage": 0.6,
+        "validation_risk": 2.8481186494298334
+      },
+      {
+        "score": "field_movement",
+        "target_coverage": 0.8,
+        "threshold": 0.12984363734722137,
+        "validation_coverage": 0.8,
+        "validation_risk": 2.163936144422762
+      },
+      {
+        "score": "field_movement",
+        "target_coverage": 0.9,
+        "threshold": 0.13848164677619934,
+        "validation_coverage": 0.9,
+        "validation_risk": 1.9385209109036312
+      },
+      {
+        "score": "neural_expert_disagreement",
+        "target_coverage": 0.6,
+        "threshold": 0.016645392827489308,
+        "validation_coverage": 0.6,
+        "validation_risk": 2.8369814333794845
+      },
+      {
+        "score": "neural_expert_disagreement",
+        "target_coverage": 0.8,
+        "threshold": 0.03602130455000678,
+        "validation_coverage": 0.8,
+        "validation_risk": 2.1637913633061667
+      },
+      {
+        "score": "neural_expert_disagreement",
+        "target_coverage": 0.9,
+        "threshold": 0.1480932732673746,
+        "validation_coverage": 0.9,
+        "validation_risk": 1.929880750796669
+      }
+    ],
+    "simple_candidates": [
+      {
+        "score": "recent_observation_jump",
+        "target_coverage": 0.6,
+        "threshold": 0.05000881687128851,
+        "validation_coverage": 0.6,
+        "validation_risk": 0.09890305681534621
+      },
+      {
+        "score": "recent_observation_jump",
+        "target_coverage": 0.8,
+        "threshold": 0.2807800476117106,
+        "validation_coverage": 0.8,
+        "validation_risk": 2.166977903473101
+      },
+      {
+        "score": "recent_observation_jump",
+        "target_coverage": 0.9,
+        "threshold": 0.4217551180097474,
+        "validation_coverage": 0.9,
+        "validation_risk": 1.929880750796669
+      }
+    ]
+  },
+  "replay": {
+    "full_risk": 0.06570283118554444,
+    "neural": {
+      "coverage": 0.65,
+      "retained_risk": 0.06313919180266238,
+      "retained_count": 13
+    },
+    "simple": {
+      "coverage": 0.65,
+      "retained_risk": 0.06313919180266238,
+      "retained_count": 13
+    },
+    "gate_passed": true
+  },
+  "final_test": {
+    "full_risk": 0.03014807197962127,
+    "neural": {
+      "coverage": 0.9,
+      "retained_risk": 0.028178655535734523,
+      "retained_count": 18
+    },
+    "simple": {
+      "coverage": 0.75,
+      "retained_risk": 0.031439507152158874,
+      "retained_count": 15
+    },
+    "gate_passed": true
+  },
+  "forecast_mutated": false,
+  "neural_uncertainty_routing_supported": true,
+  "decision": "promote_neural_uncertainty_abstention",
+  "claim_boundary": "Selective clean-session risk does not establish natural failure sensitivity, task success, or production readiness."
+}

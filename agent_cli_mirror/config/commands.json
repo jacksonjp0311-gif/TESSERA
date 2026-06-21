@@ -507,6 +507,25 @@
         }
       ]
     },
+    "neural-uncertainty-router": {
+      "purpose": "Run EVO-032 preregistered neural uncertainty abstention around the stable expert without forecast mutation.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-032 neural uncertainty router",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "neural-uncertainty-router",
+            "--preregistration",
+            "docs/research/EVO032_NEURAL_UNCERTAINTY_ROUTER_PREREGISTRATION.json",
+            "--out",
+            "outputs/evidence/evo032/neural_uncertainty_router.json"
+          ]
+        }
+      ]
+    },
     "repair-ablation": {
       "purpose": "Run the replay-gated five-arm shadow repair ablation.",
       "steps": [

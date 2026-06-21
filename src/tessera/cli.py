@@ -567,6 +567,30 @@ def cmd_bounded_neural_residual(args):
     print(f"Results: {out_path}")
 
 
+def cmd_neural_uncertainty_router(args):
+    from tessera.experiments.neural_uncertainty_router import (
+        run_neural_uncertainty_router,
+    )
+
+    result = run_neural_uncertainty_router(args.preregistration)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "neural_uncertainty_routing_supported": result[
+            "neural_uncertainty_routing_supported"
+        ],
+        "validation": {
+            "neural_selected": result["validation"]["neural_selected"],
+            "simple_selected": result["validation"]["simple_selected"],
+        },
+        "replay": result["replay"],
+        "final_test": result["final_test"],
+        "decision": result["decision"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -916,6 +940,16 @@ def main(argv=None):
         default="outputs/evidence/evo031/bounded_neural_residual.json",
     )
     residual.set_defaults(func=cmd_bounded_neural_residual)
+    uncertainty = sub.add_parser(
+        "neural-uncertainty-router",
+        help="Test neural abstention around a stable expert.",
+    )
+    uncertainty.add_argument("--preregistration", required=True)
+    uncertainty.add_argument(
+        "--out",
+        default="outputs/evidence/evo032/neural_uncertainty_router.json",
+    )
+    uncertainty.set_defaults(func=cmd_neural_uncertainty_router)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

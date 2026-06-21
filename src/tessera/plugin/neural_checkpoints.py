@@ -180,3 +180,58 @@ def neural_sequence_predictions(
             )
             field = next_field
     return np.asarray(predictions)
+
+
+def neural_awareness_features(
+    payload: dict,
+    sequence: np.ndarray,
+    stable_predictions: np.ndarray,
+) -> dict[str, np.ndarray]:
+    loaded = load_neural_checkpoint(payload)
+    model = loaded["model"]
+    values = torch.tensor(np.asarray(sequence), dtype=torch.float32)
+    field = torch.zeros(1, model.field_dim)
+    level = values[0:1]
+    previous_code = torch.zeros(1, model.code_dim)
+    scores = {
+        "reconstruction_surprise": [],
+        "latent_drift": [],
+        "field_movement": [],
+        "neural_expert_disagreement": [],
+    }
+    with torch.no_grad():
+        for index in range(len(values) - 1):
+            next_field, code, reconstruction, prediction = model.step(
+                values[index : index + 1],
+                field,
+                level,
+            )
+            scores["reconstruction_surprise"].append(
+                torch.mean(
+                    (reconstruction - values[index : index + 1]) ** 2
+                ).item()
+            )
+            scores["latent_drift"].append(
+                torch.mean(torch.abs(code - previous_code)).item()
+            )
+            scores["field_movement"].append(
+                torch.mean(torch.abs(next_field - field)).item()
+            )
+            scores["neural_expert_disagreement"].append(
+                float(np.mean(
+                    (
+                        prediction.numpy().reshape(-1)
+                        - stable_predictions[index]
+                    ) ** 2
+                ))
+            )
+            level = model.update_level(
+                values[index + 1 : index + 2],
+                level,
+            )
+            field = next_field
+            previous_code = code
+    return {
+        name: np.asarray(values, dtype=float)
+        for name, values in scores.items()
+    }

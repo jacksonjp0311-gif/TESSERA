@@ -529,6 +529,18 @@
       "validation_gate": "src/tessera/experiments/bounded_neural_residual.py",
       "authority_boundary": "Zero residual authority does not authorize alternative unvalidated neural mutation.",
       "status": "promoted"
+    },
+    {
+      "id": "F045",
+      "observed_event": "Neural latent drift did not improve forecasts directly but identified a lower-risk retained set on untouched natural sessions.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-032-final-evidence.json",
+      "wound_class": "neural_value_misassigned_to_prediction",
+      "diagnosis": "The neural field was more useful for estimating trust regions than for owning or correcting the stable forecast.",
+      "lesson": "Neural awareness can earn selective routing authority independently from prediction authority.",
+      "future_behavior_change": "Integrate latent-drift abstention around stable predictions while preserving forecast values and host authorization boundaries.",
+      "validation_gate": "src/tessera/experiments/neural_uncertainty_router.py",
+      "authority_boundary": "Selective routing does not authorize forecast mutation or host intervention.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."
