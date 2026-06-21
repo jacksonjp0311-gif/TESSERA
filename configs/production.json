@@ -44,5 +44,13 @@
     "rollback_required": true,
     "failure_isolation_required": true
   },
+  "host_integration_gate": {
+    "command": "python -m tessera host-integration-readiness --root . --hermes-root <path-to-hermes-agent>",
+    "reference_integrations": [
+      "agent-cli-mirror",
+      "hermes-agent"
+    ],
+    "independent_production_trials_required": true
+  },
   "claim_boundary": "This configuration defines a local candidate profile. External launch blockers remain authoritative."
 }

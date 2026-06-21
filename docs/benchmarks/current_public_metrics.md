@@ -2,7 +2,7 @@
 
 | Surface | Current value |
 |---|---|
-| Engine | TESSERA Engine v0.3.2 |
+| Engine | TESSERA Engine v0.3.3 |
 | Runtime loop compiler | active |
 | CLI loop | `python -m tessera loop ascii` |
 | Compile surface | `reports/runtime_loop/` |
@@ -38,7 +38,12 @@
 | EVO-036 observed-failure incident latch | abstain + memory suppression passed |
 | EVO-036 clean terminal recovery release | passed |
 | EVO-036 local security scan | release source; 0 findings |
-| Next operation | collect 4 more independent incidents and run independent host/security validation |
+| EVO-037 host contract integrations | Agent CLI Mirror + Hermes |
+| EVO-037 privacy payload leaks | 0 |
+| EVO-037 malformed records rejected | 2 of 2 |
+| EVO-037 adapter latency | Agent CLI 0.094 ms / Hermes 0.047 ms |
+| EVO-037 independently operated production hosts | 0 |
+| Next operation | deploy both adapters in independently operated host trials |
 | UCR EVO-007 discovery AUC | 0.97629 |
 | UCR EVO-007 confirmation AUC | 0.43675 |
 | EVO-007 conclusion | universal shape window rejected; scale router required |

@@ -86,7 +86,7 @@ class TestPluginSupervisor(unittest.TestCase):
 
         manifest = TesseraPlugin().describe()
         self.assertEqual(manifest.schema, "TESSERA-PLUGIN-MANIFEST-v0.3")
-        self.assertEqual(manifest.version, "0.3.2")
+        self.assertEqual(manifest.version, "0.3.3")
         self.assertEqual(
             manifest.session_summary_schema,
             "TESSERA-SESSION-SUMMARY-v0.1",

@@ -35,16 +35,18 @@ certifications concurrently on the same host.
 3. Start the supervised worker and complete warmup before traffic.
 4. Emit one summary only after each host session closes; preserve chronological
    order and never include sensitive payloads.
-5. Treat `abstain` as no memory candidacy and no automated host intervention.
-6. Latch abstention after any observed host failure; release only after the
+5. Run the host-specific conformance adapter before enabling a host trial.
+6. Treat `abstain` as no memory candidacy and no automated host intervention.
+7. Latch abstention after any observed host failure; release only after the
    configured number of clean terminal sessions.
-7. Monitor latency, worker failures, route coverage, and schema mismatches.
-8. On failure, unload the worker or roll back the active checkpoint pointer.
+8. Monitor latency, worker failures, route coverage, and schema mismatches.
+9. On failure, unload the worker or roll back the active checkpoint pointer.
 
 ## External launch blockers
 
 - Four additional independent natural failure-and-recovery incidents.
-- Two genuinely independent external host integrations.
+- Independently operated deployment trials for both the Agent CLI and Hermes
+  reference integrations.
 - Independent security review and dependency vulnerability scan.
 - Independent reproduction in a clean environment.
 - Cross-platform subprocess certification.

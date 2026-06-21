@@ -1,0 +1,93 @@
+{
+  "schema": "TESSERA-EVO-037-HOST-INTEGRATION-v0.1",
+  "passed": true,
+  "status": "two_host_reference_integration_candidate",
+  "checks": {
+    "agent_cli_contract_adapted": true,
+    "hermes_contract_adapted": true,
+    "privacy_denied_payloads_absent": true,
+    "summary_contract_matches_calibration": true,
+    "malformed_records_fail_closed": true,
+    "host_failure_triggers_incident_latch": true,
+    "adapter_latency_below_10_ms": true,
+    "source_contracts_present": true
+  },
+  "metrics": {
+    "host_integrations": 2,
+    "agent_cli_events": 3,
+    "hermes_events": 4,
+    "summary_features": 5,
+    "agent_cli_adapter_latency_ms": 0.09400001727044582,
+    "hermes_adapter_latency_ms": 0.04710000939667225,
+    "rejected_malformed_records": 2,
+    "privacy_payload_leaks": 0
+  },
+  "sources": {
+    "agent_cli_mirror": {
+      "path": "agent_cli_mirror\\agent_mirror.py",
+      "sha256": "6e329d37e6f67ed5bf1b12b439e65eb510aee299257a4f6148a0374715120ae8",
+      "repository_commit": "cc0d5ad615e62ef7611cc16d31e9dd470dc1845b"
+    },
+    "hermes_agent": {
+      "path": "gateway/stream_events.py",
+      "sha256": "6daee540722e021c1988c6beceeb8d7778f4e6221af2f77731e29bf5bf561d4e",
+      "repository_commit": "27e379d4285b94ff8903f53a5742589aadd8f122"
+    }
+  },
+  "session_contract": {
+    "schema": "TESSERA-SESSION-SUMMARY-v0.1",
+    "source_event_schema": "TESSERA-AGENT-EVENT-v0.1",
+    "aggregation": [
+      "mean",
+      "std",
+      "latest"
+    ],
+    "source_features": [
+      "duration_ms",
+      "token_count",
+      "error",
+      "retry",
+      "files_changed",
+      "tests_failed",
+      "tool_latency_ms",
+      "resource_cost",
+      "prompt_length",
+      "system_prompt_ratio",
+      "history_turns",
+      "tool_count",
+      "finish_reason_length",
+      "has_tool_call",
+      "reasoning_tokens",
+      "lines_added",
+      "lines_removed",
+      "diff_tokens",
+      "tests_passed",
+      "step_number",
+      "blocked",
+      "revision_count",
+      "error_tokens",
+      "is_test_failure",
+      "previous_error",
+      "cost_usd",
+      "rate_limited",
+      "retry_after_ms"
+    ],
+    "selected_indices": [
+      0,
+      7,
+      28,
+      35,
+      38
+    ],
+    "feature_names": [
+      "mean_duration_ms",
+      "mean_resource_cost",
+      "std_duration_ms",
+      "std_resource_cost",
+      "std_history_turns"
+    ],
+    "chronology": "one completed session per runtime event"
+  },
+  "independently_operated_production_hosts": 0,
+  "claim_boundary": "Two source-bound reference integrations prove adapter compatibility only. They are not independent production deployments or evidence of cross-host task utility."
+}

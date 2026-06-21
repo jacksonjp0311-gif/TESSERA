@@ -11,6 +11,11 @@ from .host_adapters import (
     SessionSummaryContract,
 )
 from .incident_governor import GovernedRoute, IncidentGovernor
+from .host_integrations import (
+    AgentCliMirrorIntegration,
+    HermesStreamIntegration,
+    HostSession,
+)
 
 __all__ = [
     "CheckpointStore",
@@ -18,6 +23,9 @@ __all__ = [
     "JsonSessionAdapter",
     "GovernedRoute",
     "IncidentGovernor",
+    "AgentCliMirrorIntegration",
+    "HermesStreamIntegration",
+    "HostSession",
     "PluginSupervisor",
     "ReplayGate",
     "ShadowTrainer",

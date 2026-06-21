@@ -38,13 +38,13 @@
       "trusted_count": 18,
       "abstain_count": 2,
       "route_parity_rate": 1.0,
-      "cold_start_latency_ms": 3609.439799998654,
-      "warm_latency_ms_p50": 66.88539999595378,
-      "warm_latency_ms_p95": 70.70252498815535,
-      "warm_latency_ms_max": 75.96790001844056,
+      "cold_start_latency_ms": 3510.370000003604,
+      "warm_latency_ms_p50": 66.10689999070019,
+      "warm_latency_ms_p95": 73.17705499444857,
+      "warm_latency_ms_max": 94.79249999276362,
       "soak_requests": 100,
       "soak_failures": 0,
-      "soak_latency_ms_p99": 93.34309300495086,
+      "soak_latency_ms_p99": 85.28634499700294,
       "latency_budget_ms": 250.0
     }
   },
@@ -62,15 +62,15 @@
       "installed_cli_passed": true
     },
     "version": {
-      "project": "0.3.2",
-      "package": "0.3.2",
-      "plugin_manifest": "0.3.2",
-      "wheel_metadata": "0.3.2"
+      "project": "0.3.3",
+      "package": "0.3.3",
+      "plugin_manifest": "0.3.3",
+      "wheel_metadata": "0.3.3"
     },
     "wheel": {
-      "filename": "tessera-0.3.2-py3-none-any.whl",
-      "sha256": "08cff8e661854ee8ef23edce542a929617e9c208556d1e4382f7c047ee5bae80",
-      "file_count": 77,
+      "filename": "tessera-0.3.3-py3-none-any.whl",
+      "sha256": "e492bd129de0ba6f89269aab82755d6c50b67c1cf442bbb870bacf4a7e20a69c",
+      "file_count": 79,
       "forbidden_paths": [],
       "record_failures": []
     }
@@ -87,7 +87,7 @@
       "hard_timeout_and_circuit_breaker_present": true
     },
     "metrics": {
-      "release_files_scanned": 147,
+      "release_files_scanned": 152,
       "python_findings": 0,
       "secret_findings": 0,
       "denied_authorities": 6
@@ -96,7 +96,7 @@
   },
   "external_launch_gates": [
     "minimum-support natural failure/recovery cohort: four more independent incidents",
-    "two genuinely independent external host integrations",
+    "independently operated trials for Agent CLI and Hermes integrations",
     "independent vulnerability scan and security review",
     "independent reproduction without inherited system packages",
     "cross-platform subprocess certification"

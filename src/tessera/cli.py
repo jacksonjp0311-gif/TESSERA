@@ -712,6 +712,31 @@ def cmd_local_security_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_host_integration_readiness(args):
+    from tessera.experiments.host_integration_readiness import (
+        run_host_integration_readiness,
+    )
+
+    result = run_host_integration_readiness(
+        root=args.root,
+        hermes_root=args.hermes_root,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "status": result["status"],
+        "checks": result["checks"],
+        "metrics": result["metrics"],
+        "sources": result["sources"],
+        "independently_operated_production_hosts": result[
+            "independently_operated_production_hosts"
+        ],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1135,6 +1160,17 @@ def main(argv=None):
         default="outputs/evidence/evo036/local_security.json",
     )
     local_security.set_defaults(func=cmd_local_security_readiness)
+    host_integration = sub.add_parser(
+        "host-integration-readiness",
+        help="Validate Agent CLI Mirror and Hermes reference integrations.",
+    )
+    host_integration.add_argument("--root", default=".")
+    host_integration.add_argument("--hermes-root", required=True)
+    host_integration.add_argument(
+        "--out",
+        default="outputs/evidence/evo037/host_integration.json",
+    )
+    host_integration.set_defaults(func=cmd_host_integration_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

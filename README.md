@@ -8,9 +8,9 @@
 into sparse neural state, and answers a deliberately narrow question: should
 the host trust this session—or abstain?**
 
-![Package](https://img.shields.io/badge/tessera-v0.3.2-blue)
+![Package](https://img.shields.io/badge/tessera-v0.3.3-blue)
 ![Release Gate](https://img.shields.io/badge/release%20gate-9%2F9-brightgreen)
-![Tests](https://img.shields.io/badge/tests-115%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-118%20passing-brightgreen)
 ![Warm p95](https://img.shields.io/badge/EVO--034%20warm%20p95-95.19%20ms-brightgreen)
 ![Route parity](https://img.shields.io/badge/route%20parity-100%25-brightgreen)
 ![RCC-N](https://img.shields.io/badge/RCC--N-Full-brightgreen)
@@ -49,7 +49,8 @@ tools, mutate prompts, replace models, or overrule the host.
 | Final retained-risk change vs simple router | **-10.37%** |
 | Release artifact verification | **9 / 9 checks passed** |
 | Local security scan | **release source, 0 findings** |
-| Test suite | **115 passing** |
+| Host contract integrations | **Agent CLI Mirror + Hermes** |
+| Test suite | **118 passing** |
 | Real telemetry families with dataset-scoped T1 support | **NAB + UCR** |
 | NAB machine-temperature AUC | **0.94865** |
 | UCR untouched confirmation AUC | **0.96081** |
@@ -65,6 +66,7 @@ and [`outputs/evidence/`](outputs/evidence/).
 |---|---|
 | Neural trust routing | Emits explicit `trusted` or `abstain` decisions from calibrated latent drift. |
 | Session-semantic adapters | Converts native `AgentEvent` or JSON host sessions into the exact versioned calibration space. |
+| Concrete host integrations | Adapts Agent CLI phase/state telemetry and Hermes typed stream events without retaining payload content. |
 | Fail-closed supervision | Contains crashes and timeouts, opens a circuit breaker, and emits no proposal on failure. |
 | Memory governance | Suppresses memory candidacy whenever the router abstains. |
 | Incident containment | Latches `abstain` after an observed failure and releases only after a clean terminal recovery. |
@@ -99,7 +101,7 @@ certification.
 | Surface | Current result |
 |---|---:|
 | Repository | `Tessera` |
-| Package / CLI | `tessera` v0.3.2 |
+| Package / CLI | `tessera` v0.3.3 |
 | Launch gate | repository launch candidate; external gates open |
 | Diagnostic engine | Engine v0.1 |
 | Operator surface | v0.3.9 Agent CLI Mirror Graceful Stop |

@@ -9,7 +9,7 @@ from tessera.plugin.contracts import PluginManifest
 
 class TestReleaseReadiness(unittest.TestCase):
     def test_version_surfaces_match(self):
-        self.assertEqual(__version__, "0.3.2")
+        self.assertEqual(__version__, "0.3.3")
         self.assertEqual(PluginManifest().version, __version__)
 
     def test_release_wheel_is_reproducibly_installable(self):

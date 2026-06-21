@@ -1,0 +1,37 @@
+[
+  {
+    "type": "tool_call_chunk",
+    "timestamp": "2026-06-21T07:00:00Z",
+    "tool_name": "terminal",
+    "preview": "must not cross adapter",
+    "args": {
+      "command": "must not cross adapter"
+    },
+    "index": 1
+  },
+  {
+    "type": "tool_call_finished",
+    "timestamp": "2026-06-21T07:00:01Z",
+    "tool_name": "terminal",
+    "duration": 0.125,
+    "ok": true,
+    "index": 1
+  },
+  {
+    "type": "message_stop",
+    "timestamp": "2026-06-21T07:00:02Z",
+    "final": true,
+    "text": "must not cross adapter"
+  },
+  {
+    "type": "session_summary",
+    "timestamp": "2026-06-21T07:00:02Z",
+    "ended_at": "2026-06-21T07:00:02Z",
+    "end_reason": "complete",
+    "message_count": 3,
+    "tool_call_count": 1,
+    "input_tokens": 50,
+    "output_tokens": 20,
+    "user_id": "must not cross adapter"
+  }
+]

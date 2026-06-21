@@ -45,6 +45,9 @@ proposals.
   space across native AgentEvent and JSON host records.
 - A deterministic host-owned incident governor latches abstention after an
   observed failure and requires clean terminal recovery before release.
+- Agent CLI Mirror and Hermes stream integrations map distinct host contracts
+  into the shared session schema while discarding commands, text, arguments,
+  previews, paths, and user identifiers.
 - Release verification builds and integrity-checks the wheel, installs it into
   an isolated environment, and executes packaged inference and CLI smoke tests.
 

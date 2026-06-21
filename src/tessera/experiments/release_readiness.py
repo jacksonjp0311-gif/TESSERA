@@ -277,7 +277,7 @@ def run_release_readiness(root: str | Path = ".") -> dict:
             "smoke": smoke_payload,
             "remaining_external_gates": [
                 "minimum-support natural failure/recovery cohort: four more independent incidents",
-                "two genuinely independent external host integrations",
+                "independently operated trials for Agent CLI and Hermes integrations",
                 "independent vulnerability scan and security review",
                 "independent reproduction without inherited system packages",
                 "cross-platform subprocess certification",

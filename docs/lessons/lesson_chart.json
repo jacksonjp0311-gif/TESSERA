@@ -589,6 +589,18 @@
       "validation_gate": "src/tessera/experiments/failure_recovery_readiness.py",
       "authority_boundary": "Incident containment does not establish failure prediction, autonomous intervention, or general production safety.",
       "status": "promoted"
+    },
+    {
+      "id": "F050",
+      "observed_event": "Agent CLI Mirror and Hermes expose materially different telemetry contracts, and both contain payload fields that must never enter the neural sidecar.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-037-final-evidence.json",
+      "wound_class": "host_adapter_payload_and_semantic_drift",
+      "diagnosis": "A generic JSON adapter is insufficient for production hosts; each host requires a source-bound privacy projection and conformance gate.",
+      "lesson": "Host neutrality comes from explicit per-host adapters that converge on one versioned semantic contract, not from accepting arbitrary payloads.",
+      "future_behavior_change": "Every host integration binds to a source contract hash, discards payload content, rejects unsupported records, and passes shared summary and incident-governance checks.",
+      "validation_gate": "src/tessera/experiments/host_integration_readiness.py",
+      "authority_boundary": "Reference integration conformance does not establish independent deployment, task utility, or host mutation authority.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

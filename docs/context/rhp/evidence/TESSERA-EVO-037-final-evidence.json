@@ -1,0 +1,86 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.37",
+  "operation": "TESSERA-EVO-037",
+  "previous_operation": "TESSERA-EVO-036",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "cc0d5ad",
+  "state_after_validation": "TWO_HOST_REFERENCE_INTEGRATIONS_INDEPENDENT_TRIALS_OPEN",
+  "implemented": [
+    "versioned host integration contract",
+    "Agent CLI Mirror privacy-safe integration",
+    "Hermes typed stream/session integration",
+    "source contract hash binding",
+    "payload-content denial",
+    "malformed-record fail closure",
+    "shared session-summary conformance",
+    "host incident-governor integration",
+    "Tessera v0.3.3 package"
+  ],
+  "finding": "Two materially different host contracts converged on the same five-feature session semantics with zero payload leaks, fail-closed malformed input, incident containment, and sub-millisecond adapter latency.",
+  "decision": "Promote Agent CLI Mirror and Hermes as source-bound reference integrations. Keep independent production-host trials open.",
+  "metrics": {
+    "unit_tests_expected": 118,
+    "host_integrations": 2,
+    "agent_cli_events": 3,
+    "hermes_events": 4,
+    "summary_features": 5,
+    "privacy_payload_leaks": 0,
+    "malformed_records_rejected": 2,
+    "agent_cli_adapter_latency_ms": 0.09400001727044582,
+    "hermes_adapter_latency_ms": 0.04710000939667225,
+    "adapter_latency_budget_ms": 10.0,
+    "independently_operated_production_hosts": 0,
+    "launch_warm_latency_ms_p95": 73.17705499444857,
+    "launch_soak_latency_ms_p99": 85.28634499700294,
+    "launch_soak_failures": 0,
+    "wheel_version": "0.3.3",
+    "wheel_file_count": 79
+  },
+  "source_bindings": {
+    "agent_cli_mirror": {
+      "repository_commit": "cc0d5ad615e62ef7611cc16d31e9dd470dc1845b",
+      "path": "agent_cli_mirror/agent_mirror.py",
+      "sha256": "6e329d37e6f67ed5bf1b12b439e65eb510aee299257a4f6148a0374715120ae8"
+    },
+    "hermes_agent": {
+      "repository_commit": "27e379d4285b94ff8903f53a5742589aadd8f122",
+      "path": "gateway/stream_events.py",
+      "sha256": "6daee540722e021c1988c6beceeb8d7778f4e6221af2f77731e29bf5bf561d4e"
+    }
+  },
+  "artifacts": {
+    "host_integration": {
+      "path": "outputs/evidence/evo037/host_integration.json",
+      "sha256": "8cac6c83fab06cdbc9adc7a95b3bcd022ae02f004a7e01ad4c88ad442c025139"
+    },
+    "launch_readiness": {
+      "path": "outputs/evidence/evo035/launch_readiness.json",
+      "sha256": "cbc0af2c5e37b04635e36566ef02d6229631dd2544da333f4a56595473912cf4"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.3-py3-none-any.whl",
+      "sha256": "e492bd129de0ba6f89269aab82755d6c50b67c1cf442bbb870bacf4a7e20a69c"
+    }
+  },
+  "external_launch_gates": [
+    "four more independent natural failure/recovery incidents",
+    "independently operated Agent CLI integration trial",
+    "independently operated Hermes integration trial",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "next_recommended_operation": "deploy_agent_cli_and_hermes_adapters_in_independent_host_trials",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Reference host integration does not prove independent deployment, task utility, production safety, consciousness, or autonomous authority."
+}
