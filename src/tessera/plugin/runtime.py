@@ -6,7 +6,11 @@ import hashlib
 import numpy as np
 
 from tessera.graph.topologies import make_operator
-from tessera.model.train import evaluate_sequence, fit_tessera_model
+from tessera.model.train import (
+    evaluate_sequence,
+    extend_evaluated_sequence,
+    fit_tessera_model,
+)
 from tessera.model.prediction_experts import (
     prediction_losses,
     select_prediction_expert,
@@ -88,6 +92,10 @@ class TesseraPlugin:
         self._anomaly_history: list[float] = []
         self._checkpoint_cache_key: str | None = None
         self._checkpoint_cache_packet: InferencePacket | None = None
+        self._checkpoint_cache_matrix: np.ndarray | None = None
+        self._checkpoint_cache_rows: list[dict] | None = None
+        self._checkpoint_cache_state: dict | None = None
+        self._checkpoint_cache_mode = "empty"
 
     def describe(self) -> PluginManifest:
         return PluginManifest()
@@ -182,7 +190,38 @@ class TesseraPlugin:
             and self._checkpoint_cache_packet is not None
         ):
             return self._checkpoint_cache_packet
-        rows = evaluate_sequence(loaded["model"], normalized)["rows"]
+        prefix_length = (
+            len(self._checkpoint_cache_matrix)
+            if self._checkpoint_cache_matrix is not None
+            else 0
+        )
+        can_extend = (
+            prefix_length >= 2
+            and len(normalized) > prefix_length
+            and self._checkpoint_cache_rows is not None
+            and self._checkpoint_cache_state is not None
+            and np.array_equal(
+                normalized[:prefix_length],
+                self._checkpoint_cache_matrix,
+            )
+        )
+        if can_extend:
+            extension = extend_evaluated_sequence(
+                loaded["model"],
+                self._checkpoint_cache_state,
+                normalized[prefix_length:],
+            )
+            rows = [
+                *self._checkpoint_cache_rows,
+                *extension["rows"],
+            ]
+            recurrent_state = extension["state"]
+            cache_mode = "prefix_extended"
+        else:
+            evaluated = evaluate_sequence(loaded["model"], normalized)
+            rows = evaluated["rows"]
+            recurrent_state = evaluated["state"]
+            cache_mode = "full_replay"
         neural_losses = np.asarray(
             [row["prediction_loss"] for row in rows],
             dtype=float,
@@ -227,6 +266,10 @@ class TesseraPlugin:
         )
         self._checkpoint_cache_key = cache_key
         self._checkpoint_cache_packet = packet
+        self._checkpoint_cache_matrix = normalized.copy()
+        self._checkpoint_cache_rows = list(rows)
+        self._checkpoint_cache_state = recurrent_state
+        self._checkpoint_cache_mode = cache_mode
         return packet
 
     def _fallback_infer(self, matrix: np.ndarray) -> InferencePacket:

@@ -1,0 +1,26 @@
+{
+  "schema": "TESSERA-EVO-041-PREFIX-STATE-v0.1",
+  "passed": true,
+  "checks": {
+    "all_packets_match_full_replay": true,
+    "all_metric_rows_match_full_replay": true,
+    "first_prefix_uses_full_replay": true,
+    "remaining_prefixes_extend_state": true,
+    "prefix_mismatch_forces_full_replay": true,
+    "incremental_p95_below_full_replay_p95": true
+  },
+  "metrics": {
+    "prefixes_compared": 20,
+    "packet_parity_rate": 1.0,
+    "row_parity_rate": 1.0,
+    "prefix_extensions": 19,
+    "full_replays": 1,
+    "incremental_latency_ms_p95": 1.598440023371946,
+    "full_replay_latency_ms_p95": 77.22977004013953,
+    "p95_speedup": 48.31571338987218,
+    "mismatch_mode": "full_replay"
+  },
+  "decision": "promote_exact_prefix_state_continuation",
+  "mathematical_interpretation": "A validated recurrent prefix is a sufficient computational state for its next transition when the normalized historical prefix is byte-identical. Extension is associative over that state; any prefix mismatch destroys the equivalence and forces full replay.",
+  "claim_boundary": "Exact parity on one reference chronology does not establish cross-platform floating-point identity or independent-host latency."
+}

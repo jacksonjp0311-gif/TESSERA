@@ -44,11 +44,13 @@ certifications concurrently on the same host.
    host intervention.
 9. Feed completed-session summaries into the sequential geometry sentinel;
    preserve its latch until an explicit validated reset.
-10. Latch abstention after any observed host failure; release only after the
+10. Permit recurrent continuation only for an exactly matching normalized
+    prefix; any historical mismatch requires full replay.
+11. Latch abstention after any observed host failure; release only after the
    configured number of clean terminal sessions.
-11. Monitor latency, worker failures, route coverage, effective rank, and schema
+12. Monitor latency, worker failures, route coverage, effective rank, and schema
    mismatches.
-12. On failure, unload the worker or roll back the active checkpoint pointer.
+13. On failure, unload the worker or roll back the active checkpoint pointer.
 
 ## External launch blockers
 

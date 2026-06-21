@@ -661,6 +661,18 @@
       "validation_gate": "tests/test_neural_checkpoint_runtime.py",
       "authority_boundary": "Exact caching improves repeated-query latency but does not authorize approximate cache hits, changed-prefix reuse, or cross-host performance claims.",
       "status": "promoted"
+    },
+    {
+      "id": "F056",
+      "observed_event": "Appending one completed session invalidated the whole-query cache and replayed every prior recurrent transition even though the normalized historical prefix was unchanged.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-041-final-evidence.json",
+      "wound_class": "validated_prefix_not_represented_as_state",
+      "diagnosis": "The runtime recognized complete identity but not prefix identity, so validated recurrent history could not serve as a sufficient continuation witness.",
+      "lesson": "A byte-identical normalized prefix may carry forward its exact recurrent state; changed history destroys that proof and must be reconstructed.",
+      "future_behavior_change": "Tessera preserves field, level, previous code, last observation, and historical metric rows for exact append-only continuation, with mandatory replay on mismatch.",
+      "validation_gate": "src/tessera/experiments/prefix_state_readiness.py",
+      "authority_boundary": "Reference-host parity does not establish cross-platform floating-point identity, persistent recovery, or autonomous authority.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

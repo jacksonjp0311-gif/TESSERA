@@ -35,6 +35,9 @@ proposals.
   concurrent host workloads do not create unbounded inference contention.
 - Identical admitted-checkpoint queries reuse an exact packet keyed by the
   normalized matrix shape and bytes; any event change invalidates the key.
+- Byte-identical historical prefixes reuse recurrent field, level, previous
+  code, last observation, and metric-row state. Any historical mismatch
+  forces full replay.
 - Crossing the neural-support threshold emits a shadow-training-required
   status while the bounded fast path continues serving the host.
 - Direct research-mode plugin instances may still run inline neural fitting.

@@ -138,4 +138,83 @@ def evaluate_sequence(model: TESSERANet, X: np.ndarray) -> dict:
             field = next_field
             level = model.update_level(x_next, level)
             prev_z = z
-    return {"rows": rows}
+    return {
+        "rows": rows,
+        "state": {
+            "field": field,
+            "level": level,
+            "previous_code": prev_z,
+            "last_observation": X_t[-1:],
+            "transitions": len(rows),
+        },
+    }
+
+
+def extend_evaluated_sequence(
+    model: TESSERANet,
+    state: dict,
+    new_rows: np.ndarray,
+) -> dict:
+    """Continue an evaluated prefix without replaying validated transitions."""
+    model.eval()
+    values = torch.tensor(np.asarray(new_rows), dtype=torch.float32)
+    field = state["field"]
+    level = state["level"]
+    prev_z = state["previous_code"]
+    current = state["last_observation"]
+    step = int(state["transitions"])
+    rows = []
+    with torch.no_grad():
+        for x_next in values:
+            x_next = x_next.reshape(1, -1)
+            next_field, z, x_rec, x_pred = model.step(
+                current,
+                field,
+                level,
+            )
+            rec = torch.mean((x_rec - current) ** 2).item()
+            pred = torch.mean((x_pred - x_next) ** 2).item()
+            target_dims = getattr(model, "prediction_target_dims", None)
+            if target_dims is None:
+                target_dims = model.input_dim
+            target_rec = torch.mean(
+                (
+                    x_rec[:, :target_dims]
+                    - current[:, :target_dims]
+                ) ** 2
+            ).item()
+            target_pred = torch.mean(
+                (
+                    x_pred[:, :target_dims]
+                    - x_next[:, :target_dims]
+                ) ** 2
+            ).item()
+            rows.append({
+                "step": step,
+                "reconstruction_loss": rec,
+                "prediction_loss": pred,
+                "target_reconstruction_loss": target_rec,
+                "target_prediction_loss": target_pred,
+                "delta_phi": torch.mean(
+                    torch.abs(next_field - field)
+                ).item(),
+                "code_drift": torch.mean(
+                    torch.abs(z - prev_z)
+                ).item(),
+                "rate": torch.mean(z * z).item(),
+            })
+            field = next_field
+            level = model.update_level(x_next, level)
+            prev_z = z
+            current = x_next
+            step += 1
+    return {
+        "rows": rows,
+        "state": {
+            "field": field,
+            "level": level,
+            "previous_code": prev_z,
+            "last_observation": current,
+            "transitions": step,
+        },
+    }

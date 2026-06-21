@@ -80,5 +80,17 @@
     "alarm_route": "abstain",
     "alarm_memory_candidate": false
   },
+  "prefix_state_cache": {
+    "identity_rule": "incoming normalized history must exactly equal cached prefix",
+    "cached_state": [
+      "field",
+      "level",
+      "previous_code",
+      "last_observation",
+      "historical_metric_rows"
+    ],
+    "prefix_mismatch_behavior": "full_replay",
+    "approximate_cache_hits_allowed": false
+  },
   "claim_boundary": "This configuration defines a local candidate profile. External launch blockers remain authoritative."
 }

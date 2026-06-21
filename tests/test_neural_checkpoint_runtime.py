@@ -90,6 +90,51 @@ class TestNeuralCheckpointRuntime(unittest.TestCase):
         third = plugin.infer()
         self.assertNotEqual(first_key, plugin._checkpoint_cache_key)
         self.assertEqual(third.status, "admitted_neural_checkpoint")
+        self.assertEqual(plugin._checkpoint_cache_mode, "prefix_extended")
+
+    def test_changed_prefix_packet_matches_full_replay_exactly(self):
+        events = _events()
+        payload, _ = train_neural_checkpoint(vectorize_events(events))
+        incremental = TesseraPlugin(
+            neural_min_events=8,
+            checkpoint_payload=payload,
+        )
+        incremental.observe(events[:20])
+        incremental.infer()
+        incremental.observe([events[20]])
+        continued = incremental.infer()
+
+        replay = TesseraPlugin(
+            neural_min_events=8,
+            checkpoint_payload=payload,
+        )
+        replay.observe(events[:21])
+        expected = replay.infer()
+        self.assertEqual(continued, expected)
+        self.assertEqual(
+            incremental._checkpoint_cache_rows,
+            replay._checkpoint_cache_rows,
+        )
+
+    def test_prefix_mismatch_falls_back_to_full_replay(self):
+        events = _events()
+        payload, _ = train_neural_checkpoint(vectorize_events(events))
+        plugin = TesseraPlugin(
+            neural_min_events=8,
+            checkpoint_payload=payload,
+        )
+        plugin.observe(events[:20])
+        plugin.infer()
+        changed = list(events[:21])
+        changed[5] = AgentEvent(
+            event_id="changed-prefix",
+            kind="test_result",
+            timestamp=changed[5].timestamp,
+            features={"duration_ms": 999.0},
+        )
+        plugin.replace_events(changed)
+        plugin.infer()
+        self.assertEqual(plugin._checkpoint_cache_mode, "full_replay")
 
 
 if __name__ == "__main__":

@@ -810,6 +810,26 @@ def cmd_sequential_geometry_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_prefix_state_readiness(args):
+    from tessera.experiments.prefix_state_readiness import (
+        run_prefix_state_readiness,
+    )
+
+    result = run_prefix_state_readiness(root=args.root)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "metrics": result["metrics"],
+        "mathematical_interpretation": result[
+            "mathematical_interpretation"
+        ],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1277,6 +1297,16 @@ def main(argv=None):
         default="outputs/evidence/evo040/sequential_geometry.json",
     )
     sequential_geometry.set_defaults(func=cmd_sequential_geometry_readiness)
+    prefix_state = sub.add_parser(
+        "prefix-state-readiness",
+        help="Prove exact recurrent continuation against full replay.",
+    )
+    prefix_state.add_argument("--root", default=".")
+    prefix_state.add_argument(
+        "--out",
+        default="outputs/evidence/evo041/prefix_state.json",
+    )
+    prefix_state.set_defaults(func=cmd_prefix_state_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

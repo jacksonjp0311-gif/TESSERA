@@ -2,7 +2,7 @@
 
 | Surface | Current value |
 |---|---|
-| Engine | TESSERA Engine v0.3.6 |
+| Engine | TESSERA Engine v0.3.7 |
 | Runtime loop compiler | active |
 | CLI loop | `python -m tessera loop ascii` |
 | Compile surface | `reports/runtime_loop/` |
@@ -63,7 +63,13 @@
 | EVO-040 exact-cache warm p95 | 64.59 ms |
 | EVO-040 exact-cache soak p99 | 1.00 ms |
 | EVO-040 route parity / soak failures | 100% / 0 of 100 |
-| Next operation | validate rolling sentinel on independently operated hosts, then prove exact recurrent-state cache parity |
+| EVO-041 prefix packet / row parity | 20 of 20 / 20 of 20 |
+| EVO-041 incremental / full replay p95 | 1.60 ms / 77.23 ms |
+| EVO-041 prefix-state p95 speedup | 48.32x |
+| EVO-041 historical mismatch behavior | full replay |
+| EVO-041 launch warm p95 / soak p99 | 4.62 ms / 0.89 ms |
+| EVO-041 launch route parity / failures | 100% / 0 of 100 |
+| Next operation | persist proof-carrying state across worker restart, then run independent host trials |
 | UCR EVO-007 discovery AUC | 0.97629 |
 | UCR EVO-007 confirmation AUC | 0.43675 |
 | EVO-007 conclusion | universal shape window rejected; scale router required |

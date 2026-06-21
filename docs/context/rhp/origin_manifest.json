@@ -102,6 +102,8 @@
     "src/tessera/plugin/sequential_geometry.py",
     "src/tessera/experiments/sequential_geometry_readiness.py",
     "docs/research/SEQUENTIAL_GEOMETRY_SENTINEL_2026-06-21.md",
+    "src/tessera/experiments/prefix_state_readiness.py",
+    "docs/research/EXACT_PREFIX_STATE_CONTINUATION_2026-06-21.md",
     "docs/release/PRODUCTION_CANDIDATE.md",
     "configs/production.json",
     "src/tessera/rhp/core.py",

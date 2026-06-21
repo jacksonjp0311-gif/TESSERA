@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tessera"
-version = "0.3.6"
-description = "TESSERA Engine v0.3.6: dual-timescale geometric trust routing with sequential drift evidence, host observability, and fail-closed authority."
+version = "0.3.7"
+description = "TESSERA Engine v0.3.7: proof-carrying recurrent prefix continuation with dual-timescale geometric trust and fail-closed authority."
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name="James Paul Jackson"}]

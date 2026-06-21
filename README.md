@@ -8,9 +8,9 @@
 into sparse neural state, and answers a deliberately narrow question: should
 the host trust this session—or abstain?**
 
-![Package](https://img.shields.io/badge/tessera-v0.3.6-blue)
+![Package](https://img.shields.io/badge/tessera-v0.3.7-blue)
 ![Release Gate](https://img.shields.io/badge/release%20gate-9%2F9-brightgreen)
-![Tests](https://img.shields.io/badge/tests-130%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-133%20passing-brightgreen)
 ![Warm p95](https://img.shields.io/badge/EVO--034%20warm%20p95-95.19%20ms-brightgreen)
 ![Route parity](https://img.shields.io/badge/route%20parity-100%25-brightgreen)
 ![RCC-N](https://img.shields.io/badge/RCC--N-Full-brightgreen)
@@ -56,7 +56,10 @@ tools, mutate prompts, replace models, or overrule the host.
 | Persistent-shift alarm delay | **7 completed sessions** |
 | Impulse / untouched false latches | **0 / 0** |
 | Exact-cache warm p95 / soak p99 | **64.59 ms / 1.00 ms** |
-| Test suite | **130 passing** |
+| Prefix continuation / replay p95 | **1.60 ms / 77.23 ms** |
+| Exact prefix packet and row parity | **20 / 20** |
+| v0.3.7 launch warm p95 / soak p99 | **<5 ms / ~1 ms** |
+| Test suite | **133 passing** |
 | Real telemetry families with dataset-scoped T1 support | **NAB + UCR** |
 | NAB machine-temperature AUC | **0.94865** |
 | UCR untouched confirmation AUC | **0.96081** |
@@ -77,6 +80,7 @@ and [`outputs/evidence/`](outputs/evidence/).
 | Manifold drift governance | Detects support collapse/expansion, rotation, location drift, and scale drift; drift forces abstention. |
 | Sequential geometry sentinel | Accumulates bounded evidence for weak persistent drift without latching on one extreme impulse. |
 | Exact idempotent inference cache | Reuses identical checkpoint packets by normalized-state hash and invalidates on any event change. |
+| Exact prefix-state continuation | Extends byte-identical recurrent history and falls back to full replay on any historical mismatch. |
 | Fail-closed supervision | Contains crashes and timeouts, opens a circuit breaker, and emits no proposal on failure. |
 | Memory governance | Suppresses memory candidacy whenever the router abstains. |
 | Incident containment | Latches `abstain` after an observed failure and releases only after a clean terminal recovery. |
@@ -111,7 +115,7 @@ certification.
 | Surface | Current result |
 |---|---:|
 | Repository | `Tessera` |
-| Package / CLI | `tessera` v0.3.6 |
+| Package / CLI | `tessera` v0.3.7 |
 | Launch gate | repository launch candidate; external gates open |
 | Diagnostic engine | Engine v0.1 |
 | Operator surface | v0.3.9 Agent CLI Mirror Graceful Stop |
@@ -540,6 +544,12 @@ on 60 untouched sessions, did not latch on one extreme impulse, and detected a
 persistent `0.2`-unit orthogonal shift after seven completed sessions. The
 alarm is host-owned, latched, memory-suppressing, and does not retune the
 neural router.
+
+EVO-041 made changed-prefix inference stateful without approximation. Across
+20 chronological prefixes, incremental packets and every internal metric row
+matched fresh full replay exactly. Prefix continuation reached `1.60 ms` p95
+versus `77.23 ms` for replay, a `48.3x` speedup. Any changed historical value
+forces full reconstruction.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

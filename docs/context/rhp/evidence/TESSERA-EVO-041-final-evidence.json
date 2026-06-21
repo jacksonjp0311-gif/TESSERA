@@ -1,0 +1,75 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.41",
+  "operation": "TESSERA-EVO-041",
+  "previous_operation": "TESSERA-EVO-040",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "dbb4f4f",
+  "state_after_validation": "PROOF_CARRYING_PREFIX_STATE_GATED",
+  "implemented": [
+    "recurrent continuation state",
+    "append-only normalized-prefix identity gate",
+    "exact recurrent metric-row continuation",
+    "packet-level full-replay parity",
+    "historical mismatch full-replay fallback",
+    "prefix-state readiness benchmark",
+    "Tessera v0.3.7 package"
+  ],
+  "finding": "A byte-identical validated prefix is a sufficient computational witness for exact recurrent continuation. Preserving field, level, previous code, last observation, and metric rows eliminates replay without changing packet semantics.",
+  "decision": "Promote exact append-only prefix-state continuation and require full replay on every historical mismatch.",
+  "metrics": {
+    "unit_tests_expected": 133,
+    "prefixes_compared": 20,
+    "packet_parity_rate": 1.0,
+    "metric_row_parity_rate": 1.0,
+    "prefix_extensions": 19,
+    "initial_full_replays": 1,
+    "prefix_incremental_latency_ms_p95": 1.598440023371946,
+    "prefix_full_replay_latency_ms_p95": 77.22977004013953,
+    "prefix_p95_speedup": 48.31571338987218,
+    "mismatch_mode": "full_replay",
+    "launch_route_parity": 1.0,
+    "launch_warm_latency_ms_p95": 4.6181500132661695,
+    "launch_soak_latency_ms_p99": 0.8917839766945692,
+    "launch_soak_failures": 0,
+    "wheel_version": "0.3.7",
+    "wheel_file_count": 85
+  },
+  "artifacts": {
+    "prefix_state": {
+      "path": "outputs/evidence/evo041/prefix_state.json",
+      "sha256": "79bb9e55ddba50a5af165a644c79fa9f48475b55063076b1bd36232080fbd7b0"
+    },
+    "launch_readiness": {
+      "path": "outputs/evidence/evo041/launch_readiness.json",
+      "sha256": "94d8e880a0015ee062014d2476c2789a3ebc12c2b8ce6609c74a9a79dd2287e3"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.7-py3-none-any.whl",
+      "sha256": "4d9c2609fc2396038c8343987a1fe6c94c8e9411b0fb68b6b9a760369e8723f9"
+    },
+    "research_report": {
+      "path": "docs/research/EXACT_PREFIX_STATE_CONTINUATION_2026-06-21.md"
+    }
+  },
+  "external_launch_gates": [
+    "four more independent natural failure/recovery incidents",
+    "independently operated Agent CLI trial",
+    "independently operated Hermes trial",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess and floating-point parity certification"
+  ],
+  "next_recommended_operation": "persist_and_integrity_bind_prefix_state_across_worker_restart",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Exact prefix-state parity does not prove cross-platform identity, independent production safety, consciousness, general transfer, or autonomous authority."
+}
