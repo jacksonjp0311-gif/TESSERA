@@ -1,0 +1,6 @@
+{
+  "epochs": 20,
+  "parameter_count": 2069,
+  "train_rows": 24,
+  "latency_ms": 745.8695000095759
+}

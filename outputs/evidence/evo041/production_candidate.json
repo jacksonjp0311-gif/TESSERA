@@ -1,0 +1,111 @@
+{
+  "schema": "TESSERA-EVO-034-PRODUCTION-CANDIDATE-v0.1",
+  "passed": true,
+  "status": "local_production_candidate",
+  "checks": {
+    "semantic_adapter_matches_calibration": true,
+    "json_adapter_matches_direct_adapter": true,
+    "selected_feature_contract_stable": true,
+    "runtime_routes_match_offline_final_test": true,
+    "abstention_blocks_memory_candidate": true,
+    "forecast_status_preserved": true,
+    "warm_latency_gate_passed": true,
+    "restart_is_deterministic": true,
+    "soak_passed": true,
+    "failure_isolation_passed": true,
+    "checkpoint_rollback_passed": true,
+    "release_integrity_manifest_complete": true
+  },
+  "session_contract": {
+    "schema": "TESSERA-SESSION-SUMMARY-v0.1",
+    "source_event_schema": "TESSERA-AGENT-EVENT-v0.1",
+    "aggregation": [
+      "mean",
+      "std",
+      "latest"
+    ],
+    "source_features": [
+      "duration_ms",
+      "token_count",
+      "error",
+      "retry",
+      "files_changed",
+      "tests_failed",
+      "tool_latency_ms",
+      "resource_cost",
+      "prompt_length",
+      "system_prompt_ratio",
+      "history_turns",
+      "tool_count",
+      "finish_reason_length",
+      "has_tool_call",
+      "reasoning_tokens",
+      "lines_added",
+      "lines_removed",
+      "diff_tokens",
+      "tests_passed",
+      "step_number",
+      "blocked",
+      "revision_count",
+      "error_tokens",
+      "is_test_failure",
+      "previous_error",
+      "cost_usd",
+      "rate_limited",
+      "retry_after_ms"
+    ],
+    "selected_indices": [
+      0,
+      28
+    ],
+    "feature_names": [
+      "mean_duration_ms",
+      "std_duration_ms"
+    ],
+    "chronology": "one completed session per runtime event"
+  },
+  "metrics": {
+    "baseline_loss": 0.21009282767772675,
+    "candidate_loss": 0.12062043951277313,
+    "replay_pass_rate": 0.5263157894736842,
+    "neural_awareness_loss": 0.11398515196158673,
+    "train_rows": 60,
+    "validation_rows": 20,
+    "replay_rows": 20,
+    "selected_prediction_expert": "ewma_0.05",
+    "sessions": 120,
+    "selected_session_features": 2,
+    "final_route_count": 20,
+    "trusted_count": 18,
+    "abstain_count": 2,
+    "route_parity_rate": 1.0,
+    "cold_start_latency_ms": 3541.1665000137873,
+    "warm_latency_ms_p50": 3.0857000092510134,
+    "warm_latency_ms_p95": 9.530845031258705,
+    "warm_latency_ms_max": 82.76530000148341,
+    "soak_requests": 100,
+    "soak_failures": 0,
+    "soak_latency_ms_p99": 0.8471660240320504,
+    "latency_budget_ms": 250.0
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "files": {
+      "pyproject.toml": "d3402557a3b2a2c9db7f2b36b41d6d7336ae33808967a50c9032dd8b02010ed3",
+      "src/tessera/plugin/contracts.py": "2a6a35afe801ffbb2232b395802ec0cfb6091e522ad11f77b69517f15e4d74e1",
+      "src/tessera/plugin/runtime.py": "0ec65bf816408398da9b409cff54a23367076cfa9575f375a30daab893031d73",
+      "src/tessera/plugin/supervisor.py": "0ae4d0ae8cd0e4f79c6013a98396c9b217021a8dc44684c402b0ea1cc4c5864d",
+      "src/tessera/plugin/host_adapters.py": "6b1ed2996b99ffebf1140b4886d6ec75a6e94750571682ce58aa4a77c1d63d7e",
+      "src/tessera/plugin/neural_checkpoints.py": "6c1519ab5fd877e8718449e6f22cafe9964c0b9f3af7dc7572eb5c9710e81be1",
+      "src/tessera/plugin/checkpoints.py": "0995468de3659fd929b33fe283ce18987c5ac33b3093835eee291114fa41b34c",
+      "configs/production.json": "6711bb6a71cfba6b8c46fc090a25e0ed82148ee3fa5fef06cf83ce0843e06a25"
+    }
+  },
+  "external_launch_blockers": [
+    "untouched natural failure-and-recovery cohort",
+    "two genuinely independent external host integrations",
+    "independent security review and dependency vulnerability scan",
+    "independent reproducibility run in a clean environment"
+  ],
+  "claim_boundary": "Local production candidacy proves the checked repository and runtime properties only; it does not establish general safety, natural failure sensitivity, or authorization for host mutation."
+}

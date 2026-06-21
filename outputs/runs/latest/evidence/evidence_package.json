@@ -1,37 +1,56 @@
 {
   "schema": "TESSERA-v0.1-evidence-package",
-  "run_id": "tessera_run_20260617_131306",
+  "run_id": "tessera_run_20260621_065621",
   "manifest": {
-    "schema": "TESSERA-v0.1-dataset-manifest",
+    "schema": "TESSERA-v1.7-dataset-manifest",
     "dataset_name": "tessera_synthetic_telemetry",
     "dataset_version": "synthetic-v0.1",
     "raw_data_hash": "b415bcaf6232b69e159603f8d882c5996fa83bcb23103d8d59d810c15f713175",
+    "preprocess_hash": "b12d16b268cb6afec10df9887e9d04ee3a2632491735b41a00406ab933826194",
+    "split_hashes": {
+      "calibration": "dd0811690fd2eff1ac8447cd43398d7f7686ffb12782916c69c2a80c6efd9978",
+      "train": "5beab61a4da38d9365d885ce45fde76ac762146395c637f1852357f6c38b5f8f",
+      "validation": "52ad3619007de756f6769d8c30b2add19be49a73be448670d57e998006730157",
+      "replay": "e07b74f63006392105d9f556fb7a6c9b3cda889e75d7feeef139de85c5f0cca6",
+      "final_test": "21912847f5a612e76aaf618c29ecd61ecd373aad729b51e7d85399ca584462a0"
+    },
     "split_policy": {
-      "calibration": "first 16 percent chronological window",
-      "train": "first 38 percent chronological window",
-      "validation": "38-58 percent chronological window",
-      "replay": "58-76 percent chronological window",
-      "final_test": "76-100 percent chronological window"
+      "calibration": "0-12 percent chronological window",
+      "train": "12-20 percent chronological window",
+      "validation": "20-52 percent chronological window",
+      "replay": "52-74 percent chronological window",
+      "final_test": "74-100 percent chronological window"
     },
     "label_policy": "labels are used for evaluation and replay validation, not for training codec thresholds",
     "leakage_controls": {
       "future_statistics_blocked": true,
       "test_labels_blocked_from_tuning": true,
       "preprocessing_fit_on_train_only": true,
-      "time_order_preserved": true
+      "time_order_preserved": true,
+      "replay_held_out_from_repair": true,
+      "final_test_read_only": true
     },
+    "source": "generated_local",
+    "license": "internal_generated",
+    "labels_hash": null,
+    "timebase": "ordered_rows",
+    "known_caveats": [],
     "claim_boundary": "synthetic_or_dataset_scoped_evidence_only",
-    "manifest_hash": "603452c50d4f9fbad2eca70e67f27a6b2780b4332c9e0f17009133b5e258f677"
+    "manifest_hash": "3a70488cedf9db2b34c91979efac17b46577bc352d4c74717faab2fec580ec23"
   },
-  "certificate_hash": "7c660723224528f88fa584079ceb2917642d88988778118f9b05a2f809b30b52",
+  "certificate_hash": "ca9cf28289dd32ffd86909c4986e81f760373ab5cc37e0e3bafc1befd6b566bc",
   "artifacts": {
     "timeseries": "metrics/tessera_timeseries.csv",
     "model_summary": "metrics/model_summary.csv",
     "baseline_summary": "metrics/baseline_summary.csv",
     "wounds": "ledgers/wounds.jsonl",
-    "certificate": "certificates/transfer_certificate.json"
+    "replay_timeseries": "metrics/replay_timeseries.csv",
+    "replay_summary": "metrics/replay_summary.csv",
+    "experiment_budget": "state/experiment_budget.json",
+    "anomaly_ablation": "metrics/anomaly_ablation.json",
+    "certificate": "certificates/diagnostic_certificate.json"
   },
-  "claim_boundary": "diagnostic_baseline_limited",
+  "claim_boundary": "synthetic_phase_1_run_supported",
   "non_claim_locks_preserved": true,
-  "evidence_hash": "522be66b1ddd6d900eb766bde100267e3e6746ef5e3b463b307f53acadc0186f"
+  "evidence_hash": "c696fd80a7584d72b7c54436fa3f5d83848af67b569ca2188500fee2e05baee4"
 }

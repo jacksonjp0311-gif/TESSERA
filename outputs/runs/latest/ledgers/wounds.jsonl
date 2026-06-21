@@ -1,8 +1,3 @@
-{"step": 0, "wound_type": "W_block_false_positive", "J_RD": 1725.6894135494529, "claim_boundary": "repair_evidence_not_training_permission"}
-{"step": 3, "wound_type": "W_falsememory", "J_RD": 551.6651388409733, "claim_boundary": "repair_evidence_not_training_permission"}
-{"step": 4, "wound_type": "W_falsememory", "J_RD": 557.2181374719738, "claim_boundary": "repair_evidence_not_training_permission"}
-{"step": 5, "wound_type": "W_falsememory", "J_RD": 563.8825240967423, "claim_boundary": "repair_evidence_not_training_permission"}
-{"step": 6, "wound_type": "W_falsememory", "J_RD": 965.9819606312365, "claim_boundary": "repair_evidence_not_training_permission"}
-{"step": 11, "wound_type": "W_predict", "J_RD": 1615.7141127006712, "claim_boundary": "repair_evidence_not_training_permission"}
-{"step": 11, "wound_type": "W_codedrift", "J_RD": 1615.7141127006712, "claim_boundary": "repair_evidence_not_training_permission"}
-{"step": 12, "wound_type": "W_reconstruct", "J_RD": 1878.044542002082, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 0, "wound_type": "W_block_false_positive", "J_RD": 865.5381246620417, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 10, "wound_type": "W_predict", "J_RD": 1735.2310711968692, "claim_boundary": "repair_evidence_not_training_permission"}
+{"step": 12, "wound_type": "W_reconstruct", "J_RD": 1505.0713236074894, "claim_boundary": "repair_evidence_not_training_permission"}

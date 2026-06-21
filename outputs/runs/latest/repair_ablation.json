@@ -1,0 +1,76 @@
+{
+  "seed": 42,
+  "field_dim": 16,
+  "code_dim": 8,
+  "depth": 2,
+  "hidden_dim": 64,
+  "arms": [
+    {
+      "arm": "no_repair",
+      "prediction_loss": 1.0668053854779982,
+      "baseline_loss": 1.0668054819107056,
+      "replay_pass_rate": 0.0,
+      "recall": 1.0,
+      "false_memory_rate": 0.0,
+      "wall_seconds": 0.11202478408813477,
+      "parameter_count": 5493,
+      "notes": "Baseline: no repair applied",
+      "eligible": false,
+      "utility": -0.7499999096061006
+    },
+    {
+      "arm": "random_repair",
+      "prediction_loss": 1.0668053854779982,
+      "baseline_loss": 1.0668054819107056,
+      "replay_pass_rate": 0.0,
+      "recall": 1.0,
+      "false_memory_rate": 0.0,
+      "wall_seconds": 0.12402796745300293,
+      "parameter_count": 5493,
+      "notes": "Random weight perturbation (std=0.01)",
+      "eligible": false,
+      "utility": -0.7499999096061006
+    },
+    {
+      "arm": "wrong_target_repair",
+      "prediction_loss": 1.0667928767575,
+      "baseline_loss": 1.0668054819107056,
+      "replay_pass_rate": 0.0,
+      "recall": 1.0,
+      "false_memory_rate": 0.0,
+      "wall_seconds": 0.6931560039520264,
+      "parameter_count": 5493,
+      "notes": "Retrained on shuffled data (wrong target)",
+      "eligible": false,
+      "utility": -0.7499881842065687
+    },
+    {
+      "arm": "generic_retrain",
+      "prediction_loss": 1.0668053854779982,
+      "baseline_loss": 1.0668054819107056,
+      "replay_pass_rate": 0.0,
+      "recall": 1.0,
+      "false_memory_rate": 0.0,
+      "wall_seconds": 0.7812135219573975,
+      "parameter_count": 5493,
+      "notes": "Full retrain from scratch on same data",
+      "eligible": false,
+      "utility": -0.7499999096061006
+    },
+    {
+      "arm": "targeted_shadow_repair",
+      "prediction_loss": 1.0668053854779982,
+      "baseline_loss": 1.0668054819107056,
+      "replay_pass_rate": 1.0,
+      "recall": 1.0,
+      "false_memory_rate": 0.0,
+      "wall_seconds": 0.3360903263092041,
+      "parameter_count": 5493,
+      "notes": "Shadow fine-tune of predictor head only, frozen encoder/decoder",
+      "eligible": true,
+      "utility": -0.39999990960610066
+    }
+  ],
+  "winner": "targeted_shadow_repair",
+  "wall_seconds": 5.589767932891846
+}

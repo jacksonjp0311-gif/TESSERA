@@ -1,0 +1,37 @@
+{
+  "schema": "TESSERA-v1.7-dataset-manifest",
+  "dataset_name": "tessera_synthetic_telemetry",
+  "dataset_version": "synthetic-v0.1",
+  "raw_data_hash": "62b8314ca450b4bb458d61ca3a66627d3cb5ef78480f1cf0a031fcdbbb1f60cf",
+  "preprocess_hash": "42823653ddb9b1f9f7dc773a38486cd2efb2078afbb09acccb37d60a922965dd",
+  "split_hashes": {
+    "calibration": "dd38e34614aed728e88212d58aa90269cc0a390e63a3f1d0096aab4e6c505186",
+    "train": "10ba87bd204db06049503c07b4097d194e03287e433c41bc5b427de41bece736",
+    "validation": "1e39f2eb04bd046b14072fd3081b81412b14d03d3745e5f337b31745a1dad646",
+    "replay": "12d57eb2116af1f4429dcd2107f1b32c125ee9ccc9c8e1582bb04ddbd8a5006b",
+    "final_test": "ecedebe5e27ccd237fd51732956f6c4727e7e50289d941d01b6e46e00574115e"
+  },
+  "split_policy": {
+    "calibration": "0-12 percent chronological window",
+    "train": "12-20 percent chronological window",
+    "validation": "20-52 percent chronological window",
+    "replay": "52-74 percent chronological window",
+    "final_test": "74-100 percent chronological window"
+  },
+  "label_policy": "labels are used for evaluation and replay validation, not for training codec thresholds",
+  "leakage_controls": {
+    "future_statistics_blocked": true,
+    "test_labels_blocked_from_tuning": true,
+    "preprocessing_fit_on_train_only": true,
+    "time_order_preserved": true,
+    "replay_held_out_from_repair": true,
+    "final_test_read_only": true
+  },
+  "source": "generated_local",
+  "license": "internal_generated",
+  "labels_hash": null,
+  "timebase": "ordered_rows",
+  "known_caveats": [],
+  "claim_boundary": "synthetic_or_dataset_scoped_evidence_only",
+  "manifest_hash": "641fb675556197d3ebfa593f7e4ec6e6062717d2aebad5735878959a98857b84"
+}

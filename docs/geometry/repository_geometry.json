@@ -210,6 +210,26 @@
       "id": "nab_enhanced",
       "kind": "runtime",
       "path": "src/tessera/experiments/run_nab_transfer.py"
+    },
+    {
+      "id": "evo043_evidence",
+      "kind": "evidence",
+      "path": "docs/context/rhp/evidence/TESSERA-EVO-043-final-evidence.json"
+    },
+    {
+      "id": "evo043_tests",
+      "kind": "validator",
+      "path": "tests/test_evo043.py"
+    },
+    {
+      "id": "atomic_capsule_store",
+      "kind": "runtime",
+      "path": "src/tessera/plugin/atomic_capsule_store.py"
+    },
+    {
+      "id": "local_utility_benchmark",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/trajectory_local_benchmark.py"
     }
   ],
   "edges": [
@@ -542,6 +562,51 @@
       "source": "dataset_transfer",
       "target": "nab_enhanced",
       "kind": "validates"
+    },
+    {
+      "source": "neural_plugin",
+      "target": "atomic_capsule_store",
+      "kind": "reads"
+    },
+    {
+      "source": "neural_plugin",
+      "target": "local_utility_benchmark",
+      "kind": "reads"
+    },
+    {
+      "source": "atomic_capsule_store",
+      "target": "evo043_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "local_utility_benchmark",
+      "target": "evo043_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "evo043_tests",
+      "target": "atomic_capsule_store",
+      "kind": "validates"
+    },
+    {
+      "source": "evo043_tests",
+      "target": "local_utility_benchmark",
+      "kind": "validates"
+    },
+    {
+      "source": "evo043_evidence",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "atomic_capsule_store",
+      "target": "plugin_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "local_utility_benchmark",
+      "target": "runtime_readme",
+      "kind": "documented_by"
     }
   ],
   "claim_boundary": "Geometry validates declared relationships and order only; it does not prove runtime correctness or model capability."

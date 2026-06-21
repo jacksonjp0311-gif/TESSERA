@@ -1,5 +1,5 @@
 {
-  "schema": "TESSERA-v0.3.8-agent-cli-contract-validation",
+  "schema": "TESSERA-v0.3.9-agent-cli-contract-validation",
   "passed": true,
   "missing_files": [],
   "missing_script_tokens": {},

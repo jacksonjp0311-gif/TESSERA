@@ -1,7 +1,42 @@
 {
-  "warn_J_RD": 1435.2866159632058,
-  "block_J_RD": 2541.5717751386646,
-  "memory_J_RD": 973.6279505896717,
-  "block_delta_phi": 0.9806493937969207,
-  "block_code_drift": 0.5222220197319977
+  "schema": "TESSERA-MULTISCALE-ANOMALY-CALIBRATION-v0.1",
+  "channels": {
+    "prediction_loss": {
+      "center": 22.588361740112305,
+      "scale": 13.868090660476684
+    },
+    "reconstruction_loss": {
+      "center": 10.845943450927734,
+      "scale": 15.022005821478366
+    },
+    "delta_phi": {
+      "center": 0.09184890985488892,
+      "scale": 0.10497500441372394
+    },
+    "code_drift": {
+      "center": 0.0845268964767456,
+      "scale": 0.07943784755542874
+    },
+    "rate": {
+      "center": 0.11185744404792786,
+      "scale": 0.03905863257050514
+    }
+  },
+  "components": [
+    "prediction_loss",
+    "reconstruction_loss",
+    "delta_phi",
+    "code_drift",
+    "rate"
+  ],
+  "fusion": "top_two_multiscale",
+  "warn_score": 8.412249081201209,
+  "block_score": 9.934411299749081,
+  "memory_score": 8.412249081201209,
+  "warn_quantile": 0.95,
+  "block_quantile": 0.995,
+  "memory_quantile": 0.95,
+  "max_component_score": 12.0,
+  "normal_rows": 15,
+  "label_usage": "normal_only_calibration_no_anomaly_labels"
 }

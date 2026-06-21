@@ -1,0 +1,51 @@
+{
+  "schema": "TESSERA-v0.1-evidence-package",
+  "run_id": "tessera_run_20260619_120449",
+  "manifest": {
+    "schema": "TESSERA-v1.7-dataset-manifest",
+    "dataset_name": "tessera_synthetic_telemetry",
+    "dataset_version": "synthetic-v0.1",
+    "raw_data_hash": "62b8314ca450b4bb458d61ca3a66627d3cb5ef78480f1cf0a031fcdbbb1f60cf",
+    "preprocess_hash": "91bc1cd000f4c3ffb27ab7cf864711fd40fafd1c485cb750f2d3ea16491d6a71",
+    "split_hashes": {
+      "calibration": "94db17b22f37d6f80e86419752c8792ea6096060e6c09e17901f56442e8bec99",
+      "train": "3b37ae06ee8ba5ae9c84018a6f5daa1dc94c6c3f14eeaf59befaed3a2dbdb8c1",
+      "validation": "7c08b4226ff50e12f22b33111b1dba836197c3a6adaa9697384ae959c748b446",
+      "replay": "b4e4c9f2dd177937a662fed6cebee8252ff9a8445aadc74e4ec6e000aff1342b",
+      "final_test": "b071daace50eabd3bd1aeddbb3a2930b2de2314b318d2167ac553560e9704bf9"
+    },
+    "split_policy": {
+      "calibration": "0-12 percent chronological window",
+      "train": "12-20 percent chronological window",
+      "validation": "20-52 percent chronological window",
+      "replay": "52-74 percent chronological window",
+      "final_test": "74-100 percent chronological window"
+    },
+    "label_policy": "labels are used for evaluation and replay validation, not for training codec thresholds",
+    "leakage_controls": {
+      "future_statistics_blocked": true,
+      "test_labels_blocked_from_tuning": true,
+      "preprocessing_fit_on_train_only": true,
+      "time_order_preserved": true,
+      "replay_held_out_from_repair": true,
+      "final_test_read_only": true
+    },
+    "claim_boundary": "synthetic_or_dataset_scoped_evidence_only",
+    "manifest_hash": "3243eaeac34433402e0a58c8b85821ef19c5f1f521bb1a4f3cf7705a9dcd0500"
+  },
+  "certificate_hash": "743f3880343417d14dcda577251d1293996c8894e687202a39498c2ee15022ae",
+  "artifacts": {
+    "timeseries": "metrics/tessera_timeseries.csv",
+    "model_summary": "metrics/model_summary.csv",
+    "baseline_summary": "metrics/baseline_summary.csv",
+    "wounds": "ledgers/wounds.jsonl",
+    "replay_timeseries": "metrics/replay_timeseries.csv",
+    "replay_summary": "metrics/replay_summary.csv",
+    "experiment_budget": "state/experiment_budget.json",
+    "anomaly_ablation": "metrics/anomaly_ablation.json",
+    "certificate": "certificates/diagnostic_certificate.json"
+  },
+  "claim_boundary": "synthetic_phase_1_run_supported",
+  "non_claim_locks_preserved": true,
+  "evidence_hash": "d32d8bec571189e6e81865138ed573c37466021d54c9208a6fef3e1d02f008a6"
+}

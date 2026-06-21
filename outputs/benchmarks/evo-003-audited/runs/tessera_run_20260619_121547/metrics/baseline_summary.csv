@@ -1,0 +1,8 @@
+model,mean_prediction_loss,mean_reconstruction_loss,parameter_count
+persistence,179.35760498046875,0.0,
+pca_codec,315.8506164550781,1.250125437196603e-11,
+random_projection,327.3168640136719,43.072593688964844,
+ewma,100.06897735595703,0.0,
+dense_autoencoder,278.90435791015625,275.320556640625,494.0
+reservoir_esn,395.3641594490207,0.0,1408.0
+matrix_profile_neighbor,287.7799072265625,0.0,

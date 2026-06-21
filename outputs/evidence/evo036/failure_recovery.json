@@ -55,25 +55,19 @@
     ],
     "selected_indices": [
       0,
-      7,
-      28,
-      35,
-      38
+      28
     ],
     "feature_names": [
       "mean_duration_ms",
-      "mean_resource_cost",
-      "std_duration_ms",
-      "std_resource_cost",
-      "std_history_turns"
+      "std_duration_ms"
     ],
     "chronology": "one completed session per runtime event"
   },
   "metrics": {
-    "baseline_loss": 0.08403712511062622,
-    "candidate_loss": 0.04824817580510925,
+    "baseline_loss": 0.21009282767772675,
+    "candidate_loss": 0.12062043951277313,
     "replay_pass_rate": 0.5263157894736842,
-    "neural_awareness_loss": 0.045525368783273734,
+    "neural_awareness_loss": 0.11398515196158673,
     "train_rows": 60,
     "validation_rows": 20,
     "replay_rows": 20,
@@ -81,9 +75,9 @@
     "failure_episodes": 1,
     "recovery_episodes": 1,
     "minimum_failure_episodes": 5,
-    "failure_latent_drift": 0.012412279844284058,
-    "recovery_latent_drift": 0.4092440605163574,
-    "router_threshold": 0.03937917947769165,
+    "failure_latent_drift": 0.028598468750715256,
+    "recovery_latent_drift": 0.2267230749130249,
+    "router_threshold": 0.07666110247373581,
     "failure_abstention_recall": 0.0,
     "recovery_release_rate": 0.0,
     "memory_candidate_on_failure": true,

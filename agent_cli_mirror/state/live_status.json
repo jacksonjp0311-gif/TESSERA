@@ -1,10 +1,17 @@
 {
-  "schema": "AGENT-CLI-MIRROR-v0.3.7",
-  "timestamp": "2026-06-17T13:13:11",
-  "phase": "VALIDATE",
-  "state": "RUN",
-  "detail": "validate latest evidence",
-  "command": "C:\\Program Files\\Python312\\python.exe -m tessera validate --run outputs/runs/latest",
+  "schema": "AGENT-CLI-MIRROR-v0.3.9",
+  "timestamp": "2026-06-21T16:56:06",
+  "phase": "LESSON",
+  "state": "OK",
+  "detail": "command failed: unit tests",
+  "command": null,
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera",
-  "mirror_dir": "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera\\agent_cli_mirror"
+  "mirror_dir": "C:\\Users\\jacks\\OneDrive\\Desktop\\Tessera\\agent_cli_mirror",
+  "session_id": "8feab861a71e4d5487c225d76df1b6e5",
+  "event_index": 27,
+  "elapsed_ms": 0.0,
+  "exit_code": null,
+  "system_cpu_percent": 20.0,
+  "memory_available_ratio": 0.2378495239279403,
+  "process_count": 283.0
 }

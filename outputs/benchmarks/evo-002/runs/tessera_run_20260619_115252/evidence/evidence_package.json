@@ -1,0 +1,50 @@
+{
+  "schema": "TESSERA-v0.1-evidence-package",
+  "run_id": "tessera_run_20260619_115252",
+  "manifest": {
+    "schema": "TESSERA-v1.7-dataset-manifest",
+    "dataset_name": "tessera_synthetic_telemetry",
+    "dataset_version": "synthetic-v0.1",
+    "raw_data_hash": "62b8314ca450b4bb458d61ca3a66627d3cb5ef78480f1cf0a031fcdbbb1f60cf",
+    "preprocess_hash": "b386d76c40f6fbd07b2c505e7cde55c98700f42046e96ecbedffa87e52d9461b",
+    "split_hashes": {
+      "calibration": "b6c62e7d7dd7293d58e9d702190e83471652231277525056b7ca736f3e5d1150",
+      "train": "5420cb204220fe34b2a9e31bfae904fa1823ed85acf4f6e41f4f5e167e405e2d",
+      "validation": "c7ca6c346f761c5251f74037a0b206338c6c4056c59c0e39c655d5c142c8997b",
+      "replay": "68a62c5a1a1b0a621c58b8f2ba9f2027f117a01efde9fed6bc53d79237f92005",
+      "final_test": "5b8e90a7f3879633a0e3e1f9fa37267f5ea5d3fc6ad3b893f5e188be0e6ceaaa"
+    },
+    "split_policy": {
+      "calibration": "0-12 percent chronological window",
+      "train": "12-20 percent chronological window",
+      "validation": "20-52 percent chronological window",
+      "replay": "52-74 percent chronological window",
+      "final_test": "74-100 percent chronological window"
+    },
+    "label_policy": "labels are used for evaluation and replay validation, not for training codec thresholds",
+    "leakage_controls": {
+      "future_statistics_blocked": true,
+      "test_labels_blocked_from_tuning": true,
+      "preprocessing_fit_on_train_only": true,
+      "time_order_preserved": true,
+      "replay_held_out_from_repair": true,
+      "final_test_read_only": true
+    },
+    "claim_boundary": "synthetic_or_dataset_scoped_evidence_only",
+    "manifest_hash": "b45813d0cd7969c621af25ccbed698a007626fcb7d305e7527cbc2474538a42f"
+  },
+  "certificate_hash": "53b947b133b28a206696e64d6c4c7971f4ed0208e8ce2586ff36cdf7ebf18d1f",
+  "artifacts": {
+    "timeseries": "metrics/tessera_timeseries.csv",
+    "model_summary": "metrics/model_summary.csv",
+    "baseline_summary": "metrics/baseline_summary.csv",
+    "wounds": "ledgers/wounds.jsonl",
+    "replay_timeseries": "metrics/replay_timeseries.csv",
+    "replay_summary": "metrics/replay_summary.csv",
+    "experiment_budget": "state/experiment_budget.json",
+    "certificate": "certificates/diagnostic_certificate.json"
+  },
+  "claim_boundary": "diagnostic",
+  "non_claim_locks_preserved": true,
+  "evidence_hash": "cd57c96c0d83c4637990d8de47aab11cfd484c85c530e138f7f074c8d7b852e8"
+}

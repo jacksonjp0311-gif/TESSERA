@@ -1,0 +1,97 @@
+{
+  "schema": "TESSERA-RHP-NEXUS-VALIDATION-v0.1",
+  "passed": true,
+  "latest_operation": "TESSERA-EVO-042",
+  "sections": {
+    "origin": {
+      "ok": true,
+      "checks": {
+        "source_commit_alignment": true,
+        "history_not_copied": true,
+        "context_default_disabled": true,
+        "compounding_permission_disabled": true,
+        "required_surfaces_present": true
+      },
+      "missing_surfaces": []
+    },
+    "lineage": {
+      "ok": true,
+      "checks": {
+        "operation_alignment": true,
+        "evidence_path_alignment": true,
+        "state_alignment": true,
+        "next_operation_alignment": true,
+        "source_commit_alignment": true,
+        "authority_ok": true,
+        "current_head_observed": true
+      },
+      "failures": []
+    },
+    "nexus": {
+      "ok": true,
+      "surface_count": 23,
+      "profile_counts": {
+        "pointer": 2,
+        "compact": 3,
+        "full": 18
+      },
+      "findings": []
+    },
+    "route_echoes": {
+      "ok": true,
+      "route_count": 3,
+      "findings": []
+    },
+    "lessons": {
+      "ok": true,
+      "lesson_count": 57,
+      "findings": []
+    },
+    "geometry": {
+      "ok": true,
+      "node_count": 36,
+      "edge_count": 66,
+      "sequence": {
+        "ok": true,
+        "expected": [
+          "REHYDRATE",
+          "RHP",
+          "NEXUS",
+          "GEOMETRY",
+          "LESSONS",
+          "MIRROR",
+          "LOOPBOOK",
+          "CHECK",
+          "RUN",
+          "VALIDATE",
+          "LEDGER",
+          "PUSH",
+          "ROOT"
+        ],
+        "observed": [
+          "REHYDRATE",
+          "RHP",
+          "NEXUS",
+          "GEOMETRY",
+          "LESSONS",
+          "MIRROR",
+          "LOOPBOOK",
+          "CHECK",
+          "RUN",
+          "VALIDATE",
+          "LEDGER",
+          "PUSH",
+          "ROOT"
+        ],
+        "mismatch_index": null
+      },
+      "findings": []
+    },
+    "hygiene": {
+      "ok": true,
+      "checked_count": 6,
+      "findings": []
+    }
+  },
+  "claim_boundary": "RHP-Nexus validation proves local contract coherence only; it does not prove model capability, correctness, safety, production readiness, or transfer."
+}

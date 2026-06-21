@@ -1,0 +1,85 @@
+{
+  "schema": "TESSERA-MULTI-SEED-BENCHMARK-v0.2",
+  "seeds": [
+    11,
+    23,
+    37,
+    41,
+    53
+  ],
+  "runs": [
+    {
+      "seed": 11,
+      "run_id": "tessera_run_20260619_115247",
+      "auc": 0.4414814814814814,
+      "prediction_loss": 78.78544238712881,
+      "replay_pass_rate": 0.0,
+      "missed_warning": 0.5925925925925926,
+      "baseline_gap": -0.004665409589748037,
+      "best_baseline_loss": 78.78077697753906,
+      "claim_ceiling": "diagnostic"
+    },
+    {
+      "seed": 23,
+      "run_id": "tessera_run_20260619_115250",
+      "auc": 0.4422222222222222,
+      "prediction_loss": 100.06898159514387,
+      "replay_pass_rate": 0.0,
+      "missed_warning": 0.5555555555555556,
+      "baseline_gap": -4.239186836230147e-06,
+      "best_baseline_loss": 100.06897735595703,
+      "claim_ceiling": "diagnostic"
+    },
+    {
+      "seed": 37,
+      "run_id": "tessera_run_20260619_115252",
+      "auc": 0.4407407407407407,
+      "prediction_loss": 95.22867042716447,
+      "replay_pass_rate": 0.0,
+      "missed_warning": 0.5925925925925926,
+      "baseline_gap": -0.0008872240394737219,
+      "best_baseline_loss": 95.227783203125,
+      "claim_ceiling": "diagnostic"
+    },
+    {
+      "seed": 41,
+      "run_id": "tessera_run_20260619_115253",
+      "auc": 0.4444444444444444,
+      "prediction_loss": 115.09393644313533,
+      "replay_pass_rate": 0.0,
+      "missed_warning": 0.5555555555555556,
+      "baseline_gap": -0.004374980732990252,
+      "best_baseline_loss": 115.08956146240234,
+      "claim_ceiling": "diagnostic"
+    },
+    {
+      "seed": 53,
+      "run_id": "tessera_run_20260619_115255",
+      "auc": 0.4096296296296296,
+      "prediction_loss": 78.37565490293812,
+      "replay_pass_rate": 0.0,
+      "missed_warning": 0.5925925925925926,
+      "baseline_gap": 0.003236088272814186,
+      "best_baseline_loss": 78.37889099121094,
+      "claim_ceiling": "diagnostic"
+    }
+  ],
+  "aggregate": {
+    "auc_mean": 0.43570370370370365,
+    "auc_median": 0.4414814814814814,
+    "prediction_loss_mean": 93.51053715110213,
+    "replay_pass_rate_mean": 0.0,
+    "best_baseline_loss_mean": 93.50919799804687,
+    "baseline_gap_mean": -0.001339153055246811,
+    "baseline_relative_gap": -1.4321083742743489e-05,
+    "baseline_parity_tolerance_fraction": 0.001,
+    "baseline_parity_passed": true,
+    "phase_1_passed": false,
+    "phase_1_blockers": [
+      "median AUC must exceed 0.60",
+      "replay pass rate must reach 0.60",
+      "missed-warning rate must remain below 0.35"
+    ]
+  },
+  "claim_boundary": "A synthetic multi-seed benchmark is not real telemetry transfer."
+}

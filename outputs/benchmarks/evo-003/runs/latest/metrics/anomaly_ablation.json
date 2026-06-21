@@ -1,0 +1,8 @@
+{
+  "prediction_loss": 0.8014814814814815,
+  "reconstruction_loss": 0.5,
+  "delta_phi": 0.7251851851851852,
+  "code_drift": 0.7644444444444444,
+  "rate": 0.8533333333333333,
+  "combined_multiscale": 0.8422222222222222
+}

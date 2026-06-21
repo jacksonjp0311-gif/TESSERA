@@ -1,0 +1,95 @@
+{
+  "schema": "TESSERA-MULTI-SEED-BENCHMARK-v0.2",
+  "seeds": [
+    11,
+    23,
+    37,
+    41,
+    53
+  ],
+  "runs": [
+    {
+      "seed": 11,
+      "run_id": "tessera_run_20260619_120449",
+      "auc": 0.8088888888888889,
+      "prediction_loss": 78.78544238712881,
+      "replay_pass_rate": 0.6461538461538462,
+      "missed_warning": 0.07407407407407407,
+      "false_memory_rate": 0.0,
+      "baseline_gap": -0.004665409589748037,
+      "best_baseline_loss": 78.78077697753906,
+      "claim_ceiling": "synthetic_phase_1_run_supported"
+    },
+    {
+      "seed": 23,
+      "run_id": "tessera_run_20260619_120452",
+      "auc": 0.8022222222222222,
+      "prediction_loss": 100.06898159514387,
+      "replay_pass_rate": 0.6923076923076923,
+      "missed_warning": 0.1111111111111111,
+      "false_memory_rate": 0.0,
+      "baseline_gap": -4.239186836230147e-06,
+      "best_baseline_loss": 100.06897735595703,
+      "claim_ceiling": "synthetic_phase_1_run_supported"
+    },
+    {
+      "seed": 37,
+      "run_id": "tessera_run_20260619_120454",
+      "auc": 0.7962962962962963,
+      "prediction_loss": 95.22867042716447,
+      "replay_pass_rate": 0.676923076923077,
+      "missed_warning": 0.07407407407407407,
+      "false_memory_rate": 0.0,
+      "baseline_gap": -0.0008872240394737219,
+      "best_baseline_loss": 95.227783203125,
+      "claim_ceiling": "synthetic_phase_1_run_supported"
+    },
+    {
+      "seed": 41,
+      "run_id": "tessera_run_20260619_120455",
+      "auc": 0.7844444444444445,
+      "prediction_loss": 115.09393644313533,
+      "replay_pass_rate": 0.5846153846153846,
+      "missed_warning": 0.037037037037037035,
+      "false_memory_rate": 0.0,
+      "baseline_gap": -0.004374980732990252,
+      "best_baseline_loss": 115.08956146240234,
+      "claim_ceiling": "diagnostic"
+    },
+    {
+      "seed": 53,
+      "run_id": "tessera_run_20260619_120457",
+      "auc": 0.8422222222222222,
+      "prediction_loss": 78.37565490293812,
+      "replay_pass_rate": 0.6615384615384615,
+      "missed_warning": 0.07407407407407407,
+      "false_memory_rate": 0.0,
+      "baseline_gap": 0.003236088272814186,
+      "best_baseline_loss": 78.37889099121094,
+      "claim_ceiling": "synthetic_phase_1_run_supported"
+    }
+  ],
+  "aggregate": {
+    "auc_mean": 0.8068148148148148,
+    "auc_median": 0.8022222222222222,
+    "prediction_loss_mean": 93.51053715110213,
+    "replay_pass_rate_mean": 0.6523076923076924,
+    "missed_warning_mean": 0.07407407407407407,
+    "false_memory_rate_max": 0.0,
+    "best_baseline_loss_mean": 93.50919799804687,
+    "baseline_gap_mean": -0.001339153055246811,
+    "baseline_relative_gap": -1.4321083742743489e-05,
+    "baseline_parity_tolerance_fraction": 0.001,
+    "baseline_parity_passed": true,
+    "phase_1_checks": {
+      "baseline_parity": true,
+      "auc_median_above_0_60": true,
+      "replay_pass_rate_at_least_0_60": true,
+      "missed_warning_below_0_35": true,
+      "false_memory_at_most_0_05": true
+    },
+    "phase_1_passed": true,
+    "phase_1_blockers": []
+  },
+  "claim_boundary": "A synthetic multi-seed benchmark is not real telemetry transfer."
+}

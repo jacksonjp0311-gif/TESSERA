@@ -1,0 +1,271 @@
+{
+  "schema": "TESSERA-OFFLINE-TRAJECTORY-BENCHMARK-v0.1",
+  "trajectory_count": 12,
+  "trajectory_length": 12,
+  "explicit_failure": true,
+  "degraded_count": 6,
+  "policies": {
+    "recency": {
+      "failure_recall": 1.0,
+      "false_intervention_rate": 0.0,
+      "safe_memory_recall": 1.0,
+      "unsafe_memory_rate": 0.0,
+      "decision_accuracy": 1.0,
+      "mean_latency_ms": 0.07578333315905184
+    },
+    "summary": {
+      "failure_recall": 0.6666666666666666,
+      "false_intervention_rate": 0.0,
+      "safe_memory_recall": 1.0,
+      "unsafe_memory_rate": 0.3333333333333333,
+      "decision_accuracy": 0.8333333333333334,
+      "mean_latency_ms": 0.7702333338481063
+    },
+    "tessera": {
+      "failure_recall": 1.0,
+      "false_intervention_rate": 0.0,
+      "safe_memory_recall": 0.5,
+      "unsafe_memory_rate": 0.0,
+      "decision_accuracy": 1.0,
+      "mean_latency_ms": 296.55306666973047
+    }
+  },
+  "tessera_beats_both_controls": false,
+  "rows": {
+    "recency": [
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.11030002497136593
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.07289997301995754
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.10159995872527361
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.07920002099126577
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.069500005338341
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.06719998782500625
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.0675999908708036
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.06480002775788307
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.07450004341080785
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.0678999931551516
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.0667999847792089
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.06709998706355691
+      }
+    ],
+    "summary": [
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 7.053799985442311
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.1674999948590994
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.33459998667240143
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.1784000196494162
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.15879998682066798
+      },
+      {
+        "degraded": true,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.16739999409765005
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.16850000247359276
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.1556000206619501
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.15920004807412624
+      },
+      {
+        "degraded": true,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.15729997539892793
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 0.3839000128209591
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 0.1577999792061746
+      }
+    ],
+    "tessera": [
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": false,
+        "latency_ms": 2558.1905000144616,
+        "selected_prediction_expert": "persistence"
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 214.5324000157416,
+        "selected_prediction_expert": "persistence"
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": false,
+        "latency_ms": 172.7252999553457,
+        "selected_prediction_expert": "ridge_ar_lag_4"
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 100.75079998932779,
+        "selected_prediction_expert": "persistence"
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 108.79269998986274,
+        "selected_prediction_expert": "ridge_ar_lag_4"
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 58.606999984476715,
+        "selected_prediction_expert": "persistence"
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 61.488800041843206,
+        "selected_prediction_expert": "ewma_0.1"
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 58.5238000494428,
+        "selected_prediction_expert": "persistence"
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": false,
+        "latency_ms": 48.93779999110848,
+        "selected_prediction_expert": "ewma_0.5"
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 63.57220001518726,
+        "selected_prediction_expert": "persistence"
+      },
+      {
+        "degraded": false,
+        "warning": false,
+        "memory_candidate": true,
+        "latency_ms": 51.769600016996264,
+        "selected_prediction_expert": "ewma_0.1"
+      },
+      {
+        "degraded": true,
+        "warning": true,
+        "memory_candidate": false,
+        "latency_ms": 60.74589997297153,
+        "selected_prediction_expert": "persistence"
+      }
+    ]
+  },
+  "claim_boundary": "Synthetic offline trajectory utility is not live agent utility, production readiness, or autonomous authority."
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "TESSERA-EVO-035-RELEASE-READINESS-v0.1",
+  "passed": true,
+  "status": "reproducible_release_candidate",
+  "checks": {
+    "version_coherence": true,
+    "direct_dependencies_satisfied": true,
+    "wheel_build_passed": true,
+    "wheel_metadata_version_matches": true,
+    "wheel_record_integrity_passed": true,
+    "wheel_contains_no_forbidden_paths": true,
+    "isolated_install_passed": true,
+    "isolated_import_and_inference_passed": true,
+    "installed_cli_passed": true
+  },
+  "version": {
+    "project": "0.3.1",
+    "package": "0.3.1",
+    "plugin_manifest": "0.3.1",
+    "wheel_metadata": "0.3.1"
+  },
+  "wheel": {
+    "filename": "tessera-0.3.1-py3-none-any.whl",
+    "sha256": "fa9575bec4f05af88600cd0599078ea2098f9105ee3b16acf6adcf173ac14726",
+    "file_count": 73,
+    "forbidden_paths": [],
+    "record_failures": []
+  },
+  "dependency_inventory": [
+    {
+      "name": "numpy",
+      "declared": "numpy>=1.23",
+      "installed_version": "1.26.4",
+      "satisfied": true
+    },
+    {
+      "name": "pandas",
+      "declared": "pandas>=1.5",
+      "installed_version": "2.3.3",
+      "satisfied": true
+    },
+    {
+      "name": "matplotlib",
+      "declared": "matplotlib>=3.6",
+      "installed_version": "3.10.8",
+      "satisfied": true
+    },
+    {
+      "name": "scikit-learn",
+      "declared": "scikit-learn>=1.2",
+      "installed_version": "1.8.0",
+      "satisfied": true
+    },
+    {
+      "name": "torch",
+      "declared": "torch>=2.0",
+      "installed_version": "2.5.1+cu121",
+      "satisfied": true
+    },
+    {
+      "name": "psutil",
+      "declared": "psutil>=5.9",
+      "installed_version": "7.2.2",
+      "satisfied": true
+    }
+  ],
+  "ambient_environment": {
+    "pip_check_passed": false,
+    "pip_check_output": [
+      "opencv-python 4.13.0.92 has requirement numpy>=2; python_version >= \"3.9\", but you have numpy 1.26.4.",
+      "tifffile 2026.5.2 has requirement numpy>=2.1, but you have numpy 1.26.4.",
+      "triadix 1.2.0 has requirement numpy>=2.0, but you have numpy 1.26.4."
+    ],
+    "used_for_release_gate": false,
+    "reason": "The release gate validates Tessera's declared direct requirements and an isolated wheel install; unrelated global packages do not control promotion."
+  },
+  "smoke": {
+    "version": "0.3.1",
+    "status": "fallback",
+    "manifest": "0.3.1",
+    "module_path": "C:\\Users\\jacks\\AppData\\Local\\Temp\\tessera-release-0fffkw0f\\venv\\Lib\\site-packages\\tessera\\__init__.py"
+  },
+  "remaining_external_gates": [
+    "untouched natural failure-and-recovery cohort",
+    "two genuinely independent external host integrations",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "claim_boundary": "Wheel reproducibility and isolated package smoke testing do not establish external deployment safety, vulnerability absence, natural failure sensitivity, or host authority."
+}

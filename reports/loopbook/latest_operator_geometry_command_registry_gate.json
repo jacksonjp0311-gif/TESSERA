@@ -1,13 +1,8 @@
 {
-  "schema": "TESSERA-v0.3.8-operator-geometry-command-registry-validation",
+  "schema": "TESSERA-operator-geometry-validation-v0.3.2",
   "passed": true,
   "missing_files": [],
   "missing_readme_tokens": [],
-  "missing_registry_tokens": [],
-  "missing_chart_tokens": [],
-  "missing_geometry_tokens": [],
-  "missing_powershell_tokens": [],
-  "missing_bash_tokens": [],
   "root_engine_markdown_files": [],
   "claim_boundary": "operator geometry validation is not real telemetry transfer proof"
 }

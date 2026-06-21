@@ -1,0 +1,56 @@
+{
+  "schema": "TESSERA-v0.1-evidence-package",
+  "run_id": "tessera_run_20260619_121547",
+  "manifest": {
+    "schema": "TESSERA-v1.7-dataset-manifest",
+    "dataset_name": "tessera_synthetic_telemetry",
+    "dataset_version": "synthetic-v0.1",
+    "raw_data_hash": "62b8314ca450b4bb458d61ca3a66627d3cb5ef78480f1cf0a031fcdbbb1f60cf",
+    "preprocess_hash": "31a00ba5061fe6895ceef2b6339fd2a22ca48181e2a7d3c6ccd65fe990c7a9a2",
+    "split_hashes": {
+      "calibration": "846244255c2ecdb4f340a3de7dbd8797cdcd8376ab24ade429e629e8b355439a",
+      "train": "589b7bd451e1b3ae72e3eb32cc528643815da38746e7a0f490526d021ead96df",
+      "validation": "218731a045f1b0e0fada1ab9262ce49465bba1fd031629cbcc6415a80a5ea921",
+      "replay": "bf22f1a6b6b98470c1efd8892413c024ce72c05ec0b761a34145c47ff069185f",
+      "final_test": "d1b89a45ca6669ca1c92a040b778eb1c4d785d74690e5b780f0c96f7c19398cf"
+    },
+    "split_policy": {
+      "calibration": "0-12 percent chronological window",
+      "train": "12-20 percent chronological window",
+      "validation": "20-52 percent chronological window",
+      "replay": "52-74 percent chronological window",
+      "final_test": "74-100 percent chronological window"
+    },
+    "label_policy": "labels are used for evaluation and replay validation, not for training codec thresholds",
+    "leakage_controls": {
+      "future_statistics_blocked": true,
+      "test_labels_blocked_from_tuning": true,
+      "preprocessing_fit_on_train_only": true,
+      "time_order_preserved": true,
+      "replay_held_out_from_repair": true,
+      "final_test_read_only": true
+    },
+    "source": "generated_local",
+    "license": "internal_generated",
+    "labels_hash": null,
+    "timebase": "ordered_rows",
+    "known_caveats": [],
+    "claim_boundary": "synthetic_or_dataset_scoped_evidence_only",
+    "manifest_hash": "7d566ca17f4332349fb763c508435bda89f5b55bcac9367e9115fab3ddc491a4"
+  },
+  "certificate_hash": "dd3e1c5de9d3254ae318a16d4278945c94a67c928652d52f41f98cc5a647149f",
+  "artifacts": {
+    "timeseries": "metrics/tessera_timeseries.csv",
+    "model_summary": "metrics/model_summary.csv",
+    "baseline_summary": "metrics/baseline_summary.csv",
+    "wounds": "ledgers/wounds.jsonl",
+    "replay_timeseries": "metrics/replay_timeseries.csv",
+    "replay_summary": "metrics/replay_summary.csv",
+    "experiment_budget": "state/experiment_budget.json",
+    "anomaly_ablation": "metrics/anomaly_ablation.json",
+    "certificate": "certificates/diagnostic_certificate.json"
+  },
+  "claim_boundary": "diagnostic",
+  "non_claim_locks_preserved": true,
+  "evidence_hash": "5240ca6a69a37e699b6caf79318ca917588b03f884644d154c713f0e5d621bc2"
+}

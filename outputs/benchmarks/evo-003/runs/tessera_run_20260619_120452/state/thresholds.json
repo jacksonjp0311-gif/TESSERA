@@ -1,0 +1,31 @@
+{
+  "schema": "TESSERA-MULTISCALE-ANOMALY-CALIBRATION-v0.1",
+  "channels": {
+    "prediction_loss": {
+      "center": 0.917229175567627,
+      "scale": 0.5959826805353164
+    },
+    "reconstruction_loss": {
+      "center": 2.6011312007904053,
+      "scale": 3.566070770215988
+    },
+    "delta_phi": {
+      "center": 0.13825756311416626,
+      "scale": 0.10618067841231822
+    },
+    "code_drift": {
+      "center": 0.06794878840446472,
+      "scale": 0.06663127285391092
+    },
+    "rate": {
+      "center": 0.921622097492218,
+      "scale": 0.12482019871473311
+    }
+  },
+  "warn_score": 8.72052244778707,
+  "block_score": 10.939500976468116,
+  "memory_score": 8.72052244778707,
+  "max_component_score": 12.0,
+  "normal_rows": 59,
+  "label_usage": "normal_only_calibration_no_anomaly_labels"
+}

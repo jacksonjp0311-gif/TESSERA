@@ -56,55 +56,49 @@
     ],
     "selected_indices": [
       0,
-      7,
-      28,
-      35,
-      38
+      28
     ],
     "feature_names": [
       "mean_duration_ms",
-      "mean_resource_cost",
-      "std_duration_ms",
-      "std_resource_cost",
-      "std_history_turns"
+      "std_duration_ms"
     ],
     "chronology": "one completed session per runtime event"
   },
   "metrics": {
-    "baseline_loss": 0.08403712511062622,
-    "candidate_loss": 0.04824817580510925,
+    "baseline_loss": 0.21009282767772675,
+    "candidate_loss": 0.12062043951277313,
     "replay_pass_rate": 0.5263157894736842,
-    "neural_awareness_loss": 0.045525368783273734,
+    "neural_awareness_loss": 0.11398515196158673,
     "train_rows": 60,
     "validation_rows": 20,
     "replay_rows": 20,
     "selected_prediction_expert": "ewma_0.05",
     "sessions": 120,
-    "selected_session_features": 5,
+    "selected_session_features": 2,
     "final_route_count": 20,
     "trusted_count": 18,
     "abstain_count": 2,
     "route_parity_rate": 1.0,
-    "cold_start_latency_ms": 3631.2993000028655,
-    "warm_latency_ms_p50": 75.48340001085307,
-    "warm_latency_ms_p95": 95.19158499751939,
-    "warm_latency_ms_max": 96.29899999708869,
+    "cold_start_latency_ms": 3581.483499991009,
+    "warm_latency_ms_p50": 71.38945000770036,
+    "warm_latency_ms_p95": 79.27458000194747,
+    "warm_latency_ms_max": 80.77709999633953,
     "soak_requests": 100,
     "soak_failures": 0,
-    "soak_latency_ms_p99": 126.79136498161827,
+    "soak_latency_ms_p99": 134.01260599930544,
     "latency_budget_ms": 250.0
   },
   "integrity": {
     "algorithm": "sha256",
     "files": {
-      "pyproject.toml": "4e076b7497cf957a26b44383277dc9e0cdca330785162c60c246c22b1dd85e58",
-      "src/tessera/plugin/contracts.py": "709e0502581310e6e9535db2209546ec8bf7ba60bbf49a867c84f46589151f12",
+      "pyproject.toml": "dd06de97190e95b1a290165942a095e3c8b4d22abbe121c31fde3edb2e4f1fe8",
+      "src/tessera/plugin/contracts.py": "799497ee2b7ac8b7cf3b6ac4b075a322a1f4c1140cc5bf1788a326f429c2bcd2",
       "src/tessera/plugin/runtime.py": "6d803a5646418db2600e8c5f7eb9efbf2ac92d323442466d82018c4f4eeb683d",
       "src/tessera/plugin/supervisor.py": "7f1a96088a58f0cd0079baacf5d768da34cff0d5a9835aef84fd089889be4926",
-      "src/tessera/plugin/host_adapters.py": "e6c59715e43f60241edd3ca95d0fb4319d3c57179acb4befbb3634160916d53f",
+      "src/tessera/plugin/host_adapters.py": "6b1ed2996b99ffebf1140b4886d6ec75a6e94750571682ce58aa4a77c1d63d7e",
       "src/tessera/plugin/neural_checkpoints.py": "6c1519ab5fd877e8718449e6f22cafe9964c0b9f3af7dc7572eb5c9710e81be1",
       "src/tessera/plugin/checkpoints.py": "0995468de3659fd929b33fe283ce18987c5ac33b3093835eee291114fa41b34c",
-      "configs/production.json": "614e5b47b046ebc6549b6422cf946358380d47e2e40b34b20cb22c74f31eabac"
+      "configs/production.json": "ea48875b52ed62a14f19212775bd415445cd799b0867861d851d314527ea7c57"
     }
   },
   "external_launch_blockers": [

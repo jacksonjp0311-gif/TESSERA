@@ -1,0 +1,42 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.43",
+  "operation": "TESSERA-EVO-043",
+  "previous_operation": "TESSERA-EVO-042",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "f16e8a9",
+  "state_after_validation": "ATOMIC_CAPSULE_STORE_LOCAL_UTILITY_BENCHMARKED",
+  "implemented": [
+    "atomic host-owned capsule store with SHA-256 integrity",
+    "FIFO eviction with configurable capacity",
+    "tamper detection and host-key enforcement",
+    "trajectory local capture from Agent CLI Mirror JSONL",
+    "local utility benchmark framework (coverage, drift, warnings, abstention)",
+    "session filtering by minimum prefix and session ID",
+    "Tessera v0.3.9 package"
+  ],
+  "finding": "The plugin can capture and benchmark against real Agent CLI Mirror sessions. The atomic capsule store provides host-owned durable state with integrity verification. Local utility measurement is now possible without external dependencies.",
+  "decision": "Promote atomic capsule store and local utility benchmark. Next: run independent host trials.",
+  "metrics": {
+    "unit_tests_expected": 150,
+    "plugin_modules": 15,
+    "experiment_modules": 27,
+    "capsule_store_max": 10000,
+    "tamper_detection": true,
+    "host_key_enforcement": true,
+    "local_capture_minimum_prefix": 7,
+    "adapter_coverage_measured": true
+  },
+  "non_claim_lock": "Local utility benchmark measures offline behavior on captured sessions. It does not establish live agent utility, production readiness, or autonomous authority.",
+  "next_recommended_operation": "run_independent_host_trials_with_rank_drift_monitoring",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false
+}
