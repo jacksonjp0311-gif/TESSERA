@@ -450,6 +450,23 @@
         }
       ]
     },
+    "neural-checkpoint-readiness": {
+      "purpose": "Run EVO-029 real TESSERANet serialization, held-out replay admission, isolated loading, and latency validation.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-029 neural checkpoint readiness",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "neural-checkpoint-readiness",
+            "--out",
+            "outputs/evidence/evo029/neural_checkpoint_readiness.json"
+          ]
+        }
+      ]
+    },
     "repair-ablation": {
       "purpose": "Run the replay-gated five-arm shadow repair ablation.",
       "steps": [

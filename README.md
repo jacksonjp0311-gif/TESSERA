@@ -82,6 +82,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Permission declarations are not runtime isolation. | Production-facing inference must be supervised, time-bounded, fail-closed, unloadable, and adversarially tested. |
 | Learning does not belong on the interactive request path. | Fast inference remains synchronous; fitting and repair stay shadow-only until replay-gated checkpoint admission. |
 | A shadow trainer must never activate its own output. | Checkpoints are immutable proposals admitted through integrity, replay, atomic activation, and rollback gates. |
+| A controlled neural win is not natural agent utility. | Promote integration separately; natural chronological cohorts must beat persistence, summaries, and retrieval controls. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -389,6 +390,12 @@ checkpoint candidates, replay-gated admission, atomic activation, injected
 failure preservation, and rollback. Five of five lifecycle probes passed.
 The trainer still has no activation authority. The next target is a real
 neural checkpoint evaluated on held-out agent-trajectory replay.
+
+EVO-029 admitted a real serialized TESSERANet checkpoint with a
+validation-selected causal prediction expert. It passed controlled held-out
+replay and served 20 warm neural requests at `11.19 ms` p95 and `15.66 ms`
+maximum latency. The integration path works; natural agent utility remains
+unproven because the controlled trajectory strongly favored autoregression.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

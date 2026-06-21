@@ -1,0 +1,28 @@
+{
+  "schema": "TESSERA-EVO-029-NEURAL-CHECKPOINT-v0.1",
+  "passed": true,
+  "checks": {
+    "real_tessera_model_serialized": true,
+    "held_out_replay_gate_passed": true,
+    "checkpoint_admitted": true,
+    "isolated_worker_loaded_checkpoint": true,
+    "warm_latency_gate_passed": true
+  },
+  "metrics": {
+    "baseline_loss": 0.00046382195432670414,
+    "candidate_loss": 5.114789373130426e-12,
+    "replay_pass_rate": 1.0,
+    "neural_awareness_loss": 0.006691083609309446,
+    "train_rows": 43,
+    "validation_rows": 14,
+    "replay_rows": 15,
+    "selected_prediction_expert": "ridge_ar_lag_16",
+    "cold_start_latency_ms": 3492.9907000041567,
+    "warm_latency_ms_p50": 10.281449998728931,
+    "warm_latency_ms_p95": 11.192739996477034,
+    "warm_latency_ms_max": 15.656599978683516,
+    "latency_budget_ms": 250.0
+  },
+  "production_candidate": false,
+  "claim_boundary": "Admitted neural inference on a controlled trajectory does not establish natural agent utility or production readiness."
+}

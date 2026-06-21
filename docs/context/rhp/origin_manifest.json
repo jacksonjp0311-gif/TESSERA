@@ -71,6 +71,9 @@
     "src/tessera/plugin/checkpoints.py",
     "src/tessera/plugin/shadow_training.py",
     "src/tessera/experiments/checkpoint_readiness.py",
+    "docs/research/NEURAL_CHECKPOINT_RUNTIME_2026-06-20.md",
+    "src/tessera/plugin/neural_checkpoints.py",
+    "src/tessera/experiments/neural_checkpoint_readiness.py",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

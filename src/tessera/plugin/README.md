@@ -37,12 +37,14 @@ proposals.
 - Shadow trainers emit immutable checkpoint candidates only.
 - Checkpoint activation requires payload integrity and replay gates.
 - Active versions change through atomic pointers with preserved rollback.
+- Admitted checkpoints may contain a serialized TESSERANet and causal expert.
+- The persistent worker loads admitted neural state once during readiness.
 - Operational prediction may use a normal-history-selected causal expert while
   neural field loss remains separately visible for anomaly awareness.
 
 ## Claim Boundary
 
 Containment and warm interactive latency are locally validated. Asynchronous
-checkpoint lifecycle is locally validated, but real neural checkpoint utility,
-host compatibility, load, signing, security review, and natural agent utility
-still block production readiness.
+checkpoint lifecycle and controlled neural loading are locally validated, but
+natural checkpoint utility, host compatibility, load, signing, and security
+review still block production readiness.

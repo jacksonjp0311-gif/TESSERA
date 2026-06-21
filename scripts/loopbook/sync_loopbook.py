@@ -71,6 +71,9 @@ FEATURE_FILES = [
     "src/tessera/plugin/checkpoints.py",
     "src/tessera/plugin/shadow_training.py",
     "src/tessera/experiments/checkpoint_readiness.py",
+    "docs/research/NEURAL_CHECKPOINT_RUNTIME_2026-06-20.md",
+    "src/tessera/plugin/neural_checkpoints.py",
+    "src/tessera/experiments/neural_checkpoint_readiness.py",
     "scripts/telemetry/probe.py",
     "outputs/evidence/evo020/clean_calibration.json",
     "outputs/evidence/evo020/controlled_confirmation.json",
@@ -92,6 +95,7 @@ FEATURE_FILES = [
     "outputs/evidence/evo026/plugin_readiness.json",
     "outputs/evidence/evo027/plugin_latency_separation.json",
     "outputs/evidence/evo028/checkpoint_readiness.json",
+    "outputs/evidence/evo029/neural_checkpoint_readiness.json",
     "src/tessera/rhp/core.py", "scripts/validation/validate_rhp_nexus.py",
 ]
 

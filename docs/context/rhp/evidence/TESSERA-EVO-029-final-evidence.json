@@ -1,0 +1,60 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.29",
+  "operation": "TESSERA-EVO-029",
+  "previous_operation": "TESSERA-EVO-028",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "a3b07d3",
+  "state_after_validation": "REAL_NEURAL_CHECKPOINT_ADMITTED_NATURAL_UTILITY_OPEN",
+  "implemented": [
+    "real TESSERANet checkpoint serialization",
+    "normalization and architecture lineage",
+    "validation-selected causal prediction expert serialization",
+    "held-out replay admission",
+    "worker-level checkpoint caching",
+    "admitted neural inference latency benchmark"
+  ],
+  "finding": "A real Tessera neural checkpoint passed held-out controlled replay, was admitted through the transactional lifecycle, loaded once during worker readiness, and served warm neural inference at 11.19 ms p95.",
+  "decision": "Promote the neural checkpoint integration path. Keep natural utility and production claims blocked until chronological natural agent cohorts beat non-neural controls.",
+  "metrics": {
+    "unit_tests_passed": 102,
+    "baseline_loss": 0.00046382195432670414,
+    "candidate_loss": 5.114789373130426e-12,
+    "replay_pass_rate": 1.0,
+    "neural_awareness_loss": 0.006691083609309446,
+    "selected_prediction_expert": "ridge_ar_lag_16",
+    "cold_start_latency_ms": 3492.9907000041567,
+    "warm_latency_ms_p50": 10.281449998728931,
+    "warm_latency_ms_p95": 11.192739996477034,
+    "warm_latency_ms_max": 15.656599978683516,
+    "latency_budget_ms": 250.0,
+    "latency_gate_passed": true,
+    "natural_agent_utility_supported": false,
+    "production_candidate": false
+  },
+  "artifacts": {
+    "neural_checkpoint_readiness": {
+      "path": "outputs/evidence/evo029/neural_checkpoint_readiness.json",
+      "sha256": "b29f62bfc70f87ac0cc718713af678c40a2609bfa3743abec75dc70e74d78077"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 102,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 1
+  },
+  "next_recommended_operation": "evaluate_admitted_neural_checkpoint_on_chronological_natural_agent_cohorts_against_non_neural_controls",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Controlled neural checkpoint admission does not establish natural agent utility, production readiness, consciousness, or autonomous authority."
+}

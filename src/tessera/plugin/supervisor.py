@@ -43,13 +43,13 @@ def _infer_worker(
 
 
 def _persistent_worker(request_queue, output_queue, plugin_options) -> None:
+    plugin = TesseraPlugin(**plugin_options)
     while True:
         request = request_queue.get()
         if request is None:
             return
         try:
-            plugin = TesseraPlugin(**plugin_options)
-            receipt = plugin.observe(request["events"])
+            receipt = plugin.replace_events(request["events"])
             if receipt.rejected:
                 output_queue.put({
                     "request_id": request["request_id"],

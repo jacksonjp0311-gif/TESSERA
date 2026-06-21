@@ -493,6 +493,18 @@
       "validation_gate": "src/tessera/experiments/checkpoint_readiness.py",
       "authority_boundary": "Checkpoint admission does not authorize autonomous learning or host mutation.",
       "status": "promoted"
+    },
+    {
+      "id": "F042",
+      "observed_event": "A real neural checkpoint could be admitted and served quickly on a controlled trajectory, but the trajectory strongly favored autoregression.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-029-final-evidence.json",
+      "wound_class": "controlled_checkpoint_success_overclaim_risk",
+      "diagnosis": "Integration and latency success do not establish natural agent utility or superiority over non-neural controls.",
+      "lesson": "Promote checkpoint mechanics separately from utility; natural chronological cohorts and matched controls remain mandatory.",
+      "future_behavior_change": "Neural checkpoint claims require held-out natural replay and final-test comparisons against persistence, summaries, and retrieval controls.",
+      "validation_gate": "src/tessera/experiments/neural_checkpoint_readiness.py",
+      "authority_boundary": "Checkpoint utility does not authorize host mutation or general production claims.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

@@ -531,6 +531,21 @@ The next gate trains and admits a real Tessera neural checkpoint on held-out
 agent trajectories, then verifies that loading it preserves interactive
 latency and containment.
 
+### Phase 6 hardening — TESSERA-EVO-029
+
+A real TESSERANet checkpoint was serialized with architecture, normalization,
+model state, and a validation-selected causal expert. It passed controlled
+held-out replay, entered through the EVO-028 admission transaction, and loaded
+once during isolated-worker readiness.
+
+Warm neural inference reached `11.19 ms` p95 and `15.66 ms` maximum against the
+`250 ms` budget. The checkpoint integration path is therefore promoted.
+
+Natural utility is not promoted. The controlled trajectory was highly regular
+and the selected `ridge_ar_lag_16` expert had an unusually favorable signal.
+The next gate uses chronological natural agent cohorts and matched non-neural
+controls.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -808,10 +823,10 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Train a real Tessera neural checkpoint in shadow and evaluate it on held-out
-   agent-trajectory replay.
-2. Load only admitted checkpoints into the isolated worker and revalidate the
-   `250 ms` p95 latency and rollback gates.
+1. Evaluate the admitted checkpoint on chronological natural agent cohorts
+   with replay and untouched final-test partitions.
+2. Compare against persistence, text summaries, recency context, and
+   non-neural retrieval under matched budgets.
 3. Build two host adapters and run sustained mixed-load validation.
 
 The immediate priority is resolving natural-session sensitivity while keeping

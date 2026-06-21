@@ -29,6 +29,7 @@ Failure is a learning artifact only when it becomes a named lesson, a chart entr
 | F039 | permission declarations alone did not contain plugin crashes, hangs, or lifecycle risk | enforce a supervised fail-closed subprocess boundary and retain latency as a production blocker | plugin readiness gate |
 | F040 | synchronous model fitting drove warm plugin latency above one second | separate fast inference from shadow learning and require replay-gated checkpoint admission | latency separation gate |
 | F041 | asynchronous learning without transactional admission could replace live state unsafely | require immutable candidates, replay gates, atomic activation, and rollback | checkpoint lifecycle gate |
+| F042 | controlled neural checkpoint success could be mistaken for natural agent utility | separate integration proof from chronological natural utility against matched controls | neural checkpoint gate |
 
 ## Lessons Law
 

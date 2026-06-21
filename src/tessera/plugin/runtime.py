@@ -23,6 +23,7 @@ from .contracts import (
     ReplayPacket,
 )
 from .trajectory import vectorize_events
+from .neural_checkpoints import load_neural_checkpoint
 
 
 class TesseraPlugin:
@@ -59,6 +60,7 @@ class TesseraPlugin:
         field_dim: int = 8,
         code_dim: int = 4,
         inline_neural_training: bool = True,
+        checkpoint_payload: dict | None = None,
     ):
         self._events: deque[AgentEvent] = deque(maxlen=max_events)
         self.warning_quantile = warning_quantile
@@ -67,6 +69,11 @@ class TesseraPlugin:
         self.field_dim = field_dim
         self.code_dim = code_dim
         self.inline_neural_training = inline_neural_training
+        self._loaded_checkpoint = (
+            load_neural_checkpoint(checkpoint_payload)
+            if checkpoint_payload is not None
+            else None
+        )
         self._last_packet: InferencePacket | None = None
         self._last_prediction_expert = "not_selected"
         self._wound_history: list[str] = []
@@ -95,6 +102,10 @@ class TesseraPlugin:
             buffer_size=len(self._events),
         )
 
+    def replace_events(self, events: list[AgentEvent]) -> ObservationReceipt:
+        self._events.clear()
+        return self.observe(events)
+
     def infer(self, query: InferenceQuery | None = None) -> InferencePacket:
         _ = query or InferenceQuery()
         matrix = vectorize_events(list(self._events))
@@ -107,6 +118,13 @@ class TesseraPlugin:
                 memory_candidate=False,
                 claim_boundary="Insufficient context; no capability or memory claim.",
             )
+            self._last_packet = packet
+            return packet
+        if (
+            len(matrix) >= self.neural_min_events
+            and self._loaded_checkpoint is not None
+        ):
+            packet = self._checkpoint_infer(matrix)
             self._last_packet = packet
             return packet
         if (
@@ -134,6 +152,39 @@ class TesseraPlugin:
             )
         self._last_packet = packet
         return packet
+
+    def _checkpoint_infer(self, matrix: np.ndarray) -> InferencePacket:
+        loaded = self._loaded_checkpoint
+        normalized = ((matrix - loaded["mean"]) / loaded["scale"]).astype(
+            "float32"
+        )
+        rows = evaluate_sequence(loaded["model"], normalized)["rows"]
+        neural_losses = np.asarray(
+            [row["prediction_loss"] for row in rows],
+            dtype=float,
+        )
+        center = float(np.median(neural_losses[:-1])) if len(neural_losses) > 1 else 0.0
+        spread = float(np.std(neural_losses[:-1])) if len(neural_losses) > 1 else 1.0
+        spread = spread or 1.0
+        score = max(0.0, (float(neural_losses[-1]) - center) / spread)
+        expert_losses = prediction_losses(
+            loaded["expert"],
+            normalized[-2:],
+            history=normalized[:-2],
+        )
+        prediction_loss = float(expert_losses[-1])
+        return InferencePacket(
+            status="admitted_neural_checkpoint",
+            anomaly_score=score,
+            prediction_loss=prediction_loss,
+            warning=score > 1.5,
+            memory_candidate=score <= 1.5,
+            claim_boundary=(
+                "Replay-admitted checkpoint inference remains read-only and "
+                "does not authorize host mutation."
+            ),
+            selected_prediction_expert=loaded["expert"].name,
+        )
 
     def _fallback_infer(self, matrix: np.ndarray) -> InferencePacket:
         history, current = matrix[:-1], matrix[-1]
@@ -282,6 +333,7 @@ class TesseraPlugin:
                 len(self._events) >= self.neural_min_events
                 and not self.inline_neural_training
             ),
+            "admitted_checkpoint_loaded": self._loaded_checkpoint is not None,
             "live_codec_replacement": False,
             "memory_write": False,
             "tool_invocation": False,

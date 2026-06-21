@@ -505,6 +505,23 @@ def cmd_checkpoint_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_neural_checkpoint_readiness(args):
+    from tessera.experiments.neural_checkpoint_readiness import (
+        run_neural_checkpoint_readiness,
+    )
+
+    result = run_neural_checkpoint_readiness()
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "metrics": result["metrics"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -821,6 +838,15 @@ def main(argv=None):
         default="outputs/evidence/evo028/checkpoint_readiness.json",
     )
     checkpoint.set_defaults(func=cmd_checkpoint_readiness)
+    neural_checkpoint = sub.add_parser(
+        "neural-checkpoint-readiness",
+        help="Train, admit, load, and benchmark a real neural checkpoint.",
+    )
+    neural_checkpoint.add_argument(
+        "--out",
+        default="outputs/evidence/evo029/neural_checkpoint_readiness.json",
+    )
+    neural_checkpoint.set_defaults(func=cmd_neural_checkpoint_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)
