@@ -666,6 +666,52 @@ def cmd_launch_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_failure_recovery_readiness(args):
+    from tessera.experiments.failure_recovery_readiness import (
+        run_failure_recovery_readiness,
+    )
+
+    result = run_failure_recovery_readiness(
+        args.preregistration,
+        args.failure,
+        args.recovery,
+        root=args.root,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "natural_failure_recovery_promoted": result[
+            "natural_failure_recovery_promoted"
+        ],
+        "decision": result["decision"],
+        "checks": result["checks"],
+        "metrics": result["metrics"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
+def cmd_local_security_readiness(args):
+    from tessera.experiments.local_security_readiness import (
+        run_local_security_readiness,
+    )
+
+    result = run_local_security_readiness(args.root)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "metrics": result["metrics"],
+        "external_security_review_complete": result[
+            "external_security_review_complete"
+        ],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1066,6 +1112,29 @@ def main(argv=None):
         default="outputs/evidence/evo035/launch_readiness.json",
     )
     launch_readiness.set_defaults(func=cmd_launch_readiness)
+    failure_recovery = sub.add_parser(
+        "failure-recovery-readiness",
+        help="Audit preregistered natural failure and recovery behavior.",
+    )
+    failure_recovery.add_argument("--root", default=".")
+    failure_recovery.add_argument("--preregistration", required=True)
+    failure_recovery.add_argument("--failure", required=True)
+    failure_recovery.add_argument("--recovery", required=True)
+    failure_recovery.add_argument(
+        "--out",
+        default="outputs/evidence/evo036/failure_recovery.json",
+    )
+    failure_recovery.set_defaults(func=cmd_failure_recovery_readiness)
+    local_security = sub.add_parser(
+        "local-security-readiness",
+        help="Run tracked-secret, AST, authority, and isolation checks.",
+    )
+    local_security.add_argument("--root", default=".")
+    local_security.add_argument(
+        "--out",
+        default="outputs/evidence/evo036/local_security.json",
+    )
+    local_security.set_defaults(func=cmd_local_security_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

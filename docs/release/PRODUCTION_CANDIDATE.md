@@ -36,12 +36,14 @@ certifications concurrently on the same host.
 4. Emit one summary only after each host session closes; preserve chronological
    order and never include sensitive payloads.
 5. Treat `abstain` as no memory candidacy and no automated host intervention.
-6. Monitor latency, worker failures, route coverage, and schema mismatches.
-7. On failure, unload the worker or roll back the active checkpoint pointer.
+6. Latch abstention after any observed host failure; release only after the
+   configured number of clean terminal sessions.
+7. Monitor latency, worker failures, route coverage, and schema mismatches.
+8. On failure, unload the worker or roll back the active checkpoint pointer.
 
 ## External launch blockers
 
-- An untouched natural failure-and-recovery cohort.
+- Four additional independent natural failure-and-recovery incidents.
 - Two genuinely independent external host integrations.
 - Independent security review and dependency vulnerability scan.
 - Independent reproduction in a clean environment.

@@ -6,13 +6,21 @@ from tessera.experiments.production_candidate import (
     run_production_candidate,
 )
 from tessera.experiments.release_readiness import run_release_readiness
+from tessera.experiments.local_security_readiness import (
+    run_local_security_readiness,
+)
 
 
 def run_launch_readiness(root: str | Path = ".") -> dict:
     """Run latency-sensitive runtime checks before release construction."""
     production = run_production_candidate(root)
+    security = run_local_security_readiness(root)
     release = run_release_readiness(root)
-    passed = bool(production["passed"] and release["passed"])
+    passed = bool(
+        production["passed"]
+        and security["passed"]
+        and release["passed"]
+    )
     return {
         "schema": "TESSERA-EVO-035-LAUNCH-READINESS-v0.1",
         "passed": passed,
@@ -23,6 +31,7 @@ def run_launch_readiness(root: str | Path = ".") -> dict:
         ),
         "certification_order": [
             "runtime_semantic_latency_restart_rollback_soak",
+            "local_static_security_and_secret_scan",
             "wheel_build_integrity_install_smoke",
         ],
         "production_candidate": {
@@ -35,6 +44,14 @@ def run_launch_readiness(root: str | Path = ".") -> dict:
             "checks": release["checks"],
             "version": release["version"],
             "wheel": release["wheel"],
+        },
+        "local_security_readiness": {
+            "passed": security["passed"],
+            "checks": security["checks"],
+            "metrics": security["metrics"],
+            "external_security_review_complete": security[
+                "external_security_review_complete"
+            ],
         },
         "external_launch_gates": release["remaining_external_gates"],
         "claim_boundary": (

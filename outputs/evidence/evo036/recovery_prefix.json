@@ -1,0 +1,865 @@
+{
+  "schema": "TESSERA-SANITIZED-TRAJECTORY-COHORT-v0.1",
+  "role": "evo036-recovery-prefix",
+  "cohort_sha256": "51a532bfc5f6c669cecdc16fe28340058ac1b2ae7f593bef8fe21286686d86d7",
+  "capture_manifest": {
+    "schema": "TESSERA-LOCAL-TRAJECTORY-CAPTURE-v0.1",
+    "privacy_audit": {
+      "schema": "TESSERA-LOCAL-TRAJECTORY-PRIVACY-AUDIT-v0.1",
+      "source_sha256": "ed80e69759fa337792d8123574f16a51de0bac85630633e363830d991a8da9c6",
+      "record_count": 60,
+      "malformed_count": 0,
+      "observed_fields": [
+        "command",
+        "detail",
+        "disk_read_bytes_delta",
+        "disk_read_time_ms_delta",
+        "disk_write_bytes_delta",
+        "disk_write_time_ms_delta",
+        "elapsed_ms",
+        "event_index",
+        "exit_code",
+        "memory_available_ratio",
+        "mirror_dir",
+        "phase",
+        "process_count",
+        "root",
+        "schema",
+        "session_id",
+        "state",
+        "subprocess_spawn_ms",
+        "system_cpu_percent",
+        "timestamp"
+      ],
+      "allowed_fields": [
+        "phase",
+        "schema",
+        "state",
+        "timestamp"
+      ],
+      "safe_optional_fields": [
+        "disk_read_bytes_delta",
+        "disk_read_time_ms_delta",
+        "disk_write_bytes_delta",
+        "disk_write_time_ms_delta",
+        "elapsed_ms",
+        "event_index",
+        "exit_code",
+        "memory_available_ratio",
+        "process_count",
+        "session_id",
+        "subprocess_spawn_ms",
+        "system_cpu_percent"
+      ],
+      "denied_fields_present": [
+        "command",
+        "detail",
+        "mirror_dir",
+        "root"
+      ],
+      "raw_payload_retained": false,
+      "capture_permitted": true,
+      "claim_boundary": "Privacy audit permits numeric metadata capture only; it does not authorize prompts, commands, paths, details, or raw outputs."
+    },
+    "minimum_prefix": 25,
+    "last_enriched_sessions": null,
+    "selected_session_ids": [
+      "db5f373cbeb44fc181ef3217255839f7"
+    ],
+    "captured_session_ids": [
+      "db5f373cbeb44fc181ef3217255839f7"
+    ],
+    "captured_session_count": 1,
+    "degraded_session_count": 0,
+    "clean_session_count": 1,
+    "excluded_sessions": [],
+    "retained_fields": [
+      "duration_ms",
+      "phase",
+      "state",
+      "phase_code",
+      "transition",
+      "phase_repetition",
+      "skip_indicator",
+      "event_index",
+      "system_cpu_percent",
+      "memory_available_ratio",
+      "process_count",
+      "subprocess_spawn_ms",
+      "disk_read_bytes_delta",
+      "disk_write_bytes_delta",
+      "disk_read_time_ms_delta",
+      "disk_write_time_ms_delta"
+    ],
+    "denied_fields": [
+      "command",
+      "detail",
+      "mirror_dir",
+      "root"
+    ],
+    "raw_payload_retained": false,
+    "claim_boundary": "Sanitized local capture is an offline diagnostic dataset only."
+  },
+  "trajectory_count": 1,
+  "clean_count": 1,
+  "degraded_count": 0,
+  "trajectories": [
+    {
+      "degraded": false,
+      "profile": "711a178bcccc9222",
+      "events": [
+        {
+          "event_id": "captured-0-0",
+          "kind": "plan_transition",
+          "timestamp": 1782039276.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 1.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 100.0,
+            "memory_available_ratio": 0.22705386648006434,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-1",
+          "kind": "plan_transition",
+          "timestamp": 1782039276.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 2.0,
+            "resource_cost": 6.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22687025211072187,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-2",
+          "kind": "plan_transition",
+          "timestamp": 1782039276.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 3.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22681724008807708,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-3",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 97.05280000343919,
+            "history_turns": 4.0,
+            "resource_cost": 6.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 40.5,
+            "memory_available_ratio": 0.22561386717403992,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": 15.79830000991933,
+            "disk_read_bytes_delta": 10240.0,
+            "disk_write_bytes_delta": 0.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "MIRROR",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-4",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 5.0,
+            "resource_cost": 8.0,
+            "tool_count": 1.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22561386717403992,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-5",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 201.1793999990914,
+            "history_turns": 6.0,
+            "resource_cost": 8.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 87.5,
+            "memory_available_ratio": 0.22660133657766912,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": 6.4193000143859535,
+            "disk_read_bytes_delta": 244736.0,
+            "disk_write_bytes_delta": 0.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "REHYDRATE",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-6",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 7.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22660326428758348,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-7",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 196.38989999657497,
+            "history_turns": 8.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 86.3,
+            "memory_available_ratio": 0.22314880812105634,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": 4.837799991946667,
+            "disk_read_bytes_delta": 125952.0,
+            "disk_write_bytes_delta": 16384.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-8",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 9.0,
+            "resource_cost": 5.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22313049487686995,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-9",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 222.8334000101313,
+            "history_turns": 10.0,
+            "resource_cost": 5.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 74.7,
+            "memory_available_ratio": 0.22280471190134366,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": 4.98410000000149,
+            "disk_read_bytes_delta": 1113088.0,
+            "disk_write_bytes_delta": 1490944.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-10",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 11.0,
+            "resource_cost": 5.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22280422997386506,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-11",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 129.44300001254305,
+            "history_turns": 12.0,
+            "resource_cost": 5.0,
+            "tool_count": 0.0,
+            "retry": 3.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 67.3,
+            "memory_available_ratio": 0.22391603666697027,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": 4.381799983093515,
+            "disk_read_bytes_delta": 0.0,
+            "disk_write_bytes_delta": 1298432.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "LOOPBOOK",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-12",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 13.0,
+            "resource_cost": 2.0,
+            "tool_count": 1.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.2238297716483028,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-13",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 84.51710001099855,
+            "history_turns": 14.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 3.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 73.0,
+            "memory_available_ratio": 0.22438928945094486,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": 4.080499988049269,
+            "disk_read_bytes_delta": 10752.0,
+            "disk_write_bytes_delta": 1617920.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-14",
+          "kind": "plan_transition",
+          "timestamp": 1782039277.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 15.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 4.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22438977137842342,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-15",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 97.96040001674555,
+            "history_turns": 16.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 5.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 100.0,
+            "memory_available_ratio": 0.22290157932454008,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": 6.186499987961724,
+            "disk_read_bytes_delta": 1024.0,
+            "disk_write_bytes_delta": 131072.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-16",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 17.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 6.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22290157932454008,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-17",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 105.37980002118275,
+            "history_turns": 18.0,
+            "resource_cost": 2.0,
+            "tool_count": 0.0,
+            "retry": 7.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 85.7,
+            "memory_available_ratio": 0.22203266408064382,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": 4.928199981804937,
+            "disk_read_bytes_delta": 18944.0,
+            "disk_write_bytes_delta": 0.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "GEOMETRY",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-18",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 19.0,
+            "resource_cost": 1.0,
+            "tool_count": 1.0,
+            "retry": 0.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22203170022568663,
+            "process_count": 302.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "CHECK",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-19",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 88.87750000576489,
+            "history_turns": 20.0,
+            "resource_cost": 1.0,
+            "tool_count": 0.0,
+            "retry": 1.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 92.3,
+            "memory_available_ratio": 0.2238480848924892,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": 4.598600004101172,
+            "disk_read_bytes_delta": 0.0,
+            "disk_write_bytes_delta": 0.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "CHECK",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-20",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 21.0,
+            "resource_cost": 1.0,
+            "tool_count": 0.0,
+            "retry": 2.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22385001260240356,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "CHECK",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-21",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 73.0213999922853,
+            "history_turns": 22.0,
+            "resource_cost": 1.0,
+            "tool_count": 0.0,
+            "retry": 3.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 43.3,
+            "memory_available_ratio": 0.22454928937383645,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": 6.485299993073568,
+            "disk_read_bytes_delta": 3072.0,
+            "disk_write_bytes_delta": 0.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "CHECK",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-22",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 23.0,
+            "resource_cost": 1.0,
+            "tool_count": 0.0,
+            "retry": 4.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.2245516990112294,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "CHECK",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-23",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 63.17219999618828,
+            "history_turns": 24.0,
+            "resource_cost": 1.0,
+            "tool_count": 0.0,
+            "retry": 5.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 16.7,
+            "memory_available_ratio": 0.22455892792340823,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": 3.734700003406033,
+            "disk_read_bytes_delta": 1024.0,
+            "disk_write_bytes_delta": 0.0,
+            "disk_read_time_ms_delta": 0.0,
+            "disk_write_time_ms_delta": 0.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "CHECK",
+            "state": "OK",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        },
+        {
+          "event_id": "captured-0-24",
+          "kind": "plan_transition",
+          "timestamp": 1782039278.0,
+          "features": {
+            "duration_ms": 0.0,
+            "history_turns": 25.0,
+            "resource_cost": 1.0,
+            "tool_count": 0.0,
+            "retry": 6.0,
+            "blocked": 0.0,
+            "finish_reason_length": 0.0,
+            "error": 0.0,
+            "token_count": 0.0,
+            "system_cpu_percent": 0.0,
+            "memory_available_ratio": 0.22455940985088682,
+            "process_count": 300.0,
+            "subprocess_spawn_ms": -1.0,
+            "disk_read_bytes_delta": -1.0,
+            "disk_write_bytes_delta": -1.0,
+            "disk_read_time_ms_delta": -1.0,
+            "disk_write_time_ms_delta": -1.0
+          },
+          "metadata": {
+            "capture": "privacy_sanitized_v0.1",
+            "phase": "CHECK",
+            "state": "RUN",
+            "session_id": "db5f373cbeb44fc181ef3217255839f7"
+          }
+        }
+      ]
+    }
+  ],
+  "claim_boundary": "Archived sanitized cohorts retain numeric operational metadata only and grant no monitoring or intervention authority."
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "TESSERA-EVO-036-FAILURE-RECOVERY-PREREGISTRATION-v0.1",
+  "operation": "TESSERA-EVO-036",
+  "frozen_before_scoring": true,
+  "source": "privacy-sanitized Agent CLI Mirror session telemetry captured after EVO-035",
+  "failure_definition": "the first event whose state is FAIL",
+  "precursor_rule": {
+    "exclude_failure_event": true,
+    "prefix_events": 25,
+    "minimum_events": 9
+  },
+  "recovery_definition": "the next chronological full-loop session with no FAIL event and a terminal ROOT OK event",
+  "router": {
+    "checkpoint_training_sessions": 100,
+    "score": "latent_drift",
+    "threshold": 0.03937917947769165,
+    "forecast_mutation": false
+  },
+  "promotion_gate": {
+    "minimum_independent_failure_episodes": 5,
+    "minimum_failure_abstention_recall": 0.8,
+    "minimum_recovery_release_rate": 0.8,
+    "maximum_clean_false_intervention": 0.1,
+    "abstention_must_suppress_memory": true
+  },
+  "insufficient_support_rule": "Report observed behavior but reject natural failure/recovery promotion when episode support is below five.",
+  "claim_boundary": "A preregistered local incident audit does not establish general failure sensitivity, production safety, or autonomous intervention authority."
+}

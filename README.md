@@ -8,9 +8,9 @@
 into sparse neural state, and answers a deliberately narrow question: should
 the host trust this session—or abstain?**
 
-![Package](https://img.shields.io/badge/tessera-v0.3.1-blue)
+![Package](https://img.shields.io/badge/tessera-v0.3.2-blue)
 ![Release Gate](https://img.shields.io/badge/release%20gate-9%2F9-brightgreen)
-![Tests](https://img.shields.io/badge/tests-111%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-115%20passing-brightgreen)
 ![Warm p95](https://img.shields.io/badge/EVO--034%20warm%20p95-95.19%20ms-brightgreen)
 ![Route parity](https://img.shields.io/badge/route%20parity-100%25-brightgreen)
 ![RCC-N](https://img.shields.io/badge/RCC--N-Full-brightgreen)
@@ -48,7 +48,8 @@ tools, mutate prompts, replace models, or overrule the host.
 | Final retained-risk change vs full coverage | **-6.53%** |
 | Final retained-risk change vs simple router | **-10.37%** |
 | Release artifact verification | **9 / 9 checks passed** |
-| Test suite | **111 passing** |
+| Local security scan | **release source, 0 findings** |
+| Test suite | **115 passing** |
 | Real telemetry families with dataset-scoped T1 support | **NAB + UCR** |
 | NAB machine-temperature AUC | **0.94865** |
 | UCR untouched confirmation AUC | **0.96081** |
@@ -66,6 +67,7 @@ and [`outputs/evidence/`](outputs/evidence/).
 | Session-semantic adapters | Converts native `AgentEvent` or JSON host sessions into the exact versioned calibration space. |
 | Fail-closed supervision | Contains crashes and timeouts, opens a circuit breaker, and emits no proposal on failure. |
 | Memory governance | Suppresses memory candidacy whenever the router abstains. |
+| Incident containment | Latches `abstain` after an observed failure and releases only after a clean terminal recovery. |
 | Shadow evolution | Trains immutable checkpoint proposals outside the request path. |
 | Replay admission | Hash-checks, replay-gates, atomically activates, and rolls back checkpoints. |
 | Release verification | Builds the wheel, verifies its RECORD, installs it in isolation, and smoke-tests package inference and CLI execution. |
@@ -87,16 +89,17 @@ local_production_candidate
 reproducible_release_candidate
 ```
 
-External launch still requires an untouched natural failure/recovery cohort,
-two independent host integrations, independent security review, reproduction
-without inherited packages, and cross-platform subprocess certification.
+External launch still requires four more independent failure/recovery
+incidents, two independent host integrations, independent security review,
+reproduction without inherited packages, and cross-platform subprocess
+certification.
 
 ## Current Health Snapshot
 
 | Surface | Current result |
 |---|---:|
 | Repository | `Tessera` |
-| Package / CLI | `tessera` v0.3.1 |
+| Package / CLI | `tessera` v0.3.2 |
 | Launch gate | repository launch candidate; external gates open |
 | Diagnostic engine | Engine v0.1 |
 | Operator surface | v0.3.9 Agent CLI Mirror Graceful Stop |
@@ -153,6 +156,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | Neural value may emerge as metacognition rather than prediction. | Latent state may earn abstention authority while stable experts retain forecast ownership. |
 | A validated router still needs a semantically matching host adapter. | Runtime mechanics and cross-host threshold transfer remain separate promotion gates. |
 | Semantic equivalence is testable, not assumed. | Versioned host adapters must reproduce calibration vectors and offline routes exactly before local release candidacy. |
+| Neural uncertainty is not incident prediction. | Observed failures enter a deterministic host latch; the neural threshold is not moved to fit one incident. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 

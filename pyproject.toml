@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tessera"
-version = "0.3.1"
-description = "TESSERA Engine v0.3.1: supervised sparse-neural sidecar with session-semantic routing, replay admission, release verification, and fail-closed authority."
+version = "0.3.2"
+description = "TESSERA Engine v0.3.2: supervised sparse-neural trust routing with deterministic incident containment, replay admission, release verification, and fail-closed authority."
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name="James Paul Jackson"}]

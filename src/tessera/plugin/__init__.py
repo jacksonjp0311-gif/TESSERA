@@ -10,11 +10,14 @@ from .host_adapters import (
     JsonSessionAdapter,
     SessionSummaryContract,
 )
+from .incident_governor import GovernedRoute, IncidentGovernor
 
 __all__ = [
     "CheckpointStore",
     "AgentEventSessionAdapter",
     "JsonSessionAdapter",
+    "GovernedRoute",
+    "IncidentGovernor",
     "PluginSupervisor",
     "ReplayGate",
     "ShadowTrainer",

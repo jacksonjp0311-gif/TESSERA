@@ -4,6 +4,7 @@
   "status": "repository_launch_candidate",
   "certification_order": [
     "runtime_semantic_latency_restart_rollback_soak",
+    "local_static_security_and_secret_scan",
     "wheel_build_integrity_install_smoke"
   ],
   "production_candidate": {
@@ -37,13 +38,13 @@
       "trusted_count": 18,
       "abstain_count": 2,
       "route_parity_rate": 1.0,
-      "cold_start_latency_ms": 3759.699299989734,
-      "warm_latency_ms_p50": 71.68685000215191,
-      "warm_latency_ms_p95": 93.33982501993887,
-      "warm_latency_ms_max": 93.40869999141432,
+      "cold_start_latency_ms": 3609.439799998654,
+      "warm_latency_ms_p50": 66.88539999595378,
+      "warm_latency_ms_p95": 70.70252498815535,
+      "warm_latency_ms_max": 75.96790001844056,
       "soak_requests": 100,
       "soak_failures": 0,
-      "soak_latency_ms_p99": 139.1964679979742,
+      "soak_latency_ms_p99": 93.34309300495086,
       "latency_budget_ms": 250.0
     }
   },
@@ -61,21 +62,40 @@
       "installed_cli_passed": true
     },
     "version": {
-      "project": "0.3.1",
-      "package": "0.3.1",
-      "plugin_manifest": "0.3.1",
-      "wheel_metadata": "0.3.1"
+      "project": "0.3.2",
+      "package": "0.3.2",
+      "plugin_manifest": "0.3.2",
+      "wheel_metadata": "0.3.2"
     },
     "wheel": {
-      "filename": "tessera-0.3.1-py3-none-any.whl",
-      "sha256": "009b4cc4436dc28cb7299a2a95cca8b7ef03fd973c98cfec9985ffcf2ccd78ba",
-      "file_count": 74,
+      "filename": "tessera-0.3.2-py3-none-any.whl",
+      "sha256": "08cff8e661854ee8ef23edce542a929617e9c208556d1e4382f7c047ee5bae80",
+      "file_count": 77,
       "forbidden_paths": [],
       "record_failures": []
     }
   },
+  "local_security_readiness": {
+    "passed": true,
+    "checks": {
+      "tracked_secret_scan_clean": true,
+      "no_dynamic_execution_or_shell_true": true,
+      "plugin_network_authority_denied": true,
+      "mutation_authorities_denied": true,
+      "checkpoint_deserialization_uses_weights_only": true,
+      "supervisor_uses_spawned_process_boundary": true,
+      "hard_timeout_and_circuit_breaker_present": true
+    },
+    "metrics": {
+      "release_files_scanned": 147,
+      "python_findings": 0,
+      "secret_findings": 0,
+      "denied_authorities": 6
+    },
+    "external_security_review_complete": false
+  },
   "external_launch_gates": [
-    "untouched natural failure-and-recovery cohort",
+    "minimum-support natural failure/recovery cohort: four more independent incidents",
     "two genuinely independent external host integrations",
     "independent vulnerability scan and security review",
     "independent reproduction without inherited system packages",

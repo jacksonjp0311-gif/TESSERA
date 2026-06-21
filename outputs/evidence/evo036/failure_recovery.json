@@ -1,0 +1,97 @@
+{
+  "schema": "TESSERA-EVO-036-FAILURE-RECOVERY-v0.1",
+  "passed": true,
+  "natural_failure_recovery_promoted": false,
+  "decision": "retain_router_reject_failure_recovery_claim",
+  "checks": {
+    "preregistration_frozen_before_scoring": true,
+    "failure_prefix_excludes_failure_event": true,
+    "recovery_prefix_is_clean": true,
+    "failure_abstained": false,
+    "recovery_released": false,
+    "abstention_suppresses_memory": false,
+    "minimum_episode_support_met": false,
+    "incident_latch_forces_abstention": true,
+    "incident_latch_suppresses_memory": true,
+    "clean_terminal_session_releases_latch": true
+  },
+  "session_contract": {
+    "schema": "TESSERA-SESSION-SUMMARY-v0.1",
+    "source_event_schema": "TESSERA-AGENT-EVENT-v0.1",
+    "aggregation": [
+      "mean",
+      "std",
+      "latest"
+    ],
+    "source_features": [
+      "duration_ms",
+      "token_count",
+      "error",
+      "retry",
+      "files_changed",
+      "tests_failed",
+      "tool_latency_ms",
+      "resource_cost",
+      "prompt_length",
+      "system_prompt_ratio",
+      "history_turns",
+      "tool_count",
+      "finish_reason_length",
+      "has_tool_call",
+      "reasoning_tokens",
+      "lines_added",
+      "lines_removed",
+      "diff_tokens",
+      "tests_passed",
+      "step_number",
+      "blocked",
+      "revision_count",
+      "error_tokens",
+      "is_test_failure",
+      "previous_error",
+      "cost_usd",
+      "rate_limited",
+      "retry_after_ms"
+    ],
+    "selected_indices": [
+      0,
+      7,
+      28,
+      35,
+      38
+    ],
+    "feature_names": [
+      "mean_duration_ms",
+      "mean_resource_cost",
+      "std_duration_ms",
+      "std_resource_cost",
+      "std_history_turns"
+    ],
+    "chronology": "one completed session per runtime event"
+  },
+  "metrics": {
+    "baseline_loss": 0.08403712511062622,
+    "candidate_loss": 0.04824817580510925,
+    "replay_pass_rate": 0.5263157894736842,
+    "neural_awareness_loss": 0.045525368783273734,
+    "train_rows": 60,
+    "validation_rows": 20,
+    "replay_rows": 20,
+    "selected_prediction_expert": "ewma_0.05",
+    "failure_episodes": 1,
+    "recovery_episodes": 1,
+    "minimum_failure_episodes": 5,
+    "failure_latent_drift": 0.012412279844284058,
+    "recovery_latent_drift": 0.4092440605163574,
+    "router_threshold": 0.03937917947769165,
+    "failure_abstention_recall": 0.0,
+    "recovery_release_rate": 0.0,
+    "memory_candidate_on_failure": true,
+    "incident_latch_recovery_sessions_required": 1
+  },
+  "source_roles": {
+    "failure": "untouched post-EVO-035 natural failed full-loop prefix",
+    "recovery": "subsequent post-fix successful full-loop prefix"
+  },
+  "claim_boundary": "One natural incident and one recovery session reveal observed behavior only. They do not establish general failure sensitivity or production intervention authority."
+}

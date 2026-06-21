@@ -33,6 +33,7 @@
     "command": "python -m tessera launch-readiness --root .",
     "certification_order": [
       "production-candidate",
+      "local-security-readiness",
       "release-readiness"
     ],
     "parallel_execution_allowed": false,

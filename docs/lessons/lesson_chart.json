@@ -577,6 +577,18 @@
       "validation_gate": "src/tessera/experiments/launch_readiness.py",
       "authority_boundary": "Repository launch candidacy does not replace independent security, external host, clean-environment, cross-platform, or natural failure validation.",
       "status": "promoted"
+    },
+    {
+      "id": "F049",
+      "observed_event": "On the first untouched natural incident, latent drift trusted the failure precursor and abstained on the subsequent clean recovery.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-036-final-evidence.json",
+      "wound_class": "uncertainty_router_misread_as_failure_predictor",
+      "diagnosis": "A clean-session risk router is not a validated incident detector, and one incident cannot justify threshold retuning.",
+      "lesson": "Separate predictive uncertainty from observed incident containment; latch failures deterministically and release only on declared clean terminal recovery.",
+      "future_behavior_change": "The host incident governor overrides neural trust after observed failure, suppresses memory, and preserves the preregistered neural threshold.",
+      "validation_gate": "src/tessera/experiments/failure_recovery_readiness.py",
+      "authority_boundary": "Incident containment does not establish failure prediction, autonomous intervention, or general production safety.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

@@ -1,0 +1,88 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.36",
+  "operation": "TESSERA-EVO-036",
+  "previous_operation": "TESSERA-EVO-035",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "21124a9",
+  "state_after_validation": "INCIDENT_LATCH_INTEGRATED_NATURAL_SENSITIVITY_REJECTED",
+  "implemented": [
+    "preregistered natural failure/recovery audit",
+    "immutable privacy-safe failure and recovery prefixes",
+    "deterministic host-owned incident latch",
+    "failure-triggered abstention and memory suppression",
+    "clean-terminal recovery release",
+    "release-source secret and dangerous-execution scan",
+    "plugin authority and isolation security checks",
+    "Tessera v0.3.2 release artifact"
+  ],
+  "finding": "The frozen neural router trusted the untouched failure precursor and abstained on recovery. Predictive sensitivity is rejected. Deterministic incident containment passed and local security checks found no release-source findings.",
+  "decision": "Promote the incident governor, preserve the neural threshold, reject natural failure/recovery prediction claims, and collect four more independent incidents.",
+  "metrics": {
+    "unit_tests_expected": 115,
+    "failure_episodes": 1,
+    "recovery_episodes": 1,
+    "minimum_failure_episodes": 5,
+    "failure_latent_drift": 0.012412279844284058,
+    "recovery_latent_drift": 0.4092440605163574,
+    "router_threshold": 0.03937917947769165,
+    "failure_abstention_recall": 0.0,
+    "recovery_release_rate": 0.0,
+    "incident_latch_forces_abstention": true,
+    "incident_latch_suppresses_memory": true,
+    "clean_terminal_session_releases_latch": true,
+    "release_files_scanned": 147,
+    "secret_findings": 0,
+    "python_security_findings": 0,
+    "launch_warm_latency_ms_p95": 70.70252498815535,
+    "launch_soak_latency_ms_p99": 93.34309300495086,
+    "launch_soak_failures": 0,
+    "wheel_version": "0.3.2",
+    "wheel_file_count": 77
+  },
+  "artifacts": {
+    "failure_prefix": {
+      "path": "outputs/evidence/evo036/failure_prefix.json",
+      "sha256": "3b0be688ba8725d72f9d5d266d5a0334f3c9cbdbfdad10b35b59ec5bf2daf631"
+    },
+    "recovery_prefix": {
+      "path": "outputs/evidence/evo036/recovery_prefix.json",
+      "sha256": "8626a37ebb455746cc5ed61fce5f6f8ba448c01cdedb8fbd92ab585d14fda25c"
+    },
+    "failure_recovery": {
+      "path": "outputs/evidence/evo036/failure_recovery.json",
+      "sha256": "3094aba7373564adc48f5bfc4b21e52179eb2cef57fe83bf420c99e2d9aa3eb2"
+    },
+    "local_security": {
+      "path": "outputs/evidence/evo036/local_security.json",
+      "sha256": "a2df89e610e363dcfa2c42bf693ba7b3172ed14d56a879bafa08b6ae8e2679c8"
+    },
+    "launch_readiness": {
+      "path": "outputs/evidence/evo035/launch_readiness.json",
+      "sha256": "5d9cce6ff9029666afb987879d93ff8892509e9a52411895a202c7af6142931b"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.2-py3-none-any.whl",
+      "sha256": "08cff8e661854ee8ef23edce542a929617e9c208556d1e4382f7c047ee5bae80"
+    }
+  },
+  "external_launch_gates": [
+    "four more independent natural failure/recovery incidents",
+    "two genuinely independent external host integrations",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "next_recommended_operation": "collect_four_more_incidents_and_integrate_two_independent_hosts",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Incident containment and local static checks do not prove failure prediction, external production readiness, vulnerability absence, consciousness, or autonomous authority."
+}

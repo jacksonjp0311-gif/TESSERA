@@ -1,0 +1,25 @@
+{
+  "schema": "TESSERA-EVO-036-LOCAL-SECURITY-v0.1",
+  "passed": true,
+  "checks": {
+    "tracked_secret_scan_clean": true,
+    "no_dynamic_execution_or_shell_true": true,
+    "plugin_network_authority_denied": true,
+    "mutation_authorities_denied": true,
+    "checkpoint_deserialization_uses_weights_only": true,
+    "supervisor_uses_spawned_process_boundary": true,
+    "hard_timeout_and_circuit_breaker_present": true
+  },
+  "metrics": {
+    "release_files_scanned": 147,
+    "python_findings": 0,
+    "secret_findings": 0,
+    "denied_authorities": 6
+  },
+  "findings": {
+    "python": [],
+    "secrets": []
+  },
+  "external_security_review_complete": false,
+  "claim_boundary": "Local static checks reduce obvious release risk but are not an independent vulnerability assessment, penetration test, or security certification."
+}

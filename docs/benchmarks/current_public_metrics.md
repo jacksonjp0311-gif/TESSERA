@@ -2,7 +2,7 @@
 
 | Surface | Current value |
 |---|---|
-| Engine | TESSERA Engine v0.3.1 |
+| Engine | TESSERA Engine v0.3.2 |
 | Runtime loop compiler | active |
 | CLI loop | `python -m tessera loop ascii` |
 | Compile surface | `reports/runtime_loop/` |
@@ -33,7 +33,12 @@
 | EVO-035 release checks | 9 of 9 passed |
 | EVO-035 package version coherence | pyproject, package, plugin, wheel all 0.3.1 |
 | EVO-035 wheel integrity | RECORD verified; forbidden paths 0 |
-| Next operation | untouched natural failure/recovery and independent host/security validation |
+| EVO-036 natural failure precursor | trusted; predictive sensitivity rejected |
+| EVO-036 natural recovery prefix | abstained; predictive recovery release rejected |
+| EVO-036 observed-failure incident latch | abstain + memory suppression passed |
+| EVO-036 clean terminal recovery release | passed |
+| EVO-036 local security scan | release source; 0 findings |
+| Next operation | collect 4 more independent incidents and run independent host/security validation |
 | UCR EVO-007 discovery AUC | 0.97629 |
 | UCR EVO-007 confirmation AUC | 0.43675 |
 | EVO-007 conclusion | universal shape window rejected; scale router required |

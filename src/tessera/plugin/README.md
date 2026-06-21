@@ -43,6 +43,8 @@ proposals.
   neural field loss remains separately visible for anomaly awareness.
 - Versioned session adapters preserve the calibrated mean/std/latest semantic
   space across native AgentEvent and JSON host records.
+- A deterministic host-owned incident governor latches abstention after an
+  observed failure and requires clean terminal recovery before release.
 - Release verification builds and integrity-checks the wheel, installs it into
   an isolated environment, and executes packaged inference and CLI smoke tests.
 
