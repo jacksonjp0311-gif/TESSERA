@@ -37,7 +37,7 @@ class PluginPermissions:
 class PluginManifest:
     schema: str = "TESSERA-PLUGIN-MANIFEST-v0.3"
     name: str = "tessera-neural-sidecar"
-    version: str = "0.3.7"
+    version: str = "0.3.8"
     deterministic_mode: bool = True
     event_schema: str = "TESSERA-AGENT-EVENT-v0.1"
     execution_model: str = "host-supervised-local-subprocess"
@@ -49,6 +49,7 @@ class PluginManifest:
     supports_manifold_drift_gate: bool = True
     supports_sequential_geometry_gate: bool = True
     supports_exact_prefix_state: bool = True
+    supports_integrity_bound_restart_state: bool = True
     permissions: PluginPermissions = field(default_factory=PluginPermissions)
     claim_boundary: str = (
         "The plugin provides local inference and proposals only; the host retains "

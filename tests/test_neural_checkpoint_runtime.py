@@ -136,6 +136,26 @@ class TestNeuralCheckpointRuntime(unittest.TestCase):
         plugin.infer()
         self.assertEqual(plugin._checkpoint_cache_mode, "full_replay")
 
+    def test_state_capsule_restores_exact_prefix(self):
+        events = _events()
+        payload, _ = train_neural_checkpoint(vectorize_events(events))
+        source = TesseraPlugin(
+            neural_min_events=8,
+            checkpoint_payload=payload,
+        )
+        source.observe(events[:20])
+        source.infer()
+        capsule = source.export_state_capsule()
+        restored = TesseraPlugin(
+            neural_min_events=8,
+            checkpoint_payload=payload,
+            state_capsule=capsule,
+        )
+        restored.observe(events[:21])
+        packet = restored.infer()
+        self.assertEqual(restored._checkpoint_cache_mode, "prefix_extended")
+        self.assertEqual(packet.status, "admitted_neural_checkpoint")
+
 
 if __name__ == "__main__":
     unittest.main()

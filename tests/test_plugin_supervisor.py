@@ -86,11 +86,12 @@ class TestPluginSupervisor(unittest.TestCase):
 
         manifest = TesseraPlugin().describe()
         self.assertEqual(manifest.schema, "TESSERA-PLUGIN-MANIFEST-v0.3")
-        self.assertEqual(manifest.version, "0.3.7")
+        self.assertEqual(manifest.version, "0.3.8")
         self.assertTrue(manifest.supports_host_observability_gate)
         self.assertTrue(manifest.supports_manifold_drift_gate)
         self.assertTrue(manifest.supports_sequential_geometry_gate)
         self.assertTrue(manifest.supports_exact_prefix_state)
+        self.assertTrue(manifest.supports_integrity_bound_restart_state)
         self.assertEqual(
             manifest.session_summary_schema,
             "TESSERA-SESSION-SUMMARY-v0.1",

@@ -92,5 +92,15 @@
     "prefix_mismatch_behavior": "full_replay",
     "approximate_cache_hits_allowed": false
   },
+  "restart_state_capsule": {
+    "schema": "TESSERA-PREFIX-STATE-CAPSULE-v0.1",
+    "integrity": "canonical-json-sha256",
+    "checkpoint_binding_required": true,
+    "feature_contract_binding_required": true,
+    "router_binding_required": true,
+    "prefix_hash_required": true,
+    "tamper_behavior": "reject",
+    "mismatch_behavior": "full_replay"
+  },
   "claim_boundary": "This configuration defines a local candidate profile. External launch blockers remain authoritative."
 }

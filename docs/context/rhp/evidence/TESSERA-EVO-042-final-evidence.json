@@ -1,0 +1,75 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.42",
+  "operation": "TESSERA-EVO-042",
+  "previous_operation": "TESSERA-EVO-041",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "56ecf38",
+  "state_after_validation": "INTEGRITY_BOUND_RESTART_STATE_GATED",
+  "implemented": [
+    "canonical JSON state capsule",
+    "SHA-256 capsule integrity envelope",
+    "checkpoint and contract binding",
+    "router and normalized-prefix binding",
+    "recurrent tensor and metric-row restoration",
+    "tamper and mismatch rejection",
+    "Tessera v0.3.8 package"
+  ],
+  "finding": "Proof-carrying recurrent state can cross a worker boundary without semantic drift when the complete state and its lineage share one verified integrity envelope.",
+  "decision": "Promote integrity-bound restart capsules while preserving full replay for every mismatch.",
+  "metrics": {
+    "unit_tests_expected": 135,
+    "prefix_rows_restored": 110,
+    "restart_packet_parity": 1.0,
+    "restart_metric_row_parity": 1.0,
+    "restored_continuation_latency_ms": 1.1343999649398029,
+    "full_replay_latency_ms": 56.1203999677673,
+    "restart_speedup": 49.47144014654949,
+    "tampered_capsule_rejected": true,
+    "checkpoint_mismatch_rejected": true,
+    "historical_mismatch_mode": "full_replay",
+    "launch_route_parity": 1.0,
+    "launch_warm_latency_ms_p95": 4.948935008724258,
+    "launch_soak_latency_ms_p99": 0.8306500199250889,
+    "launch_soak_failures": 0,
+    "wheel_version": "0.3.8",
+    "wheel_file_count": 87
+  },
+  "artifacts": {
+    "restart_state": {
+      "path": "outputs/evidence/evo042/restart_state.json",
+      "sha256": "4fd4ed452529fa6621becf8c039df8c2ba11593710974325e08d4e8c8d809b17"
+    },
+    "launch_readiness": {
+      "path": "outputs/evidence/evo042/launch_readiness.json",
+      "sha256": "4f87073d1f2a88b43413376054ba02af8b8b4aa79cc670b6790b720817f5bc5c"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.8-py3-none-any.whl",
+      "sha256": "611007d0626a871510b5fa5c821cc1e5e7c01e44df031337ffd02b1dc65fc4ab"
+    },
+    "research_report": {
+      "path": "docs/research/INTEGRITY_BOUND_RESTART_STATE_2026-06-21.md"
+    }
+  },
+  "external_launch_gates": [
+    "four more independent natural failure/recovery incidents",
+    "independently operated Agent CLI trial",
+    "independently operated Hermes trial",
+    "host-keyed capsule authentication and atomic durable storage",
+    "independent vulnerability scan and security review",
+    "clean-environment and cross-platform certification"
+  ],
+  "next_recommended_operation": "add_atomic_host_owned_capsule_store_then_run_independent_host_trials",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Integrity-bound restart state does not prove confidentiality, privileged-attacker authenticity, consciousness, general transfer, or autonomous authority."
+}

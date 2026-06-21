@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from collections import deque
+from dataclasses import asdict
 import hashlib
 
 import numpy as np
+import torch
 
 from tessera.graph.topologies import make_operator
 from tessera.model.train import (
@@ -29,6 +31,11 @@ from .contracts import (
 )
 from .trajectory import vectorize_events
 from .neural_checkpoints import load_neural_checkpoint
+from .state_capsules import (
+    open_state_capsule,
+    seal_state_capsule,
+    sha256_json,
+)
 
 
 class TesseraPlugin:
@@ -68,6 +75,7 @@ class TesseraPlugin:
         checkpoint_payload: dict | None = None,
         uncertainty_router: dict | None = None,
         feature_names: tuple[str, ...] | list[str] | None = None,
+        state_capsule: dict | None = None,
     ):
         self._events: deque[AgentEvent] = deque(maxlen=max_events)
         self.warning_quantile = warning_quantile
@@ -76,6 +84,11 @@ class TesseraPlugin:
         self.field_dim = field_dim
         self.code_dim = code_dim
         self.inline_neural_training = inline_neural_training
+        self._checkpoint_payload_hash = (
+            sha256_json(checkpoint_payload)
+            if checkpoint_payload is not None
+            else None
+        )
         self._loaded_checkpoint = (
             load_neural_checkpoint(checkpoint_payload)
             if checkpoint_payload is not None
@@ -96,9 +109,87 @@ class TesseraPlugin:
         self._checkpoint_cache_rows: list[dict] | None = None
         self._checkpoint_cache_state: dict | None = None
         self._checkpoint_cache_mode = "empty"
+        self._state_capsule_status = "not_provided"
+        if state_capsule is not None:
+            self.restore_state_capsule(state_capsule)
 
     def describe(self) -> PluginManifest:
         return PluginManifest()
+
+    def export_state_capsule(self) -> dict:
+        if (
+            self._checkpoint_cache_matrix is None
+            or self._checkpoint_cache_rows is None
+            or self._checkpoint_cache_state is None
+            or self._checkpoint_cache_packet is None
+        ):
+            raise ValueError("prefix_state_not_available")
+        state = self._checkpoint_cache_state
+        payload = {
+            "checkpoint_payload_sha256": self._checkpoint_payload_hash,
+            "feature_names": list(self.feature_names or ()),
+            "uncertainty_router": self.uncertainty_router,
+            "normalized_prefix": self._checkpoint_cache_matrix.tolist(),
+            "metric_rows": self._checkpoint_cache_rows,
+            "recurrent_state": {
+                "field": state["field"].detach().cpu().tolist(),
+                "level": state["level"].detach().cpu().tolist(),
+                "previous_code": (
+                    state["previous_code"].detach().cpu().tolist()
+                ),
+                "last_observation": (
+                    state["last_observation"].detach().cpu().tolist()
+                ),
+                "transitions": int(state["transitions"]),
+            },
+            "packet": asdict(self._checkpoint_cache_packet),
+            "cache_key": self._checkpoint_cache_key,
+        }
+        return seal_state_capsule(payload)
+
+    def restore_state_capsule(self, capsule: dict) -> None:
+        payload = open_state_capsule(capsule)
+        if (
+            payload.get("checkpoint_payload_sha256")
+            != self._checkpoint_payload_hash
+        ):
+            raise ValueError("state_capsule_checkpoint_mismatch")
+        if tuple(payload.get("feature_names", ())) != tuple(
+            self.feature_names or ()
+        ):
+            raise ValueError("state_capsule_feature_contract_mismatch")
+        if payload.get("uncertainty_router") != self.uncertainty_router:
+            raise ValueError("state_capsule_router_mismatch")
+        matrix = np.asarray(
+            payload["normalized_prefix"],
+            dtype="float32",
+        )
+        expected_key = hashlib.sha256(
+            np.asarray(matrix.shape, dtype="int64").tobytes()
+            + matrix.tobytes(order="C")
+        ).hexdigest()
+        if expected_key != payload.get("cache_key"):
+            raise ValueError("state_capsule_prefix_hash_mismatch")
+        state = payload["recurrent_state"]
+        self._checkpoint_cache_matrix = matrix
+        self._checkpoint_cache_rows = list(payload["metric_rows"])
+        self._checkpoint_cache_state = {
+            "field": torch.tensor(state["field"], dtype=torch.float32),
+            "level": torch.tensor(state["level"], dtype=torch.float32),
+            "previous_code": torch.tensor(
+                state["previous_code"],
+                dtype=torch.float32,
+            ),
+            "last_observation": torch.tensor(
+                state["last_observation"],
+                dtype=torch.float32,
+            ),
+            "transitions": int(state["transitions"]),
+        }
+        self._checkpoint_cache_packet = InferencePacket(**payload["packet"])
+        self._checkpoint_cache_key = expected_key
+        self._checkpoint_cache_mode = "capsule_restored"
+        self._state_capsule_status = "restored"
 
     def observe(self, events: list[AgentEvent]) -> ObservationReceipt:
         reasons: list[str] = []

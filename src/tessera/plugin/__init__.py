@@ -33,6 +33,11 @@ from .sequential_geometry import (
     fit_sequential_geometry_contract,
     update_sequential_geometry,
 )
+from .state_capsules import (
+    STATE_CAPSULE_SCHEMA,
+    open_state_capsule,
+    seal_state_capsule,
+)
 
 __all__ = [
     "CheckpointStore",
@@ -56,11 +61,14 @@ __all__ = [
     "SequentialGeometryContract",
     "SequentialGeometryState",
     "SequentialGeometryUpdate",
+    "STATE_CAPSULE_SCHEMA",
     "TesseraPlugin",
     "audit_manifold_window",
     "fit_manifold_contract",
     "fit_sequential_geometry_contract",
     "govern_manifold_audit",
+    "open_state_capsule",
+    "seal_state_capsule",
     "train_neural_checkpoint",
     "update_sequential_geometry",
 ]

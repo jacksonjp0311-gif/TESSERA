@@ -1,0 +1,25 @@
+{
+  "schema": "TESSERA-EVO-042-RESTART-STATE-v0.1",
+  "passed": true,
+  "checks": {
+    "restored_packet_matches_full_replay": true,
+    "restored_rows_match_full_replay": true,
+    "restored_state_extends_prefix": true,
+    "tampered_capsule_rejected": true,
+    "checkpoint_mismatch_rejected": true,
+    "historical_mismatch_forces_replay": true,
+    "restored_continuation_faster_than_replay": true
+  },
+  "metrics": {
+    "capsule_payload_sha256": "3138cc964659699ee9726e5a2657f9d5d7e02741101eac4253c02fdf6ff79ca4",
+    "prefix_rows_restored": 110,
+    "restored_continuation_latency_ms": 1.1343999649398029,
+    "full_replay_latency_ms": 56.1203999677673,
+    "restart_speedup": 49.47144014654949,
+    "packet_parity": 1.0,
+    "row_parity": 1.0
+  },
+  "decision": "promote_integrity_bound_restart_state",
+  "mathematical_interpretation": "A recurrent prefix witness can cross a process boundary only when its full serialized state, input lineage, checkpoint, feature contract, router, packet, and metric history share one verified integrity envelope.",
+  "claim_boundary": "Local restart parity and SHA-256 integrity do not establish confidentiality, authenticity against a privileged attacker, cross-platform identity, or independent production safety."
+}

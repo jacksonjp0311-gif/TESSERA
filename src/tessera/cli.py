@@ -830,6 +830,26 @@ def cmd_prefix_state_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_restart_state_readiness(args):
+    from tessera.experiments.restart_state_readiness import (
+        run_restart_state_readiness,
+    )
+
+    result = run_restart_state_readiness(root=args.root)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "metrics": result["metrics"],
+        "mathematical_interpretation": result[
+            "mathematical_interpretation"
+        ],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1307,6 +1327,16 @@ def main(argv=None):
         default="outputs/evidence/evo041/prefix_state.json",
     )
     prefix_state.set_defaults(func=cmd_prefix_state_readiness)
+    restart_state = sub.add_parser(
+        "restart-state-readiness",
+        help="Verify integrity-bound recurrent state across worker restart.",
+    )
+    restart_state.add_argument("--root", default=".")
+    restart_state.add_argument(
+        "--out",
+        default="outputs/evidence/evo042/restart_state.json",
+    )
+    restart_state.set_defaults(func=cmd_restart_state_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

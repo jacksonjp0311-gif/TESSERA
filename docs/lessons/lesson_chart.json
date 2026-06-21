@@ -673,6 +673,18 @@
       "validation_gate": "src/tessera/experiments/prefix_state_readiness.py",
       "authority_boundary": "Reference-host parity does not establish cross-platform floating-point identity, persistent recovery, or autonomous authority.",
       "status": "promoted"
+    },
+    {
+      "id": "F057",
+      "observed_event": "Exact recurrent state was useful only inside one live worker; restart discarded the validated prefix witness and unsealed serialization could not be trusted.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-042-final-evidence.json",
+      "wound_class": "portable_state_without_integrity_lineage",
+      "diagnosis": "Cross-process state requires both serialization and binding to the exact checkpoint, contracts, prefix, packet, and metric history that produced it.",
+      "lesson": "Portable state is admissible only as an integrity-verified lineage witness; tampering or semantic mismatch must reject restoration.",
+      "future_behavior_change": "Tessera seals recurrent prefix state in a canonical SHA-256 capsule and verifies all bindings before exact continuation.",
+      "validation_gate": "src/tessera/experiments/restart_state_readiness.py",
+      "authority_boundary": "Integrity is not confidentiality, privileged-attacker authenticity, cross-platform identity, or autonomous authority.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

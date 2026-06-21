@@ -2,7 +2,7 @@
 
 | Surface | Current value |
 |---|---|
-| Engine | TESSERA Engine v0.3.7 |
+| Engine | TESSERA Engine v0.3.8 |
 | Runtime loop compiler | active |
 | CLI loop | `python -m tessera loop ascii` |
 | Compile surface | `reports/runtime_loop/` |
@@ -69,7 +69,11 @@
 | EVO-041 historical mismatch behavior | full replay |
 | EVO-041 launch warm p95 / soak p99 | 4.62 ms / 0.89 ms |
 | EVO-041 launch route parity / failures | 100% / 0 of 100 |
-| Next operation | persist proof-carrying state across worker restart, then run independent host trials |
+| EVO-042 restart packet / row parity | 100% / 100% |
+| EVO-042 restored continuation / replay | 1.13 ms / 56.12 ms |
+| EVO-042 restart speedup | 49.47x |
+| EVO-042 tamper / checkpoint mismatch | rejected / rejected |
+| Next operation | add atomic host-owned capsule storage and run independent host trials |
 | UCR EVO-007 discovery AUC | 0.97629 |
 | UCR EVO-007 confirmation AUC | 0.43675 |
 | EVO-007 conclusion | universal shape window rejected; scale router required |

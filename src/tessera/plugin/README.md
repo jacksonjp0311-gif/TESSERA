@@ -38,6 +38,8 @@ proposals.
 - Byte-identical historical prefixes reuse recurrent field, level, previous
   code, last observation, and metric-row state. Any historical mismatch
   forces full replay.
+- Restart capsules integrity-bind the checkpoint, contracts, normalized
+  prefix, recurrent state, metric rows, and packet before restoration.
 - Crossing the neural-support threshold emits a shadow-training-required
   status while the bounded fast path continues serving the host.
 - Direct research-mode plugin instances may still run inline neural fitting.
