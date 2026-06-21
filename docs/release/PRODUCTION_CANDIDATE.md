@@ -42,11 +42,13 @@ certifications concurrently on the same host.
    principal angle, robust location, and scale over completed-session windows.
 8. Treat any manifold drift as `abstain`, no memory candidacy, and no automated
    host intervention.
-9. Latch abstention after any observed host failure; release only after the
+9. Feed completed-session summaries into the sequential geometry sentinel;
+   preserve its latch until an explicit validated reset.
+10. Latch abstention after any observed host failure; release only after the
    configured number of clean terminal sessions.
-10. Monitor latency, worker failures, route coverage, effective rank, and schema
+11. Monitor latency, worker failures, route coverage, effective rank, and schema
    mismatches.
-11. On failure, unload the worker or roll back the active checkpoint pointer.
+12. On failure, unload the worker or roll back the active checkpoint pointer.
 
 ## External launch blockers
 

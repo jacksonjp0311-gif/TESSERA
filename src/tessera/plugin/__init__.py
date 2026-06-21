@@ -26,6 +26,13 @@ from .manifold_monitor import (
     fit_manifold_contract,
     govern_manifold_audit,
 )
+from .sequential_geometry import (
+    SequentialGeometryContract,
+    SequentialGeometryState,
+    SequentialGeometryUpdate,
+    fit_sequential_geometry_contract,
+    update_sequential_geometry,
+)
 
 __all__ = [
     "CheckpointStore",
@@ -46,9 +53,14 @@ __all__ = [
     "ShadowTrainer",
     "ShadowTrainingJob",
     "SessionSummaryContract",
+    "SequentialGeometryContract",
+    "SequentialGeometryState",
+    "SequentialGeometryUpdate",
     "TesseraPlugin",
     "audit_manifold_window",
     "fit_manifold_contract",
+    "fit_sequential_geometry_contract",
     "govern_manifold_audit",
     "train_neural_checkpoint",
+    "update_sequential_geometry",
 ]

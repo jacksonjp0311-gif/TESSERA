@@ -786,6 +786,30 @@ def cmd_manifold_stability_readiness(args):
     print(f"Results: {out_path}")
 
 
+def cmd_sequential_geometry_readiness(args):
+    from tessera.experiments.sequential_geometry_readiness import (
+        run_sequential_geometry_readiness,
+    )
+
+    result = run_sequential_geometry_readiness(
+        args.preregistration,
+        root=args.root,
+    )
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "passed": result["passed"],
+        "checks": result["checks"],
+        "contract": result["contract"],
+        "metrics": result["metrics"],
+        "mathematical_interpretation": result[
+            "mathematical_interpretation"
+        ],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -1242,6 +1266,17 @@ def main(argv=None):
         default="outputs/evidence/evo039/manifold_stability.json",
     )
     manifold_stability.set_defaults(func=cmd_manifold_stability_readiness)
+    sequential_geometry = sub.add_parser(
+        "sequential-geometry-readiness",
+        help="Separate isolated impulses from persistent manifold drift.",
+    )
+    sequential_geometry.add_argument("--root", default=".")
+    sequential_geometry.add_argument("--preregistration", required=True)
+    sequential_geometry.add_argument(
+        "--out",
+        default="outputs/evidence/evo040/sequential_geometry.json",
+    )
+    sequential_geometry.set_defaults(func=cmd_sequential_geometry_readiness)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

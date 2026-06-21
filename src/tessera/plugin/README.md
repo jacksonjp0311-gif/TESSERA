@@ -33,6 +33,8 @@ proposals.
 - Supervised host inference disables inline neural fitting by default.
 - Persistent workers bind PyTorch compute to one CPU thread by default so
   concurrent host workloads do not create unbounded inference contention.
+- Identical admitted-checkpoint queries reuse an exact packet keyed by the
+  normalized matrix shape and bytes; any event change invalidates the key.
 - Crossing the neural-support threshold emits a shadow-training-required
   status while the bounded fast path continues serving the host.
 - Direct research-mode plugin instances may still run inline neural fitting.
@@ -55,6 +57,9 @@ proposals.
 - A fingerprinted manifold contract monitors support, intrinsic rank,
   principal angle, robust location, and scale across completed-session
   windows; drift forces abstention and suppresses memory candidacy.
+- A fingerprinted sequential contract accumulates clipped orthogonal
+  nonconformity. Persistent evidence latches abstention while one isolated
+  impulse is prevented from acquiring unlimited influence.
 - Release verification builds and integrity-checks the wheel, installs it into
   an isolated environment, and executes packaged inference and CLI smoke tests.
 

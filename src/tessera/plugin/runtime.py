@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import deque
+import hashlib
 
 import numpy as np
 
@@ -85,6 +86,8 @@ class TesseraPlugin:
         self._wound_history: list[str] = []
         self._memory_buffer: list[np.ndarray] = []
         self._anomaly_history: list[float] = []
+        self._checkpoint_cache_key: str | None = None
+        self._checkpoint_cache_packet: InferencePacket | None = None
 
     def describe(self) -> PluginManifest:
         return PluginManifest()
@@ -170,6 +173,15 @@ class TesseraPlugin:
         normalized = ((matrix - loaded["mean"]) / loaded["scale"]).astype(
             "float32"
         )
+        cache_key = hashlib.sha256(
+            np.asarray(normalized.shape, dtype="int64").tobytes()
+            + normalized.tobytes(order="C")
+        ).hexdigest()
+        if (
+            cache_key == self._checkpoint_cache_key
+            and self._checkpoint_cache_packet is not None
+        ):
+            return self._checkpoint_cache_packet
         rows = evaluate_sequence(loaded["model"], normalized)["rows"]
         neural_losses = np.asarray(
             [row["prediction_loss"] for row in rows],
@@ -194,7 +206,7 @@ class TesseraPlugin:
             router_enabled
             and latest_drift > float(self.uncertainty_router["threshold"])
         )
-        return InferencePacket(
+        packet = InferencePacket(
             status="admitted_neural_checkpoint",
             anomaly_score=score,
             prediction_loss=prediction_loss,
@@ -213,6 +225,9 @@ class TesseraPlugin:
             abstained=abstained,
             uncertainty_score=latest_drift,
         )
+        self._checkpoint_cache_key = cache_key
+        self._checkpoint_cache_packet = packet
+        return packet
 
     def _fallback_infer(self, matrix: np.ndarray) -> InferencePacket:
         history, current = matrix[:-1], matrix[-1]

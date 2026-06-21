@@ -1,0 +1,36 @@
+{
+  "schema": "TESSERA-EVO-040-SEQUENTIAL-GEOMETRY-v0.1",
+  "passed": true,
+  "checks": {
+    "untouched_stream_has_no_alarm": true,
+    "untouched_evidence_below_threshold": true,
+    "single_impulse_does_not_latch": true,
+    "persistent_small_shift_latches": true,
+    "persistent_alarm_within_ten_samples": true,
+    "alarm_forces_abstention": true,
+    "alarm_suppresses_memory": true
+  },
+  "contract": {
+    "manifold_fingerprint": "529f13fae513aa428cf4a6569debcc750d06ec8ff90cff2c35cc39cd47231828",
+    "residual_center": 0.08838500522782275,
+    "residual_scale": 0.0729781288813047,
+    "reference_allowance": 0.75,
+    "evidence_clip": 3.0,
+    "alarm_threshold": 5.0,
+    "schema": "TESSERA-SEQUENTIAL-GEOMETRY-CONTRACT-v0.1",
+    "fingerprint": "85e0f6e0dc45145e6675a0b5203cc5ddb5bec4ecdb04d751d9eabd7282b331ae"
+  },
+  "metrics": {
+    "calibration_sessions": 60,
+    "monitoring_sessions": 60,
+    "untouched_maximum_evidence": 2.25,
+    "single_impulse_maximum_evidence": 4.5,
+    "persistent_shift_maximum_evidence": 5.389050731221301,
+    "persistent_change_index": 20,
+    "persistent_first_alarm_index": 27,
+    "persistent_alarm_delay": 7
+  },
+  "decision": "promote_dual_timescale_geometry_sentinel",
+  "mathematical_interpretation": "The window manifold gate is a geometric Shewhart surface for large changes. Bounded one-sided cumulative evidence along the orthogonal residual adds a CUSUM-like timescale for persistent small departures while preventing one impulse from acquiring authority.",
+  "claim_boundary": "Controlled sequential sensitivity does not establish calibrated false-alarm guarantees on independent hosts or causal failure prediction."
+}

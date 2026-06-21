@@ -1,0 +1,77 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.40",
+  "operation": "TESSERA-EVO-040",
+  "previous_operation": "TESSERA-EVO-039",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "f867b9a",
+  "state_after_validation": "DUAL_TIMESCALE_GEOMETRY_EXACT_CACHE_GATED",
+  "implemented": [
+    "cross-domain streaming geometry research",
+    "bounded orthogonal nonconformity",
+    "CUSUM-like sequential evidence accumulator",
+    "single-impulse influence clipping",
+    "persistent-drift abstention latch",
+    "sequential contract fingerprinting",
+    "exact normalized-state inference cache",
+    "automatic cache invalidation on event change",
+    "Tessera v0.3.6 package"
+  ],
+  "finding": "Static manifold geometry and bounded sequential evidence form complementary timescales. Persistent weak orthogonal drift can accumulate into a latched signal without allowing one extreme impulse to acquire authority. Exact computational identity can also be reused without approximation.",
+  "decision": "Promote the dual-timescale geometry sentinel and exact idempotent checkpoint cache.",
+  "metrics": {
+    "unit_tests_expected": 130,
+    "calibration_sessions": 60,
+    "monitoring_sessions": 60,
+    "untouched_maximum_evidence": 2.25,
+    "single_impulse_maximum_evidence": 4.5,
+    "persistent_shift_robust_units": 0.2,
+    "persistent_alarm_delay_sessions": 7,
+    "persistent_first_alarm_index": 27,
+    "sequential_alarm_threshold": 5.0,
+    "sequential_contract_fingerprint": "85e0f6e0dc45145e6675a0b5203cc5ddb5bec4ecdb04d751d9eabd7282b331ae",
+    "launch_route_parity": 1.0,
+    "launch_warm_latency_ms_p95": 62.46633499104064,
+    "launch_soak_latency_ms_p99": 0.8606109925312929,
+    "launch_soak_failures": 0,
+    "wheel_version": "0.3.6",
+    "wheel_file_count": 84
+  },
+  "artifacts": {
+    "sequential_geometry": {
+      "path": "outputs/evidence/evo040/sequential_geometry.json",
+      "sha256": "de20f365cea3f3627d64159b09d3d564461fa0353f6801c4d6d71f67b1ae8a64"
+    },
+    "launch_readiness": {
+      "path": "outputs/evidence/evo040/launch_readiness.json",
+      "sha256": "f358eb633ef589503ee11b434447c8c2fbb6ea893d29a0f4b1a87f63e921bf41"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.6-py3-none-any.whl",
+      "sha256": "272b0442157f8364f5f0c0a4baf25b1b475762d0705da0390dd4c1400a9eb1e2"
+    },
+    "research_report": {
+      "path": "docs/research/SEQUENTIAL_GEOMETRY_SENTINEL_2026-06-21.md"
+    }
+  },
+  "external_launch_gates": [
+    "four more independent natural failure/recovery incidents",
+    "independently operated Agent CLI trial with rolling sequential geometry",
+    "independently operated Hermes trial with rolling sequential geometry",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "next_recommended_operation": "prove_changed_prefix_recurrent_state_cache_parity_then_run_independent_host_trials",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Sequential geometry sensitivity and exact caching do not prove conformal validity, consciousness, general transfer, independent production safety, failure prediction, or autonomous authority."
+}

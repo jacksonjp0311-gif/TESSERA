@@ -637,6 +637,30 @@
       "validation_gate": "src/tessera/experiments/production_candidate.py",
       "authority_boundary": "Thread containment improves local latency isolation but does not prove cross-platform or externally operated performance.",
       "status": "promoted"
+    },
+    {
+      "id": "F054",
+      "observed_event": "A window-level manifold gate could represent large structural drift but had no state for accumulating repeated weak departures from the duration filament.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-040-final-evidence.json",
+      "wound_class": "stateless_geometry_misses_persistent_weak_evidence",
+      "diagnosis": "Magnitude-only gates treat observations independently, so persistence has no explicit representation and one outlier can be confused with a regime.",
+      "lesson": "Bound per-observation influence, allow stable evidence to decay, and let repeated weak geometric departures accumulate into a separate latched signal.",
+      "future_behavior_change": "A fingerprinted sequential geometry sentinel complements the static manifold audit; its alarm forces abstention and suppresses memory without retuning the neural router.",
+      "validation_gate": "src/tessera/experiments/sequential_geometry_readiness.py",
+      "authority_boundary": "Controlled sequential sensitivity does not establish conformal validity, independent-host false-alarm rates, or autonomous authority.",
+      "status": "promoted"
+    },
+    {
+      "id": "F055",
+      "observed_event": "The persistent worker recomputed an identical admitted-checkpoint query during soak, consuming the full recurrent history despite no state change.",
+      "evidence_path": "docs/context/rhp/evidence/TESSERA-EVO-040-final-evidence.json",
+      "wound_class": "identity_blind_recomputation",
+      "diagnosis": "The runtime represented observations but not computational identity, so unchanged normalized state incurred repeated neural evaluation and unstable tail latency.",
+      "lesson": "Exact identity is reusable evidence: a read-only result may be cached only when the normalized shape and bytes match exactly, and any changed event must invalidate it.",
+      "future_behavior_change": "Admitted-checkpoint inference hashes normalized matrix identity and reuses only exact packets, preserving route parity while eliminating repeated computation.",
+      "validation_gate": "tests/test_neural_checkpoint_runtime.py",
+      "authority_boundary": "Exact caching improves repeated-query latency but does not authorize approximate cache hits, changed-prefix reuse, or cross-host performance claims.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

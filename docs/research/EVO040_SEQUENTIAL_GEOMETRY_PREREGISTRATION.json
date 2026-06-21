@@ -1,0 +1,37 @@
+{
+  "schema": "TESSERA-EVO-040-SEQUENTIAL-GEOMETRY-PREREGISTRATION-v0.1",
+  "cohorts": [
+    "outputs/evidence/evo021/natural_split_calibration.json",
+    "outputs/evidence/evo024/fresh_context_cohort.json",
+    "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+  ],
+  "selected_indices": [
+    0,
+    28
+  ],
+  "calibration": [
+    0,
+    60
+  ],
+  "monitoring": [
+    60,
+    120
+  ],
+  "sequential_parameters": {
+    "reference_allowance": 0.75,
+    "evidence_clip": 3.0,
+    "alarm_threshold": 5.0
+  },
+  "impulse_magnitude": 3.0,
+  "persistent_change_index": 20,
+  "persistent_shift": 0.2,
+  "acceptance": {
+    "untouched_alarms": 0,
+    "single_impulse_alarms": 0,
+    "persistent_shift_alarm_required": true,
+    "maximum_persistent_alarm_delay": 10,
+    "alarm_route": "abstain",
+    "alarm_memory_candidate": false
+  },
+  "claim_boundary": "Thresholds are preregistered on the reference chronology and do not establish independent-host false-alarm control."
+}

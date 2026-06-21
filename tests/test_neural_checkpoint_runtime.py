@@ -11,6 +11,7 @@ from tessera.plugin import (
     PluginSupervisor,
     ReplayGate,
     train_neural_checkpoint,
+    TesseraPlugin,
 )
 from tessera.plugin.contracts import AgentEvent
 from tessera.plugin.trajectory import vectorize_events
@@ -71,6 +72,24 @@ class TestNeuralCheckpointRuntime(unittest.TestCase):
         payload, metrics = train_neural_checkpoint(matrix)
         self.assertTrue(np.isfinite(metrics["neural_awareness_loss"]))
         self.assertIn("model_state_base64", payload)
+
+    def test_identical_checkpoint_query_reuses_exact_packet(self):
+        events = _events()
+        payload, _ = train_neural_checkpoint(vectorize_events(events))
+        plugin = TesseraPlugin(
+            neural_min_events=8,
+            checkpoint_payload=payload,
+        )
+        plugin.observe(events[:20])
+        first = plugin.infer()
+        first_key = plugin._checkpoint_cache_key
+        second = plugin.infer()
+        self.assertEqual(first, second)
+        self.assertEqual(first_key, plugin._checkpoint_cache_key)
+        plugin.observe([events[20]])
+        third = plugin.infer()
+        self.assertNotEqual(first_key, plugin._checkpoint_cache_key)
+        self.assertEqual(third.status, "admitted_neural_checkpoint")
 
 
 if __name__ == "__main__":

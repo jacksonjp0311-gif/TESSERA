@@ -71,5 +71,14 @@
     "drift_route": "abstain",
     "drift_memory_candidate": false
   },
+  "sequential_geometry_gate": {
+    "signal": "absolute robust-normalized residual orthogonal to the calibrated filament",
+    "reference_allowance": 0.75,
+    "evidence_clip": 3.0,
+    "alarm_threshold": 5.0,
+    "alarm_latched_until_validated_reset": true,
+    "alarm_route": "abstain",
+    "alarm_memory_candidate": false
+  },
   "claim_boundary": "This configuration defines a local candidate profile. External launch blockers remain authoritative."
 }

@@ -1,0 +1,105 @@
+{
+  "schema": "TESSERA-EVO-035-LAUNCH-READINESS-v0.1",
+  "passed": true,
+  "status": "repository_launch_candidate",
+  "certification_order": [
+    "runtime_semantic_latency_restart_rollback_soak",
+    "local_static_security_and_secret_scan",
+    "wheel_build_integrity_install_smoke"
+  ],
+  "production_candidate": {
+    "passed": true,
+    "checks": {
+      "semantic_adapter_matches_calibration": true,
+      "json_adapter_matches_direct_adapter": true,
+      "selected_feature_contract_stable": true,
+      "runtime_routes_match_offline_final_test": true,
+      "abstention_blocks_memory_candidate": true,
+      "forecast_status_preserved": true,
+      "warm_latency_gate_passed": true,
+      "restart_is_deterministic": true,
+      "soak_passed": true,
+      "failure_isolation_passed": true,
+      "checkpoint_rollback_passed": true,
+      "release_integrity_manifest_complete": true
+    },
+    "metrics": {
+      "baseline_loss": 0.21009282767772675,
+      "candidate_loss": 0.12062043951277313,
+      "replay_pass_rate": 0.5263157894736842,
+      "neural_awareness_loss": 0.11398515196158673,
+      "train_rows": 60,
+      "validation_rows": 20,
+      "replay_rows": 20,
+      "selected_prediction_expert": "ewma_0.05",
+      "sessions": 120,
+      "selected_session_features": 2,
+      "final_route_count": 20,
+      "trusted_count": 18,
+      "abstain_count": 2,
+      "route_parity_rate": 1.0,
+      "cold_start_latency_ms": 3343.7444000155665,
+      "warm_latency_ms_p50": 57.7029499982018,
+      "warm_latency_ms_p95": 62.46633499104064,
+      "warm_latency_ms_max": 63.80839998018928,
+      "soak_requests": 100,
+      "soak_failures": 0,
+      "soak_latency_ms_p99": 0.8606109925312929,
+      "latency_budget_ms": 250.0
+    }
+  },
+  "release_readiness": {
+    "passed": true,
+    "checks": {
+      "version_coherence": true,
+      "direct_dependencies_satisfied": true,
+      "wheel_build_passed": true,
+      "wheel_metadata_version_matches": true,
+      "wheel_record_integrity_passed": true,
+      "wheel_contains_no_forbidden_paths": true,
+      "isolated_install_passed": true,
+      "isolated_import_and_inference_passed": true,
+      "installed_cli_passed": true
+    },
+    "version": {
+      "project": "0.3.6",
+      "package": "0.3.6",
+      "plugin_manifest": "0.3.6",
+      "wheel_metadata": "0.3.6"
+    },
+    "wheel": {
+      "filename": "tessera-0.3.6-py3-none-any.whl",
+      "sha256": "272b0442157f8364f5f0c0a4baf25b1b475762d0705da0390dd4c1400a9eb1e2",
+      "file_count": 84,
+      "forbidden_paths": [],
+      "record_failures": []
+    }
+  },
+  "local_security_readiness": {
+    "passed": true,
+    "checks": {
+      "tracked_secret_scan_clean": true,
+      "no_dynamic_execution_or_shell_true": true,
+      "plugin_network_authority_denied": true,
+      "mutation_authorities_denied": true,
+      "checkpoint_deserialization_uses_weights_only": true,
+      "supervisor_uses_spawned_process_boundary": true,
+      "hard_timeout_and_circuit_breaker_present": true
+    },
+    "metrics": {
+      "release_files_scanned": 163,
+      "python_findings": 0,
+      "secret_findings": 0,
+      "denied_authorities": 6
+    },
+    "external_security_review_complete": false
+  },
+  "external_launch_gates": [
+    "minimum-support natural failure/recovery cohort: four more independent incidents",
+    "independently operated trials for Agent CLI and Hermes integrations",
+    "independent vulnerability scan and security review",
+    "independent reproduction without inherited system packages",
+    "cross-platform subprocess certification"
+  ],
+  "claim_boundary": "Repository launch candidacy certifies local runtime and package gates in a non-contending order. External host, security, failure-recovery, clean-environment, and cross-platform gates remain open."
+}
