@@ -545,6 +545,28 @@ def cmd_natural_checkpoint_utility(args):
     print(f"Results: {out_path}")
 
 
+def cmd_bounded_neural_residual(args):
+    from tessera.experiments.bounded_neural_residual import (
+        run_bounded_neural_residual,
+    )
+
+    result = run_bounded_neural_residual(args.preregistration)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print(json.dumps({
+        "bounded_residual_supported": result[
+            "bounded_residual_supported"
+        ],
+        "selected": result["validation"]["selected"],
+        "replay": result["replay"],
+        "authority": result["authority"],
+        "final_test": result["final_test"],
+        "decision": result["decision"],
+    }, indent=2))
+    print(f"Results: {out_path}")
+
+
 def cmd_repair(args):
     """Run replay-guided shadow repair ablation study."""
     from tessera.experiments.repair_ablation import run_repair_ablation
@@ -884,6 +906,16 @@ def main(argv=None):
         default="outputs/evidence/evo030/natural_checkpoint_utility.json",
     )
     natural_checkpoint.set_defaults(func=cmd_natural_checkpoint_utility)
+    residual = sub.add_parser(
+        "bounded-neural-residual",
+        help="Test clipped neural residual authority over a stable expert.",
+    )
+    residual.add_argument("--preregistration", required=True)
+    residual.add_argument(
+        "--out",
+        default="outputs/evidence/evo031/bounded_neural_residual.json",
+    )
+    residual.set_defaults(func=cmd_bounded_neural_residual)
 
     loop = sub.add_parser("loop", help="Compile runtime loop surfaces.")
     loop.add_argument("loop_args", nargs=argparse.REMAINDER)

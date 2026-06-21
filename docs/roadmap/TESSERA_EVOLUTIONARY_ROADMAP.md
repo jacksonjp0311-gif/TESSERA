@@ -561,6 +561,20 @@ This rejection preserves the architecture: stable experts own operational
 prediction; the neural field retains awareness and may earn only bounded
 residual authority through later replay.
 
+### Phase 6 bounded authority — TESSERA-EVO-031
+
+Neural corrections were clipped to small fractions of observed innovation and
+gains no larger than `0.20`. Validation selected gain `0.0`: every nonzero
+candidate increased loss.
+
+Authority therefore collapsed before replay. Replay and final-test predictions
+were identical to the stable expert, proving that a rejected neural experiment
+cannot degrade the deployed path.
+
+The next useful neural role is uncertainty routing or abstention around the
+stable expert. Neural state may help identify where the expert should be
+trusted less without changing its forecast.
+
 ## Phase 3 — Replay-Guided Shadow Repair
 
 Target: Engine `v0.6`.
@@ -838,8 +852,8 @@ Pause or narrow the program if:
 
 ## Next Three Operations
 
-1. Test a bounded neural residual over the validation-selected stable expert,
-   with zero authority when replay consistency fails.
+1. Test neural uncertainty routing and abstention around the stable expert,
+   without forecast mutation.
 2. Collect immutable natural failure sessions for precursor and recovery
    utility rather than weakening clean-session prediction gates.
 3. Build two host adapters and run sustained mixed-load validation.

@@ -154,3 +154,29 @@ def load_neural_checkpoint(payload: dict) -> dict[str, Any]:
         "mean": np.asarray(payload["normalization"]["mean"], dtype=float),
         "scale": np.asarray(payload["normalization"]["scale"], dtype=float),
     }
+
+
+def neural_sequence_predictions(
+    payload: dict,
+    sequence: np.ndarray,
+) -> np.ndarray:
+    loaded = load_neural_checkpoint(payload)
+    model = loaded["model"]
+    values = torch.tensor(np.asarray(sequence), dtype=torch.float32)
+    field = torch.zeros(1, model.field_dim)
+    level = values[0:1]
+    predictions = []
+    with torch.no_grad():
+        for index in range(len(values) - 1):
+            next_field, _, _, prediction = model.step(
+                values[index : index + 1],
+                field,
+                level,
+            )
+            predictions.append(prediction.numpy().reshape(-1))
+            level = model.update_level(
+                values[index + 1 : index + 2],
+                level,
+            )
+            field = next_field
+    return np.asarray(predictions)

@@ -77,6 +77,9 @@
     "docs/research/EVO030_NATURAL_CHECKPOINT_UTILITY_PREREGISTRATION.json",
     "docs/research/NATURAL_CHECKPOINT_UTILITY_2026-06-21.md",
     "src/tessera/experiments/natural_checkpoint_utility.py",
+    "docs/research/EVO031_BOUNDED_NEURAL_RESIDUAL_PREREGISTRATION.json",
+    "docs/research/BOUNDED_NEURAL_RESIDUAL_2026-06-21.md",
+    "src/tessera/experiments/bounded_neural_residual.py",
     "src/tessera/rhp/core.py",
     "scripts/validation/validate_rhp_nexus.py"
   ],

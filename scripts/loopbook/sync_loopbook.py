@@ -77,6 +77,9 @@ FEATURE_FILES = [
     "docs/research/EVO030_NATURAL_CHECKPOINT_UTILITY_PREREGISTRATION.json",
     "docs/research/NATURAL_CHECKPOINT_UTILITY_2026-06-21.md",
     "src/tessera/experiments/natural_checkpoint_utility.py",
+    "docs/research/EVO031_BOUNDED_NEURAL_RESIDUAL_PREREGISTRATION.json",
+    "docs/research/BOUNDED_NEURAL_RESIDUAL_2026-06-21.md",
+    "src/tessera/experiments/bounded_neural_residual.py",
     "scripts/telemetry/probe.py",
     "outputs/evidence/evo020/clean_calibration.json",
     "outputs/evidence/evo020/controlled_confirmation.json",
@@ -100,6 +103,7 @@ FEATURE_FILES = [
     "outputs/evidence/evo028/checkpoint_readiness.json",
     "outputs/evidence/evo029/neural_checkpoint_readiness.json",
     "outputs/evidence/evo030/natural_checkpoint_utility.json",
+    "outputs/evidence/evo031/bounded_neural_residual.json",
     "src/tessera/rhp/core.py", "scripts/validation/validate_rhp_nexus.py",
 ]
 

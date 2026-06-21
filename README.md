@@ -84,6 +84,7 @@ enforced by tests, manifests, certificates, or repository gates.
 | A shadow trainer must never activate its own output. | Checkpoints are immutable proposals admitted through integrity, replay, atomic activation, and rollback gates. |
 | A controlled neural win is not natural agent utility. | Promote integration separately; natural chronological cohorts must beat persistence, summaries, and retrieval controls. |
 | A checkpoint that beats persistence may still be unnecessary. | Stable expert ownership remains until neural utility beats every preregistered matched control. |
+| Bounded neural influence may still point the wrong way. | Validation may collapse residual authority completely to zero while retaining neural awareness. |
 | Two outliers do not constitute an operating mode. | Conditional calibration requires recurring privacy-safe signatures in both discovery and later validation. |
 | General resource pressure is not automatically tail attribution. | Context conditioning requires replicated association with robust tail events, not ordinary latency alone. |
 
@@ -404,6 +405,12 @@ below the `60%` admission gate, and was `24.15%` worse than
 validation-selected EWMA on the untouched final 20 sessions. Admission was
 rejected. The validated fast path remains intact, with stable expert prediction
 ownership and neural awareness separated.
+
+EVO-031 tested clipped neural residual gains from `0.05` through `0.20` over
+the stable expert. Every nonzero correction increased validation loss, so
+validation selected gain `0.0`. Replay and final-test behavior remained exactly
+the stable expert. Neural forecast authority was safely collapsed to zero; the
+next neural role is uncertainty routing and abstention.
 
 The plugin accepts allowlisted agent-event metadata, performs local sparse
 neural inference, and emits memory, repair, and replay proposals. Host-memory

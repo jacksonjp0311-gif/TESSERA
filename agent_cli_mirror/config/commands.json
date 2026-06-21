@@ -488,6 +488,25 @@
         }
       ]
     },
+    "bounded-neural-residual": {
+      "purpose": "Run EVO-031 preregistered clipped neural residual authority over the stable natural-workflow expert.",
+      "steps": [
+        {
+          "phase": "RUN",
+          "label": "EVO-031 bounded neural residual",
+          "cmd": [
+            "{python}",
+            "-m",
+            "tessera",
+            "bounded-neural-residual",
+            "--preregistration",
+            "docs/research/EVO031_BOUNDED_NEURAL_RESIDUAL_PREREGISTRATION.json",
+            "--out",
+            "outputs/evidence/evo031/bounded_neural_residual.json"
+          ]
+        }
+      ]
+    },
     "repair-ablation": {
       "purpose": "Run the replay-gated five-arm shadow repair ablation.",
       "steps": [

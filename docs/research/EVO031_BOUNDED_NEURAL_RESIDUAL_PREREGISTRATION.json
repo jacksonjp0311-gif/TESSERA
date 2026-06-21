@@ -1,0 +1,31 @@
+{
+  "schema": "TESSERA-EVO-031-BOUNDED-NEURAL-RESIDUAL-PREREGISTRATION-v0.1",
+  "operation": "TESSERA-EVO-031",
+  "cohorts": [
+    "outputs/evidence/evo021/natural_split_calibration.json",
+    "outputs/evidence/evo024/fresh_context_cohort.json",
+    "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+  ],
+  "chronological_split": {
+    "train_sessions": 60,
+    "validation_sessions": 20,
+    "replay_sessions": 20,
+    "final_test_sessions": 20
+  },
+  "residual_candidates": {
+    "gains": [0.0, 0.05, 0.1, 0.2],
+    "clip_scale_fractions": [0.1, 0.25, 0.5]
+  },
+  "selection_rule": "Select the lowest validation loss; ties prefer lower gain and lower clip fraction.",
+  "replay_gate": {
+    "nonzero_authority_required": true,
+    "maximum_mean_loss_ratio_to_stable_expert": 0.99,
+    "minimum_row_win_rate": 0.6
+  },
+  "final_test_gate": {
+    "maximum_mean_loss_ratio_to_stable_expert": 1.0,
+    "maximum_mean_loss_ratio_to_best_control": 1.0
+  },
+  "authority_collapse": "If validation selects zero authority or either replay gate fails, deployed residual gain is zero before final-test inspection.",
+  "claim_boundary": "Bounded residual prediction does not establish failure sensitivity, task success, production readiness, consciousness, or autonomous authority."
+}

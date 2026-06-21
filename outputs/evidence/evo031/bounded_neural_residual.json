@@ -1,0 +1,144 @@
+{
+  "schema": "TESSERA-EVO-031-BOUNDED-NEURAL-RESIDUAL-v0.1",
+  "preregistration": {
+    "schema": "TESSERA-EVO-031-BOUNDED-NEURAL-RESIDUAL-PREREGISTRATION-v0.1",
+    "operation": "TESSERA-EVO-031",
+    "cohorts": [
+      "outputs/evidence/evo021/natural_split_calibration.json",
+      "outputs/evidence/evo024/fresh_context_cohort.json",
+      "outputs/evidence/evo025/fresh_mechanism_cohort.json"
+    ],
+    "chronological_split": {
+      "train_sessions": 60,
+      "validation_sessions": 20,
+      "replay_sessions": 20,
+      "final_test_sessions": 20
+    },
+    "residual_candidates": {
+      "gains": [
+        0.0,
+        0.05,
+        0.1,
+        0.2
+      ],
+      "clip_scale_fractions": [
+        0.1,
+        0.25,
+        0.5
+      ]
+    },
+    "selection_rule": "Select the lowest validation loss; ties prefer lower gain and lower clip fraction.",
+    "replay_gate": {
+      "nonzero_authority_required": true,
+      "maximum_mean_loss_ratio_to_stable_expert": 0.99,
+      "minimum_row_win_rate": 0.6
+    },
+    "final_test_gate": {
+      "maximum_mean_loss_ratio_to_stable_expert": 1.0,
+      "maximum_mean_loss_ratio_to_best_control": 1.0
+    },
+    "authority_collapse": "If validation selects zero authority or either replay gate fails, deployed residual gain is zero before final-test inspection.",
+    "claim_boundary": "Bounded residual prediction does not establish failure sensitivity, task success, production readiness, consciousness, or autonomous authority."
+  },
+  "varying_session_features": 5,
+  "checkpoint_metrics": {
+    "baseline_loss": 0.08403712511062622,
+    "candidate_loss": 0.04824817580510925,
+    "replay_pass_rate": 0.5263157894736842,
+    "neural_awareness_loss": 0.045525368783273734,
+    "train_rows": 60,
+    "validation_rows": 20,
+    "replay_rows": 20,
+    "selected_prediction_expert": "ewma_0.05"
+  },
+  "validation": {
+    "candidates": [
+      {
+        "gain": 0.0,
+        "clip_fraction": 0.1,
+        "validation_loss": 1.75345378047837
+      },
+      {
+        "gain": 0.0,
+        "clip_fraction": 0.25,
+        "validation_loss": 1.75345378047837
+      },
+      {
+        "gain": 0.0,
+        "clip_fraction": 0.5,
+        "validation_loss": 1.75345378047837
+      },
+      {
+        "gain": 0.05,
+        "clip_fraction": 0.1,
+        "validation_loss": 1.7597698080355155
+      },
+      {
+        "gain": 0.05,
+        "clip_fraction": 0.25,
+        "validation_loss": 1.7597698080355155
+      },
+      {
+        "gain": 0.05,
+        "clip_fraction": 0.5,
+        "validation_loss": 1.7597698080355155
+      },
+      {
+        "gain": 0.1,
+        "clip_fraction": 0.1,
+        "validation_loss": 1.7659068432615859
+      },
+      {
+        "gain": 0.1,
+        "clip_fraction": 0.25,
+        "validation_loss": 1.766425491423062
+      },
+      {
+        "gain": 0.1,
+        "clip_fraction": 0.5,
+        "validation_loss": 1.766425491423062
+      },
+      {
+        "gain": 0.2,
+        "clip_fraction": 0.1,
+        "validation_loss": 1.7739312514758496
+      },
+      {
+        "gain": 0.2,
+        "clip_fraction": 0.25,
+        "validation_loss": 1.7804429699449296
+      },
+      {
+        "gain": 0.2,
+        "clip_fraction": 0.5,
+        "validation_loss": 1.7807558256893556
+      }
+    ],
+    "selected": {
+      "gain": 0.0,
+      "clip_fraction": 0.1,
+      "validation_loss": 1.75345378047837
+    },
+    "stable_loss": 1.75345378047837
+  },
+  "replay": {
+    "stable_loss": 0.06570283118554444,
+    "residual_loss": 0.06570283118554444,
+    "loss_ratio": 1.0,
+    "row_win_rate": 0.0,
+    "gate_passed": false
+  },
+  "authority": {
+    "selected_gain": 0.0,
+    "deployed_gain": 0.0,
+    "collapsed_to_zero": true
+  },
+  "final_test": {
+    "stable_loss": 0.030148071979621265,
+    "residual_loss": 0.030148071979621265,
+    "loss_ratio": 1.0
+  },
+  "bounded_residual_supported": false,
+  "decision": "reject_residual_authority_preserve_stable_expert",
+  "claim_boundary": "Bounded residual prediction does not establish failure sensitivity, task success, or production readiness."
+}

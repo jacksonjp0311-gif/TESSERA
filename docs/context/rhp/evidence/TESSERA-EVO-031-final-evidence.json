@@ -1,0 +1,63 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.31",
+  "operation": "TESSERA-EVO-031",
+  "previous_operation": "TESSERA-EVO-030",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "417080d",
+  "state_after_validation": "NEURAL_RESIDUAL_REJECTED_AUTHORITY_COLLAPSED_TO_ZERO",
+  "implemented": [
+    "preregistered residual influence budgets",
+    "validation-selected gain and clipping",
+    "replay improvement gate",
+    "row-level replay win gate",
+    "automatic authority collapse before final test"
+  ],
+  "finding": "Validation selected zero neural gain because every nonzero clipped residual increased loss. Authority collapsed to zero, preserving stable-expert replay and final-test performance exactly.",
+  "decision": "Reject neural forecast correction. Preserve stable expert prediction ownership and test neural uncertainty routing or abstention next.",
+  "metrics": {
+    "unit_tests_passed": 104,
+    "selected_gain": 0.0,
+    "deployed_gain": 0.0,
+    "validation_stable_loss": 1.75345378047837,
+    "best_nonzero_validation_loss": 1.7597698080355155,
+    "replay_stable_loss": 0.06570283118554444,
+    "replay_residual_loss": 0.06570283118554444,
+    "replay_row_win_rate": 0.0,
+    "replay_gate_passed": false,
+    "final_stable_loss": 0.030148071979621265,
+    "final_residual_loss": 0.030148071979621265,
+    "final_loss_ratio": 1.0,
+    "authority_collapsed_to_zero": true,
+    "bounded_residual_supported": false
+  },
+  "artifacts": {
+    "preregistration": {
+      "path": "docs/research/EVO031_BOUNDED_NEURAL_RESIDUAL_PREREGISTRATION.json",
+      "sha256": "6b228f6c8f5387fee69b4dbbf063c9f84bea9e46941c4dedbca9afd4e0e88272"
+    },
+    "bounded_neural_residual": {
+      "path": "outputs/evidence/evo031/bounded_neural_residual.json",
+      "sha256": "824c8228dcebcf237a8127c13c98c242d9214056334a9f8824da980dd4ce7a28"
+    }
+  },
+  "validation": {
+    "unit_tests_passed": 104,
+    "loopbook_gate": true,
+    "rhp_nexus_gate": true,
+    "canonical_no_push_loop": true,
+    "artifact_hashes_verified": 2
+  },
+  "next_recommended_operation": "test_neural_uncertainty_routing_and_abstention_around_stable_expert",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false,
+  "non_claim_lock": "Residual rejection and authority collapse do not establish failure sensitivity, production readiness, consciousness, or autonomous authority."
+}
