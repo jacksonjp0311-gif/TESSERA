@@ -1,0 +1,19 @@
+{
+  "name": "tessera-neural-sidecar",
+  "displayName": "Tessera Neural Trust Layer",
+  "version": "0.4.1",
+  "description": "Neural trust layer for agent systems. Watches agent trajectory, compresses into sparse neural state, emits trusted/abstain decisions. Read-only sidecar — never mutates host memory, tools, or prompts.",
+  "author": "James Paul Jackson",
+  "category": "ai-safety",
+  "icon": "brain",
+  "tags": ["neural", "trust", "agent", "safety", "anomaly-detection"],
+  "permissions": {
+    "observeAgentEvents": true,
+    "emitTrustDecisions": true,
+    "proposeMemoryCandidates": true,
+    "hostMemoryWrite": false,
+    "toolInvocation": false,
+    "promptMutation": false
+  },
+  "claimBoundary": "The plugin provides local inference and proposals only; the host retains tool, memory-write, prompt, topology, codec, and external API authority."
+}
