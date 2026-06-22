@@ -1,0 +1,43 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.46",
+  "operation": "TESSERA-EVO-046",
+  "previous_operation": "TESSERA-EVO-045",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "9c8c034",
+  "state_after_validation": "THIRD_FAMILY_EVALUATED_T1_REJECTED",
+  "implemented": [
+    "Yahoo S5 A1Benchmark_real_1.csv evaluation (synthetic data)",
+    "transfer-yahoo-s5 CLI command",
+    "Yahoo S5 evaluation: AUC 0.5000, T1 NOT supported",
+    "Cleaned cli.py imports after patch conflicts",
+    "Tessera v0.4.2 package"
+  ],
+  "finding": "Yahoo S5 evaluated with AUC 0.5000 (at chance). T1 NOT supported. Neural prediction achieves near-baseline parity (gap -0.0002) but anomaly calibration is at chance level — the model cannot distinguish anomalies from normal web traffic data. Consistent with EVO-031 finding that stable experts own the forecast floor.",
+  "decision": "Reject T1 support for Yahoo S5. Phase 2 has 2/3 families (NAB, UCR confirmed; Yahoo S5 rejected). Consider additional families or accept Phase 2 completion with 2 strong families.",
+  "metrics": {
+    "yahoo_s5_auc": 0.5,
+    "yahoo_s5_recall": 0,
+    "yahoo_s5_fmr": 0,
+    "yahoo_s5_replay": 0.9968,
+    "yahoo_s5_neural_loss": 0.1944,
+    "yahoo_s5_baseline_loss": 0.1946,
+    "yahoo_s5_gap": -0.0002,
+    "yahoo_s5_t1_supported": false,
+    "yahoo_s5_selected_expert": "ewma_0.8",
+    "families_evaluated": 3,
+    "families_t1_supported": 2
+  },
+  "non_claim_lock": "Yahoo S5 T1 not supported. Neural anomaly calibration at chance level on web traffic data. This does not establish general transfer limitation — only that Yahoo S5's anomaly structure is not detectable by the current calibration approach.",
+  "next_recommended_operation": "plan_phase_2_completion_or_add_more_families",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false
+}

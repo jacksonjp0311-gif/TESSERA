@@ -1,9 +1,9 @@
 {
-  "version": "0.4.1",
-  "operation": "TESSERA-EVO-045",
-  "state": "THIRD_FAMILY_EVALUATED_INDEPENDENT_HOST_TRIAL_RUN",
-  "nextOperation": "promote_or_reject_third_family_then_plan_phase_2_completion",
-  "lastUpdated": "2026-06-22T05:29:58.845Z",
+  "version": "0.4.2",
+  "operation": "EVO-046",
+  "state": "THIRD_FAMILY_EVALUATED_T1_REJECTED",
+  "nextOperation": "plan_phase_2_completion_with_two_families",
+  "lastUpdated": "2026-06-22T06:15:59.064Z",
   "metrics": {
     "nab": {
       "auc": 0.94865,
@@ -24,7 +24,16 @@
       "status": "Rejected"
     },
     "yahooS5": {
-      "status": "Preregistered — framework ready"
+      "auc": 0.5,
+      "recall": 0,
+      "fmr": 0,
+      "replay": 0.9968,
+      "neuralLoss": 0.1944,
+      "baselineLoss": 0.1946,
+      "gap": -0.0002,
+      "selectedExpert": "ewma_0.8",
+      "t1Supported": false,
+      "status": "Evaluated - T1 NOT supported (AUC 0.5000)"
     }
   },
   "production": {
@@ -325,9 +334,9 @@
     {
       "id": 1,
       "name": "Third Dataset Family",
-      "status": "preregistered",
-      "progress": 50,
-      "description": "Yahoo S5 framework built, needs data download + evaluation"
+      "status": "evaluated_t1_rejected",
+      "progress": 100,
+      "description": "Yahoo S5: AUC 0.5000, T1 NOT supported. Neural near-baseline parity (gap -0.0002) but anomaly calibration at chance."
     },
     {
       "id": 2,

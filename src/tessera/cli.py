@@ -998,6 +998,22 @@ def main(argv=None):
     plugin.add_argument("--events", type=int, default=8)
     plugin.add_argument("--max-prediction-loss", type=float, default=500.0)
     plugin.set_defaults(func=cmd_plugin_demo)
+
+    yahoo = sub.add_parser(
+        "transfer-yahoo-s5",
+        help="Run Yahoo S5 third family evaluation.",
+    )
+    yahoo.add_argument("--root", default=".")
+    yahoo.add_argument("--out", default="outputs/transfers/yahoo_s5")
+    yahoo.add_argument("--stream", default="A1Benchmark_real_1.csv")
+    yahoo.add_argument("--epochs", type=int, default=4)
+    yahoo.add_argument("--seed", type=int, default=42)
+    yahoo.add_argument("--field-dim", type=int, default=16)
+    yahoo.add_argument("--code-dim", type=int, default=8)
+    yahoo.add_argument("--hidden-dim", type=int, default=0)
+    yahoo.add_argument("--depth", type=int, default=2)
+    yahoo.set_defaults(func=cmd_transfer_yahoo_s5)
+
     repair = sub.add_parser("repair", help="Run replay-guided shadow repair ablation.")
     repair.add_argument("--out", default="outputs/runs/latest")
     repair.add_argument("--seed", type=int, default=42)
@@ -1343,6 +1359,57 @@ def main(argv=None):
     loop.set_defaults(func=cmd_loop)
     args = p.parse_args(argv)
     args.func(args)
+
+
+def cmd_transfer_yahoo_s5(args):
+    """Run Yahoo S5 third family evaluation."""
+    from tessera.experiments.run_yahoo_s5_transfer import run_yahoo_s5_transfer
+    data_dir = Path(args.root) / "datasets" / "yahoo_s5"
+    csv_path = data_dir / args.stream
+    if not csv_path.exists():
+        print(f"Stream not found: {csv_path}")
+        print("Run: node download_yahoo_s5.js")
+        raise SystemExit(1)
+
+    anomaly_windows = None
+    if "real_1" in args.stream:
+        anomaly_windows = [[287, 307], [490, 513]]
+    elif "real_2" in args.stream:
+        anomaly_windows = [[400, 420]]
+    elif "real_3" in args.stream:
+        anomaly_windows = [[300, 320], [500, 520]]
+
+    result = run_yahoo_s5_transfer(
+        data_dir=str(data_dir),
+        stream_name=args.stream,
+        epochs=args.epochs,
+        seed=args.seed,
+        field_dim=args.field_dim,
+        code_dim=args.code_dim,
+        hidden_dim=args.hidden_dim if args.hidden_dim > 0 else None,
+        depth=args.depth,
+        anomaly_windows=anomaly_windows,
+    )
+
+    out_path = Path(args.out)
+    out_path.mkdir(parents=True, exist_ok=True)
+    result_file = out_path / f"{args.stream.replace('.csv', '')}_result.json"
+    with open(result_file, "w") as f:
+        json.dump(result, f, indent=2, default=str)
+
+    print(f"\nYahoo S5 Transfer: {args.stream}")
+    print(f"  Status: {result.get('status', 'unknown')}")
+    if result.get("status") == "evaluated":
+        print(f"  AUC: {result['auc']:.4f}")
+        print(f"  Recall: {result['recall']:.4f}")
+        print(f"  FMR: {result['false_memory_rate']:.4f}")
+        print(f"  Replay: {result['replay_pass_rate']:.4f}")
+        print(f"  Neural Loss: {result['neural_prediction_loss']:.4f}")
+        print(f"  Baseline: {result['best_baseline_loss']:.4f}")
+        print(f"  Gap: {result['baseline_gap']:.4f}")
+        print(f"  Expert: {result['selected_expert']}")
+        print(f"  T1: {result['t1_supported']}")
+    print(f"  Results: {result_file}")
 
 if __name__ == "__main__":
     main()
