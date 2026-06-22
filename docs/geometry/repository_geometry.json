@@ -230,6 +230,26 @@
       "id": "local_utility_benchmark",
       "kind": "runtime",
       "path": "src/tessera/experiments/trajectory_local_benchmark.py"
+    },
+    {
+      "id": "evo044_evidence",
+      "kind": "evidence",
+      "path": "docs/context/rhp/evidence/TESSERA-EVO-044-final-evidence.json"
+    },
+    {
+      "id": "evo044_tests",
+      "kind": "validator",
+      "path": "tests/test_evo044.py"
+    },
+    {
+      "id": "independent_host_trial",
+      "kind": "runtime",
+      "path": "src/tessera/experiments/independent_host_trial.py"
+    },
+    {
+      "id": "third_family_prereg",
+      "kind": "evidence",
+      "path": "docs/research/EVO044_THIRD_FAMILY_PREREGISTRATION.json"
     }
   ],
   "edges": [
@@ -605,6 +625,36 @@
     },
     {
       "source": "local_utility_benchmark",
+      "target": "runtime_readme",
+      "kind": "documented_by"
+    },
+    {
+      "source": "neural_plugin",
+      "target": "independent_host_trial",
+      "kind": "reads"
+    },
+    {
+      "source": "independent_host_trial",
+      "target": "atomic_capsule_store",
+      "kind": "reads"
+    },
+    {
+      "source": "independent_host_trial",
+      "target": "evo044_evidence",
+      "kind": "emits"
+    },
+    {
+      "source": "evo044_tests",
+      "target": "independent_host_trial",
+      "kind": "validates"
+    },
+    {
+      "source": "evo044_evidence",
+      "target": "claim_boundary",
+      "kind": "governed_by"
+    },
+    {
+      "source": "independent_host_trial",
       "target": "runtime_readme",
       "kind": "documented_by"
     }

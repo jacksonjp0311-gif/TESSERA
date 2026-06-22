@@ -1,0 +1,60 @@
+{
+  "schema": "TESSERA-PREREGISTRATION-v0.1",
+  "operation": "TESSERA-EVO-044",
+  "dataset": {
+    "name": "yahoo_s5",
+    "version": "v1.0",
+    "source": "https://webscope.sandbox.yahoo.com/catalogulo;_a=25&g=98.2&p=5&cat=15",
+    "license": "Yahoo Webscope Program — approved for research use",
+    "family": "web_traffic",
+    "anomaly_types": [
+      "point",
+      "contextual",
+      "collective"
+    ],
+    "channels": [
+      "real",
+      "synthetic"
+    ],
+    "description": "Yahoo S5 benchmark: 367 time series with labeled anomalies. Mix of real web traffic and synthetic series. Diverse anomaly types complementary to NAB (machine temperature, single-channel, physical) and UCR (air temperature/ECG, single-channel, environmental).",
+    "selected_streams": [
+      {
+        "name": "A1Benchmark_real_1.csv",
+        "anomaly_windows": [
+          [
+            287,
+            307
+          ],
+          [
+            490,
+            513
+          ]
+        ],
+        "rationale": "Real web traffic with two clear anomaly windows. Point and contextual anomalies."
+      },
+      {
+        "name": "A2Benchmark_synthetic_1.csv",
+        "anomaly_windows": [],
+        "rationale": "Clean synthetic series for normal-only calibration baseline."
+      }
+    ],
+    "splits": {
+      "calibration": "0-10% chronological",
+      "train": "10-20% chronological",
+      "validation": "20-52% chronological",
+      "replay": "52-74% chronological",
+      "final_test": "74-100% chronological"
+    },
+    "hypothesis": "Tessera's neural uncertainty router (EVO-032) with rank-2 session summary will achieve AUC > 0.9 on Yahoo S5 A1Benchmark, establishing T1 support on a third independent family (web traffic, mixed anomaly types).",
+    "prediction_target": "AUC",
+    "prediction_direction": "above",
+    "prediction_threshold": 0.9,
+    "prediction_ceiling": "two_dataset_families_T1_supported_general_transfer_open",
+    "risks": [
+      "Yahoo S5 web traffic may have different temporal structure from NAB/UCR physical sensors",
+      "Multiple anomaly types may require metric adaptation outside current calibration",
+      "Data format differs from current adapters — requires new DatasetAdapter"
+    ]
+  },
+  "status": "preregistered"
+}

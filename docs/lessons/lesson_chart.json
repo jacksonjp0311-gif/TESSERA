@@ -685,6 +685,42 @@
       "validation_gate": "src/tessera/experiments/restart_state_readiness.py",
       "authority_boundary": "Integrity is not confidentiality, privileged-attacker authenticity, cross-platform identity, or autonomous authority.",
       "status": "promoted"
+    },
+    {
+      "id": "F058",
+      "observed_event": "No third dataset family was preregistered despite Phase 2 requiring 3 families for completion.",
+      "evidence_path": "docs/loop/TESSERA_FAILURE_LESSONS.md",
+      "wound_class": "missing_third_family",
+      "diagnosis": "Phase 2 completion requires 3 clean dataset families. Only NAB and UCR were confirmed. No preregistration existed for a third family.",
+      "lesson": "Preregister third dataset family (Yahoo S5) with explicit hypothesis, selected streams, and evaluation protocol before running any experiments.",
+      "future_behavior_change": "No transfer evaluation without preregistration. Third family must be preregistered before EVO-044 evaluation.",
+      "validation_gate": "docs/research/EVO044_THIRD_FAMILY_PREREGISTRATION.json",
+      "authority_boundary": "Preregistration does not establish T1 support. Only evaluation against pinned protocol does.",
+      "status": "promoted"
+    },
+    {
+      "id": "F059",
+      "observed_event": "No framework existed for running Tessera against sessions from independent hosts and measuring cross-host parity.",
+      "evidence_path": "docs/loop/TESSERA_FAILURE_LESSONS.md",
+      "wound_class": "missing_independent_host_validation",
+      "diagnosis": "External launch gates require independent host trials. No framework existed to capture sessions from a second host and compare routing decisions.",
+      "lesson": "Independent host trial framework with cross-host parity measurement, rank drift computation, and capsule store integration.",
+      "future_behavior_change": "Every routing change is validated against captured sessions from at least two hosts before promotion.",
+      "validation_gate": "src/tessera/experiments/independent_host_trial.py",
+      "authority_boundary": "Cross-host parity does not establish production readiness or live agent utility.",
+      "status": "promoted"
+    },
+    {
+      "id": "F060",
+      "observed_event": "The capsule store had no cross-host session tracking or rank drift monitoring.",
+      "evidence_path": "docs/loop/TESSERA_FAILURE_LESSONS.md",
+      "wound_class": "missing_cross_host_monitoring",
+      "diagnosis": "Capsules were written per-host with no mechanism to compare session distributions across hosts or detect rank drift.",
+      "lesson": "Independent host trial framework computes rank drift between host session distributions and verifies capsule integrity across hosts.",
+      "future_behavior_change": "Capsule store stats include per-host counts. Rank drift is measured before any cross-host promotion.",
+      "validation_gate": "tests/test_evo044.py",
+      "authority_boundary": "Rank drift monitoring does not establish safety or production readiness.",
+      "status": "promoted"
     }
   ],
   "claim_boundary": "Lessons change future repository behavior through validated gates only; they do not self-authorize repair or promotion."

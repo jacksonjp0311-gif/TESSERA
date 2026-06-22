@@ -26,7 +26,10 @@ Every operational command must be documented here and mirrored in the README whe
 | `python -m tessera transfer-ucr --filename 115_UCR_Anomaly_CIMIS44AirTemperature3_4000_6520_6544.txt --role confirmation --sensor-mode selective-router --episode-quarantine 12 --epochs 3` | Run the EVO-011 supported UCR T1 confirmation with validation-selected forecasting. |
 | `python -m tessera plugin-demo --events 8`
 | `python -m tessera capsule-store --root . --max-capsules 10000` | Create or open the host-owned atomic capsule store. |
-| `python -m tessera trajectory-local --events <path.jsonl> --minimum-prefix 7` | Capture and benchmark Agent CLI Mirror sessions from a JSONL file. |
+| `python -m tessera trajectory-local --events <path.jsonl> --minimum-prefix 7`
+| `python -m tessera host-trial --trial-id <id> --reference-host <host> --trial-host <host> --reference-sessions <path> --trial-sessions <path>` | Run an independent host trial comparing routing parity across two hosts. |
+| `python -m tessera preregister-third-family` | Validate and display the Yahoo S5 third family preregistration. |
+ | Capture and benchmark Agent CLI Mirror sessions from a JSONL file. |
  | Run the permission-bounded sparse-neural sidecar prototype. |
 | `python -m tessera repair --seed 42 --steps 300 --channels 3 --epochs 2 --depth 2 --hidden-dim 64` | Run the replay-gated five-arm shadow repair ablation. |
 | `python -m tessera trajectory-benchmark --seeds 0,1,2,3,4,5,6,7,8,9,10,11 --length 12` | Run the offline typed trajectory benchmark against recency and summary controls. |
