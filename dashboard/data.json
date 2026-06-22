@@ -1,0 +1,366 @@
+{
+  "version": "0.4.1",
+  "operation": "TESSERA-EVO-045",
+  "state": "THIRD_FAMILY_EVALUATED_INDEPENDENT_HOST_TRIAL_RUN",
+  "nextOperation": "promote_or_reject_third_family_then_plan_phase_2_completion",
+  "lastUpdated": "2026-06-22T05:29:58.845Z",
+  "metrics": {
+    "nab": {
+      "auc": 0.94865,
+      "recall": 0.993,
+      "fmr": 0.00353,
+      "replay": 0.66751,
+      "status": "T1 Supported"
+    },
+    "ucr": {
+      "auc": 0.96081,
+      "recall": 1,
+      "fmr": 0,
+      "replay": 0.61215,
+      "status": "T1 Confirmed"
+    },
+    "smap": {
+      "auc": 0.56896,
+      "status": "Rejected"
+    },
+    "yahooS5": {
+      "status": "Preregistered — framework ready"
+    }
+  },
+  "production": {
+    "p95LatencyMs": 95.19,
+    "p99LatencyMs": 126.79,
+    "routeParity": "20/20",
+    "trustedAbstain": "18/2",
+    "soakFailures": "0/100",
+    "effectiveRank": "2/84",
+    "restartSpeedup": "49.5x",
+    "restartLatencyMs": 1.134,
+    "fullReplayLatencyMs": 56.12
+  },
+  "architecture": {
+    "pluginModules": 15,
+    "experimentModules": 29,
+    "testFiles": 34,
+    "lessons": 60,
+    "geometryNodes": 44,
+    "geometryEdges": 81,
+    "evidenceFiles": 45
+  },
+  "evolution": [
+    {
+      "operation": "TESSERA-EVO-001",
+      "state": "VERTICAL_NEURAL_PLUGIN_PROTOTYPE_LOCAL_VALIDATED_CAPABILITY_BLOCKED",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-002",
+      "state": "NEURAL_BASELINE_PARITY_LOCAL_VALIDATED_PHASE_1_BLOCKED",
+      "tests": "?",
+      "implemented": 7
+    },
+    {
+      "operation": "TESSERA-EVO-003",
+      "state": "SYNTHETIC_PHASE_1_AGGREGATE_SUPPORTED_REAL_TRANSFER_UNPROVEN",
+      "tests": "?",
+      "implemented": 8
+    },
+    {
+      "operation": "TESSERA-EVO-004",
+      "state": "ONE_DATASET_T1_SUPPORTED_PHASE_2_DIVERSITY_OPEN",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-005",
+      "state": "NASA_SMAP_DIAGNOSTIC_EVALUATED_T1_NOT_SUPPORTED",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-006",
+      "state": "UCR_SUBSEQUENCE_SENSOR_CONFIRMED_T1_NOT_SUPPORTED",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-007",
+      "state": "UCR_EPISODE_GOVERNANCE_IMPLEMENTED_UNIVERSAL_SHAPE_HYPOTHESIS_REJECTED",
+      "tests": "?",
+      "implemented": 3
+    },
+    {
+      "operation": "TESSERA-EVO-008",
+      "state": "POINT_SENSOR_TILE_CONFIRMED_ROUTER_AND_UCR_T1_BLOCKED",
+      "tests": "?",
+      "implemented": 3
+    },
+    {
+      "operation": "TESSERA-EVO-009",
+      "state": "MEMORY_NORMALITY_CONFIRMED_ABSTENTION_FUSION_AND_UCR_T1_BLOCKED",
+      "tests": "?",
+      "implemented": 5
+    },
+    {
+      "operation": "TESSERA-EVO-010",
+      "state": "POINT_SELECTIVE_FUSION_CONFIRMED_SHAPE_AND_PREDICTION_BLOCKED",
+      "tests": "?",
+      "implemented": 4
+    },
+    {
+      "operation": "TESSERA-EVO-011",
+      "state": "UCR_T1_SUPPORTED_PLUGIN_PREDICTION_EXPERT_INTEGRATED",
+      "tests": "?",
+      "implemented": 4
+    },
+    {
+      "operation": "TESSERA-EVO-012",
+      "state": "EVO-012_NEURAL_CORE_ENHANCED_PLUGIN_V02",
+      "timestamp": "2026-06-19T18:33:42.667Z",
+      "tests": 52,
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-013",
+      "state": "EVO-013_TRAJECTORY_ADAPTERS_REPAIR_ABLATION_ARCH_BENCHMARK",
+      "timestamp": "2026-06-19T19:08:00.988Z",
+      "tests": 74,
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-014",
+      "state": "ENHANCED_NAB_CODEC_DIAGNOSTIC_ORIGINAL_T1_PRESERVED",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-015",
+      "state": "SHADOW_REPAIR_GATE_FIXED_TRAJECTORY_BENCHMARK_CONTROL_SATURATED",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-016",
+      "state": "SYNTHETIC_PRECURSOR_TRAJECTORY_UTILITY_SUPPORTED",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-017",
+      "state": "LOCAL_CAPTURE_PRIVACY_PASSED_TRAJECTORY_UTILITY_REJECTED",
+      "tests": "?",
+      "implemented": 0
+    },
+    {
+      "operation": "TESSERA-EVO-018",
+      "state": "LOCAL_TRAJECTORY_NOT_IDENTIFIABLE_SAFE_TELEMETRY_EVOLVED",
+      "tests": "?",
+      "implemented": 5
+    },
+    {
+      "operation": "TESSERA-EVO-019",
+      "state": "CONTROLLED_PHASE_RECALL_CONFIRMED_CALIBRATION_UNDERPOWERED",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-020",
+      "state": "CONTROLLED_WORKFLOW_SPECIALIST_CONFIRMED_NATURAL_SHADOW_ABSTAINING",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-021",
+      "state": "NATURAL_CLEAN_PROFILE_COVERAGE_CONFIRMED_SENSITIVITY_UNMEASURED",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-022",
+      "state": "NATURAL_PROFILE_PERTURBATION_RESPONSE_MAPPED_COARSE_SENSITIVITY",
+      "tests": "?",
+      "implemented": 5
+    },
+    {
+      "operation": "TESSERA-EVO-023",
+      "state": "TAIL_MODE_SPLIT_REJECTED_CONTEXT_SENSOR_REQUIRED",
+      "tests": "?",
+      "implemented": 4
+    },
+    {
+      "operation": "TESSERA-EVO-024",
+      "state": "AGGREGATE_CONTEXT_CAPTURED_TAIL_ATTRIBUTION_REJECTED",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-025",
+      "state": "SUBPROCESS_IO_CAPTURED_MECHANISM_ATTRIBUTION_REJECTED",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-026",
+      "state": "PLUGIN_CONTAINMENT_PASSED_PRODUCTION_LATENCY_BLOCKED",
+      "tests": "?",
+      "implemented": 7
+    },
+    {
+      "operation": "TESSERA-EVO-027",
+      "state": "INTERACTIVE_LATENCY_PASSED_SHADOW_TRAINER_OPEN",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-028",
+      "state": "SHADOW_CHECKPOINT_LIFECYCLE_PASSED_NEURAL_ADMISSION_OPEN",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-029",
+      "state": "REAL_NEURAL_CHECKPOINT_ADMITTED_NATURAL_UTILITY_OPEN",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-030",
+      "state": "NATURAL_CHECKPOINT_REJECTED_EXPERT_OWNERSHIP_PRESERVED",
+      "tests": "?",
+      "implemented": 7
+    },
+    {
+      "operation": "TESSERA-EVO-031",
+      "state": "NEURAL_RESIDUAL_REJECTED_AUTHORITY_COLLAPSED_TO_ZERO",
+      "tests": "?",
+      "implemented": 5
+    },
+    {
+      "operation": "TESSERA-EVO-032",
+      "state": "NEURAL_UNCERTAINTY_ROUTING_SUPPORTED_FORECAST_UNCHANGED",
+      "tests": "?",
+      "implemented": 6
+    },
+    {
+      "operation": "TESSERA-EVO-033",
+      "state": "RUNTIME_ABSTENTION_INTEGRATED_SEMANTIC_ADAPTER_OPEN",
+      "tests": "?",
+      "implemented": 5
+    },
+    {
+      "operation": "TESSERA-EVO-034",
+      "state": "LOCAL_PRODUCTION_CANDIDATE_EXTERNAL_LAUNCH_GATES_OPEN",
+      "tests": "?",
+      "implemented": 7
+    },
+    {
+      "operation": "TESSERA-EVO-035",
+      "state": "REPOSITORY_LAUNCH_CANDIDATE_EXTERNAL_GATES_OPEN",
+      "tests": 111,
+      "implemented": 9
+    },
+    {
+      "operation": "TESSERA-EVO-036",
+      "state": "INCIDENT_LATCH_INTEGRATED_NATURAL_SENSITIVITY_REJECTED",
+      "tests": 115,
+      "implemented": 8
+    },
+    {
+      "operation": "TESSERA-EVO-037",
+      "state": "TWO_HOST_REFERENCE_INTEGRATIONS_INDEPENDENT_TRIALS_OPEN",
+      "tests": 118,
+      "implemented": 9
+    },
+    {
+      "operation": "TESSERA-EVO-038",
+      "state": "EFFECTIVE_RANK_REPAIRED_HOST_OBSERVABILITY_GATED",
+      "tests": 121,
+      "implemented": 8
+    },
+    {
+      "operation": "TESSERA-EVO-039",
+      "state": "INTRINSIC_MANIFOLD_DRIFT_GATED",
+      "tests": 126,
+      "implemented": 9
+    },
+    {
+      "operation": "TESSERA-EVO-040",
+      "state": "DUAL_TIMESCALE_GEOMETRY_EXACT_CACHE_GATED",
+      "tests": 130,
+      "implemented": 9
+    },
+    {
+      "operation": "TESSERA-EVO-041",
+      "state": "PROOF_CARRYING_PREFIX_STATE_GATED",
+      "tests": 133,
+      "implemented": 7
+    },
+    {
+      "operation": "TESSERA-EVO-042",
+      "state": "INTEGRITY_BOUND_RESTART_STATE_GATED",
+      "tests": 135,
+      "implemented": 7
+    },
+    {
+      "operation": "TESSERA-EVO-043",
+      "state": "ATOMIC_CAPSULE_STORE_LOCAL_UTILITY_BENCHMARKED",
+      "tests": 150,
+      "implemented": 7
+    },
+    {
+      "operation": "TESSERA-EVO-044",
+      "state": "THIRD_FAMILY_PREREGISTERED_INDEPENDENT_HOST_TRIAL_FRAMEWORK",
+      "tests": 157,
+      "implemented": 5
+    },
+    {
+      "operation": "TESSERA-EVO-045",
+      "state": "THIRD_FAMILY_EVALUATED_INDEPENDENT_HOST_TRIAL_RUN",
+      "tests": 162,
+      "implemented": 6
+    }
+  ],
+  "openItems": [
+    {
+      "id": 1,
+      "name": "Third Dataset Family",
+      "status": "preregistered",
+      "progress": 50,
+      "description": "Yahoo S5 framework built, needs data download + evaluation"
+    },
+    {
+      "id": 2,
+      "name": "Live Agent Utility",
+      "status": "framework_built",
+      "progress": 60,
+      "description": "Trajectory benchmark framework built, needs real AGNT sessions"
+    },
+    {
+      "id": 3,
+      "name": "External Launch Gates",
+      "status": "framework_built",
+      "progress": 40,
+      "description": "Independent host trial framework built, needs real host data"
+    },
+    {
+      "id": 4,
+      "name": "Neural Prediction Below Baseline",
+      "status": "by_design",
+      "progress": 100,
+      "description": "Stable experts own forecast floor — EVO-031 proved zero gain optimal"
+    }
+  ],
+  "governance": {
+    "nonClaimLock": true,
+    "authorityLocksEnforced": true,
+    "hostIntegrations": [
+      "Agent CLI Mirror",
+      "Hermes"
+    ],
+    "privacySafe": true,
+    "tamperDetection": true,
+    "certificationsPassed": 9,
+    "certificationsTotal": 9
+  }
+}
