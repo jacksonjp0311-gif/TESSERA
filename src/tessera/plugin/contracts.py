@@ -37,7 +37,7 @@ class PluginPermissions:
 class PluginManifest:
     schema: str = "TESSERA-PLUGIN-MANIFEST-v0.3"
     name: str = "tessera-neural-sidecar"
-    version: str = "0.4.2"
+    version: str = "0.4.3"
     deterministic_mode: bool = True
     event_schema: str = "TESSERA-AGENT-EVENT-v0.1"
     execution_model: str = "host-supervised-local-subprocess"

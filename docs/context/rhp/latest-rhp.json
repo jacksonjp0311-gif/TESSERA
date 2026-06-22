@@ -1,13 +1,13 @@
 {
   "schema": "TESSERA-RHP-LATEST-POINTER-v0.1",
-  "latest_operation": "TESSERA-EVO-046",
-  "latest_evidence": "docs/context/rhp/evidence/TESSERA-EVO-046-final-evidence.json",
+  "latest_operation": "TESSERA-EVO-047",
+  "latest_evidence": "docs/context/rhp/evidence/TESSERA-EVO-047-final-evidence.json",
   "source_repository": "jacksonjp0311-gif/hermes-agent-evo",
   "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
-  "operation_base_commit": "9c8c034",
-  "state": "THIRD_FAMILY_EVALUATED_T1_REJECTED",
+  "operation_base_commit": "666540b",
+  "state": "AGNT_BRIDGE_BUILT_5_TOOLS",
   "integration_closed": true,
-  "next_operation": "plan_phase_2_completion_or_add_more_families",
+  "next_operation": "run_agnt_bridge_integration_test_then_deploy",
   "zero_context_rebuild": "docs/context/rhp/RHP_ZERO_CONTEXT_REBUILD.md",
   "authority_ok": true
 }

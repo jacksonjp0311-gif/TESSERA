@@ -1,0 +1,38 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.47",
+  "operation": "TESSERA-EVO-047",
+  "previous_operation": "TESSERA-EVO-046",
+  "source_commit": "409a8ec084c76fbef5a195484c014c18f959602d",
+  "operation_base_commit": "666540b",
+  "state_after_validation": "AGNT_BRIDGE_BUILT_5_TOOLS",
+  "implemented": [
+    "AGNT Bridge HTTP server (src/tessera/agnt_bridge.py)",
+    "5 tool endpoints: tessera-analyze, tessera-trust, tessera-memory, tessera-health, tessera-status",
+    "GET /health and /tools discovery endpoints",
+    "JSON request/response protocol matching AGNT plugin spec",
+    "13 new tests (test_evo047.py) — all passing",
+    "Tessera v0.4.3 package"
+  ],
+  "finding": "The AGNT Bridge provides a clean HTTP interface for Tessera's 5 core tools. All handlers return version, claim_boundary, and structured responses. The bridge can run as a standalone HTTP server on port 8765, receiving POST /tools/:tool-name requests from AGNT.",
+  "decision": "Promote AGNT Bridge. Next: run integration test against AGNT plugin system, then deploy.",
+  "metrics": {
+    "bridge_tools": 5,
+    "bridge_endpoints": 7,
+    "bridge_tests": 13,
+    "bridge_port": 8765,
+    "agnt_plugin_files": 4
+  },
+  "non_claim_lock": "The AGNT Bridge is a local HTTP server for development. Production deployment requires AGNT plugin registration, security review, and independent host validation.",
+  "next_recommended_operation": "run_agnt_bridge_integration_test_then_deploy",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false
+}
