@@ -1,0 +1,33 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.49",
+  "operation": "TESSERA-EVO-049",
+  "previous_operation": "TESSERA-EVO-048",
+  "state_after_validation": "AGNT_BRIDGE_INTEGRATION_TESTED",
+  "implemented": [
+    "EVO-049 integration test: 8/8 passing in 0.62s",
+    "Bridge starts in background thread, tests all 5 tools",
+    "Latency test: all tools under 3s budget",
+    "Anomaly detection test: detects degraded sessions",
+    "Results written to outputs/benchmarks/evo049_bridge_integration.json",
+    "Tessera v0.4.4 package"
+  ],
+  "finding": "The AGNT Bridge passes all 8 integration tests in 0.62s. All 5 tools (analyze, trust, memory, health, status) return correct responses with version, claim_boundary, and structured data. Latency budget met for all tools.",
+  "decision": "Promote AGNT Bridge integration. Ready for production deployment.",
+  "metrics": {
+    "tests_passed": 8,
+    "tests_total": 8,
+    "avg_latency_ms": 77
+  },
+  "next_recommended_operation": "deploy_agnt_bridge_to_production",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false
+}
