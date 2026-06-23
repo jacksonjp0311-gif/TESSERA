@@ -1,9 +1,9 @@
 {
-  "version": "0.4.2",
-  "operation": "EVO-046",
-  "state": "THIRD_FAMILY_EVALUATED_T1_REJECTED",
-  "nextOperation": "plan_phase_2_completion_with_two_families",
-  "lastUpdated": "2026-06-22T06:15:59.064Z",
+  "version": "0.4.4",
+  "operation": "EVO-049",
+  "state": "AGNT_BRIDGE_INTEGRATION_TESTED",
+  "nextOperation": "deploy_agnt_bridge_to_production",
+  "lastUpdated": "2026-06-23T03:10:55.377Z",
   "metrics": {
     "nab": {
       "auc": 0.94865,
@@ -328,6 +328,13 @@
       "state": "THIRD_FAMILY_EVALUATED_INDEPENDENT_HOST_TRIAL_RUN",
       "tests": 162,
       "implemented": 6
+    },
+    {
+      "operation": "EVO-049",
+      "state": "AGNT_BRIDGE_INTEGRATION_TESTED",
+      "timestamp": "2026-06-23T03:10:55.378Z",
+      "tests": 8,
+      "implemented": 8
     }
   ],
   "openItems": [
@@ -341,9 +348,9 @@
     {
       "id": 2,
       "name": "Live Agent Utility",
-      "status": "framework_built",
-      "progress": 60,
-      "description": "Trajectory benchmark framework built, needs real AGNT sessions"
+      "status": "bridge_tested",
+      "progress": 80,
+      "description": "AGNT Bridge integration test: 8/8 passing. Deploy to production for real agent sessions."
     },
     {
       "id": 3,
@@ -371,5 +378,6 @@
     "tamperDetection": true,
     "certificationsPassed": 9,
     "certificationsTotal": 9
-  }
+  },
+  "summary": "EVO-049: AGNT Bridge integration test complete. 8/8 tests passing in 0.62s."
 }
