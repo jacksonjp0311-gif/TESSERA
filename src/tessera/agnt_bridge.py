@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-TESSERA_VERSION = "0.4.2"
+TESSERA_VERSION = "0.4.5"
 
 
 def _ok(data: dict, status: int = 200) -> tuple:

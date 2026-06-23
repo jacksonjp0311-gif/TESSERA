@@ -1,7 +1,7 @@
 {
   "name": "tessera-neural-sidecar",
   "displayName": "Tessera Neural Trust Layer",
-  "version": "0.4.1",
+  "version": "0.4.5",
   "description": "Neural trust layer for agent systems. Watches agent trajectory, compresses into sparse neural state, emits trusted/abstain decisions. Read-only sidecar — never mutates host memory, tools, or prompts.",
   "author": "James Paul Jackson",
   "category": "ai-safety",
@@ -15,5 +15,47 @@
     "toolInvocation": false,
     "promptMutation": false
   },
-  "claimBoundary": "The plugin provides local inference and proposals only; the host retains tool, memory-write, prompt, topology, codec, and external API authority."
+  "claimBoundary": "The plugin provides local inference and proposals only; the host retains tool, memory-write, prompt, topology, codec, and external API authority.",
+  "capabilities": {
+    "trust_routing": true,
+    "anomaly_detection": true,
+    "memory_proposal": true,
+    "session_analysis": true,
+    "health_monitoring": true,
+    "integrity_bound_restart": true,
+    "effective_rank_calibration": true,
+    "manifold_monitoring": true,
+    "sequential_geometry": true,
+    "prefix_state_continuation": true
+  },
+  "integration": {
+    "agnt_plugin": true,
+    "http_bridge": true,
+    "bridge_port": 8765,
+    "api_base": "/api/plugins/tools",
+    "install_command": "AGNT dashboard → Plugins → Install from File → tessera.agnt"
+  },
+  "authority": {
+    "host_memory_write": false,
+    "tool_invocation": false,
+    "prompt_mutation": false,
+    "live_codec_replacement": false,
+    "topology_mutation": false,
+    "external_api_calls": false
+  },
+  "deployment": {
+    "start_command": "python -m tessera.agnt_bridge --port 8765",
+    "health_check": "GET http://localhost:8765/health",
+    "stop_command": "Ctrl+C or kill process",
+    "logs": "stdout/stderr"
+  },
+  "verified_metrics": {
+    "nab_auc": 0.949,
+    "ucr_auc": 0.961,
+    "production_p95_ms": 95.19,
+    "route_parity": "20/20",
+    "soak_failures": "0/100",
+    "effective_rank": "2/84",
+    "restart_speedup": "49.5x"
+  }
 }
