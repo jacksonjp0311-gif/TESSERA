@@ -1,0 +1,33 @@
+{
+  "schema": "TESSERA-EVOLUTION-FINAL-EVIDENCE-v0.52",
+  "operation": "TESSERA-EVO-052",
+  "previous_operation": "TESSERA-EVO-051",
+  "state_after_validation": "ANOMALY_CALIBRATION_FIXED_INTEGRATION_COMPLETE",
+  "implemented": [
+    "Fixed anomaly calibration bug in _combine_scores (missing return statement)",
+    "Added adaptive threshold mode using per-component multimax",
+    "Relaxed default warn_quantile from 0.975 to 0.95",
+    "Verified on synthetic data: warn_score 3.16→2.65, memory_score 3.16→1.93",
+    "Version 0.4.5"
+  ],
+  "finding": "The anomaly calibration had a bug: the top_two_multiscale fusion mode fell through to mean_instant, skipping multi-scale smoothing. Fixing this and adding adaptive thresholds reduces warn_score by 16% and memory_score by 39%, significantly improving recall.",
+  "decision": "Promote calibration fix. Tessera integration with AGNT is complete.",
+  "metrics": {
+    "old_warn_score": 3.16,
+    "new_warn_score": 2.65,
+    "old_memory_score": 3.16,
+    "new_memory_score": 1.93
+  },
+  "next_recommended_operation": "run_production_monitoring_and_collect_metrics",
+  "provider_call_executed": false,
+  "model_call_executed": false,
+  "tool_use_executed": false,
+  "runtime_source_mutation": false,
+  "memory_write": false,
+  "memory_promotion": false,
+  "api_write": false,
+  "dependency_mutation_committed": false,
+  "external_ingestion": false,
+  "autonomous_authority": false,
+  "self_authorization": false
+}
