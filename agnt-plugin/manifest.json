@@ -6,7 +6,13 @@
   "author": "James Paul Jackson",
   "category": "ai-safety",
   "icon": "brain",
-  "tags": ["neural", "trust", "agent", "safety", "anomaly-detection"],
+  "tags": [
+    "neural",
+    "trust",
+    "agent",
+    "safety",
+    "anomaly-detection"
+  ],
   "permissions": {
     "observeAgentEvents": true,
     "emitTrustDecisions": true,
@@ -16,17 +22,44 @@
     "promptMutation": false
   },
   "claimBoundary": "The plugin provides local inference and proposals only; the host retains tool, memory-write, prompt, topology, codec, and external API authority.",
+  "tools": [
+    {
+      "type": "tessera-analyze",
+      "entryPoint": "index.js",
+      "title": "Analyze Session",
+      "description": "Analyze agent session trajectory for drift and anomalies"
+    },
+    {
+      "type": "tessera-trust",
+      "entryPoint": "index.js",
+      "title": "Trust Decision",
+      "description": "Get trust decision (trusted/abstain) for current session"
+    },
+    {
+      "type": "tessera-memory",
+      "entryPoint": "index.js",
+      "title": "Memory Proposals",
+      "description": "Propose memory candidates from session events"
+    },
+    {
+      "type": "tessera-health",
+      "entryPoint": "index.js",
+      "title": "Health Check",
+      "description": "Get plugin health and runtime status"
+    },
+    {
+      "type": "tessera-status",
+      "entryPoint": "index.js",
+      "title": "Status Dashboard",
+      "description": "Get full status dashboard with metrics and evidence"
+    }
+  ],
   "capabilities": {
     "trust_routing": true,
     "anomaly_detection": true,
     "memory_proposal": true,
     "session_analysis": true,
-    "health_monitoring": true,
-    "integrity_bound_restart": true,
-    "effective_rank_calibration": true,
-    "manifold_monitoring": true,
-    "sequential_geometry": true,
-    "prefix_state_continuation": true
+    "health_monitoring": true
   },
   "integration": {
     "agnt_plugin": true,
@@ -45,13 +78,11 @@
   },
   "deployment": {
     "start_command": "python -m tessera.agnt_bridge --port 8765",
-    "health_check": "GET http://localhost:8765/health",
-    "stop_command": "Ctrl+C or kill process",
-    "logs": "stdout/stderr"
+    "health_check": "GET http://localhost:8765/health"
   },
   "verified_metrics": {
-    "nab_auc": 0.949,
-    "ucr_auc": 0.961,
+    "nab_auc": 0.615,
+    "ucr_auc": 0.531,
     "production_p95_ms": 95.19,
     "route_parity": "20/20",
     "soak_failures": "0/100",
