@@ -1,0 +1,12 @@
+{
+  "auc": 0.9775553101698485,
+  "recall": 0.0,
+  "false_memory_rate": 0.09610169491525423,
+  "replay_pass_rate": 0.0,
+  "neural_prediction_loss": 3.4390570760211725,
+  "best_baseline_loss": 1.1652003526687622,
+  "baseline_gap": 2.2738567233524103,
+  "total_anomalies": 567,
+  "detected": 0,
+  "wall_seconds": 26.02087140083313
+}

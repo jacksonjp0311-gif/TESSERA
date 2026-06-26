@@ -1,49 +1,73 @@
-# NAB Machine Temperature Source Capsule
+NAB Data Corpus
+---
 
-## Specification
+Data are ordered, timestamped, single-valued metrics. All data files contain anomalies, unless otherwise noted.
 
-Pinned source material for the first Tessera dataset-scoped real telemetry
-trial.
 
-## Source
+### Real data
+- realAWSCloudwatch/
 
-- Repository: <https://github.com/numenta/NAB>
-- Commit: `ea702d75cc2258d9d7dd35ca8e5e2539d71f3140`
-- Stream: `data/realKnownCause/machine_temperature_system_failure.csv`
-- Labels: `labels/combined_windows.json`
-- License: MIT
+	AWS server metrics as collected by the AmazonCloudwatch service. Example metrics include CPU Utilization, Network Bytes In, and Disk Read Bytes.
 
-## Hooks
+- realAdExchange/
+	
+	Online advertisement clicking rates, where the metrics are cost-per-click (CPC) and cost per thousand impressions (CPM). One of the files is normal, without anomalies.
+	
+- realKnownCause/
 
-- Inbound: pinned NAB stream, official combined anomaly windows, MIT license
-- Outbound: `NabKnownCauseAdapter`, T1 transfer runner, dataset certificate
+	This is data for which we know the anomaly causes; no hand labeling.
+	
+	- ambient_temperature_system_failure.csv: The ambient temperature in an office
+	setting.
+	- cpu_utilization_asg_misconfiguration.csv: From Amazon Web Services (AWS)
+	monitoring CPU usage – i.e. average CPU usage across a given cluster. When
+	usage is high, AWS spins up a new machine, and uses fewer machines when usage
+	is low.
+	- ec2_request_latency_system_failure.csv: CPU usage data from a server in
+	Amazon's East Coast datacenter. The dataset ends with complete system failure
+	resulting from a documented failure of AWS API servers. There's an interesting
+	story behind this data in the [Numenta
+	blog](http://numenta.com/blog/anomaly-of-the-week.html).
+	- machine_temperature_system_failure.csv: Temperature sensor data of an
+	internal component of a large, industrial mahcine. The first anomaly is a
+	planned shutdown of the machine. The second anomaly is difficult to detect and
+	directly led to the third anomaly, a catastrophic failure of the machine.
+	- nyc_taxi.csv: Number of NYC taxi passengers, where the five anomalies occur
+	during the NYC marathon, Thanksgiving, Christmas, New Years day, and a snow
+	storm. The raw data is from the [NYC Taxi and Limousine Commission](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml).
+	The data file included here consists of aggregating the total number of
+	taxi passengers into 30 minute buckets.
+	- rogue_agent_key_hold.csv: Timing the key holds for several users of a
+	computer, where the anomalies represent a change in the user.
+	- rogue_agent_key_updown.csv: Timing the key strokes for several users of a
+	computer, where the anomalies represent a change in the user.
 
-## Artifacts
+- realRogueAgent/
 
-- `machine_temperature_system_failure.csv`
-- `combined_windows.json`
-- `LICENSE.txt`
-- `source_manifest.json`
+	This data represents computer usage patterns for different users, where an
+	anomaly may occur with a rogue user of the computer.
 
-## Hashes
+- realTraffic/
 
-- stream: `92bf5b87fc7f9bba8ca0b7ec63ccaac8cb4a1371a258e8c29a10ae9c018d82a4`
-- labels: `1e1fbc4601321aad8d0f8b3784c8134299379f68f6c1f7777565f8ffd57ab6b1`
-- license: `0a0b4d0b10cb1f7ed9ab2993ef93defc03447e6eba9daca1315dd32dae4877e3`
+	Real time traffic data from the Twin Cities Metro area in Minnesota, collected
+	by the
+	[Minnesota Department of Transportation](http://www.dot.state.mn.us/tmc/trafficinfo/developers.html).
+	Included metrics include occupancy, speed, and travel time from specific
+	sensors.
 
-## Known Caveats
+- realTweets/
 
-- The upstream stream contains 12 duplicate timestamps.
-- NAB anomaly windows are benchmark windows, not instantaneous failure labels.
-- This is one univariate stream from one benchmark family.
+	A collection of Twitter mentions of large publicly-traded companies
+	such as Google and IBM. The metric value represents the number of mentions
+	for a given ticker symbol every 5 minutes.
 
-## Invariants
 
-- Raw rows and duplicate timestamps remain unchanged.
-- Labels are evaluation-only.
-- Hash drift blocks dataset-scoped comparison.
+### Artificial data
 
-## Claim Boundary
+- artificialNoAnomaly/
 
-Evaluation on this capsule supports only dataset-scoped evidence. It does not
-prove general real-telemetry transfer.
+	Artifically-generated data without any anomalies.
+
+- artificialWithAnomaly/
+
+	Artifically-generated data with varying types of anomalies.
